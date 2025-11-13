@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.4)  13 NOV 2025 18:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.4)  13 NOV 2025 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**cover_letter.tex
-(./cover_letter.tex
+**title_page.tex
+(./title_page.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-10-24>
 (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
@@ -55,8 +55,8 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 ) (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count286
-) (./cover_letter.aux)
-\openout1 = `cover_letter.aux'.
+) (./title_page.aux)
+\openout1 = `title_page.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
 LaTeX Font Info:    ... okay on input line 6.
@@ -108,37 +108,38 @@ LaTeX Font Info:    ... okay on input line 6.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 20.
+(Font)              <14.4> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 20.
+(Font)              <7> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 20.
-
-Overfull \hbox (1.81601pt too wide) in paragraph at lines 87--89
-\OT1/ptm/b/n/12 Data Avail-abil-ity: \OT1/ptm/m/n/12 All data used in this study are pub-licly avail-able from the In-ter-na-tional Telecom-
- []
-
+(Font)              <12> on input line 29.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 29.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 29.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 39.
 [1
 
-{c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}] [2] (./cover_letter.aux)
+{c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}] (./title_page.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-10-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 1160 strings out of 469558
- 20223 string characters out of 5468789
- 437736 words of memory out of 5000000
- 29810 multiletter control sequences out of 15000+600000
- 643926 words of font info for 63 fonts, out of 8000000 for 9000
+ 1177 strings out of 469558
+ 20401 string characters out of 5468789
+ 436736 words of memory out of 5000000
+ 29822 multiletter control sequences out of 15000+600000
+ 645654 words of font info for 72 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 57i,8n,65p,264b,293s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,5n,65p,160b,174s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cover_letter.pdf (2 pages, 43990 bytes).
+Output written on title_page.pdf (1 page, 41075 bytes).
 PDF statistics:
- 27 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 24 PDF objects out of 1000 (max. 8388607)
+ 14 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

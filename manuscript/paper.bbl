@@ -1,0 +1,120 @@
+\begin{thebibliography}{21}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Angrist and Krueger(2001)}]{angrist2001instrumental}
+\bibinfo{author}{Angrist, J.D.}, \bibinfo{author}{Krueger, A.B.}, \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{Instrumental variables and the search for identification: From supply and demand to natural experiments}.
+\newblock \bibinfo{journal}{Journal of Economic Perspectives} \bibinfo{volume}{15}, \bibinfo{pages}{69--85}.
+%Type = Article
+\bibitem[{Beaunoyer et~al.(2020)Beaunoyer, Dupéré and Guitton}]{beaunoyer2020covid}
+\bibinfo{author}{Beaunoyer, E.}, \bibinfo{author}{Dupéré, S.}, \bibinfo{author}{Guitton, M.J.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Covid-19 and digital inequalities: Reciprocal impacts and mitigation strategies}.
+\newblock \bibinfo{journal}{Computers in Human Behavior} \bibinfo{volume}{111}, \bibinfo{pages}{106424}.
+%Type = Article
+\bibitem[{Bertrand et~al.(2004)Bertrand, Duflo and Mullainathan}]{bertrand2004much}
+\bibinfo{author}{Bertrand, M.}, \bibinfo{author}{Duflo, E.}, \bibinfo{author}{Mullainathan, S.}, \bibinfo{year}{2004}.
+\newblock \bibinfo{title}{How much should we trust differences-in-differences estimates?}
+\newblock \bibinfo{journal}{The Quarterly Journal of Economics} \bibinfo{volume}{119}, \bibinfo{pages}{249--275}.
+%Type = Article
+\bibitem[{Cardona et~al.(2009)Cardona, Schwarz, Yurtoglu and Zulehner}]{cardona2009demand}
+\bibinfo{author}{Cardona, C.}, \bibinfo{author}{Schwarz, A.}, \bibinfo{author}{Yurtoglu, B.B.}, \bibinfo{author}{Zulehner, C.}, \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{Demand estimation and market definition for broadband internet services}.
+\newblock \bibinfo{journal}{Journal of Econometrics} \bibinfo{volume}{148}, \bibinfo{pages}{33--44}.
+%Type = Article
+\bibitem[{Czernich et~al.(2011)Czernich, Falck, Kretschmer and Woessmann}]{czernich2011broadband}
+\bibinfo{author}{Czernich, N.}, \bibinfo{author}{Falck, O.}, \bibinfo{author}{Kretschmer, T.}, \bibinfo{author}{Woessmann, L.}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Broadband infrastructure and economic growth}.
+\newblock \bibinfo{journal}{The Economic Journal} \bibinfo{volume}{121}, \bibinfo{pages}{505--532}.
+%Type = Techreport
+\bibitem[{{European Commission}(2021)}]{ec2021eastern}
+\bibinfo{author}{{European Commission}}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Eastern Partnership Policy beyond 2020: Reinforcing resilience - an Eastern Partnership that delivers for all}.
+\newblock \bibinfo{type}{Technical Report}. European Commission. \bibinfo{address}{Brussels}.
+%Type = Article
+\bibitem[{Galperin and Ruzzier(2017)}]{galperin2017price}
+\bibinfo{author}{Galperin, H.}, \bibinfo{author}{Ruzzier, C.A.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Price elasticity of demand for broadband: Evidence from latin america and the caribbean}.
+\newblock \bibinfo{journal}{Telecommunications Policy} \bibinfo{volume}{41}, \bibinfo{pages}{245--255}.
+%Type = Article
+\bibitem[{Hauge and Prieger(2010)}]{hauge2010demand}
+\bibinfo{author}{Hauge, J.A.}, \bibinfo{author}{Prieger, J.E.}, \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{Demand side programs for broadband adoption}.
+\newblock \bibinfo{journal}{Review of Network Economics} \bibinfo{volume}{9}, \bibinfo{pages}{1--38}.
+%Type = Article
+\bibitem[{Hausman(1978)}]{hausman1978specification}
+\bibinfo{author}{Hausman, J.A.}, \bibinfo{year}{1978}.
+\newblock \bibinfo{title}{Specification tests in econometrics}.
+\newblock \bibinfo{journal}{Econometrica} \bibinfo{volume}{46}, \bibinfo{pages}{1251--1271}.
+%Type = Techreport
+\bibitem[{{International Telecommunication Union}(2023)}]{itu2023broadband}
+\bibinfo{author}{{International Telecommunication Union}}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Measuring digital development: Facts and figures 2023}.
+\newblock \bibinfo{type}{Technical Report}. ITU Publications. \bibinfo{address}{Geneva}.
+%Type = Article
+\bibitem[{Koutroumpis(2009)}]{koutroumpis2009impact}
+\bibinfo{author}{Koutroumpis, P.}, \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{The economic impact of broadband on growth: A simultaneous approach}.
+\newblock \bibinfo{journal}{Telecommunications Policy} \bibinfo{volume}{33}, \bibinfo{pages}{471--485}.
+%Type = Article
+\bibitem[{Lai and Widmar(2021)}]{lai2020digital}
+\bibinfo{author}{Lai, J.}, \bibinfo{author}{Widmar, N.O.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Revisiting the digital divide in the covid-19 era}.
+\newblock \bibinfo{journal}{Applied Economic Perspectives and Policy} \bibinfo{volume}{43}, \bibinfo{pages}{458--464}.
+%Type = Article
+\bibitem[{Macedo and Carvalho(2011)}]{macedo2011elasticity}
+\bibinfo{author}{Macedo, H.N.}, \bibinfo{author}{Carvalho, L.C.R.}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Estimating the demand for broadband services in brazil}.
+\newblock \bibinfo{journal}{Telecommunications Policy} \bibinfo{volume}{35}, \bibinfo{pages}{772--784}.
+%Type = Article
+\bibitem[{Rappoport et~al.(2002)Rappoport, Kridel, Taylor, Alleman and Duffy-Deno}]{rappoport2003residential}
+\bibinfo{author}{Rappoport, P.N.}, \bibinfo{author}{Kridel, D.J.}, \bibinfo{author}{Taylor, L.D.}, \bibinfo{author}{Alleman, J.H.}, \bibinfo{author}{Duffy-Deno, K.T.}, \bibinfo{year}{2002}.
+\newblock \bibinfo{title}{Residential demand for access to the internet}.
+\newblock \bibinfo{journal}{The International Handbook of Telecommunications Economics} \bibinfo{volume}{1}, \bibinfo{pages}{55--72}.
+%Type = Article
+\bibitem[{R{\"o}ller and Waverman(2001)}]{roller1996telecommunications}
+\bibinfo{author}{R{\"o}ller, L.H.}, \bibinfo{author}{Waverman, L.}, \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{Telecommunications infrastructure and economic development: A simultaneous approach}.
+\newblock \bibinfo{journal}{American Economic Review} \bibinfo{volume}{91}, \bibinfo{pages}{909--923}.
+%Type = Article
+\bibitem[{Rosston et~al.(2010)Rosston, Savage and Waldman}]{rosston2010household}
+\bibinfo{author}{Rosston, G.L.}, \bibinfo{author}{Savage, S.J.}, \bibinfo{author}{Waldman, D.M.}, \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{Household demand for broadband internet service}.
+\newblock \bibinfo{journal}{Communications of the ACM} \bibinfo{volume}{53}, \bibinfo{pages}{122--127}.
+%Type = Article
+\bibitem[{Sridhar and Sridhar(2007)}]{sridhar2011telecommunications}
+\bibinfo{author}{Sridhar, K.S.}, \bibinfo{author}{Sridhar, V.}, \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{Telecommunications infrastructure and economic growth: Evidence from developing countries}.
+\newblock \bibinfo{journal}{Applied Econometrics and International Development} \bibinfo{volume}{7}, \bibinfo{pages}{37--61}.
+%Type = Article
+\bibitem[{Stock and Yogo(2005)}]{stock2005testing}
+\bibinfo{author}{Stock, J.H.}, \bibinfo{author}{Yogo, M.}, \bibinfo{year}{2005}.
+\newblock \bibinfo{title}{Testing for weak instruments in linear iv regression}.
+\newblock \bibinfo{journal}{Identification and inference for econometric models: Essays in honor of Thomas Rothenberg} , \bibinfo{pages}{80--108}.
+%Type = Article
+\bibitem[{Varian(2002)}]{varian2002demand}
+\bibinfo{author}{Varian, H.R.}, \bibinfo{year}{2002}.
+\newblock \bibinfo{title}{The demand for bandwidth: Evidence from the index project}.
+\newblock \bibinfo{journal}{Broadband: Should we regulate high-speed Internet access} , \bibinfo{pages}{39--56}.
+%Type = Article
+\bibitem[{Wooldridge(2010)}]{wooldridge2010econometric}
+\bibinfo{author}{Wooldridge, J.M.}, \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{Econometric analysis of cross section and panel data}.
+\newblock \bibinfo{journal}{MIT press} .
+%Type = Techreport
+\bibitem[{{World Bank}(2021)}]{worldbank2021digital}
+\bibinfo{author}{{World Bank}}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{World Development Report 2021: Data for better lives}.
+\newblock \bibinfo{type}{Technical Report}. World Bank. \bibinfo{address}{Washington, DC}.
+
+\end{thebibliography}
