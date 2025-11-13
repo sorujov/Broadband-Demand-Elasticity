@@ -1,0 +1,20 @@
+# Data files
+data/raw/*.csv
+data/raw/*.xlsx
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+.env
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# System files
+.DS_Store
+Thumbs.db
