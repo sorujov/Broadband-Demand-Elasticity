@@ -1,0 +1,400 @@
+
+================================================================================
+ECONOMETRIC ANALYSIS EXECUTION GUIDE
+================================================================================
+Steps 5-7: Descriptive Statistics, Baseline Regression, IV Estimation
+Date: November 13, 2025
+================================================================================
+
+FILES CREATED:
+--------------
+✓ 05_descriptive_stats.py - Descriptive statistics and visualization
+✓ 06_baseline_regression.py - Panel regression models
+✓ 07_iv_estimation.py - IV/2SLS estimation
+
+================================================================================
+FILE PLACEMENT
+================================================================================
+
+WHERE TO PUT EACH SCRIPT:
+------------------------
+
+05_descriptive_stats.py → code/analysis/
+06_baseline_regression.py → code/analysis/
+07_iv_estimation.py → code/analysis/
+
+COMMANDS (Windows):
+------------------
+copy 05_descriptive_stats.py code\analysis\
+copy 06_baseline_regression.py code\analysis\
+copy 07_iv_estimation.py code\analysis\
+
+COMMANDS (Linux/Mac):
+--------------------
+cp 05_descriptive_stats.py code/analysis/
+cp 06_baseline_regression.py code/analysis/
+cp 07_iv_estimation.py code/analysis/
+
+================================================================================
+STEP 5: DESCRIPTIVE STATISTICS (10 minutes)
+================================================================================
+
+PURPOSE:
+--------
+Generate comprehensive descriptive statistics and visualizations to understand
+your data before regression analysis.
+
+WHAT IT DOES:
+------------
+✓ Summary statistics (overall + by region)
+✓ Correlation matrices and heatmap
+✓ Regional comparison (EU vs EaP)
+✓ Time trends (4-panel plot)
+✓ Price-demand scatter plots (log-log + original scale)
+✓ Data quality report
+
+HOW TO RUN:
+-----------
+cd code\analysis
+python 05_descriptive_stats.py
+
+OUTPUTS CREATED:
+---------------
+Tables (results/tables/):
+- descriptive_stats_overall.csv
+- descriptive_stats_by_region.csv
+- correlation_matrix.csv
+- regional_comparison.csv
+- data_quality_report.csv
+
+Figures (figures/descriptive/):
+- correlation_heatmap.png
+- time_trends_by_region.png
+- price_demand_scatter.png
+
+WHAT TO LOOK FOR:
+----------------
+1. Regional differences in prices and demand
+2. Negative correlation between log_price and log_bandwidth_use
+3. Time trends showing evolution 2010-2023
+4. Data quality (missing values, panel balance)
+
+================================================================================
+STEP 6: BASELINE REGRESSION (15 minutes)
+================================================================================
+
+PURPOSE:
+--------
+Estimate baseline price elasticity using panel regression models with
+different specifications.
+
+WHAT IT DOES:
+------------
+✓ Model 1: Pooled OLS (baseline, assumes no heterogeneity)
+✓ Model 2: Fixed Effects - Country (controls for time-invariant country factors)
+✓ Model 3: Two-Way Fixed Effects - Country + Time (controls for country + year)
+✓ Model 4: Regional Heterogeneity (separate elasticities for EU vs EaP)
+
+All models use:
+- Dependent: log_bandwidth_use (or log_bb_subs)
+- Key independent: log_price
+- Controls: log_gdp_pc, internet_users_pct
+- Clustered standard errors (by country)
+
+HOW TO RUN:
+-----------
+cd code\analysis
+python 06_baseline_regression.py
+
+OUTPUTS CREATED:
+---------------
+Detailed results (results/regression_output/):
+- model1_pooled_ols.txt
+- model2_fe_country.txt
+- model3_fe_twoway.txt
+- model4_regional.txt
+
+Comparison (results/tables/):
+- baseline_regression_comparison.txt
+
+WHAT TO LOOK FOR:
+----------------
+1. Sign of log_price coefficient (should be negative = negative elasticity)
+2. Magnitude: |β| < 1 = inelastic, |β| > 1 = elastic
+3. Regional difference (β₂ in Model 4)
+4. R² improvement from Pooled OLS to Fixed Effects
+5. Statistical significance (t-stats, p-values)
+
+EXPECTED RESULTS:
+----------------
+- Negative price elasticity (higher prices → lower demand)
+- EaP countries may have different elasticity than EU
+- Fixed effects improve fit (control for country heterogeneity)
+
+================================================================================
+STEP 7: IV/2SLS ESTIMATION (20 minutes)
+================================================================================
+
+PURPOSE:
+--------
+Address potential endogeneity of price using instrumental variables.
+
+WHY IV?
+-------
+Price may be endogenous because:
+1. Reverse causality: High demand → providers raise prices
+2. Omitted variables: Unobserved quality correlated with price and demand
+3. Measurement error in price variable
+
+INSTRUMENTS USED:
+----------------
+1. Telecom investment (supply-side shifter)
+   - Relevance: Higher investment → better infrastructure → lower costs → lower prices
+   - Exogeneity: Investment decisions made for supply reasons, not demand
+
+2. Mobile broadband price (substitute price)
+   - Relevance: Mobile and fixed broadband are substitutes
+   - Exogeneity: Mobile prices set in different market
+
+WHAT IT DOES:
+------------
+✓ First-stage regression (price ~ instruments + controls)
+  - Tests instrument strength (F-statistic > 10)
+
+✓ Second-stage IV/2SLS (demand ~ predicted_price + controls)
+  - IV elasticity estimate
+
+✓ Hausman test (compare OLS vs IV)
+  - Tests if price is endogenous
+
+✓ Overidentification test (if 2+ instruments)
+  - Tests instrument validity
+
+HOW TO RUN:
+-----------
+cd code\analysis
+python 07_iv_estimation.py
+
+OUTPUTS CREATED:
+---------------
+Results (results/regression_output/):
+- iv_first_stage.txt (first stage with F-test)
+- iv_2sls_results.txt (IV estimates)
+- ols_for_comparison.txt (OLS baseline)
+
+Comparison (results/tables/):
+- ols_vs_iv_comparison.csv
+
+WHAT TO LOOK FOR:
+----------------
+1. First-stage F-statistic:
+   - F > 10: Strong instruments ✓
+   - F < 10: Weak instruments ⚠
+
+2. IV coefficient vs OLS:
+   - If IV ≠ OLS: Endogeneity present
+   - If IV ≈ OLS: Endogeneity not severe
+
+3. Hausman test:
+   - p < 0.05: Price is endogenous, use IV ✓
+   - p > 0.05: Price may be exogenous, OLS OK
+
+4. Overidentification test (if applicable):
+   - p > 0.05: Instruments valid ✓
+   - p < 0.05: Instruments may be invalid ⚠
+
+INTERPRETATION:
+--------------
+IV elasticity is typically more negative (in absolute value) than OLS,
+suggesting OLS underestimates the true price effect due to endogeneity.
+
+================================================================================
+EXECUTION SEQUENCE
+================================================================================
+
+RECOMMENDED ORDER:
+-----------------
+1. FIRST: Run 05_descriptive_stats.py
+   - Understand your data
+   - Check for issues
+   - Generate figures for paper
+
+2. SECOND: Run 06_baseline_regression.py
+   - Get baseline elasticity estimates
+   - Compare model specifications
+   - Identify regional differences
+
+3. THIRD: Run 07_iv_estimation.py
+   - Address endogeneity concerns
+   - Get causal elasticity estimates
+   - Report IV as main results
+
+FULL COMMAND SEQUENCE:
+---------------------
+cd code\analysis
+python 05_descriptive_stats.py
+python 06_baseline_regression.py
+python 07_iv_estimation.py
+cd ..\..
+
+Total time: ~45 minutes
+
+================================================================================
+INTERPRETING RESULTS FOR YOUR PAPER
+================================================================================
+
+KEY FINDINGS TO REPORT:
+----------------------
+1. Descriptive Statistics (Table 1):
+   - Regional comparison: EU vs EaP prices, subscriptions, GDP
+   - Shows motivation for your research question
+
+2. Baseline Results (Table 2):
+   - Fixed effects estimates
+   - Regional heterogeneity (β₂ coefficient)
+   - "EaP countries have X% different elasticity than EU"
+
+3. IV Results (Table 3 - Main Results):
+   - First-stage F-statistic (instrument strength)
+   - IV elasticity estimate with 95% CI
+   - Hausman test p-value
+   - "A 10% increase in price leads to Y% decrease in demand"
+
+4. Figures:
+   - Figure 1: Time trends (shows data coverage)
+   - Figure 2: Price-demand scatter (shows negative relationship)
+   - Figure 3: Coefficient plot (compare elasticities across models)
+
+TYPICAL ELASTICITY INTERPRETATION:
+----------------------------------
+If your IV estimate is -0.65:
+"A 10% increase in fixed broadband prices reduces bandwidth usage by 6.5%,
+ indicating that demand is price inelastic. Consumers do not significantly
+ reduce usage when prices increase, likely because broadband has become
+ an essential service."
+
+If β₂ = -0.30 (additional EaP effect):
+"Eastern Partnership countries exhibit 30% higher price elasticity than EU,
+ with total elasticity of -0.95. This suggests that EaP consumers are more
+ price-sensitive, possibly due to lower income levels and availability of
+ alternatives."
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Issue: "File not found: broadband_analysis_clean.csv"
+Fix: Run 04_prepare_data.py first
+
+Issue: "Instruments not found"
+Fix: Check that telecom_investment and price_mobile_bb are in your data
+
+Issue: "Weak instruments (F < 10)"
+Solution: 
+  - Try different instruments
+  - Check instrument relevance in first stage
+  - Consider just-identified model (1 instrument)
+
+Issue: Scripts run but no output files
+Fix: Check that results/ and figures/ folders exist
+
+Issue: "linearmodels not installed"
+Fix: pip install linearmodels
+
+================================================================================
+VERIFICATION CHECKLIST
+================================================================================
+
+After running all three scripts, verify:
+
+[√] Files exist in code/analysis/
+    - 05_descriptive_stats.py
+    - 06_baseline_regression.py
+    - 07_iv_estimation.py
+
+[√] Tables created in results/tables/
+    - descriptive_stats_overall.csv
+    - descriptive_stats_by_region.csv
+    - correlation_matrix.csv
+    - baseline_regression_comparison.txt
+    - ols_vs_iv_comparison.csv
+
+[√] Figures created in figures/descriptive/
+    - correlation_heatmap.png
+    - time_trends_by_region.png
+    - price_demand_scatter.png
+
+[√] Regression outputs in results/regression_output/
+    - model1_pooled_ols.txt
+    - model2_fe_country.txt
+    - model3_fe_twoway.txt
+    - model4_regional.txt
+    - iv_first_stage.txt
+    - iv_2sls_results.txt
+
+[√] Key results obtained:
+    - Baseline elasticity estimate
+    - Regional difference (EU vs EaP)
+    - IV elasticity estimate
+    - First-stage F-statistic > 10
+    - Hausman test indicates endogeneity
+
+================================================================================
+NEXT STEPS (AFTER ANALYSIS)
+================================================================================
+
+Once you have results:
+
+1. COMPILE RESULTS FOR PAPER
+   - Create regression tables (LaTeX format)
+   - Generate coefficient plots
+   - Write results section
+
+2. ROBUSTNESS CHECKS
+   - Alternative specifications
+   - Different time periods
+   - Subsample analysis
+   - Different dependent variables
+
+3. WRITE FIRST DRAFT
+   - Introduction (motivation, research question)
+   - Literature review
+   - Methodology (panel data, IV approach)
+   - Results (descriptive + regression)
+   - Discussion and policy implications
+   - Conclusion
+
+4. SUBMIT TO JOURNAL
+   - Target: Telecommunications Policy
+   - Alternative: Information Economics and Policy
+
+================================================================================
+ESTIMATED TIMELINE TO FIRST DRAFT
+================================================================================
+
+TODAY (1 hour):
+- Run all three analysis scripts
+- Review outputs
+- Identify key findings
+
+THIS WEEK (3-4 days):
+- Create publication-quality tables
+- Generate final figures
+- Write results section
+
+NEXT WEEK (5-7 days):
+- Complete introduction and literature review
+- Write methodology section
+- Draft discussion and conclusions
+- Format references
+
+WEEK 3:
+- Revise and polish draft
+- Create appendices
+- Prepare submission materials
+
+TARGET: First draft complete in 3 weeks (early December 2025)
+SUBMISSION: January 2026
+PUBLICATION: Mid-2026
+
+================================================================================

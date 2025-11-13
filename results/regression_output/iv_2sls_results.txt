@@ -1,0 +1,23 @@
+                          IV-2SLS Estimation Summary                          
+==============================================================================
+Dep. Variable:      log_bandwidth_use   R-squared:                     -4.5974
+Estimator:                    IV-2SLS   Adj. R-squared:                -4.5979
+No. Observations:               36032   F-statistic:                    608.64
+Date:                Thu, Nov 13 2025   P-value (F-stat)                0.0000
+Time:                        14:34:20   Distribution:                  chi2(3)
+Cov. Estimator:                robust                                         
+                                                                              
+                                 Parameter Estimates                                  
+======================================================================================
+                    Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+--------------------------------------------------------------------------------------
+const                  12.340     0.2425     50.885     0.0000      11.865      12.816
+log_gdp_pc             0.2892     0.0432     6.6884     0.0000      0.2044      0.3739
+internet_users_pct     0.0176     0.0018     9.7650     0.0000      0.0140      0.0211
+log_price             -2.0854     0.1947    -10.710     0.0000     -2.4671     -1.7038
+======================================================================================
+
+Endogenous: log_price
+Instruments: regulatory_quality_estimate, mobile_broad_price
+Robust Covariance (Heteroskedastic)
+Debiased: False

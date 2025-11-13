@@ -1,0 +1,33 @@
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:      log_bandwidth_use   R-squared:                        0.1075
+Estimator:                   PanelOLS   R-squared (Between):              0.7658
+No. Observations:               36032   R-squared (Within):               0.1075
+Date:                Thu, Nov 13 2025   R-squared (Overall):              0.7556
+Time:                        14:29:48   Log-likelihood                 -5.31e+04
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      1444.8
+Entities:                          33   P-value                           0.0000
+Avg Obs:                       1091.9   Distribution:                 F(3,35996)
+Min Obs:                       756.00                                           
+Max Obs:                       1404.0   F-statistic (robust):             12.748
+                                        P-value                           0.0000
+Time periods:                      14   Distribution:                 F(3,35996)
+Avg Obs:                       2573.7                                           
+Min Obs:                       1368.0                                           
+Max Obs:                       4496.0                                           
+                                                                                
+                                 Parameter Estimates                                  
+======================================================================================
+                    Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+--------------------------------------------------------------------------------------
+log_price             -0.0087     0.0058    -1.4933     0.1354     -0.0201      0.0027
+log_gdp_pc             0.3498     0.3241     1.0794     0.2804     -0.2854      0.9851
+internet_users_pct     0.0358     0.0079     4.5442     0.0000      0.0204      0.0513
+======================================================================================
+
+F-test for Poolability: 634.94
+P-value: 0.0000
+Distribution: F(32,35996)
+
+Included effects: Entity

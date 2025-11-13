@@ -1,0 +1,1 @@
+<statsmodels.regression.linear_model.RegressionResultsWrapper object at 0x00000182D2B6DF90>
