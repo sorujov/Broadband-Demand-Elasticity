@@ -1,0 +1,281 @@
+
+================================================================================
+UPDATED DATA COLLECTION WORKFLOW WITH SERIES METADATA PRESERVATION
+================================================================================
+Author: Samir Orujov
+Date: November 14, 2025
+
+PROBLEM SOLVED:
+---------------
+✓ ITU data contains multiple series for same variables (different units/methods)
+✓ Original merge script dropped series metadata
+✓ Impossible to distinguish between series in analysis
+✓ Now all series are preserved with proper identifiers
+
+================================================================================
+NEW WORKFLOW STRUCTURE
+================================================================================
+
+Step 1: Download ITU Data
+   Script: code/data_collection/01_download_itu_data.py
+   Status: ✓ NO CHANGES NEEDED (works correctly)
+   Output: data/raw/itu_*.csv
+
+   What it does:
+   - Downloads ITU indicators with ALL metadata
+   - Preserves seriesCode, seriesName, seriesUnits
+   - Adds country_iso3 column
+
+Step 2: Download World Bank Data  
+   Script: code/data_collection/02_download_worldbank_data.py
+   Status: ✓ NO CHANGES NEEDED (works correctly)
+   Output: data/raw/worldbank_data.csv
+
+   What it does:
+   - Downloads WB indicators using ISO3 codes
+   - Wide format with one column per indicator
+
+Step 3: NEW - Process Downloaded Data
+   Script: code/data_collection/01.5_process_data.py
+   Status: ✓✓✓ NEW SCRIPT (REQUIRED)
+   Output: data/interim/itu_*_processed.csv
+           data/interim/worldbank_processed.csv  
+           data/interim/data_catalog.csv
+
+   What it does:
+   - Processes ITU data to preserve series metadata
+   - Creates unique column names: variable_seriescode
+   - Adds indicator codes to WB data
+   - Creates comprehensive metadata catalog
+
+Step 4: Merge Processed Data
+   Script: code/data_collection/03_merge_data.py (UPDATED VERSION)
+   Status: ✓✓✓ UPDATED (use 03_merge_data_UPDATED.py)
+   Output: data/processed/data_merged_with_series.csv
+           data/processed/itu_series_reference.csv
+           data/processed/missing_data_report.csv
+
+   What it does:
+   - Merges processed ITU and WB data
+   - Keeps all series as separate columns
+   - Creates series reference guide
+   - Documents missing data
+
+================================================================================
+EXECUTION COMMANDS (RUN IN ORDER)
+================================================================================
+
+# Step 1: Download ITU data (no changes)
+python code/data_collection/01_download_itu_data.py
+
+# Step 2: Download World Bank data (no changes)  
+python code/data_collection/02_download_worldbank_data.py
+
+# Step 3: NEW - Process downloaded data
+python code/data_collection/01.5_process_data.py
+
+# Step 4: Merge with series metadata preserved
+python code/data_collection/03_merge_data.py
+
+================================================================================
+EXAMPLE: FIXED BROADBAND PRICE DATA
+================================================================================
+
+BEFORE (OLD WORKFLOW):
+---------------------
+Column: fixed_broad_price
+Values: Mixed from 3 different series!
+Problem: Can't distinguish which unit/method
+
+AFTER (NEW WORKFLOW):
+--------------------
+Column 1: fixed_broad_price_i154_FBB_ts_PPP
+   - Units: % GNI per capita  
+   - Method: PPP-adjusted basket
+   - Armenia 2010: 68.14
+
+Column 2: fixed_broad_price_i154_FBB_ts_GNI
+   - Units: % GNI per capita
+   - Method: GNI-based basket  
+   - Armenia 2010: 11.52
+
+Column 3: fixed_broad_price_i154_FBB_ts$
+   - Units: % GNI per capita
+   - Method: USD-based basket
+   - Armenia 2010: 32.37
+
+Now you can CHOOSE which series to use in regression!
+
+================================================================================
+USING THE DATA IN YOUR ANALYSIS
+================================================================================
+
+1. Load the merged dataset:
+
+   import pandas as pd
+   df = pd.read_csv('data/processed/data_merged_with_series.csv')
+
+2. Check available series:
+
+   series_ref = pd.read_csv('data/processed/itu_series_reference.csv')
+   print(series_ref[['column_name', 'series_units']])
+
+3. Select series for regression:
+
+   # Example: Use PPP-adjusted fixed broadband price
+   price_col = 'fixed_broad_price_i154_FBB_ts_PPP'
+
+   # Your regression model
+   model_data = df[['country', 'year', price_col, 
+                    'gdp_per_capita', 'population']].dropna()
+
+4. Document your choice in paper:
+
+   "We use the ITU fixed-broadband price indicator i154_FBB_ts_PPP,
+    which measures affordability as % of GNI per capita using PPP-adjusted
+    basket definitions (ITU, 2024)."
+
+================================================================================
+ITU SERIES GUIDE FOR REGRESSION
+================================================================================
+
+FIXED_BROAD_PRICE options:
+  • fixed_broad_price_i154_FBB_ts_PPP (% GNI - PPP basket)
+  • fixed_broad_price_i154_FBB_ts_GNI (% GNI - GNI basket)  
+  • fixed_broad_price_i154_FBB_ts$ (% GNI - USD basket)
+
+  RECOMMENDATION: Use i154_FBB_ts_PPP for cross-country comparisons
+                  (most common in literature)
+
+MOBILE_BROAD_PRICE options:
+  • Will be listed in itu_series_reference.csv
+  • Check the file after running processing script
+
+OTHER ITU VARIABLES:
+  • May have single or multiple series
+  • All documented in itu_series_reference.csv
+
+WORLD BANK VARIABLES:
+  • One series per indicator (simpler)
+  • Indicator codes preserved in column names
+  • See data_catalog.csv for full list
+
+================================================================================
+DIRECTORY STRUCTURE
+================================================================================
+
+project/
+├── code/
+│   └── data_collection/
+│       ├── 01_download_itu_data.py        (no changes)
+│       ├── 02_download_worldbank_data.py  (no changes)
+│       ├── 01.5_process_data.py           (NEW - REQUIRED)
+│       └── 03_merge_data.py               (UPDATED VERSION)
+│
+├── data/
+│   ├── raw/                    (from steps 1-2)
+│   │   ├── itu_*.csv
+│   │   └── worldbank_data.csv
+│   │
+│   ├── interim/                (from step 3 - NEW)
+│   │   ├── itu_*_processed.csv
+│   │   ├── worldbank_processed.csv
+│   │   └── data_catalog.csv
+│   │
+│   └── processed/              (from step 4)
+│       ├── data_merged_with_series.csv    ← YOUR ANALYSIS DATA
+│       ├── itu_series_reference.csv       ← SERIES SELECTION GUIDE
+│       └── missing_data_report.csv
+
+================================================================================
+CHECKING YOUR DATA
+================================================================================
+
+After running all scripts, verify:
+
+1. Check series reference:
+
+   Open: data/processed/itu_series_reference.csv
+
+   Verify: Each ITU variable lists all its series with units
+
+2. Check merged data:
+
+   Open: data/processed/data_merged_with_series.csv
+
+   Verify: Column names include series codes
+           e.g., "fixed_broad_price_i154_FBB_ts_PPP"
+
+3. Check catalog:
+
+   Open: data/interim/data_catalog.csv
+
+   Verify: All variables documented with metadata
+
+4. Check missing data:
+
+   Open: data/processed/missing_data_report.csv
+
+   Verify: Understand data availability for your sample
+
+================================================================================
+FOR YOUR ECONOMETRIC PAPER
+================================================================================
+
+1. DATA SECTION - Document series selection:
+
+   "We use ITU's i154_FBB_ts_PPP series for fixed-broadband prices,
+    which measures the entry-level broadband basket as a percentage  
+    of GNI per capita using PPP-adjusted definitions. This series
+    provides internationally comparable affordability measures..."
+
+2. ROBUSTNESS CHECKS - Use alternative series:
+
+   "As a robustness check, we re-estimate using alternative ITU
+    price series (i154_FBB_ts_GNI and i154_FBB_ts$) and find
+    consistent results..."
+
+3. VARIABLE DEFINITIONS TABLE:
+
+   Variable         | Source | Code            | Unit              
+   -----------------|--------|-----------------|-------------------
+   BB Price (main)  | ITU    | i154_FBB_ts_PPP | % GNI per capita
+   BB Price (alt1)  | ITU    | i154_FBB_ts_GNI | % GNI per capita
+   GDP per capita   | WB     | NY.GDP.PCAP.KD  | Constant 2015 USD
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Issue: "No processed ITU files found"
+Fix: Run step 3 (01.5_process_data.py) first
+
+Issue: "Series reference file not created"  
+Fix: Check that data_catalog.csv exists in data/interim/
+
+Issue: "Multiple values for same country-year"
+Fix: This is EXPECTED - different series have different values
+     Choose ONE series per variable for regression
+
+Issue: "Don't know which series to use"
+Fix: 1. Check itu_series_reference.csv
+     2. For prices: use i154_FBB_ts_PPP (most common)
+     3. Check ITU documentation for series definitions
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. ✓ Replace your 03_merge_data.py with updated version
+2. ✓ Add 01.5_process_data.py to your project
+3. ✓ Re-run pipeline: steps 1 → 2 → 3 (new) → 4 (updated)
+4. ✓ Check itu_series_reference.csv
+5. ✓ Select appropriate series for regression
+6. ✓ Document series selection in paper
+
+Questions? Check:
+- data/interim/data_catalog.csv (full variable list)
+- data/processed/itu_series_reference.csv (ITU series guide)
+- ITU DataHub: https://datahub.itu.int/
+
+================================================================================

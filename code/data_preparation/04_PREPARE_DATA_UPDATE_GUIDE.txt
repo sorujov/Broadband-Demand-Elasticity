@@ -1,0 +1,257 @@
+
+================================================================================
+SUMMARY: UPDATING 04_prepare_data.py FOR SERIES-AWARE WORKFLOW
+================================================================================
+Date: November 14, 2025
+
+YES, YOU SHOULD UPDATE 04_prepare_data.py!
+==========================================
+
+Your current script assumes single columns like 'fixed_broad_price', but
+after the updated workflow, you have multiple series columns like:
+- fixed_broad_price_i154_FBB_ts_PPP
+- fixed_broad_price_i154_FBB_ts_GNI
+- fixed_broad_price_i154_FBB_ts$
+
+PROBLEMS WITH CURRENT SCRIPT:
+==============================
+
+1. Wrong input file:
+   Current: DATA_INTERIM / 'data_merged.csv'
+   Should be: DATA_PROCESSED / 'data_merged_with_series.csv'
+
+2. Undefined variable names:
+   Current: Expects 'fixed_broad_price'
+   Reality: Need to specify which series (e.g., 'fixed_broad_price_i154_FBB_ts_PPP')
+
+3. No series documentation:
+   Current: Doesn't track which series is used
+   Needed: Must document for paper methodology
+
+4. No robustness flexibility:
+   Current: Hard to switch series for robustness checks
+   Needed: Easy configuration to test alternative series
+
+KEY IMPROVEMENTS IN UPDATED VERSION:
+====================================
+
+1. Series Configuration:
+
+   series_config = {
+       'fixed_broad_price': 'i154_FBB_ts_PPP',  # Main specification
+       # 'fixed_broad_price': 'i154_FBB_ts_GNI',  # For robustness
+   }
+
+   → Easy to change which series you use!
+
+2. Automatic Series Selection & Renaming:
+
+   - Finds: fixed_broad_price_i154_FBB_ts_PPP
+   - Renames to: fixed_broad_price (for standard analysis code)
+   - Documents: Saves log of which series was selected
+
+3. Documentation Log:
+
+   Creates: series_selection_log.txt
+   Contains: Which series codes were used
+   Purpose: For your paper's methodology section
+
+4. Backward Compatibility:
+
+   After series selection, rest of code works unchanged!
+   All transformations, lags, interactions work as before.
+
+USAGE EXAMPLE:
+==============
+
+Main Analysis (PPP-adjusted prices):
+-----------------------------------
+series_config = {
+    'fixed_broad_price': 'i154_FBB_ts_PPP'
+}
+
+Run: python code/data_preparation/04_prepare_data.py
+Output: broadband_analysis_clean.csv (with PPP series)
+
+Robustness Check 1 (GNI-based prices):
+--------------------------------------
+series_config = {
+    'fixed_broad_price': 'i154_FBB_ts_GNI'
+}
+
+Run again → Output: broadband_analysis_clean.csv (with GNI series)
+Compare regression results!
+
+Robustness Check 2 (USD-based prices):
+--------------------------------------
+series_config = {
+    'fixed_broad_price': 'i154_FBB_ts$'
+}
+
+Run again → Compare with previous specifications
+
+COMPLETE UPDATED WORKFLOW:
+==========================
+
+Step 1: Download ITU data
+   python code/data_collection/01_download_itu_data.py
+
+Step 2: Download World Bank data
+   python code/data_collection/02_download_worldbank_data.py
+
+Step 3: Process data (NEW)
+   python code/data_collection/01.5_process_data.py
+
+Step 4: Merge with series metadata (UPDATED)
+   python code/data_collection/03_merge_data.py
+
+Step 5: Prepare analysis data (UPDATED - THIS SCRIPT)
+   python code/data_preparation/04_prepare_data.py
+
+   → Now series-aware!
+   → Documents series selection
+   → Easy to switch for robustness
+
+Step 6: Run econometric analysis
+   python code/analysis/05_descriptive_analysis.py
+   python code/analysis/06_regression_analysis.py
+   etc.
+
+FOR YOUR PAPER:
+===============
+
+Main Specification:
+------------------
+Use: i154_FBB_ts_PPP (PPP-adjusted)
+
+Document in methodology:
+"We measure fixed-broadband affordability using ITU's i154_FBB_ts_PPP 
+ indicator, expressed as percentage of GNI per capita using PPP-adjusted
+ basket definitions for international comparability."
+
+Robustness Checks:
+-----------------
+Table: "Robustness to Alternative Price Measures"
+
+Specification (1): i154_FBB_ts_PPP (main)
+Specification (2): i154_FBB_ts_GNI (alternative)
+Specification (3): i154_FBB_ts$ (alternative)
+
+→ Show consistent results across specifications!
+
+IMMEDIATE ACTIONS:
+==================
+
+□ Replace: code/data_preparation/04_prepare_data.py
+   With: 04_prepare_data_UPDATED.py
+
+□ Edit series_config in main() function:
+   Choose: i154_FBB_ts_PPP for main analysis
+
+□ Run updated script:
+   python code/data_preparation/04_prepare_data.py
+
+□ Check generated files:
+   ✓ broadband_analysis_clean.csv
+   ✓ series_selection_log.txt
+   ✓ descriptive_stats_by_region.csv
+
+□ Document in paper:
+   - Which series you used (from series_selection_log.txt)
+   - Why you chose PPP-adjusted (international comparability)
+   - Robustness to alternative series
+
+VERIFICATION:
+=============
+
+After running updated script, check:
+
+✓ File exists: data/processed/broadband_analysis_clean.csv
+✓ File exists: data/processed/series_selection_log.txt
+✓ Log documents: fixed_broad_price → i154_FBB_ts_PPP
+✓ Clean data has: 'fixed_broad_price' column (not series-specific name)
+✓ Log transformations work: 'log_price' created
+✓ Interactions work: 'price_x_eap' created
+✓ Can easily change series in series_config
+
+ADVANTAGES OF UPDATED APPROACH:
+================================
+
+1. Transparency:
+   - Know exactly which series you're using
+   - Documented in series_selection_log.txt
+
+2. Flexibility:
+   - Easy to test different series
+   - Just change series_config and re-run
+
+3. Reproducibility:
+   - Clear record of data preparation choices
+   - Other researchers can replicate
+
+4. Paper Quality:
+   - Proper methodology documentation
+   - Thorough robustness checks
+   - Professional variable definitions table
+
+5. Backward Compatibility:
+   - Rest of analysis code unchanged
+   - Standard variable names preserved
+
+QUESTIONS & ANSWERS:
+====================
+
+Q: Do I need to update other scripts (05, 06, etc.)?
+A: No! After 04_prepare_data.py runs, output has standard
+   variable names ('fixed_broad_price'), so downstream scripts
+   work unchanged.
+
+Q: How do I run robustness checks?
+A: 1. Change series_config to alternative series
+   2. Re-run 04_prepare_data.py → new clean dataset
+   3. Re-run your regression scripts → new results
+   4. Compare coefficients across specifications
+
+Q: Where do I find available series codes?
+A: Check: data/processed/itu_series_reference.csv
+   Lists all series codes with descriptions
+
+Q: What if I want to use multiple series simultaneously?
+A: You can! Keep series-specific columns in the dataset:
+   - Don't rename them
+   - Use full names in regression
+   - Compare results directly
+
+Q: How do I cite this in my paper?
+A: "We use ITU's i154_FBB_ts_PPP indicator (International
+    Telecommunication Union, 2024), which measures fixed-
+    broadband basket prices as % of GNI per capita using
+    PPP-adjusted definitions."
+
+FILES PROVIDED:
+===============
+
+✓ 04_prepare_data_UPDATED.py
+  - Updated data preparation script
+  - Series selection capability
+  - Automatic documentation
+
+✓ THIS DOCUMENT
+  - Explanation of changes
+  - Usage instructions
+  - Examples
+
+NEXT STEPS:
+===========
+
+1. Replace 04_prepare_data.py with updated version
+2. Configure series_config for main analysis (use PPP)
+3. Run updated preparation script
+4. Check series_selection_log.txt
+5. Proceed with econometric analysis
+6. Document series choice in paper
+7. Run robustness checks with alternative series
+
+================================================================================
+You're now ready for proper series-aware data preparation!
+================================================================================

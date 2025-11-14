@@ -1,0 +1,80 @@
+data_source,variable,series_code,series_name,units,observations,countries,year_min,year_max,value_min,value_max
+ITU,fixed_broad_price,"    i154_FBB_ts$
+Name: 0, dtype: object","    Fixed-broadband Internet basket
+Name: 0, dtype: object","    % GNI per capita
+Name: 0, dtype: object",462,33,2010,2023,2.34,80.9
+ITU,fixed_broad_price,"    i154_FBB_ts_GNI
+Name: 1, dtype: object","    Fixed-broadband Internet basket
+Name: 1, dtype: object","    % GNI per capita
+Name: 1, dtype: object",461,33,2010,2023,0.31,11.52
+ITU,fixed_broad_price,"    i154_FBB_ts_PPP
+Name: 2, dtype: object","    Fixed-broadband Internet basket
+Name: 2, dtype: object","    % GNI per capita
+Name: 2, dtype: object",454,33,2010,2023,11.39,76.97
+ITU,mobile_broad_price,"    i271mb_ts$
+Name: 0, dtype: object","    Data-only mobile broadband basket
+Name: 0, dtype: object","    % GNI per capita
+Name: 0, dtype: object",361,33,2013,2023,1.74,41.33
+ITU,mobile_broad_price,"    i271mb_ts_GNI
+Name: 1, dtype: object","    Data-only mobile broadband basket
+Name: 1, dtype: object","    % GNI per capita
+Name: 1, dtype: object",361,33,2013,2023,0.09,3.86
+ITU,mobile_broad_price,"    i271mb_ts_PPP
+Name: 2, dtype: object","    Data-only mobile broadband basket
+Name: 2, dtype: object","    % GNI per capita
+Name: 2, dtype: object",353,33,2013,2023,4.54,35.93
+ITU,fixed_broadband_subs,"    i4213tfbb
+Name: 0, dtype: object","    Fixed-broadband subscriptions
+Name: 0, dtype: object","    per 100 people
+Name: 0, dtype: object",462,33,2010,2023,93586.0,38368400.0
+ITU,fixed_broadband_subs,"    i992b
+Name: 1, dtype: object","    Fixed-broadband subscriptions
+Name: 1, dtype: object","    per 100 people
+Name: 1, dtype: object",462,33,2010,2023,3.19,48.67
+ITU,internet_users_pct,"    i99H
+Name: 0, dtype: object","    Individuals using the Internet
+Name: 0, dtype: object","    %
+Name: 0, dtype: object",462,33,2010,2023,23.3,99.35
+ITU,int_bandwidth,"    i4214
+Name: 0, dtype: object","    International bandwidth usage
+Name: 0, dtype: object","    Mbit/s
+Name: 0, dtype: object",338,33,2010,2023,10547.0,4800000.0
+ITU,int_bandwidth,"    i994
+Name: 1, dtype: object","    International bandwidth usage
+Name: 1, dtype: object","    Mbit/s
+Name: 1, dtype: object",338,33,2010,2023,3598.33,8047010.0
+ITU,int_bandwidth,"    i994B
+Name: 2, dtype: object","    International bandwidth usage
+Name: 2, dtype: object","    Mbit/s
+Name: 2, dtype: object",131,33,2010,2014,40218.8,18736600.0
+ITU,int_bandwidth,"    i994u
+Name: 3, dtype: object","    International bandwidth usage
+Name: 3, dtype: object","    Mbit/s
+Name: 3, dtype: object",338,33,2010,2023,9031.38,8264960.0
+ITU,mobile_subs,"    i271
+Name: 0, dtype: object","    Mobile-cellular subscriptions
+Name: 0, dtype: object","    count
+Name: 0, dtype: object",462,33,2010,2023,455579.0,109700000.0
+ITU,mobile_subs,"    i911
+Name: 1, dtype: object","    Mobile-cellular subscriptions
+Name: 1, dtype: object","    count
+Name: 1, dtype: object",462,33,2010,2023,70.23,172.15
+World Bank,gdp_per_capita,N/A,gdp_per_capita,Various (see WB documentation),462,33,2010,2023,2094.47,134965.82
+World Bank,gdp_per_capita_constant,N/A,gdp_per_capita_constant,Various (see WB documentation),462,33,2010,2023,1874.66,110873.19
+World Bank,gdp_growth,N/A,gdp_growth,Various (see WB documentation),462,33,2010,2023,-28.76,24.62
+World Bank,inflation_gdp_deflator,N/A,inflation_gdp_deflator,Various (see WB documentation),462,33,2010,2023,-9.32,75.24
+World Bank,population,N/A,population,Various (see WB documentation),462,33,2010,2023,414508.0,83901923.0
+World Bank,population_density,N/A,population_density,Various (see WB documentation),462,33,2010,2023,17.65,1727.33
+World Bank,urban_population_pct,N/A,urban_population_pct,Various (see WB documentation),462,33,2010,2023,42.49,98.19
+World Bank,population_ages_15_64,N/A,population_ages_15_64,Various (see WB documentation),462,33,2010,2023,61.47,72.18
+World Bank,education_tertiary_pct,N/A,education_tertiary_pct,Various (see WB documentation),443,33,2010,2023,18.2,166.67
+World Bank,education_secondary_pct,N/A,education_secondary_pct,Various (see WB documentation),426,33,2010,2023,25.6,97.9
+World Bank,labor_force_advanced_education,N/A,labor_force_advanced_education,Various (see WB documentation),434,33,2010,2023,56.28,89.57
+World Bank,secure_internet_servers,N/A,secure_internet_servers,Various (see WB documentation),462,33,2010,2023,2.54,557174.25
+World Bank,electric_power_consumption,N/A,electric_power_consumption,Various (see WB documentation),460,33,2010,2023,1603.43,16808.26
+World Bank,access_to_electricity,N/A,access_to_electricity,Various (see WB documentation),462,33,2010,2023,93.5,100.0
+World Bank,regulatory_quality_estimate,N/A,regulatory_quality_estimate,Various (see WB documentation),462,33,2010,2023,-1.42,2.04
+World Bank,high_tech_exports,N/A,high_tech_exports,Various (see WB documentation),459,33,2010,2023,4727643.0,255687490788.0
+World Bank,ict_goods_exports,N/A,ict_goods_exports,Various (see WB documentation),428,33,2010,2023,0.0,30.87
+World Bank,research_development_expenditure,N/A,research_development_expenditure,Various (see WB documentation),432,33,2010,2023,0.08,3.71
+World Bank,wage_salaried_workers,N/A,wage_salaried_workers,Various (see WB documentation),460,33,2010,2023,31.33,96.2

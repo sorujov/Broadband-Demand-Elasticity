@@ -1,0 +1,16 @@
+variable,series_code,series_name_x,series_units,data_source,series_name_y,units,observations,countries,year_min,year_max,value_min,value_max,column_name
+fixed_broadband_subs,i4213tfbb,Fixed-broadband subscriptions,per 100 people,,,,,,,,,,fixed_broadband_subs_i4213tfbb
+fixed_broadband_subs,i992b,Fixed-broadband subscriptions,per 100 people,,,,,,,,,,fixed_broadband_subs_i992b
+fixed_broad_price,i154_FBB_ts$,Fixed-broadband Internet basket,% GNI per capita,,,,,,,,,,fixed_broad_price_i154_FBB_ts$
+fixed_broad_price,i154_FBB_ts_GNI,Fixed-broadband Internet basket,% GNI per capita,,,,,,,,,,fixed_broad_price_i154_FBB_ts_GNI
+fixed_broad_price,i154_FBB_ts_PPP,Fixed-broadband Internet basket,% GNI per capita,,,,,,,,,,fixed_broad_price_i154_FBB_ts_PPP
+internet_users_pct,i99H,Individuals using the Internet,%,,,,,,,,,,internet_users_pct_i99H
+int_bandwidth,i4214,International bandwidth usage,Mbit/s,,,,,,,,,,int_bandwidth_i4214
+int_bandwidth,i994,International bandwidth usage,Mbit/s,,,,,,,,,,int_bandwidth_i994
+int_bandwidth,i994B,International bandwidth usage,Mbit/s,,,,,,,,,,int_bandwidth_i994B
+int_bandwidth,i994u,International bandwidth usage,Mbit/s,,,,,,,,,,int_bandwidth_i994u
+mobile_broad_price,i271mb_ts$,Data-only mobile broadband basket,% GNI per capita,,,,,,,,,,mobile_broad_price_i271mb_ts$
+mobile_broad_price,i271mb_ts_GNI,Data-only mobile broadband basket,% GNI per capita,,,,,,,,,,mobile_broad_price_i271mb_ts_GNI
+mobile_broad_price,i271mb_ts_PPP,Data-only mobile broadband basket,% GNI per capita,,,,,,,,,,mobile_broad_price_i271mb_ts_PPP
+mobile_subs,i271,Mobile-cellular subscriptions,count,,,,,,,,,,mobile_subs_i271
+mobile_subs,i911,Mobile-cellular subscriptions,count,,,,,,,,,,mobile_subs_i911

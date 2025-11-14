@@ -1,33 +1,33 @@
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:      log_bandwidth_use   R-squared:                        0.0371
-Estimator:                   PanelOLS   R-squared (Between):              0.8419
-No. Observations:               36032   R-squared (Within):               0.1065
-Date:                Thu, Nov 13 2025   R-squared (Overall):              0.8313
-Time:                        14:29:48   Log-likelihood                -5.292e+04
+Dep. Variable:      log_bandwidth_use   R-squared:                        0.2492
+Estimator:                   PanelOLS   R-squared (Between):              0.6448
+No. Observations:                 462   R-squared (Within):               0.5174
+Date:                Fri, Nov 14 2025   R-squared (Overall):              0.6445
+Time:                        13:26:31   Log-likelihood                   -308.72
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                      461.56
+                                        F-statistic:                      45.693
 Entities:                          33   P-value                           0.0000
-Avg Obs:                       1091.9   Distribution:                 F(3,35983)
-Min Obs:                       756.00                                           
-Max Obs:                       1404.0   F-statistic (robust):             7.7686
+Avg Obs:                       14.000   Distribution:                   F(3,413)
+Min Obs:                       14.000                                           
+Max Obs:                       14.000   F-statistic (robust):             9.7736
                                         P-value                           0.0000
-Time periods:                      14   Distribution:                 F(3,35983)
-Avg Obs:                       2573.7                                           
-Min Obs:                       1368.0                                           
-Max Obs:                       4496.0                                           
+Time periods:                      14   Distribution:                   F(3,413)
+Avg Obs:                       33.000                                           
+Min Obs:                       33.000                                           
+Max Obs:                       33.000                                           
                                                                                 
                                  Parameter Estimates                                  
 ======================================================================================
                     Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 --------------------------------------------------------------------------------------
-log_price             -0.0092     0.0061    -1.5106     0.1309     -0.0211      0.0027
-log_gdp_pc             0.4360     0.5714     0.7631     0.4454     -0.6839      1.5560
-internet_users_pct     0.0385     0.0118     3.2626     0.0011      0.0154      0.0616
+log_price             -0.3274     0.2194    -1.4918     0.1365     -0.7587      0.1040
+log_gdp_pc             0.3275     0.5262     0.6225     0.5340     -0.7068      1.3619
+internet_users_pct     0.0417     0.0114     3.6585     0.0003      0.0193      0.0642
 ======================================================================================
 
-F-test for Poolability: 464.26
+F-test for Poolability: 39.284
 P-value: 0.0000
-Distribution: F(45,35983)
+Distribution: F(45,413)
 
 Included effects: Entity, Time

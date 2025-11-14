@@ -1,23 +1,23 @@
                           IV-2SLS Estimation Summary                          
 ==============================================================================
-Dep. Variable:      log_bandwidth_use   R-squared:                      0.4602
-Estimator:                    IV-2SLS   Adj. R-squared:                 0.4506
-No. Observations:                 400   F-statistic:                    241.83
+Dep. Variable:               log_subs   R-squared:                      0.7780
+Estimator:                    IV-2SLS   Adj. R-squared:                 0.7741
+No. Observations:                 400   F-statistic:                    1447.0
 Date:                Fri, Nov 14 2025   P-value (F-stat)                0.0000
-Time:                        14:48:09   Distribution:                  chi2(7)
+Time:                        14:48:21   Distribution:                  chi2(7)
 Cov. Estimator:                robust                                         
                                                                               
                                    Parameter Estimates                                    
 ==========================================================================================
                         Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 ------------------------------------------------------------------------------------------
-log_gdp_pc                 0.3821     0.1930     1.9791     0.0478      0.0037      0.7604
-internet_users_pct         0.0466     0.0035     13.374     0.0000      0.0398      0.0534
-mobile_subs_per100      2.193e-08  1.035e-08     2.1176     0.0342   1.633e-09   4.222e-08
-gdp_growth                 0.0005     0.0027     0.1847     0.8534     -0.0048      0.0058
-inflation_gdp_deflator     0.0007     0.0038     0.1928     0.8472     -0.0066      0.0081
-population_density        -0.0018     0.0008    -2.3309     0.0198     -0.0032     -0.0003
-log_price                 -0.5497     0.1484    -3.7039     0.0002     -0.8406     -0.2588
+log_gdp_pc                 0.0423     0.0421     1.0049     0.3150     -0.0402      0.1249
+internet_users_pct         0.0150     0.0007     21.152     0.0000      0.0136      0.0164
+mobile_subs_per100       6.33e-09  1.431e-09     4.4233     0.0000   3.525e-09   9.135e-09
+gdp_growth                 0.0003     0.0005     0.5945     0.5522     -0.0007      0.0013
+inflation_gdp_deflator     0.0019     0.0009     2.1965     0.0281      0.0002      0.0036
+population_density         0.0006  8.769e-05     6.6668     0.0000      0.0004      0.0008
+log_price                  0.0391     0.0413     0.9482     0.3430     -0.0417      0.1200
 ==========================================================================================
 
 Endogenous: log_price

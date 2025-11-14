@@ -1,0 +1,33 @@
+                                 OLS Regression Results                                
+=======================================================================================
+Dep. Variable:               log_subs   R-squared (uncentered):                   0.775
+Model:                            OLS   Adj. R-squared (uncentered):              0.772
+Method:                 Least Squares   F-statistic:                              208.8
+Date:                Fri, 14 Nov 2025   Prob (F-statistic):                   6.05e-123
+Time:                        14:48:21   Log-Likelihood:                          454.28
+No. Observations:                 429   AIC:                                     -894.6
+Df Residuals:                     422   BIC:                                     -866.1
+Df Model:                           7                                                  
+Covariance Type:                  HC1                                                  
+==========================================================================================
+                             coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------------------
+log_price                  0.0679      0.021      3.244      0.001       0.027       0.109
+log_gdp_pc                 0.0326      0.039      0.846      0.398      -0.043       0.108
+internet_users_pct         0.0155      0.001     19.712      0.000       0.014       0.017
+mobile_subs_per100      7.544e-09    1.4e-09      5.394      0.000     4.8e-09    1.03e-08
+gdp_growth                -0.0001      0.001     -0.223      0.824      -0.001       0.001
+inflation_gdp_deflator     0.0016      0.001      1.756      0.079      -0.000       0.003
+population_density         0.0005   9.88e-05      4.709      0.000       0.000       0.001
+==============================================================================
+Omnibus:                      127.792   Durbin-Watson:                   0.823
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              680.734
+Skew:                          -1.172   Prob(JB):                    1.52e-148
+Kurtosis:                       8.709   Cond. No.                     1.78e+07
+==============================================================================
+
+Notes:
+[1] R² is computed without centering (uncentered) since the model does not contain a constant.
+[2] Standard Errors are heteroscedasticity robust (HC1)
+[3] The condition number is large, 1.78e+07. This might indicate that there are
+strong multicollinearity or other numerical problems.

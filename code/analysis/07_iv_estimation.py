@@ -25,8 +25,13 @@ from datetime import datetime
 import sys
 
 # Econometrics packages
-from linearmodels.iv import IV2SLS
+from linearmodels.iv import IV2SLS, IVGMM
 from linearmodels.panel import PanelOLS
+try:
+    from linearmodels.iv.model import _IVGMMBase
+    from linearmodels.panel.model import PanelOLS
+except ImportError:
+    pass
 import statsmodels.api as sm
 from scipy import stats
 
@@ -82,7 +87,8 @@ class IVEstimation:
 
         instruments = {
             'regulatory_quality_estimate': 'Regulatory Quality (supply shifter)',
-            'mobile_broad_price': 'Mobile Broadband Price (substitute)',
+            'research_development_expenditure': 'R&D Expenditure (technology costs)',
+            'mobile_broad_price_i271mb_ts_GNI': 'Mobile Broadband Price (substitute)',
             'log_price': 'Log Price (endogenous variable)'
         }
 
@@ -151,9 +157,9 @@ class IVEstimation:
         return first_stage, model_data
 
     def estimate_iv2sls(self, df, instruments, dependent_var='log_bandwidth_use'):
-        """Estimate IV/2SLS model."""
+        """Estimate IV/2SLS model with entity fixed effects (manually demeaned)."""
         print("\n" + "="*80)
-        print("IV/2SLS ESTIMATION")
+        print("IV/2SLS ESTIMATION WITH ENTITY FIXED EFFECTS")
         print("="*80)
         print(f"Dependent variable: {dependent_var}")
         print(f"Endogenous: log_price")
@@ -169,16 +175,24 @@ class IVEstimation:
         print(f"\nObservations: {len(model_data)}")
         print(f"Entities: {model_data.index.get_level_values(0).nunique()}")
 
+        # Apply within transformation (entity demeaning) for fixed effects
+        model_data_demeaned = model_data.copy()
+        for var in [dependent_var, 'log_price'] + instruments + exog_vars:
+            # Calculate entity-specific means
+            entity_means = model_data.groupby(level=0)[var].transform('mean')
+            # Demean (within transformation)
+            model_data_demeaned[var] = model_data[var] - entity_means
+
         # Reset index for IV2SLS
-        model_data_reset = model_data.reset_index()
+        model_data_reset = model_data_demeaned.reset_index()
 
         # Prepare formula components
         # IV2SLS expects: exog = included exogenous vars, instruments = excluded instruments only
         endog = model_data_reset[['log_price']]
-        exog = sm.add_constant(model_data_reset[exog_vars])
+        exog = model_data_reset[exog_vars]  # No constant for demeaned data
         instr = model_data_reset[instruments]  # Only excluded instruments, not all instruments
 
-        # Estimate IV/2SLS
+        # Estimate IV/2SLS on demeaned data (equivalent to fixed effects)
         iv_model = IV2SLS(
             dependent=model_data_reset[dependent_var],
             exog=exog,
@@ -209,6 +223,12 @@ class IVEstimation:
         print("HAUSMAN TEST FOR ENDOGENEITY")
         print("="*80)
 
+        output_text = []
+        output_text.append("="*80)
+        output_text.append("HAUSMAN TEST FOR ENDOGENEITY")
+        output_text.append("="*80)
+        output_text.append("")
+
         # Compare OLS and IV coefficients
         if 'log_price' in ols_result.params.index and 'log_price' in iv_result.params.index:
             ols_beta = ols_result.params['log_price']
@@ -223,16 +243,40 @@ class IVEstimation:
             t_stat = diff / se_diff
             p_value = 2 * (1 - stats.t.cdf(abs(t_stat), df=100))  # Approximate df
 
-            print(f"\nOLS coefficient: {ols_beta:.3f} (SE: {ols_se:.3f})")
-            print(f"IV coefficient:  {iv_beta:.3f} (SE: {iv_se:.3f})")
-            print(f"Difference:      {diff:.3f}")
-            print(f"\nTest statistic: {t_stat:.3f}")
-            print(f"P-value:        {p_value:.4f}")
+            output_text.append(f"OLS coefficient: {ols_beta:.3f} (SE: {ols_se:.3f})")
+            output_text.append(f"IV coefficient:  {iv_beta:.3f} (SE: {iv_se:.3f})")
+            output_text.append(f"Difference:      {diff:.3f}")
+            output_text.append("")
+            output_text.append(f"Test statistic: {t_stat:.3f}")
+            output_text.append(f"P-value:        {p_value:.4f}")
+            output_text.append("")
 
             if p_value < 0.05:
-                print("\n✓ REJECT H₀: Price is ENDOGENOUS (use IV)")
+                conclusion = "✓ REJECT H₀: Price is ENDOGENOUS (use IV)"
             else:
-                print("\n✗ FAIL TO REJECT H₀: Price may be exogenous (OLS OK)")
+                conclusion = "✗ FAIL TO REJECT H₀: Price may be exogenous (OLS OK)"
+            
+            output_text.append(conclusion)
+            output_text.append("")
+            output_text.append("Interpretation:")
+            output_text.append("H₀: Price is exogenous (OLS and IV estimates are consistent)")
+            output_text.append("H₁: Price is endogenous (only IV estimates are consistent)")
+            output_text.append("")
+            output_text.append(f"Since p-value = {p_value:.4f}, we {'reject' if p_value < 0.05 else 'fail to reject'} the null.")
+            output_text.append("This suggests price is " + ("endogenous" if p_value < 0.05 else "potentially exogenous") + " in the demand equation.")
+            output_text.append("="*80)
+
+            # Print to console
+            for line in output_text:
+                print(line)
+
+            # Save to file
+            output_file = self.output_dir / 'hausman_test.txt'
+            with open(output_file, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(output_text))
+            print(f"\n✓ Saved: {output_file}")
+
+            return p_value
 
     def overidentification_test(self, iv_results):
         """Test overidentifying restrictions (if applicable)."""
@@ -240,21 +284,67 @@ class IVEstimation:
         print("OVERIDENTIFICATION TEST")
         print("="*80)
 
+        output_text = []
+        output_text.append("="*80)
+        output_text.append("SARGAN-HANSEN OVERIDENTIFICATION TEST")
+        output_text.append("="*80)
+        output_text.append("")
+
         # This requires more than one instrument
         # linearmodels provides J-statistic automatically
         if hasattr(iv_results, 'sargan'):
             j_stat = iv_results.sargan.stat
             p_value = iv_results.sargan.pval
 
-            print(f"\nSargan J-statistic: {j_stat:.3f}")
-            print(f"P-value:           {p_value:.4f}")
+            output_text.append(f"Sargan J-statistic: {j_stat:.3f}")
+            output_text.append(f"P-value:           {p_value:.4f}")
+            output_text.append("")
 
             if p_value > 0.05:
-                print("\n✓ FAIL TO REJECT H₀: Instruments are valid")
+                conclusion = "✓ FAIL TO REJECT H₀: Instruments are valid"
             else:
-                print("\n⚠ REJECT H₀: Instruments may be invalid")
+                conclusion = "⚠ REJECT H₀: Instruments may be invalid"
+            
+            output_text.append(conclusion)
+            output_text.append("")
+            output_text.append("Interpretation:")
+            output_text.append("H₀: Overidentifying restrictions are valid (instruments are uncorrelated with error term)")
+            output_text.append("H₁: Overidentifying restrictions are invalid (at least one instrument is endogenous)")
+            output_text.append("")
+            output_text.append(f"Since p-value = {p_value:.4f}, we {'reject' if p_value < 0.05 else 'fail to reject'} the null.")
+            if p_value > 0.05:
+                output_text.append("This suggests the instruments are valid and uncorrelated with the error term.")
+            else:
+                output_text.append("This suggests at least one instrument may be invalid or correlated with the error.")
+            output_text.append("")
+            output_text.append("Note: This test is only applicable when there are more instruments than endogenous variables.")
+            output_text.append(f"Number of instruments: 2 (regulatory_quality_estimate, mobile_broad_price)")
+            output_text.append(f"Number of endogenous variables: 1 (log_price)")
+            output_text.append(f"Degrees of freedom for overidentification: 1")
+            output_text.append("="*80)
+
+            # Print to console
+            for line in output_text:
+                print(line)
+
+            # Save to file
+            output_file = self.output_dir / 'sargan_test.txt'
+            with open(output_file, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(output_text))
+            print(f"\n✓ Saved: {output_file}")
+
+            return p_value
         else:
-            print("\n⚠ Test not available (need multiple instruments)")
+            output_text.append("⚠ Test not available (need multiple instruments)")
+            output_text.append("")
+            output_text.append("The Sargan-Hansen test requires more instruments than endogenous variables.")
+            output_text.append("Current model is exactly identified.")
+            output_text.append("="*80)
+            
+            for line in output_text:
+                print(line)
+            
+            return None
 
     def compare_ols_iv(self, ols_result, iv_result):
         """Create comparison table of OLS vs IV."""

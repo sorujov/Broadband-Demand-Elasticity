@@ -1,0 +1,10 @@
+================================================================================
+HAUSMAN TEST FOR ENDOGENEITY - SUBSCRIPTION MODEL
+================================================================================
+
+OLS coefficient: 0.068 (SE: 0.021)
+IV coefficient:  0.039 (SE: 0.041)
+Difference:      -0.029
+
+Test statistic: -0.809
+P-value:        0.4188
