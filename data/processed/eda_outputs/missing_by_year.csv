@@ -1,0 +1,15 @@
+year,fixed_broadband_subs_i4213tfbb,fixed_broadband_subs_i992b,fixed_broad_price_i154_FBB_ts$,fixed_broad_price_i154_FBB_ts_GNI,fixed_broad_price_i154_FBB_ts_PPP,internet_users_pct_i99H,int_bandwidth_i4214,int_bandwidth_i994,int_bandwidth_i994B,int_bandwidth_i994u,mobile_broad_price_i271mb_ts$,mobile_broad_price_i271mb_ts_GNI,mobile_broad_price_i271mb_ts_PPP,mobile_subs_i271,mobile_subs_i911,access_to_electricity,education_secondary_pct,education_tertiary_pct,electric_power_consumption,gdp_growth,gdp_per_capita,gdp_per_capita_constant,high_tech_exports,ict_goods_exports,inflation_gdp_deflator,labor_force_advanced_education,population,population_ages_15_64,population_density,regulatory_quality_estimate,research_development_expenditure,secure_internet_servers,urban_population_pct,wage_salaried_workers
+2010,0,0,0,0,0,0,1,1,1,1,33,33,33,0,0,0,3,2,0,0,0,0,1,0,0,5,0,0,0,0,1,0,0,0
+2011,0,0,0,0,0,0,1,1,1,1,33,33,33,0,0,0,3,3,0,0,0,0,0,0,0,3,0,0,0,0,1,0,0,0
+2012,0,0,0,0,0,0,1,1,16,1,33,33,33,0,0,0,2,2,0,0,0,0,0,0,0,3,0,0,0,0,1,0,0,0
+2013,0,0,0,1,0,0,0,0,16,0,1,1,1,0,0,0,2,3,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0
+2014,0,0,0,0,2,0,0,0,0,0,1,1,3,0,0,0,2,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0
+2015,0,0,0,0,2,0,0,0,33,0,0,0,2,0,0,0,3,1,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0
+2016,0,0,0,0,2,0,0,0,33,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+2017,0,0,0,0,0,0,0,0,33,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+2018,0,0,0,0,1,0,20,20,33,20,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+2019,0,0,0,0,1,0,20,20,33,20,0,0,1,0,0,0,2,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+2020,0,0,0,0,0,0,20,20,33,20,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+2021,0,0,0,0,0,0,20,20,33,20,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+2022,0,0,0,0,0,0,20,20,33,20,0,0,0,0,0,0,4,2,0,0,0,0,1,1,0,2,0,0,0,0,0,0,0,1
+2023,0,0,0,0,0,0,21,21,33,21,0,0,0,0,0,0,3,2,2,0,0,0,1,33,0,2,0,0,0,0,27,0,0,1

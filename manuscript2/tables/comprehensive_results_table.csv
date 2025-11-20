@@ -1,0 +1,48 @@
+Panel,Model,Sample,EU_Elasticity,EaP_Elasticity,Interaction,N,R2,Controls,COVID,FE
+A: Main Specification,"(1) Unified Model
+GDP + R&D + Servers","Pre-COVID
+2010-2019","-0.0538
+(0.0393)","-0.6076***
+(0.1068)","-0.5537***
+(0.0675)",319,0.3417,"GDP, R&D, Servers",—,Country + Year
+B: Robustness (Separate),(2) GDP + Regulatory Quality,"Pre-COVID
+2010-2019","-0.0116
+(0.0299)","-0.1296**
+(0.0514)",—,"EU:270
+EaP:52","EU:0.062
+EaP:0.191",Regulatory Quality,—,Country + Year
+,(3) GDP + Education (Tertiary),"Pre-COVID
+2010-2019","-0.0228
+(0.0305)","-0.1057
+(0.0677)",—,"EU:262
+EaP:52","EU:0.085
+EaP:0.088",Education (Tertiary),—,Country + Year
+,(4) GDP + Growth,"Pre-COVID
+2010-2019","-0.0262
+(0.0296)","-0.1052*
+(0.0615)",—,"EU:270
+EaP:52","EU:0.132
+EaP:0.132",Growth,—,Country + Year
+,(5) GDP Only,"Pre-COVID
+2010-2019","-0.0194
+(0.0325)","-0.1145**
+(0.0433)",—,"EU:270
+EaP:52","EU:0.019
+EaP:0.087",GDP Only,—,Country + Year
+C: Full Period,"(6) Full Sample
+No COVID control","Full
+2010-2023","-0.0573
+(0.0465)","-0.2914**
+(0.1472)",0.0944*,451,0.2163,"GDP, R&D, Servers",No,Country + Year
+,"(7) Full Sample
+With COVID dummy","Full
+2010-2023","0.0498
+(0.0328)","-0.4587***
+(0.1473)",0.0004***,451,0.4376,"GDP, R&D, Servers","Yes
+0.096***",Country only
+,"(8) Full Sample
+COVID×Region","Full
+2010-2023","0.0675**
+(0.0313)","-0.4375***
+(0.1143)",0.0000***,451,0.5002,"GDP, R&D, Servers","EU:0.096***
+EaP:0.357***",Country only

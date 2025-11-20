@@ -1,7 +1,0 @@
-variable_name,code_id,description,download_date,rows_downloaded,unique_countries,status
-fixed_broadband_subs,19303,Fixed-broadband subscriptions,2025-11-13,924,33,Success
-mobile_subs,178,Mobile-cellular subscriptions,2025-11-13,924,33,Success
-internet_users_pct,11624,Individuals using the Internet,2025-11-13,462,33,Success
-int_bandwidth,242,International bandwidth usage,2025-11-13,1145,33,Success
-fixed_broad_price,34616,Fixed-broadband Internet basket,2025-11-13,1377,33,Success
-mobile_broad_price,34617,Data-only mobile broadband basket,2025-11-13,1075,33,Success

@@ -1,9 +1,0 @@
-                             Pooled_OLS           FE_Country            FE_TwoWay             Regional
-const               9.6795***\n(0.6675)                  NaN                  NaN                  NaN
-log_price            -0.2734*\n(0.1569)    -0.2153\n(0.1652)    -0.3274\n(0.2194)    -0.2819\n(0.2564)
-log_gdp_pc          0.3452***\n(0.0890)     0.2433\n(0.2975)     0.3275\n(0.5262)     0.3542\n(0.5187)
-internet_users_pct     0.0042\n(0.0066)  0.0476***\n(0.0070)  0.0417***\n(0.0114)  0.0416***\n(0.0115)
-time_trend          0.0974***\n(0.0187)                  NaN                  NaN                  NaN
-N                                   462                  462                  462                  462
-R²                                0.217                0.526                0.249                0.250
-log_price_x_eap                     NaN                  NaN                  NaN    -0.2096\n(0.4641)

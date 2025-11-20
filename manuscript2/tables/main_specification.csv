@@ -1,0 +1,2 @@
+specification,controls,eu_elasticity,eu_se,eu_pval,eap_elasticity,eap_se,eap_pval,interaction_coef,interaction_pval,n_obs,r_squared
+Main (Unified),"log_gdp_per_capita, rd_expenditure, secure_servers",-0.05384087641388203,0.03925778702655886,0.17135879462333636,-0.6075619183759579,0.10676153180266897,3.2663767690621626e-08,-0.5537210419620758,5.891780396893864e-08,319,0.34170087076832323

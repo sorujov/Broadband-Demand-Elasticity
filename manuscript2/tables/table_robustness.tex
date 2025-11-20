@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\caption{Robustness Checks: Alternative Specifications and Periods}
+\label{tab:robustness}
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{4}{c}{\textbf{Dependent Variable: log(Internet Users \%)}} \\
+\cmidrule(lr){2-5}
+Sample & Full Sample & Full Sample & EaP & EaP \\
+Period & 2010--2023 & Pre-COVID & 2010--2023 & Pre-COVID \\
+ & (1) & (2) & (3) & (4) \\
+\midrule
+log(Price PPP)  & -0.1130** & -0.1578** & 0.0212 & -0.1296** \\
+  & (0.0541) & (0.0757) & (0.0586) & (0.0514) \\
+ & & & & \\
+Observations  & 454 & 322 & 76 & 52 \\
+R-squared  & 0.105 & 0.118 & 0.097 & 0.191 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Notes:} All specifications include the same controls (GDP per capita, GDP growth, population density, urban population) and two-way fixed effects. Standard errors clustered at country level. Pre-COVID sample: 2010--2019. Significance levels: *** p$<$0.01, ** p$<$0.05, * p$<$0.10.
+\end{tablenotes}
+\end{table}

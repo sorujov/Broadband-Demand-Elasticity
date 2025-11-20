@@ -27,3 +27,4 @@ ipykernel>=6.25.0
 # Utilities
 openpyxl>=3.1.0
 xlrd>=2.0.1
+missingno>=0.5.2
