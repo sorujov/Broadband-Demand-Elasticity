@@ -1,28 +1,12 @@
 data_source,variable,series_code,series_name,units,observations,countries,year_min,year_max,value_min,value_max
-ITU,fixed_broad_price,"    i154_FBB_ts$
+ITU,fixed_broad_price,"    i154_FBB_ts_GNI
 Name: 0, dtype: object","    Fixed-broadband Internet basket
 Name: 0, dtype: object","    % GNI per capita
-Name: 0, dtype: object",462,33,2010,2023,2.34,80.9
-ITU,fixed_broad_price,"    i154_FBB_ts_GNI
-Name: 1, dtype: object","    Fixed-broadband Internet basket
-Name: 1, dtype: object","    % GNI per capita
-Name: 1, dtype: object",461,33,2010,2023,0.31,11.52
-ITU,fixed_broad_price,"    i154_FBB_ts_PPP
-Name: 2, dtype: object","    Fixed-broadband Internet basket
-Name: 2, dtype: object","    % GNI per capita
-Name: 2, dtype: object",454,33,2010,2023,11.39,76.97
-ITU,mobile_broad_price,"    i271mb_ts$
+Name: 0, dtype: object",461,33,2010,2023,0.31,11.52
+ITU,mobile_broad_price,"    i271mb_ts_GNI
 Name: 0, dtype: object","    Data-only mobile broadband basket
 Name: 0, dtype: object","    % GNI per capita
-Name: 0, dtype: object",361,33,2013,2023,1.74,41.33
-ITU,mobile_broad_price,"    i271mb_ts_GNI
-Name: 1, dtype: object","    Data-only mobile broadband basket
-Name: 1, dtype: object","    % GNI per capita
-Name: 1, dtype: object",361,33,2013,2023,0.09,3.86
-ITU,mobile_broad_price,"    i271mb_ts_PPP
-Name: 2, dtype: object","    Data-only mobile broadband basket
-Name: 2, dtype: object","    % GNI per capita
-Name: 2, dtype: object",353,33,2013,2023,4.54,35.93
+Name: 0, dtype: object",361,33,2013,2023,0.09,3.86
 ITU,fixed_broadband_subs,"    i4213tfbb
 Name: 0, dtype: object","    Fixed-broadband subscriptions
 Name: 0, dtype: object","    per 100 people

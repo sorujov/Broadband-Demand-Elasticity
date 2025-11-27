@@ -164,7 +164,7 @@ results_df = pd.DataFrame(results_table)
 
 # Save as CSV
 results_df.to_csv(RESULTS_DIR / 'comprehensive_results_table.csv', index=False)
-print(f"\n✓ Comprehensive table saved to: {RESULTS_DIR / 'comprehensive_results_table.csv'}")
+print(f"\n[OK] Comprehensive table saved to: {RESULTS_DIR / 'comprehensive_results_table.csv'}")
 
 # ============================================================================
 # CREATE LATEX TABLE
@@ -215,7 +215,7 @@ latex_table = "\n".join(latex_lines)
 with open(RESULTS_DIR / 'comprehensive_results_table.tex', 'w') as f:
     f.write(latex_table)
 
-print(f"✓ LaTeX table saved to: {RESULTS_DIR / 'comprehensive_results_table.tex'}")
+print(f"[OK] LaTeX table saved to: {RESULTS_DIR / 'comprehensive_results_table.tex'}")
 
 # ============================================================================
 # DISPLAY SUMMARY
@@ -231,9 +231,9 @@ print(f"  EaP: {main_row['eap_elasticity']:.4f} (p={main_row['eap_pval']:.4f})")
 print(f"  Ratio: {abs(main_row['eap_elasticity']/main_row['eu_elasticity']):.1f}x")
 
 print("\nRobustness:")
-print(f"  ✓ {len(robustness_specs)} alternative control specifications")
-print(f"  ✓ Full sample analysis (2010-2023)")
-print(f"  ✓ COVID controls and interactions")
+print(f"  [OK] {len(robustness_specs)} alternative control specifications")
+print(f"  [OK] Full sample analysis (2010-2023)")
+print(f"  [OK] COVID controls and interactions")
 
 print("\nKey Insight:")
 print("  EaP countries show consistently stronger price elasticity across ALL specifications")

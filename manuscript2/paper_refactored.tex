@@ -10,6 +10,7 @@
 \usepackage{array}
 \usepackage{float}
 \usepackage{longtable}
+\usepackage{threeparttable}
 
 \journal{Telecommunications Policy}
 
@@ -153,6 +154,7 @@ These descriptive patterns motivate our hypothesis that EaP countries should exh
 \centering
 \caption{Descriptive Statistics (2010-2019, N=319)}
 \label{tab:descriptives}
+\begin{threeparttable}
 \begin{tabular}{lcccccc}
 \toprule
 Variable & N & Mean & SD & Min & Max & Source \\
@@ -183,6 +185,7 @@ Secure servers (per million) & 49 & 119 & 87 & 12 & 342 & WDI \\
 \small
 \item Notes: ITU = International Telecommunication Union; WDI = World Bank World Development Indicators. All monetary values in constant 2017 international dollars (PPP-adjusted). Internet users measured as percentage of population. Summary statistics based on pre-COVID sample (2010-2019) used in main specifications.
 \end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 \section{Methodology}
@@ -305,7 +308,7 @@ This asymmetric pandemic impact is highly consistent with our price elasticity f
 
 Across all eight specifications, we consistently find: (1) EU price elasticity near zero and statistically insignificant; (2) EaP price elasticity strongly negative and highly significant; (3) Price$\times$EaP interaction negative and significant, confirming differential responsiveness; (4) control variables with expected signs and significance; (5) differential COVID impacts consistent with heterogeneous adoption constraints. These patterns demonstrate that our main finding—EaP countries are 11.3 times more price-elastic than EU countries—is robust to alternative controls, sample periods, and model specifications.
 
-\input{tables/comprehensive_results_table}
+\input{comprehensive_results_table}
 
 \section{Discussion}
 \label{sec:discussion}

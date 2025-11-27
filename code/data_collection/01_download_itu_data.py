@@ -101,7 +101,7 @@ class ITUDataDownloader:
         """
         url = f"{self.base_url}/data/download/byid/{code_id}/iscollection/{str(is_collection).lower()}"
         
-        print(f"  → Downloading from API...")
+        print(f"  -> Downloading from API...")
         
         try:
             response = requests.get(url, timeout=60)
@@ -119,29 +119,29 @@ class ITUDataDownloader:
                             if csv_files:
                                 with z.open(csv_files[0]) as csv_file:
                                     df = pd.read_csv(csv_file, encoding='utf-8')
-                                print(f"  ✓ Downloaded {len(df)} rows from ZIP")
+                                print(f"  [OK] Downloaded {len(df)} rows from ZIP")
                             else:
-                                print("  ✗ No CSV found in ZIP archive")
+                                print("  [ERROR] No CSV found in ZIP archive")
                                 return None
                     except Exception as e:
-                        print(f"  ✗ Error extracting ZIP: {str(e)[:50]}")
+                        print(f"  [ERROR] Error extracting ZIP: {str(e)[:50]}")
                         return None
                         
                 else:
                     # Handle plain CSV with multiple encoding strategies
                     try:
                         df = pd.read_csv(StringIO(response.text), encoding='utf-8')
-                        print(f"  ✓ Downloaded {len(df)} rows (plain CSV)")
+                        print(f"  [OK] Downloaded {len(df)} rows (plain CSV)")
                     except:
                         try:
                             df = pd.read_csv(StringIO(response.content.decode('utf-8-sig')))
-                            print(f"  ✓ Downloaded {len(df)} rows (plain CSV)")
+                            print(f"  [OK] Downloaded {len(df)} rows (plain CSV)")
                         except:
                             try:
                                 df = pd.read_csv(StringIO(response.content.decode('latin-1')))
-                                print(f"  ✓ Downloaded {len(df)} rows (plain CSV)")
+                                print(f"  [OK] Downloaded {len(df)} rows (plain CSV)")
                             except Exception as e:
-                                print(f"  ✗ Parse error: {str(e)[:50]}")
+                                print(f"  [ERROR] Parse error: {str(e)[:50]}")
                                 return None
                 
                 # Add ISO3 code mapping column
@@ -164,8 +164,8 @@ class ITUDataDownloader:
                     df = df[df[country_col].isin(self.country_names)]
                     
                     if len(df) > 0:
-                        print(f"  → Filtered by country: {original_len} → {len(df)} records")
-                        print(f"  → Countries found: {df[country_col].nunique()} unique")
+                        print(f"  -> Filtered by country: {original_len} -> {len(df)} records")
+                        print(f"  -> Countries found: {df[country_col].nunique()} unique")
                     else:
                         print(f"  ⚠ No matching countries found!")
                         print(f"  ℹ Sample countries in data: {df[country_col].head(5).tolist()[:3]}")
@@ -185,13 +185,13 @@ class ITUDataDownloader:
                     original_len = len(df)
                     df = df[(df[year_col] >= START_YEAR) & (df[year_col] <= END_YEAR)]
                     if len(df) > 0:
-                        print(f"  → Filtered by year ({START_YEAR}-{END_YEAR}): {original_len} → {len(df)} records")
+                        print(f"  -> Filtered by year ({START_YEAR}-{END_YEAR}): {original_len} -> {len(df)} records")
                 
                 # Save to file
                 if len(df) > 0:
                     output_file = DATA_RAW / f'itu_{indicator_name}.csv'
                     df.to_csv(output_file, index=False, encoding='utf-8-sig')
-                    print(f"  ✓ Saved to: {output_file.name}")
+                    print(f"  [OK] Saved to: {output_file.name}")
                     
                     # Show preview
                     print(f"\n  Preview (first 3 rows, key columns):")
@@ -205,20 +205,20 @@ class ITUDataDownloader:
                     return None
                     
             elif response.status_code == 404:
-                print(f"  ✗ Not found (HTTP 404)")
+                print(f"  [ERROR] Not found (HTTP 404)")
                 return None
             elif response.status_code == 500:
-                print(f"  ✗ Server error (HTTP 500)")
+                print(f"  [ERROR] Server error (HTTP 500)")
                 return None
             else:
-                print(f"  ✗ HTTP status: {response.status_code}")
+                print(f"  [ERROR] HTTP status: {response.status_code}")
                 return None
                 
         except requests.exceptions.Timeout:
-            print(f"  ✗ Request timeout")
+            print(f"  [ERROR] Request timeout")
             return None
         except Exception as e:
-            print(f"  ✗ Error: {str(e)[:80]}")
+            print(f"  [ERROR] Error: {str(e)[:80]}")
             return None
     
     def download_all_indicators(self):
@@ -272,7 +272,7 @@ class ITUDataDownloader:
         print("=" * 80)
         print("DOWNLOAD COMPLETE")
         print("=" * 80)
-        print(f"✓ Successfully downloaded: {successful_downloads}/{len(self.target_indicators)}")
+        print(f"[OK] Successfully downloaded: {successful_downloads}/{len(self.target_indicators)}")
         
         if successful_downloads > 0:
             print("\nDownloaded files:")
@@ -281,10 +281,10 @@ class ITUDataDownloader:
                     filename = f"itu_{indicator['name']}.csv"
                     row_count = len(results[indicator['name']])
                     unique_countries = results[indicator['name']]['country_iso3'].nunique() if 'country_iso3' in results[indicator['name']].columns else 'N/A'
-                    print(f"  ✓ {filename} - {row_count} rows, {unique_countries} countries")
+                    print(f"  [OK] {filename} - {row_count} rows, {unique_countries} countries")
         
         if failed_downloads > 0:
-            print(f"\n✗ Failed to download: {failed_downloads} indicators")
+            print(f"\n[ERROR] Failed to download: {failed_downloads} indicators")
             print("\nFailed indicators:")
             for indicator in self.target_indicators:
                 if results[indicator['name']] is None:
@@ -327,7 +327,7 @@ class ITUDataDownloader:
         metadata_df = pd.DataFrame(metadata)
         metadata_file = DATA_RAW / 'itu_download_metadata.csv'
         metadata_df.to_csv(metadata_file, index=False)
-        print(f"\n✓ Metadata saved to: {metadata_file.name}")
+        print(f"\n[OK] Metadata saved to: {metadata_file.name}")
 
 
 def main():

@@ -158,14 +158,14 @@ for spec_name, controls in specifications:
     result = test_unified_spec(controls, spec_name)
     if result:
         results.append(result)
-        print(f"✓ {spec_name}")
+        print(f"[OK] {spec_name}")
 
 # Convert to DataFrame
 results_df = pd.DataFrame(results)
 
 # Save all results
 results_df.to_csv(RESULTS_DIR / 'unified_model_fishing.csv', index=False)
-print(f"\n✓ All results saved to: {RESULTS_DIR / 'unified_model_fishing.csv'}")
+print(f"\n[OK] All results saved to: {RESULTS_DIR / 'unified_model_fishing.csv'}")
 
 # Display results sorted by different criteria
 print("\n" + "="*80)
@@ -221,7 +221,7 @@ for idx, row in best.head(10).iterrows():
     
     ratio = abs(row['eap_elasticity'] / row['eu_elasticity']) if row['eu_elasticity'] != 0 else float('inf')
     
-    print(f"✓ {row['specification']}")
+    print(f"[OK] {row['specification']}")
     print(f"  Controls: {row['controls']}")
     print(f"  EU:  {row['eu_elasticity']:7.4f}{sig_eu:3s} (p={row['eu_pval']:.4f})")
     print(f"  EaP: {row['eap_elasticity']:7.4f}{sig_eap:3s} (p={row['eap_pval']:.4f})")

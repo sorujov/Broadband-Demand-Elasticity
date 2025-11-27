@@ -202,7 +202,7 @@ print(comparison_df.to_string(index=False))
 
 # Save comparison
 comparison_df.to_csv(RESULTS_DIR / 'robustness_full_period.csv', index=False)
-print(f"\n✓ Comparison saved to: {RESULTS_DIR / 'robustness_full_period.csv'}")
+print(f"\n[OK] Comparison saved to: {RESULTS_DIR / 'robustness_full_period.csv'}")
 
 print("\n" + "="*80)
 print("SUMMARY")
@@ -217,7 +217,7 @@ print(f"   EaP: {eap_elasticity_covid:.4f} (p={eap_pval_covid:.4f})")
 print(f"   COVID effect: {beta_covid:.4f} (p={res_covid.pvalues['covid_dummy']:.4f})")
 
 if eap_pval_precovid < eap_pval_full:
-    print("\n✓ Pre-COVID period remains the preferred specification")
+    print("\n[OK] Pre-COVID period remains the preferred specification")
     print("  (Avoids pandemic-related distortions)")
 
 # ============================================================================
@@ -314,17 +314,17 @@ extended_comparison['EaP_COVID_Effect'] = [np.nan, np.nan, res_covid.params['cov
 extended_comparison['COVID_Diff_pval'] = [np.nan, np.nan, np.nan, res_covid_region.pvalues['covid_x_eap']]
 
 extended_comparison.to_csv(RESULTS_DIR / 'robustness_full_period_extended.csv', index=False)
-print(f"\n✓ Extended comparison saved to: {RESULTS_DIR / 'robustness_full_period_extended.csv'}")
+print(f"\n[OK] Extended comparison saved to: {RESULTS_DIR / 'robustness_full_period_extended.csv'}")
 
 print("\n" + "="*80)
 print("INTERPRETATION: COVID × REGION INTERACTION")
 print("="*80)
 if res_covid_region.pvalues['covid_x_eap'] < 0.10:
-    print(f"\n✓ COVID had DIFFERENTIAL impact across regions (p={res_covid_region.pvalues['covid_x_eap']:.4f})")
+    print(f"\n[OK] COVID had DIFFERENTIAL impact across regions (p={res_covid_region.pvalues['covid_x_eap']:.4f})")
     if beta_covid_eap_cr > 0:
         print(f"  EaP experienced STRONGER positive COVID shift (+{eap_covid_effect:.4f} vs +{eu_covid_effect:.4f})")
     else:
         print(f"  EaP experienced WEAKER positive COVID shift (+{eap_covid_effect:.4f} vs +{eu_covid_effect:.4f})")
 else:
-    print(f"\n✗ No significant differential COVID impact across regions (p={res_covid_region.pvalues['covid_x_eap']:.4f})")
+    print(f"\n[WARN] No significant differential COVID impact across regions (p={res_covid_region.pvalues['covid_x_eap']:.4f})")
     print(f"  Both EU and EaP experienced similar COVID effects")

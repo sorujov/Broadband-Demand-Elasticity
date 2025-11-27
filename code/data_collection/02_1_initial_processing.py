@@ -122,12 +122,12 @@ class DataProcessor:
                 output_file = DATA_INTERIM / f'itu_{var_name}_processed.csv'
                 df_all_series.to_csv(output_file, index=False)
 
-                print(f"  ✓ Saved: {output_file.name}")
+                print(f"  [OK] Saved: {output_file.name}")
                 print(f"    {df_all_series.shape[0]} rows × {df_all_series.shape[1]} columns")
 
                 processed_files.append(var_name)
 
-        print(f"\n✓ Processed {len(processed_files)} ITU indicators")
+        print(f"\n[OK] Processed {len(processed_files)} ITU indicators")
         return processed_files
 
     def process_worldbank_data(self):
@@ -139,7 +139,7 @@ class DataProcessor:
         print("="*80)
 
         if not self.wb_file.exists():
-            print(f"\n✗ File not found: {self.wb_file}")
+            print(f"\n[ERROR] File not found: {self.wb_file}")
             return False
 
         # Load data
@@ -170,7 +170,7 @@ class DataProcessor:
         output_file = DATA_INTERIM / 'worldbank_processed.csv'
         df_long.to_csv(output_file, index=False)
 
-        print(f"\n✓ Saved: {output_file.name}")
+        print(f"\n[OK] Saved: {output_file.name}")
         print(f"  {df_long.shape[0]} rows × {df_long.shape[1]} columns")
 
         # Show sample
@@ -244,7 +244,7 @@ class DataProcessor:
         catalog_file = DATA_INTERIM / 'data_catalog.csv'
         catalog_df.to_csv(catalog_file, index=False)
 
-        print(f"\n✓ Saved catalog: {catalog_file.name}")
+        print(f"\n[OK] Saved catalog: {catalog_file.name}")
         print(f"  {len(catalog_df)} variables documented")
 
         # Print summary
@@ -276,13 +276,13 @@ def main():
         catalog = processor.create_metadata_catalog()
 
         print("\n" + "="*80)
-        print("PROCESSING COMPLETE ✓")
+        print("PROCESSING COMPLETE [OK]")
         print("="*80)
         print(f"\nProcessed files saved to: {DATA_INTERIM}")
         print(f"\nNext step: Run 03_merge_data.py (updated version)")
 
     except Exception as e:
-        print(f"\n✗ Error: {str(e)}")
+        print(f"\n[ERROR] Error: {str(e)}")
         import traceback
         traceback.print_exc()
 

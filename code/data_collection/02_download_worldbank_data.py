@@ -98,11 +98,11 @@ class WorldBankDownloader:
             # Filter to our year range
             data = data[data['year'].between(START_YEAR, END_YEAR)]
 
-            print(f"✓ ({len(data)} obs)")
+            print(f"[OK] ({len(data)} obs)")
             return data
 
         except Exception as e:
-            print(f"✗ Error: {str(e)}")
+            print(f"[ERROR] Error: {str(e)}")
             return None
 
     def download_all_indicators(self):
@@ -163,7 +163,7 @@ class WorldBankDownloader:
     def save_data(self, df, filename='worldbank_data.csv'):
         """Save downloaded data to CSV."""
         if df is None or len(df) == 0:
-            print("\n✗ No data to save")
+            print("\n[ERROR] No data to save")
             return None
 
         output_path = DATA_RAW / filename
@@ -172,7 +172,7 @@ class WorldBankDownloader:
         print("\n" + "="*80)
         print("SAVING DATA")
         print("="*80)
-        print(f"\n✓ Data saved: {output_path}")
+        print(f"\n[OK] Data saved: {output_path}")
         print(f"  - Shape: {df.shape[0]} rows × {df.shape[1]} columns")
         print(f"  - Countries: {df['country'].nunique()}")
         print(f"  - Years: {df['year'].min()}-{df['year'].max()}")
@@ -195,7 +195,7 @@ class WorldBankDownloader:
             print(f"\nVariables with missing data (top 10):")
             print(missing_summary.head(10).to_string(index=False))
         else:
-            print("\n✓ No missing data!")
+            print("\n[OK] No missing data!")
 
         return output_path
 
@@ -220,14 +220,14 @@ def main():
             downloader.save_data(df)
 
             print("\n" + "="*80)
-            print("DOWNLOAD COMPLETE ✓")
+            print("DOWNLOAD COMPLETE [OK]")
             print("="*80)
             print("\nNext step: Run 03_merge_data.py to merge with ITU data")
         else:
-            print("\n✗ Download failed - no data retrieved")
+            print("\n[ERROR] Download failed - no data retrieved")
 
     except Exception as e:
-        print(f"\n✗ Error: {str(e)}")
+        print(f"\n[ERROR] Error: {str(e)}")
         print("\nTroubleshooting:")
         print("  1. Ensure config.py has ISO3 country codes (AUT, BEL, etc.)")
         print("  2. Check: pip install wbgapi --upgrade")

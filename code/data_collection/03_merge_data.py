@@ -57,7 +57,7 @@ class DataMerger:
         print("="*80)
 
         if len(self.itu_processed_files) == 0:
-            print("\n✗ No processed ITU files found!")
+            print("\n[ERROR] No processed ITU files found!")
             print("   Please run: python code/data_collection/01.5_process_data.py")
             return None
 
@@ -71,12 +71,12 @@ class DataMerger:
 
             var_name = filepath.stem.replace('itu_', '').replace('_processed', '')
             n_series = df['series_code'].nunique()
-            print(f"  ✓ {var_name}: {len(df)} obs, {n_series} series")
+            print(f"  [OK] {var_name}: {len(df)} obs, {n_series} series")
 
         # Combine all ITU data
         df_itu = pd.concat(all_series, ignore_index=True)
 
-        print(f"\n✓ Combined ITU data: {df_itu.shape[0]} rows × {df_itu.shape[1]} columns")
+        print(f"\n[OK] Combined ITU data: {df_itu.shape[0]} rows × {df_itu.shape[1]} columns")
         print(f"  Total series: {df_itu['series_code'].nunique()}")
         print(f"  Variables: {df_itu['variable'].nunique()}")
 
@@ -89,7 +89,7 @@ class DataMerger:
         print("="*80)
 
         if not self.wb_processed_file.exists():
-            print(f"\n✗ File not found: {self.wb_processed_file}")
+            print(f"\n[ERROR] File not found: {self.wb_processed_file}")
             print("   Please run: python code/data_collection/01.5_process_data.py")
             return None
 
@@ -142,7 +142,7 @@ class DataMerger:
         for df_next in wide_dfs[1:]:
             df_wide = df_wide.merge(df_next, on=['country', 'year'], how='outer')
 
-        print(f"\n✓ Wide format: {df_wide.shape[0]} rows × {df_wide.shape[1]} columns")
+        print(f"\n[OK] Wide format: {df_wide.shape[0]} rows × {df_wide.shape[1]} columns")
 
         return df_wide, series_metadata
 
@@ -165,7 +165,7 @@ class DataMerger:
         
         print(f"\n⚠ NA values preserved (not filled)")
 
-        print(f"\n✓ Wide format: {df_wide.shape[0]} rows × {df_wide.shape[1]} columns")
+        print(f"\n[OK] Wide format: {df_wide.shape[0]} rows × {df_wide.shape[1]} columns")
         print(f"  Variables: {len(df_wide.columns) - 2}")  # -2 for country, year
 
         return df_wide
@@ -204,7 +204,7 @@ class DataMerger:
 
         # Verify NA values are preserved (not filled)
         na_count = df_merged.isnull().sum().sum()
-        print(f"\n✓ NA values preserved: {na_count:,} missing values in merged data")
+        print(f"\n[OK] NA values preserved: {na_count:,} missing values in merged data")
         print("  (This is expected - missing data is NOT filled)")
 
         # Add region
@@ -217,7 +217,7 @@ class DataMerger:
             (df_merged['country'].isin(ALL_COUNTRIES))
         ]
 
-        print(f"\n✓ Final dataset: {df_merged.shape[0]} rows × {df_merged.shape[1]} columns")
+        print(f"\n[OK] Final dataset: {df_merged.shape[0]} rows × {df_merged.shape[1]} columns")
         print(f"  Countries: {df_merged['country'].nunique()}")
         print(f"  Years: {df_merged['year'].min()}-{df_merged['year'].max()}")
         print(f"  Regions: {df_merged['region'].value_counts().to_dict()}")
@@ -255,7 +255,7 @@ class DataMerger:
         reference_file = DATA_PROCESSED / 'itu_series_reference.csv'
         reference.to_csv(reference_file, index=False)
 
-        print(f"\n✓ Saved: {reference_file.name}")
+        print(f"\n[OK] Saved: {reference_file.name}")
         print(f"  {len(reference)} ITU series documented")
 
         # Print user-friendly guide
@@ -284,7 +284,7 @@ class DataMerger:
         print("SAVING MERGED DATA")
         print("="*80)
         print(f"\n⚠ IMPORTANT: NA values are preserved (NOT filled)")
-        print(f"✓ Saved: {output_file}")
+        print(f"[OK] Saved: {output_file}")
         print(f"  - {df.shape[0]} observations")
         print(f"  - {df.shape[1]} variables")
         print(f"  - {df['country'].nunique()} countries")
@@ -308,12 +308,12 @@ class DataMerger:
             print(f"\nVariables with missing data (top 20):")
             print(missing_df.head(20).to_string(index=False))
         else:
-            print("\n✓ No missing data!")
+            print("\n[OK] No missing data!")
 
         # Save missing data report
         missing_file = DATA_PROCESSED / 'missing_data_report.csv'
         missing_df.to_csv(missing_file, index=False)
-        print(f"\n✓ Missing data report: {missing_file.name}")
+        print(f"\n[OK] Missing data report: {missing_file.name}")
 
         return output_file
 
@@ -334,7 +334,7 @@ def main():
         df_wb = merger.load_processed_wb_data()
 
         if df_itu is None or df_wb is None:
-            print("\n✗ Cannot proceed without processed data files.")
+            print("\n[ERROR] Cannot proceed without processed data files.")
             print("\nRequired: Run python code/data_collection/01.5_process_data.py first")
             return
 
@@ -352,14 +352,14 @@ def main():
         merger.save_merged_data(df_merged, series_reference)
 
         print("\n" + "="*80)
-        print("MERGE COMPLETE ✓")
+        print("MERGE COMPLETE [OK]")
         print("="*80)
         print(f"\nOutput files in: {DATA_PROCESSED}")
         print("\nIMPORTANT: Check 'itu_series_reference.csv' to see which series")
         print("           to use for your regression analysis!")
 
     except Exception as e:
-        print(f"\n✗ Error: {str(e)}")
+        print(f"\n[ERROR] Error: {str(e)}")
         import traceback
         traceback.print_exc()
 

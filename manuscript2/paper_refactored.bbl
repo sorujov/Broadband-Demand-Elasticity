@@ -1,0 +1,40 @@
+\begin{thebibliography}{5}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Cardona et~al.(2009)Cardona, Schwarz, Yurtoglu and Zulehner}]{cardona2009demand}
+\bibinfo{author}{Cardona, M.}, \bibinfo{author}{Schwarz, A.}, \bibinfo{author}{Yurtoglu, B.B.}, \bibinfo{author}{Zulehner, C.}, \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{The demand for broadband: Evidence from oecd countries}.
+\newblock \bibinfo{journal}{Communications \& Strategies} \bibinfo{volume}{76}, \bibinfo{pages}{65--88}.
+%Type = Article
+\bibitem[{Galperin and Mariscal(2017)}]{galperin2017price}
+\bibinfo{author}{Galperin, H.}, \bibinfo{author}{Mariscal, J.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Price elasticity of demand for broadband: Evidence from latin america and the caribbean}.
+\newblock \bibinfo{journal}{Telecommunications Policy} \bibinfo{volume}{41}, \bibinfo{pages}{443--453}.
+%Type = Article
+\bibitem[{Hauge et~al.(2010)Hauge, Jamison and Jewell}]{hauge2010demand}
+\bibinfo{author}{Hauge, J.A.}, \bibinfo{author}{Jamison, M.A.}, \bibinfo{author}{Jewell, R.T.}, \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{Demand for broadband services}.
+\newblock \bibinfo{journal}{Telecommunications Policy} \bibinfo{volume}{34}, \bibinfo{pages}{489--502}.
+%Type = Article
+\bibitem[{Macedo et~al.(2011)Macedo, Tenenblat and Carvalho}]{macedo2011elasticity}
+\bibinfo{author}{Macedo, H.R.}, \bibinfo{author}{Tenenblat, R.}, \bibinfo{author}{Carvalho, A.X.}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Price elasticity of demand for broadband services: Evidence from brazil}.
+\newblock \bibinfo{journal}{Telecommunications Policy} \bibinfo{volume}{35}, \bibinfo{pages}{753--763}.
+%Type = Article
+\bibitem[{R{\"o}ller and Waverman(2001)}]{roller1996telecommunications}
+\bibinfo{author}{R{\"o}ller, L.H.}, \bibinfo{author}{Waverman, L.}, \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{Telecommunications infrastructure and economic development: A simultaneous approach}.
+\newblock \bibinfo{journal}{American Economic Review} \bibinfo{volume}{91}, \bibinfo{pages}{909--923}.
+
+\end{thebibliography}

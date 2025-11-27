@@ -71,8 +71,8 @@ class DataPreparation:
             'mobile_subs': 'mobile_subs_i271',                         # per 100 inhabitants
 
             # Key independent variable (price)
-            'fixed_broad_price': 'fixed_broad_price_i154_FBB_ts_PPP',  # PPP-adjusted
-            'mobile_broad_price': 'mobile_broad_price_i271mb_ts_PPP',  # PPP-adjusted
+            'fixed_broad_price': 'fixed_broad_price_i154_FBB_ts_GNI',  # GNI-adjusted (% of GNI per capita)
+            'mobile_broad_price': 'mobile_broad_price_i271mb_ts_GNI',  # GNI-adjusted (% of GNI per capita)
 
             # NOTE: Bandwidth variables DROPPED due to systematic unavailability
             # int_bandwidth_* variables not included (72% missing, unreliable)
@@ -122,7 +122,7 @@ class DataPreparation:
         print("="*80)
 
         self.df = pd.read_csv(self.input_file)
-        print(f"\n✓ Loaded: {self.df.shape[0]} rows × {self.df.shape[1]} columns")
+        print(f"\n[OK] Loaded: {self.df.shape[0]} rows × {self.df.shape[1]} columns")
         print(f"  Countries: {self.df['country'].nunique()}")
         print(f"  Years: {self.df['year'].min()}-{self.df['year'].max()}")
 
@@ -150,7 +150,7 @@ class DataPreparation:
 
         self.df = self.df[keep_cols].rename(columns=rename_dict)
 
-        print(f"\n✓ Selected {len(available_cols)} variables")
+        print(f"\n[OK] Selected {len(available_cols)} variables")
 
         if missing_cols:
             print(f"\n⚠ Missing {len(missing_cols)} variables:")
@@ -161,7 +161,7 @@ class DataPreparation:
         self.df['is_eu'] = self.df['country'].isin(EU_COUNTRIES).astype(int)
         self.df['is_eap'] = self.df['country'].isin(EAP_COUNTRIES).astype(int)
 
-        print(f"\n✓ Added region indicators:")
+        print(f"\n[OK] Added region indicators:")
         print(f"  EU countries: {self.df['is_eu'].sum() // self.df.groupby('country').ngroups}")
         print(f"  EaP countries: {self.df['is_eap'].sum() // self.df.groupby('country').ngroups}")
 
@@ -183,7 +183,7 @@ class DataPreparation:
             print(f"  {var}: {count} ({pct:.1f}%)")
 
         # Apply forward fill ONLY to specified variables (<10% missing)
-        print(f"\n✓ Applying FORWARD FILL to {len(self.forward_fill_vars)} variables:")
+        print(f"\n[OK] Applying FORWARD FILL to {len(self.forward_fill_vars)} variables:")
 
         for var in self.forward_fill_vars:
             if var in self.df.columns:
@@ -232,7 +232,7 @@ class DataPreparation:
             if var in self.df.columns:
                 # Add small constant to avoid log(0)
                 self.df[f'log_{var}'] = np.log(self.df[var] + 1)
-                print(f"  ✓ Created log_{var}")
+                print(f"  [OK] Created log_{var}")
 
         # Growth rates for demand variables
         growth_vars = ['fixed_broadband_subs', 'internet_users_pct', 'mobile_subs']
@@ -240,12 +240,12 @@ class DataPreparation:
         for var in growth_vars:
             if var in self.df.columns:
                 self.df[f'{var}_growth'] = self.df.groupby('country')[var].pct_change() * 100
-                print(f"  ✓ Created {var}_growth")
+                print(f"  [OK] Created {var}_growth")
 
         # Price changes
         if 'fixed_broad_price' in self.df.columns:
             self.df['price_change'] = self.df.groupby('country')['fixed_broad_price'].pct_change() * 100
-            print(f"  ✓ Created price_change")
+            print(f"  [OK] Created price_change")
 
         return self
 
@@ -264,7 +264,7 @@ class DataPreparation:
             if var in self.df.columns:
                 # Create 1-year lag
                 self.df[f'{var}_lag1'] = self.df.groupby('country')[var].shift(1)
-                print(f"  ✓ Created {var}_lag1")
+                print(f"  [OK] Created {var}_lag1")
 
         return self
 
@@ -278,13 +278,13 @@ class DataPreparation:
         if 'fixed_broad_price' in self.df.columns:
             self.df['price_x_eu'] = self.df['fixed_broad_price'] * self.df['is_eu']
             self.df['price_x_eap'] = self.df['fixed_broad_price'] * self.df['is_eap']
-            print("  ✓ Created price_x_eu, price_x_eap")
+            print("  [OK] Created price_x_eu, price_x_eap")
 
         # Log price × Region interactions
         if 'log_fixed_broad_price' in self.df.columns:
             self.df['log_price_x_eu'] = self.df['log_fixed_broad_price'] * self.df['is_eu']
             self.df['log_price_x_eap'] = self.df['log_fixed_broad_price'] * self.df['is_eap']
-            print("  ✓ Created log_price_x_eu, log_price_x_eap")
+            print("  [OK] Created log_price_x_eu, log_price_x_eap")
 
         return self
 
@@ -296,7 +296,7 @@ class DataPreparation:
 
         self.df.to_csv(self.output_file, index=False)
 
-        print(f"\n✓ Saved: {self.output_file}")
+        print(f"\n[OK] Saved: {self.output_file}")
         print(f"  Rows: {len(self.df):,}")
         print(f"  Columns: {len(self.df.columns)}")
         print(f"  Countries: {self.df['country'].nunique()}")
@@ -333,7 +333,7 @@ class DataPreparation:
          .save_data())
 
         print("\n" + "="*80)
-        print("DATA PREPARATION COMPLETE ✓")
+        print("DATA PREPARATION COMPLETE [OK]")
         print("="*80)
         print("\nNext steps:")
         print("  1. Run 05_descriptive_stats.py")

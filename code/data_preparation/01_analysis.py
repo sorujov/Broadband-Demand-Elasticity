@@ -58,7 +58,7 @@ class DataAnalyzer:
         print("="*80)
         
         self.df = pd.read_csv(self.input_file)
-        print(f"\n✓ Loaded: {self.df.shape[0]} rows × {self.df.shape[1]} columns")
+        print(f"\n[OK] Loaded: {self.df.shape[0]} rows × {self.df.shape[1]} columns")
         print(f"  Countries: {self.df['country'].nunique()}")
         print(f"  Years: {self.df['year'].min()}-{self.df['year'].max()}")
         
@@ -69,7 +69,7 @@ class DataAnalyzer:
         numeric_cols = self.df_panel.select_dtypes(include=[np.number]).columns
         self.df_panel = self.df_panel[numeric_cols]
         
-        print(f"\n✓ Panel structure created: {len(numeric_cols)} numeric variables")
+        print(f"\n[OK] Panel structure created: {len(numeric_cols)} numeric variables")
         
         return self.df_panel
 
@@ -93,7 +93,7 @@ class DataAnalyzer:
         # Save to CSV
         output_file = self.output_dir / 'missing_value_statistics.csv'
         missing_stats.to_csv(output_file)
-        print(f"\n✓ Saved: {output_file}")
+        print(f"\n[OK] Saved: {output_file}")
         
         # By year
         missing_by_year = self.df_panel.groupby(level='year').apply(
@@ -107,8 +107,8 @@ class DataAnalyzer:
         )
         missing_by_country.to_csv(self.output_dir / 'missing_by_country.csv')
         
-        print(f"✓ Saved: missing_by_year.csv")
-        print(f"✓ Saved: missing_by_country.csv")
+        print(f"[OK] Saved: missing_by_year.csv")
+        print(f"[OK] Saved: missing_by_country.csv")
         
         return missing_stats, missing_by_year, missing_by_country
 
@@ -142,7 +142,7 @@ class DataAnalyzer:
         plt.savefig(output_file, dpi=300, bbox_inches='tight')
         plt.close()
         
-        print(f"\n✓ Saved: {output_file}")
+        print(f"\n[OK] Saved: {output_file}")
 
     def plot_dendrogram(self):
         """Generate dendrogram of missing value correlations."""
@@ -167,7 +167,7 @@ class DataAnalyzer:
         plt.savefig(output_file, dpi=300, bbox_inches='tight')
         plt.close()
         
-        print(f"\n✓ Saved: {output_file}")
+        print(f"\n[OK] Saved: {output_file}")
         print("\nInterpretation:")
         print("  - Variables that cluster together have similar missing patterns")
         print("  - Use this to identify series that can substitute for each other")
@@ -237,7 +237,7 @@ class DataAnalyzer:
             self.output_dir / 'panel_structure_summary.csv',
             index=False
         )
-        print(f"\n✓ Saved: panel_structure_summary.csv")
+        print(f"\n[OK] Saved: panel_structure_summary.csv")
 
     def main(self):
         """Execute full EDA workflow."""
@@ -259,7 +259,7 @@ class DataAnalyzer:
         self.plot_dendrogram()
         
         print("\n" + "="*80)
-        print("EDA COMPLETE ✓")
+        print("EDA COMPLETE [OK]")
         print("="*80)
         print(f"\nAll outputs saved to: {self.output_dir}")
         print("\nUse these outputs to:")

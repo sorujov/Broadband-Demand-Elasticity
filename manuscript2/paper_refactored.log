@@ -1,17 +1,17 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.4)  20 NOV 2025 18:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.25)  27 NOV 2025 09:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **paper_refactored.tex
 (./paper_refactored.tex
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-10-24>
+L3 programming layer <2025-11-06>
 (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/elsarticle/elsarticle.cls
 Document Class: elsarticle 2025/01/11, 3.4c: Elsevier Ltd
 (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 ) (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2025-10-24 L3 programming layer (loader) 
+Package: expl3 2025-11-06 L3 programming layer (loader) 
  (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count275
@@ -316,61 +316,64 @@ Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \c@LT@tables=\count324
 \c@LT@chunks=\count325
 \LT@p@ftn=\toks28
+) (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box70
 ) (./paper_refactored.aux)
 \openout1 = `paper_refactored.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
  (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 16.
+Package hyperref Info: Link coloring OFF on input line 17.
  (./paper_refactored.out) (./paper_refactored.out)
 \@outlinefile=\write4
 \openout4 = `paper_refactored.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 30.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
  (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
  (c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 45.
+(hyperref)                removing `\<def>-command' on input line 46.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cnotenum' on input line 45.
+(hyperref)                removing `\cnotenum' on input line 46.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 45.
+(hyperref)                removing `\<def>-command' on input line 46.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@corref' on input line 45.
+(hyperref)                removing `\@corref' on input line 46.
 
 [1
 
@@ -378,134 +381,30 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.45 \end{frontmatter}
+l.46 \end{frontmatter}
                        [1
 
 
-]
-
-Package natbib Warning: Citation `galperin2017price' on page 2 undefined on input line 50.
-
-
-Package natbib Warning: Citation `hauge2010demand' on page 2 undefined on input line 52.
-
-
-Package natbib Warning: Citation `galperin2017price' on page 2 undefined on input line 52.
-
-
-Package natbib Warning: Citation `macedo2011elasticity' on page 2 undefined on input line 52.
-
-
-Package natbib Warning: Citation `cardona2009demand' on page 2 undefined on input line 52.
-
-
-Package natbib Warning: Citation `roller1996telecommunications' on page 2 undefined on input line 54.
-
-
-Package natbib Warning: Citation `hauge2010demand' on page 2 undefined on input line 54.
-
-[2] [3]
-
-LaTeX Warning: Reference `sec:discussion' on page 4 undefined on input line 66.
-
-
-LaTeX Warning: Reference `sec:policy' on page 4 undefined on input line 66.
-
-
-LaTeX Warning: Reference `sec:conclusion' on page 4 undefined on input line 66.
-
-[4]
-
-Package natbib Warning: Citation `roller1996telecommunications' on page 5 undefined on input line 73.
-
-
-Package natbib Warning: Citation `cardona2009demand' on page 5 undefined on input line 73.
-
-
-Package natbib Warning: Citation `cardona2009demand' on page 5 undefined on input line 75.
-
-[5]
-
-Package natbib Warning: Citation `galperin2017price' on page 6 undefined on input line 77.
-
-
-Package natbib Warning: Citation `macedo2011elasticity' on page 6 undefined on input line 77.
-
-
-Package natbib Warning: Citation `hauge2010demand' on page 6 undefined on input line 81.
-
-
-Package natbib Warning: Citation `hauge2010demand' on page 6 undefined on input line 83.
-
-[6]
-
-Package natbib Warning: Citation `roller1996telecommunications' on page 7 undefined on input line 85.
-
-[7] [8] [9] [10]
-Overfull \hbox (56.58119pt too wide) in paragraph at lines 124--125
+] [2] [3] [4] [5] [6] [7] [8] [9] [10]
+Overfull \hbox (56.58119pt too wide) in paragraph at lines 125--126
 \T1/cmr/m/n/12 a-rithm of PPP-adjusted fixed broad-band sub-scrip-tion prices (\T1/cmtt/m/n/12 log_fixed_broad_price\T1/cmr/m/n/12 ),
  []
 
 
-Overfull \hbox (39.26225pt too wide) in paragraph at lines 128--129
+Overfull \hbox (39.26225pt too wide) in paragraph at lines 129--130
 []\T1/cmr/bx/n/12 Price$\OMS/cmsy/m/n/12 ^^B$\T1/cmr/bx/n/12 Region In-ter-ac-tion. \T1/cmr/m/n/12 The in-ter-ac-tion be-tween \T1/cmtt/m/n/12 log_fixed_broad_price
  []
 
-
-Package natbib Warning: Citation `cardona2009demand' on page 11 undefined on input line 132.
-
-
-Package natbib Warning: Citation `galperin2017price' on page 11 undefined on input line 132.
-
 [11] [12] [13]
-
-! LaTeX Error: Environment tablenotes undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.182 \begin{tablenotes}
-                        
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-Overfull \hbox (2.34975pt too wide) in paragraph at lines 156--184
- [][] 
+Overfull \hbox (2.34975pt too wide) in paragraph at lines 158--189
+ [] 
  []
 
 
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.184 \item N
-             otes: ITU = International Telecommunication Union; WDI = World ...
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+LaTeX Warning: Float too large for page by 15.21202pt on input line 189.
 
 
-! LaTeX Error: \begin{table} on input line 152 ended by \end{tablenotes}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.185 \end{tablenotes}
-                      
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-LaTeX Warning: Float too large for page by 13.75346pt on input line 186.
-
-
-Overfull \hbox (52.1111pt too wide) detected at line 202
+Overfull \hbox (52.1111pt too wide) detected at line 205
 [][][][]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 InternetUsers[]\OT1/cmr/m/n/12 ) = \OML/cmm/m/it/12 ^^L[] []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Price[]\OT1/cmr/m/n/12 ) + \OML/cmm/m/it/12 ^^L[]EaP[] \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 ^^L[]\OT1/cmr/m/n/12 [[](\OML/cmm/m/it/12 Price[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 ^^B \OML/cmm/m/it/12 EaP[]\OT1/cmr/m/n/12 ] + \OT1/cmr/bx/n/12 X[]\OML/cmm/m/it/12 ^^M \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 [] \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 ^^N[] \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 "[]
  []
 
@@ -513,37 +412,51 @@ Overfull \hbox (52.1111pt too wide) detected at line 202
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.210 \item $
-             EaP_i$ is a binary indicator equal to 1 for Eastern Partnership...] [16] [17] [18]
+l.213 \item $
+             EaP_i$ is a binary indicator equal to 1 for Eastern Partnership...] [16] [17] [18] [19] [20] [21] [22] [23] (./comprehensive_results_table.tex
+Overfull \hbox (276.89091pt too wide) in paragraph at lines 6--83
+ [][] 
+ []
 
-LaTeX Warning: Reference `tab:comprehensive' on page 19 undefined on input line 268.
 
-[19] [20]
+LaTeX Warning: Float too large for page by 931.44276pt on input line 86.
 
-LaTeX Warning: Reference `tab:comprehensive' on page 21 undefined on input line 284.
+) [24] [25
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.323 
+      ] [26] [27] [28] [29] [30]
+Overfull \hbox (3.16241pt too wide) in paragraph at lines 389--390
+\T1/cmr/m/n/12 than EU dur-ing the pan-demic^^Vsuggests an op-por-tu-nity for sus-tained progress
+ []
 
-[21] [22] [23]
+[31] [32] [33]
+Overfull \hbox (0.20047pt too wide) in paragraph at lines 422--423
+\T1/cmr/m/n/12 sub-sidy pro-grams, tax changes, or reg-u-la-tory re-forms^^Vcould pro-vide stronger
+ []
 
-! LaTeX Error: File `tables/comprehensive_results_table.tex' not found.
-
-Type X to quit or <RETURN> to proceed,
-or enter new name. (Default extension: tex)
-
-Enter file name: 
-! Emergency stop.
-<read *> 
-         
-l.308 \input{tables/comprehensive_results_table}
-                                                ^^M
-*** (cannot \read from terminal in nonstop modes)
-
- 
+[34] (./paper_refactored.bbl [35]) [36] (./paper_refactored.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
+ ***********
+Package rerunfilecheck Info: File `paper_refactored.out' has not changed.
+(rerunfilecheck)             Checksum: 6EDAB7C50E0D5893857A661494ADFE1A;6873.
+ ) 
 Here is how much of TeX's memory you used:
- 10829 strings out of 469558
- 165570 string characters out of 5468789
- 574391 words of memory out of 5000000
- 39243 multiletter control sequences out of 15000+600000
- 643385 words of font info for 82 fonts, out of 8000000 for 9000
+ 11008 strings out of 469518
+ 168927 string characters out of 5467774
+ 605913 words of memory out of 5000000
+ 39412 multiletter control sequences out of 15000+600000
+ 646713 words of font info for 91 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,9n,79p,1160b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 75i,11n,79p,1160b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0700.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> <c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/ookla.user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on paper_refactored.pdf (37 pages, 318751 bytes).
+PDF statistics:
+ 1005 PDF objects out of 1200 (max. 8388607)
+ 434 compressed objects within 5 object streams
+ 89 named destinations out of 1000 (max. 500000)
+ 321 words of extra memory for PDF output out of 10000 (max. 10000000)
+
