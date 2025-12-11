@@ -140,7 +140,7 @@ COUNTRY_CODES = {v: k for k, v in COUNTRY_NAMES.items()}
 # ============================================================================
 
 START_YEAR = 2010  # Price data available from 2010
-END_YEAR = 2023    # Most recent complete year
+END_YEAR = 2024    # Most recent complete year
 YEARS = list(range(START_YEAR, END_YEAR + 1))
 
 # ============================================================================

@@ -52,12 +52,12 @@ class DataPreparation:
     def __init__(self, input_file=None, output_file=None):
         """Initialize with file paths."""
         if input_file is None:
-            self.input_file = DATA_PROCESSED / 'data_merged_with_series.csv'
+            self.input_file = DATA_PROCESSED / 'data_merged_with_series.xlsx'
         else:
             self.input_file = input_file
 
         if output_file is None:
-            self.output_file = DATA_PROCESSED / 'analysis_ready_data.csv'
+            self.output_file = DATA_PROCESSED / 'analysis_ready_data.xlsx'
         else:
             self.output_file = output_file
 
@@ -121,7 +121,7 @@ class DataPreparation:
         print("LOADING MERGED DATA")
         print("="*80)
 
-        self.df = pd.read_csv(self.input_file)
+        self.df = pd.read_excel(self.input_file, engine='openpyxl')
         print(f"\n[OK] Loaded: {self.df.shape[0]} rows × {self.df.shape[1]} columns")
         print(f"  Countries: {self.df['country'].nunique()}")
         print(f"  Years: {self.df['year'].min()}-{self.df['year'].max()}")
@@ -294,7 +294,7 @@ class DataPreparation:
         print("SAVING ANALYSIS-READY DATA")
         print("="*80)
 
-        self.df.to_csv(self.output_file, index=False)
+        self.df.to_excel(self.output_file, engine='openpyxl', index=False)
 
         print(f"\n[OK] Saved: {self.output_file}")
         print(f"  Rows: {len(self.df):,}")

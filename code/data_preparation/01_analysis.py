@@ -41,7 +41,7 @@ class DataAnalyzer:
     def __init__(self, input_file=None):
         """Initialize with merged data file."""
         if input_file is None:
-            self.input_file = DATA_PROCESSED / 'data_merged_with_series.csv'
+            self.input_file = DATA_PROCESSED / 'data_merged_with_series.xlsx'
         else:
             self.input_file = input_file
         
@@ -57,7 +57,7 @@ class DataAnalyzer:
         print("LOADING MERGED DATA FOR EDA")
         print("="*80)
         
-        self.df = pd.read_csv(self.input_file)
+        self.df = pd.read_excel(self.input_file, engine='openpyxl')
         print(f"\n[OK] Loaded: {self.df.shape[0]} rows × {self.df.shape[1]} columns")
         print(f"  Countries: {self.df['country'].nunique()}")
         print(f"  Years: {self.df['year'].min()}-{self.df['year'].max()}")
@@ -90,25 +90,25 @@ class DataAnalyzer:
         # Filter to show only variables with missing data
         missing_stats = missing_stats[missing_stats['Missing Count'] > 0]
         
-        # Save to CSV
-        output_file = self.output_dir / 'missing_value_statistics.csv'
-        missing_stats.to_csv(output_file)
+        # Save to Excel
+        output_file = self.output_dir / 'missing_value_statistics.xlsx'
+        missing_stats.to_excel(output_file, engine='openpyxl')
         print(f"\n[OK] Saved: {output_file}")
         
         # By year
         missing_by_year = self.df_panel.groupby(level='year').apply(
             lambda x: x.isnull().sum()
         )
-        missing_by_year.to_csv(self.output_dir / 'missing_by_year.csv')
+        missing_by_year.to_excel(self.output_dir / 'missing_by_year.xlsx', engine='openpyxl')
         
         # By country
         missing_by_country = self.df_panel.groupby(level='country').apply(
             lambda x: x.isnull().sum()
         )
-        missing_by_country.to_csv(self.output_dir / 'missing_by_country.csv')
+        missing_by_country.to_excel(self.output_dir / 'missing_by_country.xlsx', engine='openpyxl')
         
-        print(f"[OK] Saved: missing_by_year.csv")
-        print(f"[OK] Saved: missing_by_country.csv")
+        print(f"[OK] Saved: missing_by_year.xlsx")
+        print(f"[OK] Saved: missing_by_country.xlsx")
         
         return missing_stats, missing_by_year, missing_by_country
 
@@ -233,11 +233,12 @@ class DataAnalyzer:
             ]
         })
         
-        structure_summary.to_csv(
-            self.output_dir / 'panel_structure_summary.csv',
+        structure_summary.to_excel(
+            self.output_dir / 'panel_structure_summary.xlsx',
+            engine='openpyxl',
             index=False
         )
-        print(f"\n[OK] Saved: panel_structure_summary.csv")
+        print(f"\n[OK] Saved: panel_structure_summary.xlsx")
 
     def main(self):
         """Execute full EDA workflow."""
