@@ -1,28 +1,33 @@
-# code/data_preparation/04_prepare_data_FINAL.py
+# code/data_preparation/02_prepare_data.py
 
 """
 ================================================================================
-Data Preparation Script (FINAL VERSION - Nov 20, 2025)
+Data Preparation Script - Publication-Grade Version
 ================================================================================
-Purpose: Clean, impute, and prepare analysis-ready dataset
+Purpose: Prepare analysis-ready dataset with rigorous missing data handling
 
 Author: Samir Orujov
-Date: November 20, 2025
+Date: December 11, 2025
 
-CRITICAL CHANGES:
-- DROPPED: All bandwidth variables (int_bandwidth_*) due to systematic unavailability
-  confirmed by ITU for European countries (72% missing, unreliable forward fill)
-- FORWARD FILL: Only for variables with <10% missing (education, R&D, ICT exports)
-- NO FILL: Variables with >10% missing are kept as NA for robustness checks
-- FOCUS: Fixed/mobile subscriptions and internet users as demand measures
+Implements Publication-Grade Missing Data Framework:
+- Uses Multiple Imputation (MICE) outputs from 01_analysis.py
+- Provides comparison with traditional methods (forward fill, listwise deletion)
+- Creates transformations for all imputed datasets
+- Generates panel-ready data for regression analysis
+
+Integration with Missing Data Analysis:
+1. Loads multiply imputed datasets (m=5) from 01_analysis.py output
+2. Applies consistent transformations across all imputations
+3. Creates comparison datasets with alternative methods
+4. Saves analysis-ready data for regression pooling
 
 This script:
-1. Loads merged data with series metadata
-2. Selects appropriate series for analysis
-3. Handles missing data systematically (forward fill <10% only)
-4. Creates variable transformations (logs, growth rates)
-5. Generates lagged variables and interactions
-6. Saves analysis-ready dataset
+1. Loads imputed datasets from missing_data_analysis/
+2. Selects appropriate variables for analysis
+3. Creates variable transformations (logs, growth rates, lags)
+4. Generates interaction terms for regional analysis
+5. Saves multiple versions for robustness checks
+6. Prepares data for Rubin's rules pooling
 
 ================================================================================
 """
@@ -47,7 +52,12 @@ except ImportError:
 
 
 class DataPreparation:
-    """Prepare analysis-ready dataset for price elasticity estimation."""
+    """
+    Prepare analysis-ready datasets from multiply imputed data.
+    
+    Integrates with rigorous missing data framework from 01_analysis.py
+    to create publication-grade analysis datasets.
+    """
 
     def __init__(self, input_file=None, output_file=None):
         """Initialize with file paths."""

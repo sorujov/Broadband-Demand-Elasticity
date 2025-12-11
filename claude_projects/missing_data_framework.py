@@ -1,4 +1,4 @@
-# code/data_preparation/01_analysis.py
+# code/data_preparation/03_rigorous_missing_analysis.py
 
 """
 ================================================================================
@@ -86,12 +86,8 @@ class RigorousMissingDataAnalysis:
         ]
         
         self.price_vars = [
-            'fixed_broad_price_usd',
-            'fixed_broad_price_gni_pct',
-            'fixed_broad_price_ppp',
-            'mobile_broad_price_usd',
-            'mobile_broad_price_gni_pct',
-            'mobile_broad_price_ppp'
+            'fixed_broad_price_i154_FBB_ts_GNI',
+            'mobile_broad_price_i271mb_ts_GNI'
         ]
         
         self.key_controls = [
@@ -216,7 +212,7 @@ class RigorousMissingDataAnalysis:
                     })
         
         if len(mcar_evidence) > 0:
-            print("\n⚠ Evidence AGAINST MCAR (Missing At Random or Not At Random):")
+            print("\nâš  Evidence AGAINST MCAR (Missing At Random or Not At Random):")
             for evidence in mcar_evidence:
                 print(f"\n  {evidence['variable']}:")
                 print(f"    - {evidence['n_significant_corr']} significant correlations")
@@ -307,49 +303,25 @@ class RigorousMissingDataAnalysis:
         key_vars = self.demand_vars + self.price_vars
         available_key_vars = [v for v in key_vars if v in self.df.columns]
         
-        # Filter to only variables with some missing data (avoid empty rows/cols)
-        vars_with_missing = [v for v in available_key_vars 
-                            if self.df[v].isnull().sum() > 0]
-        
-        print(f"\nVariables with missing data: {len(vars_with_missing)}/{len(available_key_vars)}")
-        for v in available_key_vars:
-            missing_count = self.df[v].isnull().sum()
-            if missing_count == 0:
-                print(f"  ✓ {v}: 0 missing (100% complete - excluded from heatmap)")
-        
-        if len(vars_with_missing) >= 2:
+        if len(available_key_vars) >= 2:
             # Create missing indicator matrix
-            missing_indicators = self.df[vars_with_missing].isnull().astype(int)
+            missing_indicators = self.df[available_key_vars].isnull().astype(int)
             
             # Compute correlation
             comissing_corr = missing_indicators.corr()
             
-            # Create readable labels
-            labels = []
-            for v in vars_with_missing:
-                parts = v.split('_')
-                if 'price' in v:
-                    # Extract price type (usd/gni/ppp)
-                    price_type = v.split('_')[-1] if v.split('_')[-1] in ['usd', 'gni', 'ppp'] else 'gni'
-                    prefix = 'fixed' if 'fixed' in v else 'mobile'
-                    labels.append(f"{prefix}_price_{price_type}")
-                else:
-                    labels.append(parts[0])
-            
             # Plot
-            plt.figure(figsize=(12, 10))
+            plt.figure(figsize=(10, 8))
             sns.heatmap(comissing_corr, annot=True, fmt='.2f', 
-                       cmap='RdYlGn_r', center=0, vmin=0, vmax=1,
-                       xticklabels=labels,
-                       yticklabels=labels)
-            plt.title('Co-Missingness: Correlation of Missing Indicators\n(High correlation = variables missing together)', fontsize=14)
-            plt.xticks(rotation=45, ha='right')
-            plt.yticks(rotation=0)
+                       cmap='RdYlGn_r', center=0,
+                       xticklabels=[v.split('_')[0] for v in available_key_vars],
+                       yticklabels=[v.split('_')[0] for v in available_key_vars])
+            plt.title('Co-Missingness: Correlation of Missing Indicators\n(High correlation = variables missing together)')
             plt.tight_layout()
             plt.savefig(self.output_dir / '03_comissingness_heatmap.png', dpi=300, bbox_inches='tight')
             plt.close()
             
-            print(f"\n[OK] Saved co-missingness heatmap ({len(vars_with_missing)}x{len(vars_with_missing)} matrix)")
+            print("[OK] Saved co-missingness heatmap")
             print("\nInterpretation:")
             print("  - High positive correlation: Variables missing together")
             print("  - Near zero: Independent missing patterns")
@@ -421,8 +393,7 @@ class RigorousMissingDataAnalysis:
         df_interp = df_comparison.copy()
         for var in comparison_vars:
             if df_interp[var].isnull().sum() > 0:
-                # Use transform instead of apply to maintain index alignment
-                df_interp[var] = df_interp.groupby('country')[var].transform(
+                df_interp[var] = df_interp.groupby('country')[var].apply(
                     lambda x: x.interpolate(method='linear', limit_direction='both')
                 )
         imputed_datasets['interpolation'] = df_interp
@@ -453,6 +424,7 @@ class RigorousMissingDataAnalysis:
         print("  [OK] MICE completed")
         
         # METHOD 6: EM algorithm (expectation-maximization)
+        # Note: sklearn's IterativeImputer with different settings can approximate EM
         print("[6/6] EM algorithm: Expectation-Maximization...")
         
         df_em = df_comparison.copy()
@@ -483,7 +455,7 @@ class RigorousMissingDataAnalysis:
             
             # 1. Sample size retained
             eval_dict['n_obs'] = len(df_imputed)
-            eval_dict['pct_obs_retained'] = round(len(df_imputed) / len(df_comparison) * 100, 1)
+            eval_dict['pct_obs_retained'] = (len(df_imputed) / len(df_comparison) * 100).round(1)
             
             # 2. Distribution preservation (for a key variable)
             if 'fixed_broadband_subs_i4213tfbb' in comparison_vars:
@@ -496,8 +468,8 @@ class RigorousMissingDataAnalysis:
                 imputed_mean = df_imputed[var].mean()
                 imputed_std = df_imputed[var].std()
                 
-                eval_dict['mean_bias'] = round((imputed_mean - original_mean) / original_mean * 100, 2)
-                eval_dict['std_ratio'] = round(imputed_std / original_std, 3)
+                eval_dict['mean_bias'] = ((imputed_mean - original_mean) / original_mean * 100).round(2)
+                eval_dict['std_ratio'] = (imputed_std / original_std).round(3)
             
             # 3. Correlation preservation
             if len(comparison_vars) >= 2:
@@ -509,7 +481,7 @@ class RigorousMissingDataAnalysis:
                 
                 # Measure similarity (Frobenius norm of difference)
                 corr_diff = np.linalg.norm(corr_original - corr_imputed, 'fro')
-                eval_dict['corr_preservation'] = round(corr_diff, 3)
+                eval_dict['corr_preservation'] = corr_diff.round(3)
             
             evaluation_results.append(eval_dict)
         
@@ -622,7 +594,7 @@ class RigorousMissingDataAnalysis:
         print("GENERATING METHODOLOGY TEXT FOR PAPER")
         print("="*80)
         
-        methodology_text = """
+        methodology_text = f"""
 ================================================================================
 MISSING DATA METHODOLOGY FOR PAPER
 ================================================================================
@@ -695,7 +667,7 @@ References:
         
         # Save to file
         output_file = self.output_dir / '05_methodology_text_for_paper.txt'
-        with open(output_file, 'w', encoding='utf-8') as f:
+        with open(output_file, 'w') as f:
             f.write(methodology_text)
         
         print(f"[OK] Saved: {output_file}")
