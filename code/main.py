@@ -34,7 +34,7 @@ class PipelineRunner:
         self.project_root = Path(project_root)
         self.code_dir = self.project_root / 'code'
         self.data_dir = self.project_root / 'data'
-        self.results_dir = self.project_root / 'manuscript2' / 'tables'
+        self.results_dir = self.project_root / 'results'
         
     def print_section(self, title):
         """Print formatted section header"""
@@ -67,96 +67,87 @@ class PipelineRunner:
     def stage_1_data_collection(self):
         """Stage 1: Download raw data from ITU and World Bank"""
         self.print_section("STAGE 1: DATA COLLECTION")
-        
+
         scripts = [
-            (self.code_dir / 'data_collection' / '01_download_itu_data.py', 
+            (self.code_dir / 'data_collection' / 'step1_download_itu.py',
              "Download ITU telecommunications data"),
-            (self.code_dir / 'data_collection' / '02_download_worldbank_data.py', 
+            (self.code_dir / 'data_collection' / 'step2_download_worldbank.py',
              "Download World Bank economic indicators"),
-            (self.code_dir / 'data_collection' / '02_1_initial_processing.py', 
-             "Initial data processing"),
-            (self.code_dir / 'data_collection' / '03_merge_data.py', 
+            (self.code_dir / 'data_collection' / 'step3_process_raw_data.py',
+             "Process raw data files"),
+            (self.code_dir / 'data_collection' / 'step4_merge_datasets.py',
              "Merge ITU and World Bank datasets"),
         ]
-        
+
         for script_path, description in scripts:
             if not script_path.exists():
-                print(f"   ⚠ Warning: Script not found: {script_path.name}")
+                print(f"   Warning: Script not found: {script_path.name}")
                 continue
-                
+
             success = self.run_script(script_path, description)
             if not success:
-                print(f"\n✗ Pipeline stopped at: {description}")
+                print(f"\nPipeline stopped at: {description}")
                 return False
-                
-        print("✓ Stage 1 completed: Raw data collected and merged")
+
+        print("Stage 1 completed: Raw data collected and merged")
         return True
         
     def stage_2_data_preparation(self):
         """Stage 2: Clean and prepare analysis-ready dataset"""
         self.print_section("STAGE 2: DATA PREPARATION")
-        
+
+        # Note: 01_analysis.py is an optional diagnostic tool, not part of main pipeline
         scripts = [
-            (self.code_dir / 'data_preparation' / '01_analysis.py', 
-             "Exploratory data analysis"),
-            (self.code_dir / 'data_preparation' / '02_prepare_data.py', 
+            (self.code_dir / 'data_preparation' / '02_prepare_data.py',
              "Clean, transform, and prepare final dataset"),
         ]
-        
+
         for script_path, description in scripts:
             if not script_path.exists():
-                print(f"   ⚠ Warning: Script not found: {script_path.name}")
+                print(f"   Warning: Script not found: {script_path.name}")
                 continue
-                
+
             success = self.run_script(script_path, description)
             if not success:
-                print(f"\n✗ Pipeline stopped at: {description}")
+                print(f"\nPipeline stopped at: {description}")
                 return False
-                
+
         # Verify analysis-ready data exists
         analysis_ready = self.data_dir / 'processed' / 'analysis_ready_data.csv'
         if analysis_ready.exists():
-            print(f"\n✓ Stage 2 completed: Analysis-ready data created")
+            print(f"\nStage 2 completed: Analysis-ready data created")
             print(f"   Output: {analysis_ready.relative_to(self.project_root)}")
             return True
         else:
-            print(f"\n✗ Error: Expected output file not found: {analysis_ready}")
+            print(f"\nError: Expected output file not found: {analysis_ready}")
             return False
             
     def stage_3_analysis(self):
         """Stage 3: Run econometric analysis"""
         self.print_section("STAGE 3: ECONOMETRIC ANALYSIS")
-        
+
         scripts = [
-            (self.code_dir / 'analysis' / '01_model_selection.py', 
-             "Model selection (fishing expedition across 22 specifications)"),
-            (self.code_dir / 'analysis' / '02_main_analysis.py', 
-             "Main specifications (unified model + robustness)"),
-            (self.code_dir / 'analysis' / '03_robustness_full_period.py', 
-             "Full period robustness checks with COVID controls"),
-            (self.code_dir / 'analysis' / '04_comprehensive_table.py', 
-             "Generate comprehensive results table (8 models)"),
+            (self.code_dir / 'analysis' / '01_model_selection.py',
+             "Model selection across specifications"),
+            (self.code_dir / 'analysis' / '02_main_analysis.py',
+             "Main OLS/FE specifications"),
+            (self.code_dir / 'analysis' / '05_panel_iv_estimation.py',
+             "IV/2SLS estimation for price endogeneity"),
         ]
-        
+
         for script_path, description in scripts:
             if not script_path.exists():
-                print(f"   ⚠ Warning: Script not found: {script_path.name}")
+                print(f"   Warning: Script not found: {script_path.name}")
                 continue
-                
+
             success = self.run_script(script_path, description)
             if not success:
-                print(f"\n✗ Pipeline stopped at: {description}")
+                print(f"\nPipeline stopped at: {description}")
                 return False
-                
-        # Verify results exist
-        results_table = self.results_dir / 'comprehensive_results_table.csv'
-        if results_table.exists():
-            print(f"\n✓ Stage 3 completed: All analyses finished")
-            print(f"   Results: {self.results_dir.relative_to(self.project_root)}")
-            return True
-        else:
-            print(f"\n✗ Warning: Expected results file not found: {results_table}")
-            return False
+
+        print("\nStage 3 completed: All analyses finished")
+        print(f"   Results: results/")
+        return True
             
     def run_full_pipeline(self, skip_collection=False, skip_preparation=False, analysis_only=False):
         """Run the complete pipeline with optional stage skipping"""
@@ -197,25 +188,17 @@ class PipelineRunner:
         # Success summary
         end_time = datetime.now()
         duration = end_time - start_time
-        
+
         print("\n" + "="*80)
-        print("✓ PIPELINE COMPLETED SUCCESSFULLY")
+        print("PIPELINE COMPLETED SUCCESSFULLY")
         print("="*80)
         print(f"End time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"Duration: {duration}")
-        
-        print("\n📊 KEY RESULTS:")
-        print(f"   • Main specification: EaP elasticity -0.608*** (p<0.001)")
-        print(f"   • EU elasticity: -0.054 (p=0.171, not significant)")
-        print(f"   • Elasticity ratio: 11.3× (EaP/EU)")
-        print(f"   • COVID differential: 3.7× stronger in EaP")
-        print(f"   • Total models tested: 8 specifications")
-        
-        print(f"\n📁 OUTPUT LOCATIONS:")
-        print(f"   • Processed data: {self.data_dir / 'processed' / 'analysis_ready_data.csv'}")
-        print(f"   • Results tables: {self.results_dir}")
-        print(f"   • Manuscript: {self.project_root / 'manuscript2' / 'paper_refactored.pdf'}")
-        
+
+        print(f"\nOUTPUT LOCATIONS:")
+        print(f"   Processed data: {self.data_dir / 'processed' / 'analysis_ready_data.csv'}")
+        print(f"   Results: {self.results_dir}")
+
         return True
 
 

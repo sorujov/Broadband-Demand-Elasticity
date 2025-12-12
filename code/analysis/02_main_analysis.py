@@ -1,10 +1,11 @@
 """
-Final Manuscript Specifications
-=================================
-Main: Unified model with GDP + R&D + Secure Servers (Best from fishing)
+Main Analysis Specifications
+============================
+Primary DV: Fixed broadband subscriptions per 100 inhabitants
+Main: Unified model with country and time fixed effects
 Robustness: Separate regional regressions with various controls
 
-Pre-COVID data (2010-2019) only.
+Pre-COVID data (2010-2019) for cleaner identification.
 """
 
 import pandas as pd
@@ -13,58 +14,73 @@ from linearmodels.panel import PanelOLS
 from pathlib import Path
 from scipy import stats
 import warnings
+import sys
+
 warnings.filterwarnings('ignore')
 
-# Setup
+# Setup paths
 BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = BASE_DIR / 'data' / 'processed'
-RESULTS_DIR = BASE_DIR / 'manuscript2' / 'tables'
+sys.path.insert(0, str(BASE_DIR))
+
+try:
+    from code.utils.config import (
+        ANALYSIS_READY_FILE, RESULTS_REGRESSION, EAP_COUNTRIES,
+        PRIMARY_DV, PRIMARY_PRICE
+    )
+except ModuleNotFoundError:
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from utils.config import (
+        ANALYSIS_READY_FILE, RESULTS_REGRESSION, EAP_COUNTRIES,
+        PRIMARY_DV, PRIMARY_PRICE
+    )
+
+RESULTS_DIR = RESULTS_REGRESSION
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Load Pre-COVID data
-df = pd.read_csv(DATA_DIR / 'analysis_ready_data.csv')
-df['year_num'] = pd.to_datetime(df['year'], format='%Y').dt.year
+df = pd.read_csv(ANALYSIS_READY_FILE)
+df['year_num'] = df['year'].astype(int)
 df = df[df['year_num'] <= 2019].copy()
 
 # Create EaP dummy and interaction
-eap_countries = ['ARM', 'AZE', 'BLR', 'GEO', 'MDA', 'UKR']
-df['eap_dummy'] = df['country'].isin(eap_countries).astype(float)
-df['price_x_eap'] = df['log_fixed_broad_price'] * df['eap_dummy']
+df['eap_dummy'] = df['country'].isin(EAP_COUNTRIES).astype(float)
+df['price_x_eap'] = df[PRIMARY_PRICE] * df['eap_dummy']
 
 # Set panel index
-df['year'] = pd.to_datetime(df['year_num'], format='%Y')
-df = df.set_index(['country', 'year'])
+df['year_dt'] = pd.to_datetime(df['year_num'], format='%Y')
+df = df.set_index(['country', 'year_dt'])
 
 print("="*80)
-print("FINAL MANUSCRIPT SPECIFICATIONS")
+print("MAIN ANALYSIS: BROADBAND DEMAND ELASTICITY")
 print("="*80)
+print(f"Primary DV: {PRIMARY_DV}")
 print(f"Pre-COVID sample (2010-2019): {len(df)} observations")
 print(f"Countries: {df.index.get_level_values('country').nunique()}")
 
 # ============================================================================
-# MAIN SPECIFICATION: Unified model with GDP + R&D + Secure Servers
+# MAIN SPECIFICATION: Unified model with GDP + controls
 # ============================================================================
 
 print("\n" + "="*80)
-print("MAIN SPECIFICATION: Unified Model (GDP + R&D + Secure Servers)")
+print("MAIN SPECIFICATION: Unified Model")
 print("="*80)
 
-controls_main = ['log_gdp_per_capita', 'rd_expenditure', 'secure_servers']
-required = ['log_internet_users_pct', 'log_fixed_broad_price', 'price_x_eap'] + controls_main
+controls_main = ['log_gdp_per_capita', 'urban_population_pct', 'education_tertiary_pct']
+required = [PRIMARY_DV, PRIMARY_PRICE, 'price_x_eap'] + controls_main
 df_main = df[required].dropna()
 
 print(f"\nSample: {len(df_main)} observations")
 
-y = df_main['log_internet_users_pct']
-X = df_main[['log_fixed_broad_price', 'price_x_eap'] + controls_main]
+y = df_main[PRIMARY_DV]
+X = df_main[[PRIMARY_PRICE, 'price_x_eap'] + controls_main]
 
 model_main = PanelOLS(y, X, entity_effects=True, time_effects=True)
 res_main = model_main.fit(cov_type='clustered', cluster_entity=True)
 
 # Extract results
-beta_price = res_main.params['log_fixed_broad_price']
+beta_price = res_main.params[PRIMARY_PRICE]
 beta_interaction = res_main.params['price_x_eap']
-se_price = res_main.std_errors['log_fixed_broad_price']
+se_price = res_main.std_errors[PRIMARY_PRICE]
 se_interaction = res_main.std_errors['price_x_eap']
 
 # Calculate implied elasticities
@@ -81,8 +97,8 @@ eu_pval = 2 * (1 - stats.t.cdf(abs(eu_tstat), df=res_main.df_resid))
 eap_pval = 2 * (1 - stats.t.cdf(abs(eap_tstat), df=res_main.df_resid))
 
 print("\nREGRESSION COEFFICIENTS:")
-print(f"  log_fixed_broad_price: {beta_price:7.4f} (SE={se_price:.4f})")
-print(f"  price_x_eap:           {beta_interaction:7.4f} (SE={se_interaction:.4f}, p={res_main.pvalues['price_x_eap']:.4f})")
+print(f"  {PRIMARY_PRICE}: {beta_price:7.4f} (SE={se_price:.4f})")
+print(f"  price_x_eap: {beta_interaction:7.4f} (SE={se_interaction:.4f}, p={res_main.pvalues['price_x_eap']:.4f})")
 
 for var in controls_main:
     print(f"  {var:23s}: {res_main.params[var]:7.4f} (SE={res_main.std_errors[var]:.4f})")
@@ -124,23 +140,23 @@ print("="*80)
 
 def run_separate_regression(data, controls, sample_name):
     """Run separate regression for a given sample"""
-    required = ['log_internet_users_pct', 'log_fixed_broad_price'] + controls
+    required = [PRIMARY_DV, PRIMARY_PRICE] + controls
     df_clean = data[required].dropna()
-    
+
     if len(df_clean) < 30:
         return None
-    
+
     try:
-        y = df_clean['log_internet_users_pct']
-        X = df_clean[['log_fixed_broad_price'] + controls]
-        
+        y = df_clean[PRIMARY_DV]
+        X = df_clean[[PRIMARY_PRICE] + controls]
+
         model = PanelOLS(y, X, entity_effects=True, time_effects=True)
         res = model.fit(cov_type='clustered', cluster_entity=True)
-        
-        elasticity = res.params['log_fixed_broad_price']
-        se = res.std_errors['log_fixed_broad_price']
-        pval = res.pvalues['log_fixed_broad_price']
-        
+
+        elasticity = res.params[PRIMARY_PRICE]
+        se = res.std_errors[PRIMARY_PRICE]
+        pval = res.pvalues[PRIMARY_PRICE]
+
         return {
             'sample': sample_name,
             'controls': ', '.join(controls),
@@ -150,14 +166,14 @@ def run_separate_regression(data, controls, sample_name):
             'n_obs': res.nobs,
             'r_squared': res.rsquared
         }
-    except:
+    except Exception:
         return None
 
 # Define robustness specifications
 robustness_specs = [
-    ("GDP + Regulatory Quality", ['log_gdp_per_capita', 'regulatory_quality']),
-    ("GDP + Education (Tertiary)", ['log_gdp_per_capita', 'education_tertiary']),
-    ("GDP + Growth", ['log_gdp_per_capita', 'gdp_growth']),
+    ("GDP + Regulatory Quality", ['log_gdp_per_capita', 'regulatory_quality_estimate']),
+    ("GDP + Education (Tertiary)", ['log_gdp_per_capita', 'education_tertiary_pct']),
+    ("GDP + Urban Population", ['log_gdp_per_capita', 'urban_population_pct']),
     ("GDP Only", ['log_gdp_per_capita']),
 ]
 
@@ -213,7 +229,7 @@ print("="*80)
 latex_lines = []
 latex_lines.append("\\begin{table}[htbp]")
 latex_lines.append("\\centering")
-latex_lines.append("\\caption{Broadband Price Elasticity of Internet Adoption}")
+latex_lines.append("\\caption{Broadband Price Elasticity of Demand}")
 latex_lines.append("\\label{tab:main_results}")
 latex_lines.append("\\begin{tabular}{lccc}")
 latex_lines.append("\\hline\\hline")
@@ -234,7 +250,7 @@ latex_lines.append("\\hline")
 latex_lines.append("\\multicolumn{4}{l}{\\textbf{Robustness Checks (Separate Regressions)}} \\\\")
 
 # Add key robustness checks
-for spec_name in ["GDP + Regulatory Quality", "GDP + Education (Tertiary)"]:
+for spec_name in ["GDP + Regulatory Quality", "GDP + Urban Population"]:
     spec_results = robustness_df[robustness_df['specification'] == spec_name]
     latex_lines.append(f"\\multicolumn{{4}}{{l}}{{\\textit{{{spec_name}}}}} \\\\")
     

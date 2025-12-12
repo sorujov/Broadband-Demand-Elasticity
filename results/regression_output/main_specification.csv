@@ -1,0 +1,2 @@
+specification,controls,eu_elasticity,eu_se,eu_pval,eap_elasticity,eap_se,eap_pval,interaction_coef,interaction_pval,n_obs,r_squared
+Main (Unified),"log_gdp_per_capita, urban_population_pct, education_tertiary_pct",-0.1649218012390685,0.08072145973175088,0.04196896197742639,-0.6291249223600274,0.15981280306604823,0.0001040829224758788,-0.46420312112095885,0.000869568392917186,330,0.3515984955856093

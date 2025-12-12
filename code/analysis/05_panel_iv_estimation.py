@@ -13,8 +13,6 @@ Methods:
 - Full diagnostic suite (first-stage F, Hausman, Hansen J)
 - Regional heterogeneity via price×EaP interaction
 
-Author: Samir Orujov
-Date: December 12, 2024
 ================================================================================
 """
 
@@ -23,6 +21,8 @@ import numpy as np
 from pathlib import Path
 from scipy import stats
 import warnings
+import sys
+
 warnings.filterwarnings('ignore')
 
 # Panel and IV estimation
@@ -33,18 +33,24 @@ from statsmodels.tools import add_constant
 
 # Setup paths
 BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = BASE_DIR / 'data' / 'processed'
-RESULTS_DIR = BASE_DIR / 'results' / 'iv_estimation'
+sys.path.insert(0, str(BASE_DIR))
+
+try:
+    from code.utils.config import (
+        ANALYSIS_READY_FILE, RESULTS_DIR as BASE_RESULTS_DIR,
+        EU_COUNTRIES, EAP_COUNTRIES,
+        PRIMARY_DV, PRIMARY_PRICE
+    )
+except ModuleNotFoundError:
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from utils.config import (
+        ANALYSIS_READY_FILE, RESULTS_DIR as BASE_RESULTS_DIR,
+        EU_COUNTRIES, EAP_COUNTRIES,
+        PRIMARY_DV, PRIMARY_PRICE
+    )
+
+RESULTS_DIR = BASE_RESULTS_DIR / 'iv_estimation'
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-
-# Country classifications
-EU_COUNTRIES = [
-    'AUT', 'BEL', 'BGR', 'CYP', 'CZE', 'DEU', 'DNK', 'ESP', 'EST', 'FIN',
-    'FRA', 'GRC', 'HRV', 'HUN', 'IRL', 'ITA', 'LTU', 'LUX', 'LVA', 'MLT',
-    'NLD', 'POL', 'PRT', 'ROU', 'SVK', 'SVN', 'SWE'
-]
-
-EAP_COUNTRIES = ['ARM', 'AZE', 'BLR', 'GEO', 'MDA', 'UKR']
 
 
 # =============================================================================
@@ -57,46 +63,46 @@ def load_and_prepare_data():
     print("LOADING AND PREPARING DATA")
     print("=" * 80)
 
-    # Load main dataset
-    df = pd.read_excel(DATA_DIR / 'data_merged_with_series.xlsx', engine='openpyxl')
+    # Load prepared dataset
+    df = pd.read_csv(ANALYSIS_READY_FILE)
 
     print(f"\n[OK] Loaded: {len(df):,} observations")
     print(f"  Countries: {df['country'].nunique()}")
     print(f"  Years: {df['year'].min()}-{df['year'].max()}")
 
-    # Create log transformations
-    df['log_subs'] = np.log(df['fixed_broadband_subs_i992b'] + 1)
-    df['log_internet_users'] = np.log(df['internet_users_pct_i99H'] + 1)
+    # Map standardized names to IV script names for compatibility
+    # Primary DV and price already exist as log transforms
+    df['log_subs'] = df[PRIMARY_DV]  # log_fixed_broadband_subs
+    df['log_internet_users'] = df['log_internet_users_pct']
 
-    # Price variables (all three measures)
-    df['log_price_usd'] = np.log(df['fixed_broad_price_usd'] + 1)
-    df['log_price_ppp'] = np.log(df['fixed_broad_price_ppp'] + 1)
-    df['log_price_gni'] = np.log(df['fixed_broad_price_gni_pct'] + 1)
+    # Price variables
+    df['log_price'] = df[PRIMARY_PRICE]  # log_fixed_broad_price (GNI-adjusted)
+    df['log_price_usd'] = df['log_fixed_broad_price_usd']
+    df['log_price_ppp'] = df['log_fixed_broad_price_ppp']
+    df['log_price_gni'] = df[PRIMARY_PRICE]
 
-    # Default price measure
-    df['log_price'] = df['log_price_ppp']
-
-    # Control variables
-    df['log_gdp'] = np.log(df['gdp_per_capita'] + 1)
-    df['log_pop'] = np.log(df['population'] + 1)
-    df['rd_expenditure'] = df['research_development_expenditure']
-    df['secure_servers'] = np.log(df['secure_internet_servers'] + 1)
+    # Control variables (use standardized names)
+    df['log_gdp'] = df['log_gdp_per_capita']
+    df['log_pop'] = df['log_population']
     df['urban_pct'] = df['urban_population_pct']
     df['reg_quality'] = df['regulatory_quality_estimate']
+    df['secure_servers'] = df['log_secure_internet_servers']
 
     # Mobile prices (instruments)
-    if 'mobile_broad_price_ppp' in df.columns:
-        df['log_mobile_price'] = np.log(df['mobile_broad_price_ppp'] + 1)
-    if 'mobile_broad_price_usd' in df.columns:
-        df['log_mobile_price_usd'] = np.log(df['mobile_broad_price_usd'] + 1)
+    if 'log_mobile_broad_price' in df.columns:
+        df['log_mobile_price'] = df['log_mobile_broad_price']
 
-    # Regional indicators
-    df['is_eu'] = df['country'].isin(EU_COUNTRIES).astype(int)
-    df['is_eap'] = df['country'].isin(EAP_COUNTRIES).astype(int)
+    # Regional indicators (already exist from data prep)
+    df['is_eu'] = df['eu']
+    df['is_eap'] = df['eap']
 
-    # Create lagged prices
-    df = df.sort_values(['country', 'year'])
-    df['log_price_lag1'] = df.groupby('country')['log_price'].shift(1)
+    # Lagged prices already exist from data prep
+    if 'log_fixed_broad_price_lag1' in df.columns:
+        df['log_price_lag1'] = df['log_fixed_broad_price_lag1']
+    else:
+        df = df.sort_values(['country', 'year'])
+        df['log_price_lag1'] = df.groupby('country')['log_price'].shift(1)
+
     df['log_price_lag2'] = df.groupby('country')['log_price'].shift(2)
 
     # Interaction terms

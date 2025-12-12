@@ -144,34 +144,86 @@ END_YEAR = 2024    # Most recent complete year
 YEARS = list(range(START_YEAR, END_YEAR + 1))
 
 # ============================================================================
-# VARIABLE DEFINITIONS
+# DATA PIPELINE CONFIGURATION
 # ============================================================================
 
-# Dependent variables
-DEPENDENT_VARS = {
-    'bandwidth_use': 'International Internet bandwidth (Gbit/s)',
-    'bb_subs_per100': 'Fixed broadband subscriptions per 100 inhabitants'
+# Input/output files
+DATA_MERGED_FILE = DATA_PROCESSED / 'data_merged_with_series.xlsx'
+ANALYSIS_READY_FILE = DATA_PROCESSED / 'analysis_ready_data.csv'
+
+# Column mappings: ITU raw series names -> standardized names
+COLUMN_MAPPINGS = {
+    # Demand measures (potential DVs)
+    'fixed_broadband_subs_i4213tfbb': 'fixed_broadband_subs',  # per 100 inhabitants
+    'fixed_broadband_subs_i992b': 'fixed_broadband_subs_alt',  # alternative series
+    'internet_users_pct_i99H': 'internet_users_pct',           # % of population
+    'int_bandwidth_i4214': 'int_bandwidth',                    # Gbit/s (primary)
+    'int_bandwidth_i994': 'int_bandwidth_alt',                 # alternative series
+    'mobile_subs_i271': 'mobile_subs',                         # per 100 inhabitants
+
+    # Price measures
+    'fixed_broad_price_gni_pct': 'fixed_broad_price',          # % of GNI (primary)
+    'fixed_broad_price_usd': 'fixed_broad_price_usd',          # USD
+    'fixed_broad_price_ppp': 'fixed_broad_price_ppp',          # PPP-adjusted
+    'mobile_broad_price_gni_pct': 'mobile_broad_price',        # % of GNI (primary)
+    'mobile_broad_price_usd': 'mobile_broad_price_usd',        # USD
+    'mobile_broad_price_ppp': 'mobile_broad_price_ppp',        # PPP-adjusted
 }
 
-# Key independent variable
-PRICE_VAR = 'price_fixed_bb'  # Fixed broadband basket price (USD)
+# ============================================================================
+# DEPENDENT VARIABLE DEFINITIONS
+# ============================================================================
+
+# PRIMARY DV: Fixed broadband subscriptions per 100 inhabitants
+# This is the most direct measure of broadband demand
+PRIMARY_DV = 'log_fixed_broadband_subs'
+PRIMARY_DV_RAW = 'fixed_broadband_subs'
+
+# ROBUSTNESS DVs: Alternative demand measures
+ROBUSTNESS_DVS = {
+    'internet_users': {
+        'log': 'log_internet_users_pct',
+        'raw': 'internet_users_pct',
+        'description': 'Internet users as % of population'
+    },
+    'bandwidth': {
+        'log': 'log_int_bandwidth',
+        'raw': 'int_bandwidth',
+        'description': 'International Internet bandwidth (Gbit/s)'
+    },
+}
+
+# ============================================================================
+# PRICE VARIABLE DEFINITIONS
+# ============================================================================
+
+# PRIMARY price variable: GNI-adjusted (economically meaningful for affordability)
+PRIMARY_PRICE = 'log_fixed_broad_price'
+PRIMARY_PRICE_RAW = 'fixed_broad_price'
+
+# Alternative price measures for robustness
+ROBUSTNESS_PRICES = {
+    'usd': 'log_fixed_broad_price_usd',
+    'ppp': 'log_fixed_broad_price_ppp',
+}
+
+# ============================================================================
+# CONTROL VARIABLES
+# ============================================================================
 
 # Control variables - Economic
 ECONOMIC_CONTROLS = [
-    'gdp_per_capita',
+    'log_gdp_per_capita',
     'gdp_growth',
-    'inflation_gdp_deflator',
-    'population',
-    'population_density',
+    'log_population',
+    'log_population_density',
     'urban_population_pct'
 ]
 
 # Control variables - Infrastructure
 INFRASTRUCTURE_CONTROLS = [
-    'internet_users_pct',
-    'mobile_subs_per100',
-    'fixed_phone_subs',
-    'secure_internet_servers'
+    'log_mobile_subs',
+    'log_secure_internet_servers'
 ]
 
 # Control variables - Institutional
@@ -181,20 +233,34 @@ INSTITUTIONAL_CONTROLS = [
 
 # Control variables - Human capital
 HUMAN_CAPITAL_CONTROLS = [
-    'education_secondary_pct',
     'education_tertiary_pct',
-    'labor_force_advanced_education'
 ]
 
-# Instrumental variables
+# Instrumental variables for IV estimation
 INSTRUMENTS = [
-    'telecom_investment',
-    'price_mobile_bb'
+    'log_mobile_broad_price',      # Mobile price as supply shifter
+    'regulatory_quality_estimate',  # Regulatory quality
 ]
 
 # All control variables
-ALL_CONTROLS = (ECONOMIC_CONTROLS + INFRASTRUCTURE_CONTROLS + 
+ALL_CONTROLS = (ECONOMIC_CONTROLS + INFRASTRUCTURE_CONTROLS +
                 INSTITUTIONAL_CONTROLS + HUMAN_CAPITAL_CONTROLS)
+
+# Variables to log-transform
+LOG_TRANSFORM_VARS = [
+    'fixed_broadband_subs',
+    'internet_users_pct',
+    'int_bandwidth',
+    'mobile_subs',
+    'fixed_broad_price',
+    'fixed_broad_price_usd',
+    'fixed_broad_price_ppp',
+    'mobile_broad_price',
+    'gdp_per_capita',
+    'population',
+    'population_density',
+    'secure_internet_servers',
+]
 
 # ============================================================================
 # WORLD BANK INDICATOR CODES
