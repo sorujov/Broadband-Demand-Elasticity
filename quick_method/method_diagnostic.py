@@ -45,17 +45,20 @@ from linearmodels.iv import IV2SLS
 from linearmodels.system import SUR
 import statsmodels.api as sm
 
+# Configure UTF-8 encoding for console output on Windows
+if sys.platform == 'win32':
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+
 warnings.filterwarnings('ignore')
 
 # Add project root to path
-project_root = Path(__file__).parent.parent.parent
+project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(project_root / 'code'))
 
-try:
-    from code.utils.config import DATA_PROCESSED, EU_COUNTRIES, EAP_COUNTRIES
-except ImportError:
-    sys.path.insert(0, str(Path(__file__).parent.parent))
-    from utils.config import DATA_PROCESSED, EU_COUNTRIES, EAP_COUNTRIES
+from utils.config import DATA_PROCESSED, EU_COUNTRIES, EAP_COUNTRIES
 
 
 class MethodDiagnostic:
@@ -95,8 +98,8 @@ class MethodDiagnostic:
         print(f"  Years: {self.df['year'].min()}-{self.df['year'].max()}")
         
         # Create log transformations
-        self.df['log_subs'] = np.log(self.df['fixed_broadband_subs_i4213tfbb'] + 1)
-        self.df['log_price'] = np.log(self.df['fixed_broad_price_i154_FBB_ts_GNI'] + 1)
+        self.df['log_subs'] = np.log(self.df['fixed_broadband_subs_i992b'] + 1)
+        self.df['log_price'] = np.log(self.df['fixed_broad_price_ppp'] + 1)
         self.df['log_gdp'] = np.log(self.df['gdp_per_capita'] + 1)
         self.df['log_pop'] = np.log(self.df['population'] + 1)
         
@@ -114,8 +117,8 @@ class MethodDiagnostic:
         if 'regulatory_quality_estimate' in self.df.columns:
             self.df['reg_quality'] = self.df['regulatory_quality_estimate']
         
-        if 'mobile_broad_price_i271mb_ts_GNI' in self.df.columns:
-            self.df['log_mobile_price'] = np.log(self.df['mobile_broad_price_i271mb_ts_GNI'] + 1)
+        if 'mobile_broad_price_ppp' in self.df.columns:
+            self.df['log_mobile_price'] = np.log(self.df['mobile_broad_price_ppp'] + 1)
         
         # Set panel index
         self.df_panel = self.df.set_index(['country', 'year']).sort_index()
@@ -770,8 +773,8 @@ START: Do you have valid instruments?
         
         print(tree)
         
-        # Save to file
-        with open(self.output_dir / 'decision_tree.txt', 'w') as f:
+        # Save to file with UTF-8 encoding
+        with open(self.output_dir / 'decision_tree.txt', 'w', encoding='utf-8') as f:
             f.write(tree)
         
         print(f"\n[OK] Saved decision tree to: decision_tree.txt")

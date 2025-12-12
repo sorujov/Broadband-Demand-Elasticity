@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(\".venv\\Scripts\\python.exe\":*)",
+      "Bash(pip install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd panel IV estimation for broadband demand elasticity\n\n- Implement IV/2SLS with multiple instrument combinations\n- Test mobile price, regulatory quality, and lagged prices as instruments\n- Include regional heterogeneity via Price×EaP interaction\n- Add first-stage diagnostics, Hausman test, Hansen J-test\n- Generate LaTeX tables for paper\n- Results show weak instruments problem for mobile/reg quality\n- Lagged prices provide strong instruments (F>10) but near-zero elasticities\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd IV estimation summary and recommendations for paper\n\n- Document methodology, results, and diagnostic findings\n- Provide recommendations for presenting results in paper\n- Include suggested text for methods, results, and limitations sections\n- Summarize weak instruments problem and interpretation guidance\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(copy:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(ls:*)",
+      "Bash(dir \"C:\\Users\\ookla.user\\Desktop\\GITHUB\\Broadband-Demand-Elasticity\\*.py\" /b)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(.venvScriptspython.exe -c \"import pandas as pd; df = pd.read_excel(''data/processed/data_merged_with_series.xlsx''); print(''Columns:'', list(df.columns))\")",
+      "Bash(git restore:*)"
+    ]
+  }
+}
