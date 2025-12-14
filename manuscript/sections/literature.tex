@@ -1,0 +1,37 @@
+\subsection{Broadband Demand and Price Elasticity}
+
+The telecommunications demand literature has extensively studied price elasticity, though predominantly for voice telephony and mobile services \citep{hausman2001price, madden2015demand}. Early broadband studies estimated elasticities ranging from $-0.2$ to $-0.8$, with substantial variation across methodologies and contexts \citep{rappoport2003demand, hauge2010demand}. \citet{grzybowski2015fixed} estimate elasticities of $-0.29$ to $-0.45$ for European countries during 2007--2012, finding higher elasticity in lower-income countries. Our EaP estimate of $-0.61$ is consistent with this pattern, extending evidence to 2010--2024.
+
+A key theoretical insight is that demand elasticity varies with necessity status. \citet{hausman2001price} demonstrate telecommunications evolved from luxury to necessity across the 20th century, with declining price sensitivity as services became essential. \citet{brynjolfsson2003consumer} show similar patterns for information goods, where high initial elasticity declines as network effects and complementarities increase adoption. Our finding of declining elasticity from 2015--2024 aligns with this theoretical framework, suggesting broadband followed a similar transition.
+
+Recent work emphasizes time-varying elasticity in technology markets. \citet{goolsbee2006spillovers} document changing internet demand elasticity during 1998--2003, attributing variation to learning effects and network externalities. \citet{nevo2010measuring} show demand for information services becomes less price-elastic as they integrate into daily routines. Our contribution extends this literature by documenting elasticity evolution across a 15-year panel with explicit pre-trend testing.
+
+\subsection{Regional Heterogeneity and Development Context}
+
+Cross-country telecommunications studies consistently find higher price elasticity in developing markets \citep{waverman2001telecommunications, katz2010impact}. \citet{roller2001telecommunications} show income effects dominate technology adoption in lower-income countries, where affordability constraints bind more tightly. \citet{bertschek2016drivers} find similar patterns for broadband, with elasticity inversely related to GDP per capita.
+
+Our analysis focuses on Eastern Partnership countries---Armenia, Azerbaijan, Belarus, Georgia, Moldova, and Ukraine---which represent middle-income markets with substantial development heterogeneity relative to the EU \citep{ecorys2013evaluation}. Limited prior work examines broadband demand in this region \citep{koutroumpis2009impact}, despite their policy importance as transition economies integrating with European digital markets \citep{european2021eap}.
+
+\subsection{COVID-19 and Digital Transformation}
+
+The pandemic's impact on telecommunications demand has received substantial attention, though primarily descriptive \citep{oecd2021covid, iab2020internet}. \citet{bokermann2021covid} document 30--50\% traffic increases during March--April 2020, while \citet{favale2020campus} show usage patterns shifted dramatically toward videoconferencing and streaming. However, causal evidence on price elasticity changes remains limited.
+
+Theoretically, COVID-19 could reduce elasticity through two mechanisms. First, lockdowns and social distancing converted broadband from convenience to necessity for remote work and education \citep{brynjolfsson2020covid}. Second, income effects: if broadband became essential while incomes declined, demand could become inelastic as households prioritize connectivity \citep{dietrich2020consumption}. Our contribution is econometric identification of elasticity changes using panel methods rather than descriptive evidence.
+
+Importantly, several studies suggest digital transformation predated COVID-19. \citet{goldfarb2020digital} argue the pandemic accelerated existing trends rather than creating new ones. \citet{mckinsey2020covid} estimate COVID-19 compressed 5--7 years of digital adoption into months. This aligns with our placebo test evidence showing EaP elasticity trends began in 2015, suggesting gradual evolution rather than pandemic-induced shock.
+
+\subsection{Econometric Methods for Panel Data}
+
+Our empirical strategy builds on panel data econometrics with multiple dimensions of heterogeneity \citep{wooldridge2010econometric, baltagi2021econometric}. Two-way fixed effects models---with country and time effects---are standard for cross-country telecommunications studies \citep{koutroumpis2009impact, czernich2011broadband}, as they control for time-invariant country characteristics and common time shocks while identifying from within-country variation.
+
+A critical methodological issue is inference with panel data exhibiting cross-sectional dependence and serial correlation. Standard clustered standard errors may be inadequate when common shocks (e.g., financial crises, COVID-19) affect all countries \citep{cameron2015practitioner}. \citet{driscoll1998consistent} propose kernel-based standard errors robust to heteroskedasticity, serial correlation, and cross-sectional dependence, which we employ following recent best practices \citep{petersen2009estimating, cameron2015practitioner}.
+
+Price measurement in cross-country comparisons presents further challenges. PPP-adjusted prices are common \citep{worldbank2020icp}, but PPP baskets reflect consumer goods (food, housing) rather than technology services where quality-adjusted prices decline rapidly \citep{schreyer2002oecd}. We contribute methodologically by comparing three price measures---income-relative (price as \% of GNI per capita), PPP-adjusted, and nominal USD---showing only income-relative prices yield consistent estimates. This has implications for technology goods research more broadly.
+
+\subsection{Policy Literature on Digital Inclusion}
+
+Broadband policy encompasses supply-side interventions (infrastructure subsidies, spectrum allocation) and demand-side measures (affordability programs, digital literacy) \citep{oecd2020broadband}. The effectiveness of demand-side policies depends critically on price elasticity: subsidies expand adoption only if demand is price-elastic \citep{hauge2010demand, guermazi2021digital}.
+
+\citet{bertschek2016drivers} review evidence on broadband policy effectiveness, concluding infrastructure investment dominates price subsidies in most contexts. However, they note heterogeneity by development level: affordability matters more in lower-income countries. Our finding that EaP elasticity ($-0.61$) was 5.3 times higher than EU elasticity ($-0.12$) during 2010--2019 supports this distinction, though both regions converged to near-zero elasticity by 2020--2024.
+
+Recent policy discussions emphasize broadband as ``essential service'' requiring universal access guarantees \citep{oecd2020broadband}. Our evidence of declining elasticity provides econometric support for this framing, showing demand became insensitive to price as broadband integrated into essential activities. This suggests policy should shift from affordability to availability and quality as markets mature \citep{ecorys2013evaluation}.

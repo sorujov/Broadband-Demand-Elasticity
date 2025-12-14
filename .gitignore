@@ -1,0 +1,29 @@
+# Data files
+data/raw/*.csv
+data/raw/*.xlsx
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.env
+.vscode/
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# AI Prompts
+CLAUDE.md 
+ADD_FIGURES_PROMPT.md 
+MERGE_PROMPT.md
+
+# AI Tools & Extensions
+.claude/
+tstex_modules/

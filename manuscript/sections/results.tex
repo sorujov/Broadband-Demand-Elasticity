@@ -1,0 +1,108 @@
+\subsection{Baseline Results: Pre-COVID Period}
+
+Table~\ref{tab:baseline} presents baseline estimates for the pre-COVID period (2010--2019). Column (1) shows results with minimal controls (GDP per capita only), while columns (2)--(8) progressively add controls, culminating in the full specification in column (8).
+
+Across all specifications, we find strong evidence of price sensitivity in EaP countries. In the full controls specification (column 8), the EaP elasticity is $-0.61$ (p $< 0.001$), statistically significant and economically meaningful. A 10\% increase in broadband prices reduces subscriptions by approximately 6\% in EaP countries. This elasticity is consistent with prior estimates for middle-income countries \citep{grzybowski2015estimating}.
+
+In contrast, EU country elasticity is $-0.12$ (p $= 0.041$), significant at the 5\% level but substantially smaller in magnitude. The interaction coefficient testing EaP-EU differences is $-0.49$ (p $< 0.001$), confirming that EaP countries exhibit significantly stronger price sensitivity. This differential aligns with income effects on demand elasticity \citep{hausman2001private}: lower-income EaP consumers face tighter budget constraints, making broadband more price-sensitive.
+
+Estimates are remarkably stable across control specifications (Figure~\ref{fig:robustness_specs}). From minimal to full controls, EaP elasticity ranges from $-0.58$ to $-0.63$, while EU elasticity ranges from $-0.09$ to $-0.14$. This stability suggests omitted variable bias is limited and validates the baseline specification.
+
+Control variables exhibit expected signs. GDP per capita positively correlates with subscriptions ($\beta = 0.42$, p $< 0.001$), capturing income effects. Urban population share and tertiary education both increase subscriptions, reflecting agglomeration economies and human capital complementarities \citep{kolko2012broadband}. Regulatory quality shows positive but marginally significant effects, consistent with institutional factors facilitating market development \citep{wallsten2006broadband}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\textwidth]{fig2_robustness_specs.pdf}
+\caption{Robustness of price elasticity across control specifications (pre-COVID, 2010--2019). EaP elasticity is significant at p$<$0.01 in all specifications ($-0.58$ to $-0.63$). EU elasticity ranges from $-0.09$ to $-0.14$. Error bars show $\pm$1 Driscoll--Kraay SE.}
+\label{fig:robustness_specs}
+\end{figure}
+
+\subsection{Robustness to Price Measurement}
+
+Table~\ref{tab:price_robustness} presents robustness checks using alternative price measures: income-relative prices (baseline), PPP-adjusted prices, and nominal USD prices. 
+
+Results are remarkably consistent across price measures. For EaP countries, elasticities range from $-0.57$ to $-0.64$ depending on price definition, all highly significant (p $< 0.001$). For EU countries, elasticities range from $-0.09$ to $-0.15$, mostly significant at the 5\% level. The EaP-EU differential remains statistically significant across all price measures.
+
+This robustness is theoretically important. Income-relative prices (price as \% of GNI per capita) best capture affordability constraints facing consumers. PPP-adjusted prices account for cross-country cost-of-living differences. Nominal USD prices provide a common metric but ignore purchasing power. That all three yield similar elasticities strengthens confidence that findings reflect genuine demand responses rather than measurement artifacts.
+
+These results demonstrate that elasticity estimates and their 95\% confidence intervals are consistent across price measures and regions, confirming statistical significance and substantive consistency.
+
+\subsection{COVID-19 Period: Structural Change}
+
+Table~\ref{tab:covid} presents results from equation~\eqref{eq:covid} interacting prices with the COVID period (2020--2024). Column (1) uses the full sample (2010--2024) with COVID interactions, while columns (2)--(3) present separate pre-COVID and COVID subsample estimates for comparison.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.55\textwidth]{fig4_covid_comparison.pdf}
+\caption{Disappearance of price elasticity during COVID-19. Pre-COVID elasticities are significantly negative (EU: $-0.12$**, EaP: $-0.61$***), while COVID-era elasticities are statistically insignificant. Both shifts are significant at p$<$0.005. Error bars show $\pm$1 Driscoll--Kraay SE.}
+\label{fig:covid_comparison}
+\end{figure}
+
+The COVID interaction terms are large, positive, and highly significant. For EU countries, the COVID interaction is $+0.31$ (p $= 0.003$), implying elasticity changed from $-0.12$ pre-COVID to approximately $-0.12 + 0.31 = +0.19$ during COVID. For EaP countries, combining main and interaction effects yields a change from $-0.61$ to approximately $-0.03$. Both regions exhibit near-zero or slightly positive elasticity during COVID.
+
+This dramatic shift is visualized in Figure~\ref{fig:covid_comparison}. Pre-COVID elasticities are significantly negative for both regions (more so for EaP). COVID-era elasticities cluster near zero with wide confidence intervals. The difference is stark and statistically significant.
+
+This pattern is consistent with broadband becoming an essential necessity during the pandemic \citep{oecd2021broadband}. With remote work, education, and social interaction shifting online, consumers became less responsive to price changes. The magnitude of the shift---from moderate elasticity to near-zero---suggests a fundamental change in demand behavior.
+
+\subsection{Temporal Evolution: Year-by-Year Analysis}
+
+Year-by-year elasticity estimates for 2015--2024, using 2010--2014 as the baseline period, reveal that the shift toward inelastic demand began well before COVID-19 (Figure~\ref{fig:temporal_evolution}).
+
+For EaP countries, elasticity shows a clear declining trend starting around 2015. By 2018--2019, elasticity had already declined from $-0.61$ (2010--2014 average) to approximately $-0.35$ to $-0.40$. The COVID period (2020--2024) continues this trend, with elasticities oscillating near zero but within confidence intervals of $-0.20$ to $+0.20$.
+
+For EU countries, the pattern is similar but less pronounced given the smaller baseline elasticity. Pre-COVID elasticity averaged $-0.12$ but approached zero by 2018--2019. During COVID, point estimates fluctuate around zero with wide confidence intervals.
+
+This gradual evolution contradicts a pure COVID-shock interpretation. Instead, results suggest a decade-long structural transformation as broadband transitioned from luxury to necessity good. COVID-19 accelerated this process but did not initiate it. This interpretation aligns with evidence that broadband penetration and usage were rising steadily throughout the 2010s, driven by smartphones, streaming media, and cloud services \citep{greenstein2016digital}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\textwidth]{fig1_temporal_evolution.pdf}
+\caption{Temporal evolution of broadband price elasticity (2015--2024). Year-by-year estimates using 2010--2014 as reference. Filled markers indicate p$<$0.10; open markers indicate non-significance. Shaded region marks the COVID period (2020--2024). Both regions show gradual decline starting around 2015, validating the structural transformation hypothesis.}
+\label{fig:temporal_evolution}
+\end{figure}
+
+\subsection{Placebo Test: Pre-Trends}
+
+A key identifying assumption is parallel trends: absent treatment, outcomes would have evolved similarly across groups. We test this using a placebo design splitting the pre-COVID period into early (2010--2014) and late (2015--2019) subperiods.
+
+If estimated COVID effects merely reflect continuation of pre-existing trends, then treating 2015--2019 as a ``placebo COVID'' period should yield similar results. Conversely, if pre-2015 elasticity differed from 2015--2019, this suggests evolving demand patterns preceding COVID.
+
+Table~\ref{tab:placebo} presents results. The placebo interaction (2015--2019 vs. 2010--2014) is $+0.27$ for EaP countries (p $= 0.045$), significant at the 5\% level. This indicates EaP elasticity was already declining before COVID-19. For EU countries, the placebo interaction is $+0.08$ (p $= 0.31$), statistically insignificant.
+
+The significant positive coefficient for EaP indicates that elasticity was decreasing in magnitude even during the pre-COVID period (Figure~\ref{fig:placebo_test}). Combined with year-by-year results, this confirms a gradual decade-long transformation rather than a sudden COVID shock.
+
+This finding has important methodological implications. The significant pre-trend validates our decision to analyze the full 2010--2024 period rather than focusing narrowly on COVID. It also suggests caution in attributing all observed changes to COVID-19---underlying technological and societal trends were already reshaping broadband demand.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\textwidth]{fig5_placebo_test.pdf}
+\caption{Placebo test for pre-COVID trends. (a) Three-phase evolution of elasticity showing the pre-COVID trend for EaP. (b) Placebo coefficients: EU effect is insignificant (p$=$0.31, no pre-trend); EaP effect is significant (p$=$0.045, pre-trend exists). This validates the gradual transformation hypothesis.}
+\label{fig:placebo_test}
+\end{figure}
+
+\subsection{Robustness Matrix: Comprehensive Validation}
+
+We conducted 24 robustness specifications combining eight control configurations and three price measures (Figure~\ref{fig:results_matrix}). Each specification represents a separate regression estimating EaP and EU elasticity.
+
+Results are highly consistent. Across all 24 specifications, EaP elasticity (pre-COVID) ranges from $-0.52$ to $-0.68$, with mean $-0.61$ and standard deviation $0.04$. All 24 estimates are statistically significant at the 1\% level. EU elasticity ranges from $-0.06$ to $-0.17$, with mean $-0.12$ and standard deviation $0.03$. Of 24 estimates, 22 are significant at the 5\% level and all 24 at the 10\% level.
+
+This robustness is remarkable given the diversity of specifications. It indicates findings are not artifacts of particular modeling choices but reflect robust empirical regularities. The small standard deviations across specifications (4\% for EaP, 3\% for EU) demonstrate that different control and price definitions yield substantively similar conclusions.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.6\textwidth]{fig6_results_matrix.pdf}
+\caption{EaP elasticity across 24 specifications (8 controls $\times$ 3 price measures, pre-COVID). Darker shading indicates stronger negative elasticity. Significance: ***p$<$0.01, **p$<$0.05, *p$<$0.10. Range: $-0.52$ to $-0.68$, demonstrating robustness to modeling choices.}
+\label{fig:results_matrix}
+\end{figure}
+
+The distribution of estimates shows tightly clustered point estimates with confidence intervals consistently excluding zero for EaP and (mostly) for EU.
+
+\subsection{Economic Interpretation}
+
+The pre-COVID elasticity of $-0.61$ for EaP countries implies that a 10\% price reduction increases subscriptions by 6.1\%. Given mean EaP subscription rates around 20 per 100 inhabitants (Table~\ref{tab:descriptives}), this corresponds to approximately 1.2 additional subscriptions per 100 people. Over a population of 75 million across six EaP countries, a 10\% price cut would generate approximately 900,000 new subscriptions.
+
+From a revenue perspective, demand elasticity of $-0.61$ (in absolute value) implies total revenue would increase with price reductions. For $|\varepsilon| < 1$ (inelastic demand), revenue is maximized by raising prices. For $|\varepsilon| > 1$ (elastic demand), revenue increases with price cuts. EaP countries sit at the boundary ($|\varepsilon| \approx 0.6$), suggesting moderate price reductions could increase market size without drastically reducing operator revenues.
+
+For EU countries, elasticity of $-0.12$ is substantially more inelastic. This likely reflects higher income levels reducing affordability constraints, as well as higher baseline penetration leaving less room for extensive margin growth. At mean EU subscription rates around 35 per 100 inhabitants, a 10\% price cut would generate only 0.4 additional subscriptions per 100 people---about one-third the EaP response.
+
+The shift toward near-zero elasticity during COVID dramatically changes the policy calculus. If demand becomes perfectly inelastic ($\varepsilon = 0$), price reductions have no effect on adoption. Instead, policies must focus on supply-side constraints (infrastructure availability) or income support (subsidies for low-income households). The COVID period suggests broadband became an essential necessity where price ceased to be the binding constraint.

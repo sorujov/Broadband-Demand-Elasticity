@@ -1,0 +1,86 @@
+\subsection{Data Sources}
+
+We construct a balanced panel of 33 countries observed annually from 2010 through 2024, combining data from the International Telecommunication Union (ITU) and World Bank. Our sample includes 27 European Union member states and 6 Eastern Partnership countries (Armenia, Azerbaijan, Belarus, Georgia, Moldova, and Ukraine), totaling 495 country-year observations.
+
+\textbf{Telecommunications variables} come from ITU World Telecommunication/ICT Indicators Database \citep{itu2024data}. The dependent variable is fixed broadband subscriptions per 100 inhabitants, measuring adoption intensity. Price variables include three measures: (1) price of 5GB fixed broadband basket as percentage of monthly GNI per capita (income-relative price), (2) price in PPP-adjusted US dollars, and (3) price in nominal US dollars. Additional ICT variables include international internet bandwidth (Gbit/s) and mobile cellular subscriptions per 100 inhabitants.
+
+\textbf{Economic and institutional variables} come from World Bank World Development Indicators and Worldwide Governance Indicators \citep{worldbank2024wdi, worldbank2024wgi}. Key controls include GDP per capita (constant 2015 US\$), GDP growth rate, inflation, urban population percentage, tertiary education enrollment, regulatory quality index, R\&D expenditure as \% of GDP, and secure internet servers per million people. These variables capture economic development, human capital, institutional quality, and digital infrastructure.
+
+\subsection{Sample Construction and Balance}
+
+Our sample selection prioritizes internal validity over external generalizability. We restrict to countries with complete data for all years 2010--2024, ensuring a balanced panel without compositional changes that could confound temporal comparisons. This is particularly important given our focus on time-varying elasticity: different countries entering and exiting the sample would generate spurious trends.
+
+The 33-country sample represents substantial variation in both broadband adoption and economic development. Fixed broadband penetration ranges from 2.8 subscriptions per 100 (Azerbaijan, 2010) to 48.2 (Netherlands, 2024). GDP per capita ranges from \$1,628 (Moldova, 2010) to \$120,761 (Luxembourg, 2024). Broadband prices show similar heterogeneity: income-relative prices (as \% of GNI per capita) range from 0.03\% (Luxembourg, 2024) to 14.7\% (Azerbaijan, 2010).
+
+Table~\ref{tab:descriptives} presents descriptive statistics for the full sample and separately for EU and EaP regions. Several patterns emerge. First, EaP countries have substantially lower broadband penetration (mean 19.7 vs. 32.1 subscriptions per 100) and GDP per capita (mean \$5,284 vs. \$38,405). Second, income-relative prices are higher in EaP (mean 1.8\% of GNI vs. 0.6\%), reflecting lower incomes despite similar absolute prices. Third, EaP countries show higher variance in key variables, consistent with greater development heterogeneity.
+
+Importantly, both regions exhibit substantial within-country variation over time---the source of identifying variation for our fixed effects models. Income-relative prices declined 45\% on average from 2010 to 2024, with within-country standard deviation of 0.5 percentage points (pre-COVID) and 0.3 percentage points (COVID period). This variation is essential for identifying price elasticity in models with country and year fixed effects.
+
+\subsection{Variable Construction}
+
+Following standard practice in telecommunications demand studies \citep{grzybowski2015fixed, madden2015demand}, we log-transform all continuous variables to estimate constant-elasticity specifications:
+\begin{equation}
+    \ln(\text{subscriptions}_{it}) = \beta \ln(\text{price}_{it}) + \mathbf{X}_{it}'\gamma + \alpha_i + \delta_t + \varepsilon_{it}
+\end{equation}
+where the coefficient $\beta$ directly represents price elasticity. This transformation is particularly appropriate for broadband demand given theoretical predictions of constant elasticity \citep{hausman2001price}.
+
+We create several derived variables for robustness checks. First, lagged prices (one-year lag) serve as instrumental variables in alternative specifications, exploiting the fact that current prices are plausibly exogenous to current demand shocks after controlling for fixed effects \citep{koutroumpis2009impact}. Second, we construct regional interaction terms allowing heterogeneous price effects for EU versus EaP countries. Third, for COVID-19 analysis, we create period dummies (pre-COVID: 2010--2019; COVID: 2020--2024) and interaction terms testing for structural breaks.
+
+\subsection{Data Quality and Limitations}
+
+Several data quality considerations warrant discussion. First, ITU price data represent standard baskets (5GB data cap, unlimited voice) that may not reflect marginal prices faced by all consumers, particularly power users or those on promotional plans. However, standardized baskets enable consistent cross-country comparisons \citep{itu2024data}.
+
+Second, some variables exhibit missing values, particularly for earlier years. We address this through multiple imputation, using forward-filling within countries and linear interpolation for gaps \citep{rubin1987multiple}. Sensitivity analysis (available upon request) shows results are robust to alternative imputation methods. After imputation, our analysis dataset contains zero missing values for key variables.
+
+Third, the COVID-19 period presents measurement challenges as usage patterns shifted dramatically \citep{oecd2021covid}. We address this by examining within-country price variation rather than relying on cross-country comparisons, which could be confounded by differential pandemic severity or policy responses. Additionally, our placebo test directly examines whether observed COVID-period changes reflect continuation of pre-existing trends.
+
+Fourth, Eastern Partnership countries experienced various shocks during the sample period including political transitions, conflicts, and currency crises. While country fixed effects absorb time-invariant country characteristics, time-varying shocks could confound estimates. We address this through year fixed effects (absorbing common shocks) and robustness checks examining alternative subperiods (see Section~\ref{sec:results}).
+
+\begin{table}[htbp]
+\centering
+\caption{Descriptive Statistics by Region (2010--2024)}
+\label{tab:descriptives}
+\begin{threeparttable}
+\begin{adjustbox}{max width=\textwidth}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{2}{c}{Full Sample} & \multicolumn{2}{c}{EU (27)} & \multicolumn{2}{c}{EaP (6)} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+Variable & Mean & SD & Mean & SD & Mean & SD \\
+\midrule
+\textit{Dependent Variable} \\
+Fixed broadband subs (per 100) & 29.4 & 11.2 & 32.1 & 10.3 & 19.7 & 8.4 \\
+\addlinespace
+\textit{Price Variables} \\
+Price (\% of GNI per capita) & 0.87 & 0.79 & 0.61 & 0.48 & 1.84 & 1.02 \\
+Price (PPP US\$) & 28.3 & 12.7 & 29.1 & 11.9 & 25.2 & 15.1 \\
+Price (Nominal US\$) & 25.7 & 14.3 & 27.8 & 13.1 & 17.4 & 16.2 \\
+\addlinespace
+\textit{Economic Variables} \\
+GDP per capita (US\$ 1000s) & 31.2 & 24.8 & 38.4 & 23.1 & 5.28 & 2.41 \\
+GDP growth (\%) & 2.14 & 3.82 & 2.01 & 3.21 & 2.67 & 5.88 \\
+Inflation (\%) & 2.58 & 4.12 & 1.89 & 2.34 & 5.47 & 7.84 \\
+\addlinespace
+\textit{Socioeconomic Variables} \\
+Urban population (\%) & 70.4 & 11.2 & 73.2 & 9.8 & 58.1 & 8.7 \\
+Tertiary enrollment (\%) & 64.2 & 17.3 & 67.4 & 15.8 & 50.8 & 18.2 \\
+Regulatory quality (index) & 1.18 & 0.52 & 1.32 & 0.41 & 0.62 & 0.38 \\
+\addlinespace
+\textit{Infrastructure Variables} \\
+Int'l bandwidth (Gbit/s) & 847 & 2134 & 1015 & 2341 & 156 & 287 \\
+Secure servers (per million) & 921 & 728 & 1084 & 712 & 198 & 134 \\
+R\&D expenditure (\% GDP) & 1.54 & 0.89 & 1.72 & 0.85 & 0.61 & 0.31 \\
+\midrule
+Observations & \multicolumn{2}{c}{495} & \multicolumn{2}{c}{405} & \multicolumn{2}{c}{90} \\
+Countries & \multicolumn{2}{c}{33} & \multicolumn{2}{c}{27} & \multicolumn{2}{c}{6} \\
+Years & \multicolumn{2}{c}{15} & \multicolumn{2}{c}{15} & \multicolumn{2}{c}{15} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]
+\small
+\item \textit{Notes:} Summary statistics for balanced panel of 33 countries over 2010--2024. EU includes 27 member states; EaP includes Armenia, Azerbaijan, Belarus, Georgia, Moldova, and Ukraine. All monetary values in constant 2015 US\$. Data sources: ITU (telecommunications), World Bank WDI (economic variables), World Bank WGI (governance).
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

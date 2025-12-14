@@ -1,0 +1,61 @@
+\begin{table}[p]
+\centering
+\caption{Placebo Test: Pre-COVID Trends (2010--2019)}
+\label{tab:placebo}
+\begin{threeparttable}
+\begin{adjustbox}{max width=\textwidth}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.85}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+& \multicolumn{3}{c}{Dependent Variable: Log(Subs. per 100)} \\
+\cmidrule(lr){2-4}
+& (1) & (2) & (3) \\
+& Full Sample & Early & Late \\
+& 2010--19 & 2010--14 & 2015--19 \\
+\midrule
+\textbf{Panel A: EU Countries} \\
+Log(Price) & $-0.11^{*}$ & $-0.13^{*}$ & $-0.04$ \\
+& (0.06) & (0.07) & (0.07) \\
+Log(Price) $\times$ Late & $+0.08$ & -- & -- \\
+& (0.08) & & \\
+\textit{Implied late elasticity} & $-0.03$ & -- & $-0.04$ \\
+& (0.09) & & (0.07) \\
+\midrule
+\textbf{Panel B: EaP Countries} \\
+Log(Price) $\times$ EaP & $-0.48^{***}$ & $-0.52^{***}$ & $-0.25^{**}$ \\
+& (0.10) & (0.11) & (0.11) \\
+Log(Price) $\times$ EaP $\times$ Late & $+0.27^{**}$ & -- & -- \\
+& (0.13) & & \\
+\textit{Implied early EaP elasticity} & $-0.59^{***}$ & $-0.65^{***}$ & -- \\
+& (0.09) & (0.10) & \\
+\textit{Implied late EaP elasticity} & $-0.32^{**}$ & -- & $-0.29^{**}$ \\
+& (0.12) & & (0.11) \\
+\midrule
+\textbf{Panel C: Change in Elasticity} \\
+$\Delta\varepsilon_{EU}$ (Late - Early) & $+0.08$ & -- & -- \\
+& (0.08) & & \\
+p-value & 0.31 & -- & -- \\
+$\Delta\varepsilon_{EaP}$ (Late - Early) & $+0.27^{**}$ & -- & -- \\
+& (0.13) & & \\
+p-value & 0.045 & -- & -- \\
+\midrule
+\textbf{Panel D: Model Statistics} \\
+Full controls & Yes & Yes & Yes \\
+Country FE & Yes & Yes & Yes \\
+Year FE & Yes & Yes & Yes \\
+Observations & 297 & 165 & 165 \\
+Countries & 33 & 33 & 33 \\
+R-squared & 0.92 & 0.88 & 0.94 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{4pt}
+\begin{tablenotes}[para,flushleft]
+\scriptsize
+\begin{minipage}{\textwidth}
+\item \textit{Notes:} Dependent variable: log fixed broadband subscriptions per 100. Price: \% of GNI per capita. ``Late'' is a placebo indicator for 2015--2019. EaP denotes Eastern Partnership countries. Column (1) estimates the full placebo interaction on 2010--2019; Columns (2)--(3) report subsamples for 2010--2014 (early) and 2015--2019 (late). Controls in all models: log GDP per capita, urbanization (\%), tertiary enrollment (\%), regulatory quality, log secure servers, R\&D (\% GDP), log population density, and age dependency ratio. The positive EaP interaction ($+0.27$, p = 0.045) suggests elasticity was already declining pre-COVID. Driscoll--Kraay SEs (bandwidth = 3) in parentheses. $^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\end{minipage}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
