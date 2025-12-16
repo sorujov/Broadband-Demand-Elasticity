@@ -1,0 +1,52 @@
+\begin{table}[p]
+\centering
+\caption{Robustness to Alternative Price Measures: Pre-COVID Period (2010--2019)}
+\label{tab:price_robustness}
+\begin{threeparttable}
+\begin{adjustbox}{width=\textwidth}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.9}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{6}{c}{Price Measurement} \\
+\cmidrule(lr){2-7}
+& \multicolumn{2}{c}{Income-Relative} & \multicolumn{2}{c}{PPP-Adjusted} & \multicolumn{2}{c}{Nominal USD} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+& EU & EaP & EU & EaP & EU & EaP \\
+& (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+\textbf{Price Elasticity} \\
+Log(Price) & $-0.12^{**}$ & -- & $-0.14^{**}$ & -- & $-0.09^{*}$ & -- \\
+& (0.05) & & (0.05) & & (0.05) & \\
+\\
+Log(Price) $\times$ EaP & -- & $-0.49^{***}$ & -- & $-0.50^{***}$ & -- & $-0.48^{***}$ \\
+& & (0.09) & & (0.10) & & (0.10) \\
+\\
+\textit{Implied EaP elasticity} & -- & $-0.61^{***}$ & -- & $-0.64^{***}$ & -- & $-0.57^{***}$ \\
+& & (0.08) & & (0.09) & & (0.09) \\
+\midrule
+\textbf{Model Statistics} \\
+Full controls & Yes & Yes & Yes & Yes & Yes & Yes \\
+Country FE & Yes & Yes & Yes & Yes & Yes & Yes \\
+Year FE & Yes & Yes & Yes & Yes & Yes & Yes \\
+Observations & 297 & 297 & 297 & 297 & 297 & 297 \\
+R-squared & 0.92 & 0.92 & 0.91 & 0.91 & 0.90 & 0.90 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[flushleft]
+\scriptsize
+\begin{minipage}{\textwidth}
+\item \textit{Notes:} Dependent variable is log of fixed broadband subscriptions per 100 inhabitants. 
+Columns (1)--(2) use income-relative prices (price as \% of GNI per capita) as baseline. 
+Columns (3)--(4) use PPP-adjusted prices in international dollars. Columns (5)--(6) use nominal 
+USD prices. All specifications include full controls: log GDP per capita, urban population \%, 
+tertiary enrollment \%, regulatory quality, log secure servers, R\&D \% GDP, log population 
+density, and age dependency ratio. EaP is a dummy for Eastern Partnership countries 
+(Armenia, Azerbaijan, Belarus, Georgia, Moldova, Ukraine). Driscoll--Kraay standard errors 
+(bandwidth = 3) in parentheses. $^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\end{minipage}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

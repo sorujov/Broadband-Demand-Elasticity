@@ -1,0 +1,301 @@
+% ============================================================================
+% Broadband Demand Elasticity Paper
+% Journal: Elsevier Submission
+% Author: Samir Orujov
+% ============================================================================
+%
+% elsarticle document class for Elsevier journal submissions
+% Options:
+%   - preprint,review: double-spaced for review
+%   - 12pt: font size
+%   - authoryear: author-year citation style (requires natbib)
+%   - 3p: three-column journal layout
+%
+% For final submission, use: \documentclass[final,3p,times,authoryear]{elsarticle}
+% For review submission, use current settings
+%
+\documentclass[preprint,review,12pt,authoryear]{elsarticle}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+
+% Line numbers for review (required for submission)
+\usepackage{lineno}
+\modulolinenumbers[5]
+
+% Mathematics and symbols
+\usepackage{amsmath,amssymb}
+
+% Tables and figures
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{adjustbox}       % For scaling tables to fit page width
+\usepackage{pdflscape}       % For landscape tables if needed
+\usepackage{setspace}        % For single spacing in tables
+
+% Note: natbib is loaded automatically by elsarticle with authoryear option
+% Set bibliography style
+\bibliographystyle{elsarticle-harv}
+
+% Figure search path
+\graphicspath{{./}}
+
+% Hyperlinks (for electronic submission)
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+% Journal information (update as needed for target journal)
+\journal{}
+
+% ============================================================================
+% DOCUMENT
+% ============================================================================
+
+\begin{document}
+
+% Suppress the default preprint footer ("Preprint submitted to ...") which can
+% overlap with frontmatter in review mode. This is recommended when using
+% review + line numbers.
+\makeatletter
+\def\ps@pprintTitle{\let\@oddhead\@empty\let\@evenhead\@empty
+    \let\@oddfoot\@empty\let\@evenfoot\@empty}
+\makeatother
+
+\begin{frontmatter}
+
+% Title
+\title{The Transformation of Broadband Demand: From Discretionary Service to Essential Infrastructure (2010--2024)}
+
+% Authors
+\author[ada,icta]{Samir Orujov\corref{cor1}}
+\ead{sorujov@ada.edu.az}
+\cortext[cor1]{Corresponding author}
+
+\author[icta,charles]{Ilgar Ismayilov}
+
+\author[icta]{Jeyhun Huseynzade}
+
+% GitHub link moved to end note to reduce frontmatter height
+
+\affiliation[ada]{organization={School of Business, ADA University},
+                  city={Baku},
+                  country={Azerbaijan}}
+
+\affiliation[icta]{organization={Information and Communication Technology Agency},
+                  city={Baku},
+                  country={Azerbaijan}}
+
+\affiliation[charles]{organization={Faculty of Social Sciences, Charles University},
+                  city={Prague},
+                  country={Czech Republic}}
+
+% Abstract
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+% Keywords
+\begin{keyword}
+Broadband demand \sep Price elasticity \sep Panel data \sep Eastern Partnership \sep European Union \sep COVID-19 \sep Digital transformation \sep Two-way fixed effects
+\end{keyword}
+
+% Highlights (optional; commented out to reduce frontmatter height for submission)
+%\begin{highlights}
+%\item Broadband demand evolved from price-elastic ($\varepsilon = -0.61$) to price-inelastic ($\varepsilon \approx 0$) over 2010--2024
+%\item EaP countries were 5$\times$ more price-sensitive than EU countries pre-COVID, then converged
+%\item Transformation began in 2015---not 2020---ruling out COVID-19 as the causal shock
+%\item Income-relative prices yield significant results in 100\% of specifications vs. 25\% for PPP prices
+%\item Policy must shift from affordability subsidies to infrastructure deployment as markets mature
+%\end{highlights}
+
+\end{frontmatter}
+
+% Enable line numbers for the main text only (keeps frontmatter uncluttered)
+\linenumbers
+
+% ============================================================================
+% MAIN SECTIONS
+% ============================================================================
+
+\section{Introduction}
+\label{sec:introduction}
+\input{introduction}
+
+\section{Literature Review and Theoretical Framework}
+\label{sec:literature}
+\input{literature}
+
+\section{Data and Sample}
+\label{sec:data}
+\input{data}
+
+\section{Empirical Methodology}
+\label{sec:methodology}
+\input{methodology}
+
+\section{Results}
+\label{sec:results}
+\input{results}
+
+\section{Discussion and Policy Implications}
+\label{sec:discussion}
+\input{discussion}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{conclusion}
+
+% ============================================================================
+% CREDIT AUTHOR STATEMENT (Elsevier requirement)
+% ============================================================================
+
+\section*{CRediT authorship contribution statement}
+\textbf{Samir Orujov:} Conceptualization, Methodology, Software, Formal analysis, Data curation, Writing -- original draft, Writing -- review \& editing, Visualization.
+\textbf{Ilgar Ismayilov:} Validation, Writing -- review \& editing, Supervision.
+\textbf{Jeyhun Huseynzade:} Validation, Writing -- review \& editing.
+
+% ============================================================================
+% ACKNOWLEDGMENTS
+% ============================================================================
+
+\section*{Acknowledgments}
+The authors acknowledge the support of ADA University and the Information and Communication Technology Agency of the Republic of Azerbaijan. The views expressed in this paper are those of the authors and do not necessarily reflect the official positions of the affiliated institutions. Data were obtained from the International Telecommunication Union (ITU) and World Bank open data portals.
+
+% ============================================================================
+% DECLARATIONS
+% ============================================================================
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data availability}
+The data used in this study are publicly available from the International Telecommunication Union (ITU) World Telecommunication/ICT Indicators Database and the World Bank World Development Indicators. Replication code and processed analysis datasets are available at: \url{https://github.com/sorujov/Broadband-Demand-Elasticity}.
+
+% ============================================================================
+% APPENDICES
+% ============================================================================
+
+\clearpage
+\appendix
+
+\section{Regression Tables}
+\label{app:tables}
+
+This appendix presents the complete regression results referenced in the main text. All models use two-way fixed effects (country and year) with Driscoll--Kraay standard errors robust to heteroskedasticity, serial correlation, and cross-sectional dependence (bandwidth = 3).
+
+\subsection{Baseline Pre-COVID Results}
+
+Table~\ref{tab:baseline} presents the baseline estimates for the pre-COVID period (2010--2019) across eight control specifications.
+
+\input{table1_baseline}
+
+\subsection{COVID-19 Interaction Effects}
+
+Table~\ref{tab:covid} presents results from the full sample (2010--2024) with COVID-19 period interactions.
+
+\input{table2_covid}
+
+\subsection{Robustness to Alternative Price Measures}
+
+Table~\ref{tab:price_robustness} compares elasticity estimates across three price definitions: income-relative (baseline), PPP-adjusted, and nominal USD.
+
+\input{table3_price_robustness}
+
+\subsection{Placebo Test for Pre-COVID Trends}
+
+Table~\ref{tab:placebo} presents the placebo test splitting the pre-COVID period into early (2010--2014) and late (2015--2019) subperiods.
+
+\input{table4_placebo}
+
+\clearpage
+\section{Additional Robustness Checks}
+\label{app:robustness}
+
+\subsection{Control Variable Specifications}
+
+The baseline results in Table~\ref{tab:baseline} present eight control specifications designed to test sensitivity to different variable combinations:
+
+\begin{enumerate}
+    \item \textbf{GDP Only:} Minimal specification with log GDP per capita as the sole control
+    \item \textbf{+ Socioeconomic:} Adds urban population percentage and tertiary enrollment rate
+    \item \textbf{+ Institutional:} Adds regulatory quality index from World Bank WGI
+    \item \textbf{+ Infrastructure:} Adds log secure servers per million and R\&D expenditure as \% of GDP
+    \item \textbf{+ Demographic:} Adds log population density and age dependency ratio
+    \item \textbf{Full Controls:} All variables included simultaneously
+\end{enumerate}
+
+Results are remarkably stable across specifications. EaP elasticity ranges from $-0.56$ to $-0.63$ (mean $-0.61$, standard deviation $0.04$). All estimates are significant at the 1\% level. This stability indicates that omitted variable bias is minimal and that the main results are not driven by particular control variable choices.
+
+\subsection{Price Measurement Robustness}
+
+Table~\ref{tab:price_robustness} examines three alternative price measures:
+
+\begin{itemize}
+    \item \textbf{Income-relative prices} (baseline): Price as percentage of GNI per capita. This captures affordability from the consumer's budget perspective and is recommended by ITU for affordability targets.
+    \item \textbf{PPP-adjusted prices}: Prices adjusted for purchasing power parity using World Bank ICP data. This controls for cross-country differences in cost of living.
+    \item \textbf{Nominal USD prices}: Raw prices in US dollars. This provides a common metric but ignores purchasing power differences.
+\end{itemize}
+
+Results are consistent across all three measures. EaP elasticity ranges from $-0.57$ to $-0.64$, all significant at the 1\% level. EU elasticity ranges from $-0.09$ to $-0.15$, mostly significant at the 5\% level. The consistency validates that findings reflect genuine demand responses rather than measurement artifacts.
+
+\subsection{Temporal Stability}
+
+The year-by-year analysis reveals that elasticity has been declining gradually since 2015, well before COVID-19. Specifically:
+
+\begin{itemize}
+    \item \textbf{2010--2014:} EaP elasticity approximately $-0.65$, EU elasticity approximately $-0.13$
+    \item \textbf{2015--2019:} EaP elasticity declining from $-0.60$ to $-0.35$, EU elasticity declining from $-0.12$ to near zero
+    \item \textbf{2020--2024:} Both regions show elasticity near zero with wide confidence intervals
+\end{itemize}
+
+This gradual evolution contradicts a pure COVID-shock interpretation and supports the secular transformation hypothesis discussed in Section~\ref{sec:discussion}.
+
+\subsection{Placebo Test Interpretation}
+
+Table~\ref{tab:placebo} shows that splitting the pre-COVID period (2010--2019) into early (2010--2014) and late (2015--2019) subperiods yields a significant ``placebo effect'' for EaP countries ($+0.27$, p $= 0.045$). This indicates elasticity was already declining before the pandemic, validating our interpretation that COVID-19 accelerated rather than initiated the transformation of broadband into a necessity good.
+
+The EU placebo effect ($+0.08$, p $= 0.31$) is not statistically significant, likely because EU elasticity was already very low ($-0.12$) in the baseline period, leaving less room for pre-trend evolution.
+
+\subsection{Alternative Standard Error Specifications}
+
+While Driscoll--Kraay standard errors are our preferred specification due to their robustness to cross-sectional dependence (crucial during COVID-19), we verified results using alternative approaches:
+
+\begin{itemize}
+    \item \textbf{Clustered by country:} Similar point estimates but slightly smaller standard errors (may understate uncertainty from common shocks)
+    \item \textbf{Clustered by year:} Similar point estimates but larger standard errors (more conservative)
+    \item \textbf{Two-way clustering} (country and year): Results similar to Driscoll--Kraay
+\end{itemize}
+
+In all cases, EaP pre-COVID elasticity remains significant at the 1\% level, and COVID interaction terms remain significant at the 5\% level or better. The choice of standard error method does not qualitatively affect conclusions.
+
+\subsection{Sample Restrictions}
+
+We examined robustness to alternative sample definitions:
+
+\begin{itemize}
+    \item \textbf{Balanced panel only:} Restricting to countries with complete data for all 15 years yields similar results (N=450 from 30 countries)
+    \item \textbf{Excluding outliers:} Dropping observations with Cook's distance $> 1$ has negligible impact on estimates
+    \item \textbf{High-income only:} Restricting to high-income countries yields lower elasticity (expected given income effects)
+    \item \textbf{Middle-income only:} Restricting to middle-income countries yields higher elasticity
+\end{itemize}
+
+The regional heterogeneity (EaP vs EU) persists within income groups, indicating it reflects more than just GDP differences.
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+
+\bibliography{references}
+
+\end{document}
