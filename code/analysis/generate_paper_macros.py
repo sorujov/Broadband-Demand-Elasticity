@@ -229,7 +229,7 @@ all_jk_sig = (jk_dropped['eap_pval'] < 0.01).all()
 # ── IV ────────────────────────────────────────────────────────────────────────
 
 # Select pre-COVID 2SLS row (skip OLS row)
-iv_2sls_mask = iv_res['specification'].str.contains('2SLS|IV', case=False, na=False)
+iv_2sls_mask = ~iv_res['specification'].str.contains('OLS', case=False, na=False)
 iv_pre_mask  = iv_2sls_mask & ~iv_res['covid_interaction'].astype(bool)
 iv_pre_row   = iv_res[iv_pre_mask].iloc[0]
 
@@ -409,18 +409,46 @@ add('EaPJKMinCountry', str(jk_min_country))
 add('EaPJKMaxCountry', str(jk_max_country))
 add('EaPJKAllSig',     'true' if all_jk_sig else 'false')
 
-# --- IV ---
-add('IVEaPB',    fmt(iv_eap_b, 2))
-add('IVEaPPval', fmt(iv_eap_pval, 3))
-add('IVEaPStars',stars(iv_eap_pval))
-add('IVFirstF',  fmt(iv_first_f, 1))
-add('IVFullF',   fmt(iv_full_f, 1) if not np.isnan(iv_full_f) else r'\text{n/a}')
+# --- IV (pre-COVID: just-identified lagged price) ---
+iv_pre_eu_b    = iv_pre_row['eu_elasticity']
+iv_pre_eu_se   = iv_pre_row['eu_se']
+iv_pre_eu_pval = iv_pre_row['eu_pval']
+iv_pre_eap_b   = iv_pre_row['eap_elasticity']
+iv_pre_eap_se  = iv_pre_row['eap_se']
+iv_pre_eap_pval= iv_pre_row['eap_pval']
+iv_pre_n       = int(iv_pre_row['n_obs'])
+
+add('IVFirstF',     fmt(iv_first_f, 0))   # integer display, e.g. "65"
+add('IVPreEUB',     fmt(iv_pre_eu_b, 3))
+add('IVPreEUSE',    fmt(iv_pre_eu_se, 3))
+add('IVPreEUPval',  fmt(iv_pre_eu_pval, 3))
+add('IVPreEUStars', stars(iv_pre_eu_pval))
+add('IVPreEaPB',    fmt(iv_pre_eap_b, 3))
+add('IVPreEaPSE',   fmt(iv_pre_eap_se, 3))
+add('IVPreEaPPval', fmt(iv_pre_eap_pval, 3))
+add('IVPreEaPStars',stars(iv_pre_eap_pval))
+add('IVPreN',       str(iv_pre_n))
+
+# --- IV (full-sample: lagged price + COVID interactions) ---
+add('IVFullF',   fmt(iv_full_f, 0) if not np.isnan(iv_full_f) else r'\text{n/a}')
 if not np.isnan(iv_full_eu_b):
-    add('IVFullEUB',   fmt(iv_full_eu_b))
-    add('IVFullEUSE',  fmt(iv_full_eu_se))
-if not np.isnan(iv_full_eap_b):
-    add('IVFullEaPB',  fmt(iv_full_eap_b))
-    add('IVFullEaPSE', fmt(iv_full_eap_se))
+    iv_full_eu_pval  = iv_full_row['eu_pval']
+    iv_full_eap_pval = iv_full_row['eap_pval']
+    iv_full_n        = int(iv_full_row['n_obs'])
+    add('IVFullEUB',     fmt(iv_full_eu_b, 3))
+    add('IVFullEUSE',    fmt(iv_full_eu_se, 3))
+    add('IVFullEUPval',  fmt(iv_full_eu_pval, 3))
+    add('IVFullEUStars', stars(iv_full_eu_pval))
+    add('IVFullEaPB',    fmt(iv_full_eap_b, 3))
+    add('IVFullEaPSE',   fmt(iv_full_eap_se, 3))
+    add('IVFullEaPPval', fmt(iv_full_eap_pval, 3))
+    add('IVFullEaPStars',stars(iv_full_eap_pval))
+    add('IVFullN',       str(iv_full_n))
+
+# Legacy aliases kept for backward compatibility
+add('IVEaPB',    fmt(iv_pre_eap_b, 2))
+add('IVEaPPval', fmt(iv_pre_eap_pval, 3))
+add('IVEaPStars',stars(iv_pre_eap_pval))
 
 # --- Sample restrictions ---
 if samp_bal is not None:

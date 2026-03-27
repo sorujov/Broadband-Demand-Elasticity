@@ -273,7 +273,7 @@ with its own one-year lag ($\log$ fixed broadband price in GNI\%, lagged one yea
 \textbf{Instrument rationale.}
 National fixed broadband price baskets are set through annual regulatory and procurement
 cycles, generating high year-to-year autocorrelation. The lagged price therefore strongly
-predicts the current price (within-demeaned first-stage $F = 65$ pre-COVID; $F = 99$
+predicts the current price (within-demeaned first-stage $F = \IVFirstF$ pre-COVID; $F = \IVFullF$
 full-sample), well above the Stock--Yogo 10\% maximal-IV-bias threshold of 16.38
 \citep{stock2002testing}. The exclusion restriction is plausible: conditional on country
 and year fixed effects plus time-varying controls, past prices affect current subscriptions
@@ -287,11 +287,11 @@ cannot anticipate next year's regulated tariff when making adoption decisions to
 
 \textbf{Results.}
 Panel~A of Table~\ref{tab:iv_robustness} shows pre-COVID results alongside the OLS
-baseline. The 2SLS estimate is EU$=-0.172$ (SE$=$0.097, $p=$0.075) and EaP$=-0.615$
-(SE$=$0.091, $p<$0.001)---essentially identical to OLS (EU$=-0.101$, EaP$=-0.595$),
+baseline. The 2SLS estimate is EU$=\IVPreEUB$ (SE$=\IVPreEUSE$, $p=\IVPreEUPval$\IVPreEUStars) and EaP$=\IVPreEaPB$
+(SE$=\IVPreEaPSE$, $p\IVPreEaPStars$)---essentially identical to OLS (EU$=\EUBaseB$, EaP$=\EaPBaseB$),
 confirming that simultaneity bias in the baseline TWFE estimates is negligible.
 Panel~B uses the same instrument in the full-sample specification with COVID interactions:
-EU$=-0.193$ (SE$=$0.058, $p<$0.001) and EaP$=-0.340$ (SE$=$0.088, $p<$0.001), consistent
+EU$=\IVFullEUB$ (SE$=\IVFullEUSE$, $p\IVFullEUStars$) and EaP$=\IVFullEaPB$ (SE$=\IVFullEaPSE$, $p\IVFullEaPStars$), consistent
 with the COVID-era attenuation of price sensitivity found in OLS.
 
 Overall, the IV results directly validate the OLS estimates: the endogeneity concern is
