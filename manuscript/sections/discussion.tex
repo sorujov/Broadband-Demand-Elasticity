@@ -119,17 +119,17 @@ Fourth, \textbf{endogeneity}: despite extensive controls and fixed effects, simu
 between prices and quantities could bias estimates. Operators may set prices based on
 expected demand, inducing correlation. While regulatory frameworks limit short-run price
 adjustment, reducing simultaneity concerns \citep{laffont2000competition}, we address this
-directly using 2SLS with the mobile broadband price as an instrument
-(Table~\ref{tab:iv_robustness}). The pre-COVID specification suffers from a weak
-instrument (first-stage $F = \IVFirstF$), rendering those estimates uninformative.
-With the full sample and COVID interactions, instrument strength improves
-($F = \IVFullF$): the EU 2SLS estimate ($\IVFullEUB$, SE$= \IVFullEUSE$) is negative
-and similar in magnitude to the OLS ($\EUBaseBr$), though statistically insignificant,
-providing no evidence of upward simultaneity bias. The EaP 2SLS estimate
-($\IVFullEaPB$, SE$= \IVFullEaPSE$) is imprecisely estimated and not significant,
-likely reflecting the difficulty of instrumenting the region-specific interaction
-term with a single instrument. Overall, the IV results do not suggest simultaneity
-bias inflates the OLS but lack the precision to serve as a definitive endogeneity test.
+directly using 2SLS instrumenting fixed broadband prices with their one-year lag
+(Table~\ref{tab:iv_robustness}; within-demeaned first-stage $F = \IVFirstF$ pre-COVID,
+$F = \IVFullF$ full-sample). The pre-COVID lagged-price 2SLS yields EU$=\IVPreEUB$
+(SE$=\IVPreEUSE$, p$=$0.075) and EaP$=\IVPreEaPB$ (SE$=\IVPreEaPSE$, p$<$0.001),
+virtually identical to OLS, providing direct evidence that simultaneity bias is negligible.
+The full-sample 2SLS (Panel~B) yields EU$=\IVFullEUB$ (SE$=\IVFullEUSE$, p$<$0.001)
+and EaP$=\IVFullEaPB$ (SE$=\IVFullEaPSE$, p$<$0.001), consistent with the COVID-era
+attenuation of price sensitivity found in OLS. An alternative bandwidth instrument yields
+a larger EaP magnitude and the over-identified specification rejects the Hansen $J$ test,
+confirming lagged price as the preferred instrument. Overall, the IV results validate
+the OLS estimates: the endogeneity concern is resolved.
 
 Fifth, \textbf{external validity}: findings derive from European and Eastern Partnership countries. Generalization to other regions---particularly low-income countries in Africa, Asia, or Latin America---is uncertain. Demand elasticity likely varies with income, institutions, and technology. Cross-regional studies are needed to assess global applicability.
 

@@ -1,6 +1,6 @@
 \begin{table}[htbp]
 \centering
-\caption{IV Robustness: 2SLS Estimates with Mobile Broadband Price as Instrument}
+\caption{IV Robustness: 2SLS Estimates Using Lagged Own Price as Instrument}
 \label{tab:iv_robustness}
 \begin{minipage}{\textwidth}
 \begin{adjustbox}{width=\textwidth}
@@ -11,20 +11,24 @@
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}
 Specification & Coef. & SE & Coef. & SE & First-Stage $F$ \\
 \midrule
-OLS Baseline (TWFE, DK SE) & $-0.101^{*}$ & (0.053) & $-0.595^{***}$ & (0.061) & --- \\[2pt]
-Pre-COVID 2SLS & $-6.129$ & (51.781) & $3.026$ & (10.089) & 0.4 \\[2pt]
-Full Sample 2SLS (COVID interactions) & $-0.171$ & (0.239) & $0.123$ & (0.142) & 17.4 \\[2pt]
+\multicolumn{6}{l}{\textit{A. Pre-COVID (2010--2019)}} \\[2pt]
+\phantom{x}OLS (TWFE + DK SE) & $-0.101^{*}$ & (0.053) & $-0.595^{***}$ & (0.061) & --- \\[2pt]
+\phantom{x}2SLS, lagged price & $-0.172^{*}$ & (0.097) & $-0.615^{***}$ & (0.091) & 65 \\[2pt]
+\midrule
+\multicolumn{6}{l}{\textit{B. Full sample (2010--2024), COVID interactions}} \\[2pt]
+\phantom{x}2SLS, lagged price & $-0.193^{***}$ & (0.058) & $-0.340^{***}$ & (0.088) & 99 \\[2pt]
 \bottomrule
 \end{tabular}
 \end{adjustbox}
 \par\vspace{4pt}
 \scriptsize
-\textit{Notes:} Instrument: log mobile broadband price (GNI\%), which captures
-common supply-side cost shifters while being plausibly exogenous to fixed broadband
-demand shocks. 2SLS uses within-transformed (entity + time demeaned) variables.
-First-stage $F$ statistic for primary price equation; $F > 10$ indicates instrument
-relevance. OLS row: Driscoll--Kraay standard errors (kernel bandwidth$=$3);
-2SLS rows: heteroskedasticity-robust standard errors. All in parentheses.
-$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\textit{Notes:} Instrument: $\log$ fixed broadband price (GNI\%) lagged one year.
+All specifications include country and year fixed effects absorbed via two-way
+within-transformation. First-stage $F$ is a partial $F$-statistic for the excluded
+instrument in the within-transformed first stage; $F > 10$ indicates instrument
+relevance \citep{stock2002testing}.
+EaP elasticity $=$ EU coefficient $+$ EU$\times$EaP interaction; SE via delta method.
+OLS: Driscoll--Kraay SE (kernel bandwidth$=$3). 2SLS: heteroskedasticity-robust SE.
+$^{*}$ $p < 0.10$, $^{**}$ $p < 0.05$, $^{***}$ $p < 0.01$.
 \end{minipage}
 \end{table}

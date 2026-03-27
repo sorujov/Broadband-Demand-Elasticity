@@ -1,4 +1,4 @@
-\begin{thebibliography}{56}
+\begin{thebibliography}{57}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -261,6 +261,10 @@
 \bibinfo{author}{Sinclair, A.}, \bibinfo{year}{2023}.
 \newblock \bibinfo{title}{Assessing the benefits of high-speed broadband: Lessons from {Australia}'s {National Broadband Network} ({NBN})}.
 \newblock \bibinfo{journal}{Information Economics and Policy} \bibinfo{volume}{65}, \bibinfo{pages}{101062}.
+%Type = Incollection
+\bibitem[{Stock et~al.(2005)Stock, Wright and Yogo}]{stock2002testing}
+\bibinfo{author}{Stock, J.H.}, \bibinfo{author}{Wright, J.H.}, \bibinfo{author}{Yogo, M.}, \bibinfo{year}{2005}.
+\newblock \bibinfo{title}{Testing for weak instruments in linear {IV} regression}, in: \bibinfo{editor}{Andrews, D.W.K.}, \bibinfo{editor}{Stock, J.H.} (Eds.), \bibinfo{booktitle}{Identification and Inference for Econometric Models: Essays in Honor of Thomas Rothenberg}. \bibinfo{publisher}{Cambridge University Press}, \bibinfo{address}{Cambridge}, pp. \bibinfo{pages}{80--108}.
 %Type = Article
 \bibitem[{Wallsten(2006)}]{wallsten2006broadband}
 \bibinfo{author}{Wallsten, S.J.}, \bibinfo{year}{2006}.
