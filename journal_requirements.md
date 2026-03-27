@@ -108,35 +108,44 @@ Topics relevant to *Information Economics and Policy*:
 
 ## Cross-Check: Paper vs. Requirements
 
-### PASS ✓
+*Last verified: 2026-03-27 against live guide (web-fetched).*
+
+### ALL PASSING ✓
 | Requirement | Status |
 |---|---|
 | Journal set (`\journal{...}`) | `Information Economics and Policy` ✓ |
-| Abstract word count | ~165 words (under 250 limit) ✓ |
-| Keywords count | **FIXED → 7** ✓ |
+| Abstract word count | ~170 words (under 250 limit) ✓ |
+| Keywords count | 7 (maximum allowed) ✓ |
+| Highlights: 3–5 bullets ≤85 chars | H1=81, H2=84, H3=82, H4=84, H5=85 ✓ |
 | Reference style | elsarticle-harv, author-year ✓ |
 | Line numbers | `\usepackage{lineno}` + `\linenumbers` enabled ✓ |
 | CRediT statement | Present ✓ |
 | Competing interests | Present ✓ |
-| Data availability | Present ✓ |
+| Data availability | Present ✓ (GitHub + ITU/WB sources) |
+| Funding statement | Present ✓ (no-funding standard sentence) |
 | Acknowledgments | Present ✓ |
+| Generative AI declaration | Present ✓ (Claude, Anthropic) |
+| AI section title (exact) | `Declaration of generative AI and AI-assisted technologies in the manuscript preparation process` ✓ |
 | All figures present | fig1–fig6 all exist ✓ |
-| Bib keys (previous fixes) | hausman2001price→hausman2001private, katz1985network, goolsbee fixed ✓ |
+| Bib keys | hausman2001price→hausman2001private, katz1985network, goolsbee fixed ✓ |
 
-### FIXED IN THIS SESSION ✓
-| Issue | Fix Applied |
+### HISTORY OF FIXES APPLIED
+| Issue | Fix |
 |---|---|
-| **8 keywords** (max 7) | Removed "Two-way fixed effects" → 7 keywords |
-| **Highlight 1: 104 chars** (max 85) | Rewritten to 81 chars |
-| **Highlight 2: 86 chars** (max 85) | "price-sensitive" → "price-elastic" = 84 chars |
-| **Highlight 4: 106 chars** (max 85) | Rewritten to 84 chars |
-| **Highlight 5: 93 chars** (max 85) | Rewritten to 85 chars |
+| 8 keywords (max 7) | Removed "Two-way fixed effects" → 7 keywords |
+| Highlight 1: 104 chars | Rewritten → 81 chars |
+| Highlight 2: 86 chars | "price-sensitive" → "price-elastic" = 84 chars |
+| Highlight 4: 106 chars | Rewritten → 84 chars |
+| Highlight 5: 93 chars | Rewritten → 85 chars |
+| Missing Funding section | Added standard no-funding sentence |
+| Wrong AI section title | Corrected to exact journal-required wording |
 
 ### ACTION REQUIRED BY AUTHORS
-| Item | Action Needed |
+| Item | Notes |
 |---|---|
-| **Generative AI declaration** | Added: Claude (Anthropic) used for scripting and manuscript editing ✓ |
-| **Cover letter** | Not mandatory but strongly recommended; should state novelty, target journal fit, and confirm the paper is not under review elsewhere |
+| **Cover letter** | Not mandatory but strongly recommended; state novelty, journal fit, confirm not under review elsewhere |
+| **Highlights file** | Must be submitted as a separate file (Word or plain text) at submission; name file with "highlights" in filename |
+| **Data deposit** | Guide (Option C) recommends formal repository with DOI (Zenodo/Figshare/OSF); current GitHub link is widely accepted but a DOI-based deposit strengthens reproducibility |
 
 ### MINOR BIB TYPE ISSUES (non-critical)
 | Entry | Issue |
@@ -145,4 +154,4 @@ Topics relevant to *Information Economics and Policy*:
 | `hsiao2014analysis` | @article but is a book (Cambridge UP) |
 | `katz2010impact` | @article but is an ITU report (consider @techreport) |
 
-These will not affect editorial review but may affect reference list formatting.
+These will not affect editorial review but may affect reference list formatting at proof stage.

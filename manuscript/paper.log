@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.27)  27 MAR 2026 22:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.27)  28 MAR 2026 00:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -450,10 +450,6 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 1.
  (c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ))
-Overfull \hbox (4.55061pt too wide) in paragraph at lines 128--129
-[]\T1/cmr/m/n/12 EaP coun-tries were 5$\OMS/cmsy/m/n/12 ^^B$ \T1/cmr/m/n/12 more price-elastic than EU coun-tries pre-COVID,
- []
-
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\<def>-command' on input line 134.
@@ -486,117 +482,121 @@ Overfull \hbox (1.95699pt too wide) in paragraph at lines 17--18
  []
 
 [4]) (./sections/literature.tex [5] [6] [7]
-Overfull \hbox (0.54893pt too wide) in paragraph at lines 21--28
+Overfull \hbox (0.54893pt too wide) in paragraph at lines 30--37
 []\T1/cmr/m/n/12 Theoretically, COVID-19 could re-duce elas-tic-ity through two mech-a-nisms.
  []
 
-[8] [9]) (./sections/data.tex [10] [11]
-Underfull \hbox (badness 1354) in paragraph at lines 21--22
-[]\T1/cmr/m/n/12 Following stan-dard prac-tice in telecom-mu-ni-ca-tions de-mand stud-ies
+[8]
+Overfull \hbox (14.77188pt too wide) in paragraph at lines 38--39
+[]\T1/cmr/m/n/12 Importantly, sev-eral stud-ies sug-gest dig-i-tal trans-for-ma-tion pre-dated COVID-
  []
 
-[12] [13] [14] (./tables/table_descriptives.tex
+[9]) (./sections/data.tex [10] [11] [12]
+Overfull \hbox (0.44203pt too wide) in paragraph at lines 21--22
+[]\T1/cmr/m/n/12 Following stan-dard prac-tice in telecom-mu-ni-ca-tions de-mand stud-ies ([][]Grzy-
+ []
+
+[13] [14] (./tables/table_descriptives.tex
 Underfull \hbox (badness 10000) in paragraph at lines 6--43
 []
  []
 
-)) (./sections/methodology.tex [15] [16] [17] [18] [19] [20]
-Underfull \hbox (badness 4556) in paragraph at lines 76--77
-[]\T1/cmr/m/n/12 Recent econo-met-ric literature---most promi-nently [][]Goodman-Bacon[][]
+)) [15] [16] (./sections/methodology.tex [17] [18] [19]
+Overfull \hbox (0.61427pt too wide) in paragraph at lines 62--63
+\T1/cmr/m/n/12 de-pen-dence (com-mon shocks like COVID-19 af-fect-ing all coun-tries) ([][]Cameron
  []
 
-[21] [22]) (./sections/results.tex [23]
-<figures/fig2_robustness_specs.pdf, id=567, 455.33614pt x 238.34734pt>
+[20]
+Overfull \hbox (2.03896pt too wide) in paragraph at lines 76--77
+[]\T1/cmr/m/n/12 Recent econo-met-ric literature---most promi-nently [][]Goodman-Bacon[][] ([][]2021[][])
+ []
+
+[21] [22]) (./sections/results.tex [23] [24]
+<figures/fig2_robustness_specs.pdf, id=569, 455.33614pt x 238.34734pt>
 File: figures/fig2_robustness_specs.pdf Graphic file (type pdf)
 <use figures/fig2_robustness_specs.pdf>
 Package pdftex.def Info: figures/fig2_robustness_specs.pdf  used on input line 15.
 (pdftex.def)             Requested size: 292.5pt x 153.1164pt.
- [24 <./figures/fig2_robustness_specs.pdf>] [25]
-<figures/fig4_covid_comparison.pdf, id=638, 346.93114pt x 274.80894pt>
+ [25 <./figures/fig2_robustness_specs.pdf>]
+<figures/fig4_covid_comparison.pdf, id=633, 346.93114pt x 274.80894pt>
 File: figures/fig4_covid_comparison.pdf Graphic file (type pdf)
 <use figures/fig4_covid_comparison.pdf>
 Package pdftex.def Info: figures/fig4_covid_comparison.pdf  used on input line 36.
 (pdftex.def)             Requested size: 214.50119pt x 169.91013pt.
- [26 <./figures/fig4_covid_comparison.pdf>] [27]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 90.
+ [26] [27 <./figures/fig4_covid_comparison.pdf>] [28]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 92.
  (c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [28]
-<figures/fig1_temporal_evolution.pdf, id=722, 455.31041pt x 274.54318pt>
+) [29]
+<figures/fig1_temporal_evolution.pdf, id=726, 455.31041pt x 274.54318pt>
 File: figures/fig1_temporal_evolution.pdf Graphic file (type pdf)
 <use figures/fig1_temporal_evolution.pdf>
-Package pdftex.def Info: figures/fig1_temporal_evolution.pdf  used on input line 104.
+Package pdftex.def Info: figures/fig1_temporal_evolution.pdf  used on input line 106.
 (pdftex.def)             Requested size: 292.5pt x 176.38148pt.
- [29 <./figures/fig1_temporal_evolution.pdf>]
-<figures/fig5_placebo_test.pdf, id=782, 455.30603pt x 211.60475pt>
+ [30 <./figures/fig1_temporal_evolution.pdf>]
+<figures/fig5_placebo_test.pdf, id=786, 455.30603pt x 211.60475pt>
 File: figures/fig5_placebo_test.pdf Graphic file (type pdf)
 <use figures/fig5_placebo_test.pdf>
-Package pdftex.def Info: figures/fig5_placebo_test.pdf  used on input line 123.
+Package pdftex.def Info: figures/fig5_placebo_test.pdf  used on input line 125.
 (pdftex.def)             Requested size: 292.5pt x 135.9464pt.
- [30]
-<figures/fig6_results_matrix.pdf, id=793, 451.06108pt x 346.5654pt>
+ [31]
+<figures/fig6_results_matrix.pdf, id=796, 451.06108pt x 346.5654pt>
 File: figures/fig6_results_matrix.pdf Graphic file (type pdf)
 <use figures/fig6_results_matrix.pdf>
-Package pdftex.def Info: figures/fig6_results_matrix.pdf  used on input line 138.
+Package pdftex.def Info: figures/fig6_results_matrix.pdf  used on input line 140.
 (pdftex.def)             Requested size: 234.00238pt x 179.79198pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--152
-[]\T1/cmr/m/n/12 Additional ro-bust-ness checks are re-ported in Ap-pendix [][]Ap-
+Underfull \hbox (badness 10000) in paragraph at lines 147--154
+\T1/cmr/m/n/12 ment (Ta-ble [][]B.2[][];
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 145--152
-\T1/cmr/m/n/12 pendix B[][]: a period-split de-com-pos-ing the COVID era into
+[32 <./figures/fig5_placebo_test.pdf>] [33 <./figures/fig6_results_matrix.pdf>]) (./sections/discussion.tex [34] [35] [36]
+Overfull \hbox (9.92036pt too wide) in paragraph at lines 23--24
+[]\T1/cmr/m/n/12 The ro-bust-ness across price mea-sures (Ta-ble [][]A.3[][]) pro-vides valu-able method-
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 145--152
-\T1/cmr/m/n/12 acute and post-acute sub-periods (Ta-ble [][]B.1[][]), 2SLS es-ti-mates
+[37]
+Overfull \hbox (7.66443pt too wide) in paragraph at lines 40--51
+\T1/cmr/m/n/12 bas-ket (I154_FBB, 2010--2017) was suc-ceeded by its 5GB bas-ket (I154_FBB5,
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 145--152
-\T1/cmr/m/n/12 us-ing the lagged own price as an in-stru-ment (Ta-ble [][]B.2[][];
- []
-
-
-Underfull \hbox (badness 1052) in paragraph at lines 145--152
-\T1/cmr/m/n/12 first-stage $\OML/cmm/m/it/12 F \OT1/cmr/m/n/12 = 65$ \T1/cmr/m/n/12 pre-COVID), and leave-one-EaP-country-out jack-
- []
-
-[31 <./figures/fig5_placebo_test.pdf>] [32 <./figures/fig6_results_matrix.pdf>]) (./sections/discussion.tex [33] [34] [35]
-Underfull \hbox (badness 1917) in paragraph at lines 23--24
-[]\T1/cmr/m/n/12 The ro-bust-ness across price mea-sures (Ta-ble [][]A.3[][]) pro-vides valu-
- []
-
-[36]
-<figures/fig3_price_measurement.pdf, id=976, 455.33614pt x 212.2846pt>
+<figures/fig3_price_measurement.pdf, id=977, 455.33614pt x 212.2846pt>
 File: figures/fig3_price_measurement.pdf Graphic file (type pdf)
 <use figures/fig3_price_measurement.pdf>
 Package pdftex.def Info: figures/fig3_price_measurement.pdf  used on input line 54.
 (pdftex.def)             Requested size: 292.5pt x 136.37347pt.
- [37] [38 <./figures/fig3_price_measurement.pdf>] [39] [40] [41]) (./sections/conclusion.tex [42]
-Underfull \hbox (badness 10000) in paragraph at lines 5--6
-[]\T1/cmr/m/n/12 For pol-icy, the near-zero elas-tic-ity im-plies that af-ford-abil-ity
+[38] [39 <./figures/fig3_price_measurement.pdf>]
+Overfull \hbox (11.76868pt too wide) in paragraph at lines 71--76
+[]\T1/cmr/m/n/12 A cru-cial in-ter-pre-tive ques-tion is whether ob-served changes re-flect a COVID-
+ []
+
+[40]
+Overfull \hbox (3.22003pt too wide) in paragraph at lines 105--115
+\T1/cmr/m/n/12 com-par-i-son. Mo-bile broad-band has ex-panded rapidly---particularly in middle-
+ []
+
+[41] [42]) [43] (./sections/conclusion.tex
+Overfull \hbox (7.27975pt too wide) in paragraph at lines 3--4
+\T1/cmr/m/n/12 mand: EaP coun-tries ex-hib-ited strong price sen-si-tiv-ity ($\OML/cmm/m/it/12 " \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 60$\T1/cmr/m/n/12 , p$\OML/cmm/m/it/12 <$\T1/cmr/m/n/12 0.001)---
  []
 
 
-Underfull \hbox (badness 3849) in paragraph at lines 5--6
-\T1/cmr/m/n/12 interventions---effective when de-mand was elas-tic be-fore 2015---have
+Overfull \hbox (5.45187pt too wide) in paragraph at lines 5--6
+[]\T1/cmr/m/n/12 For pol-icy, the near-zero elas-tic-ity im-plies that af-ford-abil-ity interventions---
  []
 
-) [43] [44] [45] (./tables/table1_baseline.tex
+[44]) [45] [46] (./tables/table1_baseline.tex
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.3 ...s Estimates: Pre-COVID Period (2010--2019)}
-                                                  ) [46
+                                                  ) [47
 
-] (./tables/table2_covid.tex) [47
+] (./tables/table2_covid.tex) [48
 
-] (./tables/table3_price_robustness.tex) [48
+] (./tables/table3_price_robustness.tex) [49
 
-] (./tables/table4_placebo.tex) [49
+] (./tables/table4_placebo.tex) [50
 
 ] (./tables/table5_period_split.tex
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
@@ -608,21 +608,26 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has 
 <to be read again> 
                    \relax 
 l.3 ...es: Pre-COVID, Acute COVID, and Post-Acute}
-                                                  ) [50
+                                                  ) [51
 
-] (./tables/table6_iv_robustness.tex
+]
+Overfull \hbox (1.7014pt too wide) in paragraph at lines 276--292
+[]\T1/cmr/bx/n/10.95 Instrument ra-tio-nale. \T1/cmr/m/n/10.95 Na-tional fixed broad-band price bas-kets are set through
+ []
+
+(./tables/table6_iv_robustness.tex
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.3 ...mates Using Lagged Own Price as Instrument}
-                                                  ) [51
+                                                  ) [52
 
-] [52] (./tables/table7_jackknife.tex
+] [53] (./tables/table7_jackknife.tex
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.3 ...Leave-One-Country-Out (Pre-COVID Baseline)}
-                                                  ) [53
+                                                  ) [54
 
 ] (./tables/table8_sample_restrictions.tex
 pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
@@ -634,9 +639,14 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has 
 <to be read again> 
                    \relax 
 l.5 ...{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.10$.}
-                                                  ) (./paper.bbl [54
+                                                  
+Underfull \hbox (badness 10000) in paragraph at lines 8--34
+[]
+ []
 
-] [55] [56] [57] [58]) [59] (./paper.aux)
+) (./paper.bbl [55
+
+] [56] [57] [58] [59]) [60] (./paper.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -645,18 +655,18 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: B46B1406AC8DA7BBD771724399CB2424;10563.
  ) 
 Here is how much of TeX's memory you used:
- 13246 strings out of 469515
- 213546 string characters out of 5467570
- 629946 words of memory out of 5000000
- 41420 multiletter control sequences out of 15000+600000
+ 13261 strings out of 469515
+ 213701 string characters out of 5467570
+ 630187 words of memory out of 5000000
+ 41433 multiletter control sequences out of 15000+600000
  653331 words of font info for 108 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,14n,79p,1489b,701s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0600.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0600.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0800.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss0800.450pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0700.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on paper.pdf (60 pages, 644682 bytes).
+Output written on paper.pdf (61 pages, 648216 bytes).
 PDF statistics:
- 2200 PDF objects out of 2487 (max. 8388607)
- 1009 compressed objects within 11 object streams
- 193 named destinations out of 1000 (max. 500000)
+ 2206 PDF objects out of 2487 (max. 8388607)
+ 1012 compressed objects within 11 object streams
+ 195 named destinations out of 1000 (max. 500000)
  423 words of extra memory for PDF output out of 10000 (max. 10000000)
 

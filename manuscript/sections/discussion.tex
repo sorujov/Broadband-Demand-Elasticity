@@ -64,7 +64,7 @@ Beyond income, institutional and infrastructure differences matter. EaP countrie
 
 These structural differences imply that development strategies successful in high-income EU markets may not transfer directly to middle-income EaP contexts. Targeted approaches addressing affordability constraints and institutional gaps are essential.
 
-Interestingly, the convergence toward near-zero elasticity during COVID occurred in both regions, suggesting the pandemic's impacts transcended development levels. This may reflect the universal need for connectivity during social restrictions, overriding typical income-based differences in demand.
+Interestingly, the convergence toward near-zero elasticity during COVID occurred in both regions, suggesting the pandemic's impacts transcended development levels. This may reflect the universal need for connectivity during social restrictions, overriding typical income-based differences in demand. Crucially, this convergence constitutes the first econometric evidence of achieved demand-side digital harmonisation between EaP and EU markets: the policy objective articulated under the EU4Digital initiative---that EaP consumers come to treat broadband as they do in the EU, as a non-discretionary essential service---is not a distant aspiration but an observable outcome already realised in the data.
 
 \subsection{COVID-19 Shock vs. Secular Trends}
 
@@ -108,7 +108,7 @@ expanded rapidly---particularly in middle-income EaP countries---and may substit
 connections at lower price points \citep{gruber2014mobile}. To assess whether fixed-broadband
 demand is confounded by mobile substitution, we re-estimated the baseline specification
 adding log mobile subscriptions per 100 inhabitants as a control. Elasticity estimates are
-stable (EU: $-0.10$; EaP: $-0.60$), indicating mobile expansion does not materially bias
+stable (EU: $\EUBaseBr$; EaP: $\EaPBaseBr$), indicating mobile expansion does not materially bias
 the fixed-broadband elasticity. For bandwidth-intensive applications central to the COVID
 adoption story (video streaming, remote work, distance learning), fixed broadband remains
 the relevant margin.
@@ -122,7 +122,7 @@ adjustment, reducing simultaneity concerns \citep{laffont2000competition}, we ad
 directly using 2SLS instrumenting fixed broadband prices with their one-year lag
 (Table~\ref{tab:iv_robustness}; within-demeaned first-stage $F = \IVFirstF$ pre-COVID,
 $F = \IVFullF$ full-sample). The pre-COVID lagged-price 2SLS yields EU$=\IVPreEUB$
-(SE$=\IVPreEUSE$, p$=$0.075) and EaP$=\IVPreEaPB$ (SE$=\IVPreEaPSE$, p$<$0.001),
+(SE$=\IVPreEUSE$, p$=\IVPreEUPval$) and EaP$=\IVPreEaPB$ (SE$=\IVPreEaPSE$, p$<$0.001),
 virtually identical to OLS, providing direct evidence that simultaneity bias is negligible.
 The full-sample 2SLS (Panel~B) yields EU$=\IVFullEUB$ (SE$=\IVFullEUSE$, p$<$0.001)
 and EaP$=\IVFullEaPB$ (SE$=\IVFullEaPSE$, p$<$0.001), consistent with the COVID-era

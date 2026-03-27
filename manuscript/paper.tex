@@ -110,7 +110,7 @@
                   country={Azerbaijan}}
 
 \affiliation[ubs]{organization={Université de Bretagne Sud},
-                  city={Lorient},
+                  city={Vannes},
                   country={France}}
 
 % Abstract
@@ -124,10 +124,10 @@ Broadband demand \sep Price elasticity \sep Panel data \sep Eastern Partnership 
 \end{keyword}
 
 \begin{highlights}
-\item Broadband price elasticity declined from $-0.61$ (EaP) and $-0.12$ (EU) to $\approx$0 by 2020
-\item EaP countries were 5$\times$ more price-elastic than EU countries pre-COVID, then converged
+\item Broadband price elasticity declined from $\EaPBaseBr$ (EaP) and $\EUBaseBr$ (EU) to $\approx$0 by 2020
+\item EaP price elasticity $\EaPEURatio$$\times$ EU pre-COVID; demand-side harmonisation achieved by 2020
 \item Transformation began in 2015---not 2020---ruling out COVID-19 as the sole causal shock
-\item GNI-based prices give significant results in all specs; PPP in only 25\% of EaP specs
+\item GNI-based prices give significant results in all specs; PPP in only \PctPPPSigEaP\% of EaP specs
 \item Policy must shift from price subsidies to infrastructure deployment as demand matures
 \end{highlights}
 
@@ -187,6 +187,9 @@ The authors thank Daniel Vertesy and Esperanza Magpantay of the ITU Statistics D
 % ============================================================================
 % DECLARATIONS
 % ============================================================================
+
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
 \section*{Declaration of competing interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
@@ -283,37 +286,46 @@ cannot anticipate next year's regulated tariff when making adoption decisions to
   an over-identified specification combining both instruments strongly rejected the Hansen
   $J$ overidentification test ($\chi^2(2) = 262.89$, $p < 0.001$), indicating that
   bandwidth correlates with connection speed and quality, which directly enter the demand
-  equation. Lagged price is therefore the sole preferred instrument.}
+  equation. A further practical limitation is that ITU bandwidth data are missing for most
+  EU countries after 2018, and multiple imputation does not recover sufficient coverage to
+  support credible inference. Lagged price is therefore the sole preferred instrument.}
+
+\input{tables/table6_iv_robustness}
+
 
 \textbf{Results.}
 Panel~A of Table~\ref{tab:iv_robustness} shows pre-COVID results alongside the OLS
 baseline. The 2SLS estimate is EU$=\IVPreEUB$ (SE$=\IVPreEUSE$, $p=\IVPreEUPval$\IVPreEUStars) and EaP$=\IVPreEaPB$
-(SE$=\IVPreEaPSE$, $p\IVPreEaPStars$)---essentially identical to OLS (EU$=\EUBaseB$, EaP$=\EaPBaseB$),
-confirming that simultaneity bias in the baseline TWFE estimates is negligible.
+(SE$=\IVPreEaPSE$, $p=$\IVPreEaPPval\IVPreEaPStars)---broadly consistent with OLS
+(EU$=\EUBaseB$, EaP$=\EaPBaseB$), confirming that upward simultaneity bias in the
+baseline TWFE estimates is negligible. The EaP 2SLS and OLS estimates are nearly
+identical; the EU 2SLS coefficient is somewhat larger in magnitude but within sampling
+variance, consistent with minor attenuation bias from price measurement error rather
+than simultaneity.
 Panel~B uses the same instrument in the full-sample specification with COVID interactions:
-EU$=\IVFullEUB$ (SE$=\IVFullEUSE$, $p\IVFullEUStars$) and EaP$=\IVFullEaPB$ (SE$=\IVFullEaPSE$, $p\IVFullEaPStars$), consistent
+EU$=\IVFullEUB$ (SE$=\IVFullEUSE$, $p=$\IVFullEUPval\IVFullEUStars) and EaP$=\IVFullEaPB$ (SE$=\IVFullEaPSE$, $p=$\IVFullEaPPval\IVFullEaPStars), consistent
 with the COVID-era attenuation of price sensitivity found in OLS.
 
 Overall, the IV results directly validate the OLS estimates: the endogeneity concern is
 resolved and no evidence of upward simultaneity bias is found.
 
-\input{tables/table6_iv_robustness}
 \clearpage
 
 \subsection{EaP Jackknife: Leave-One-Country-Out}
 \small
 \singlespacing
 Table~\ref{tab:jackknife} reports leave-one-out estimates dropping each of the six EaP
-countries in turn. EaP elasticity ranges from $-0.42$ to $-0.72$ across the six sub-samples.
-Armenia is the most influential country: its exclusion shifts the EaP estimate from $-0.61$
-to $-0.42$ (a change of 0.19 in magnitude), suggesting Armenia contributes relatively
-low price-sensitivity to the aggregate. Excluding Belarus, which experienced political crisis
-and sanctions during the sample period, yields a larger estimate ($-0.72$), consistent with
-data reliability concerns for that country. Crucially, \textit{all} leave-one-out EaP
-estimates are statistically significant at the 1\% level, and all confirm a substantial,
-negative price elasticity. The EaP result is therefore not driven by any single country,
-and the range $[-0.42, -0.72]$ reflects genuine heterogeneity within the EaP group
-rather than measurement fragility.
+countries in turn. EaP elasticity ranges from $\EaPJKMax$ to $\EaPJKMin$ across the six
+sub-samples. \EaPJKMaxCountry{} is the most influential country: its exclusion raises the
+EaP estimate from $\EaPBaseBr$ to $\EaPJKMax$, suggesting \EaPJKMaxCountry{} contributes
+relatively high price-sensitivity to the aggregate EaP estimate. Excluding \EaPJKMinCountry{}
+yields the largest negative estimate ($\EaPJKMin$), indicating that \EaPJKMinCountry{}
+exhibits below-average price sensitivity relative to the rest of the EaP group; removing it
+therefore shifts the group-level estimate further from zero. Crucially, \textit{all}
+leave-one-out EaP estimates are statistically significant at the 1\% level, and all confirm
+a substantial, negative price elasticity. The EaP result is therefore not driven by any
+single country, and the range $[\EaPJKMax, \EaPJKMin]$ reflects genuine heterogeneity
+within the EaP group rather than measurement fragility.
 
 \input{tables/table7_jackknife}
 \clearpage
@@ -340,7 +352,7 @@ country heterogeneity at lower income levels.
 % GENERATIVE AI DECLARATION
 % ============================================================================
 
-\section*{Generative AI and AI-assisted technologies in the writing process}
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
 During the preparation of this work the authors used Claude (Anthropic) for programming and data-collection scripting, and for manuscript editing. After using this tool, the authors reviewed and edited all content as needed and take full responsibility for the content of this publication.
 
 % ============================================================================
