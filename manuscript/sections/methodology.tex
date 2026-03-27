@@ -49,7 +49,7 @@ The coefficient $\beta_3$ measures the change in EU elasticity during COVID-19, 
 
 Our identification strategy relies on within-country variation in prices and subscriptions over time, conditional on country and year fixed effects plus time-varying controls. Several threats to identification warrant discussion.
 
-\textbf{Simultaneity:} Prices and quantities are jointly determined in equilibrium, potentially generating simultaneity bias if unobserved demand shocks affect both. However, regulatory frameworks in telecommunications typically involve ex-ante price setting with limited short-run adjustment \citep{laffont2000competition}, particularly in Europe's regulated markets. Additionally, fixed effects absorb persistent demand differences, while year effects control for aggregate shocks. As robustness, we instrument current prices with lagged prices following \citet{koutroumpis2009impact}, finding similar estimates.
+\textbf{Simultaneity:} Prices and quantities are jointly determined in equilibrium, potentially generating simultaneity bias if unobserved demand shocks affect both. However, regulatory frameworks in telecommunications typically involve ex-ante price setting with limited short-run adjustment \citep{laffont2000competition}, particularly in Europe's regulated markets. Additionally, fixed effects absorb persistent demand differences, while year effects control for aggregate shocks. As a more direct test, Appendix~\ref{app:robustness} presents 2SLS estimates instrumenting fixed broadband prices with mobile broadband prices, finding qualitatively similar results.
 
 \textbf{Omitted variables:} Unobserved time-varying factors could correlate with both prices and demand. We address this through comprehensive controls capturing economic conditions, human capital, institutions, and infrastructure. Robustness checks varying control specifications (Section~\ref{sec:results}) show estimates are stable, suggesting omitted variable bias is limited.
 
@@ -71,11 +71,21 @@ where $k(\cdot)$ is the Bartlett kernel, $m$ is the bandwidth parameter (lag tru
 
 Driscoll--Kraay standard errors are particularly appropriate for our context given the COVID-19 pandemic---a common shock affecting all countries simultaneously. Standard clustered standard errors (e.g., clustering by country) can substantially understate uncertainty in the presence of such common shocks \citep{cameron2015practitioner}. Recent studies confirm Driscoll--Kraay provides reliable inference in panels with moderate cross-sectional and time dimensions similar to ours ($N=33$, $T=15$) \citep{hoechle2007robust}.
 
+\subsection{Two-Way Fixed Effects and Treatment Heterogeneity}
+
+Recent econometric literature---most prominently \citet{goodman2021difference} and \citet{de2020two}---has demonstrated that standard two-way fixed effects (TWFE) estimators can produce misleading weighted averages with negative weights when treatment effects are heterogeneous across units and time periods. The canonical problem arises in staggered difference-in-differences designs where a binary policy is adopted at different times by different units.
+
+Our setting differs from this problematic case in two important ways. First, our key variable of interest is a \textit{continuous price}, not a binary treatment indicator. The TWFE estimator here recovers a within-country price elasticity, not a weighted average of unit-level treatment effects across adoption cohorts. The Goodman-Bacon decomposition and related diagnostics are specifically designed for staggered binary treatment; they do not directly apply to continuous regressors in a standard log-log demand model \citep{callaway2021difference}.
+
+Second, the COVID-19 interaction terms ($\text{Price} \times \text{COVID}$, $\text{Price} \times \text{EaP} \times \text{COVID}$) are constructed using a common binary period indicator (2020--2024) applied to all units simultaneously, not a staggered roll-out. This eliminates the cohort-specific treatment timing that drives negative-weight problems in staggered DiD. Because all countries enter the ``COVID period'' at the same calendar time (2020), the period-interacted TWFE estimator is equivalent to a simple before-after comparison, which does not suffer from the heterogeneity bias of staggered designs.
+
+Our year-by-year elasticity estimates (Section~\ref{sec:results}) provide direct empirical evidence against any residual concern: they show a smooth, monotonically declining pattern from 2015 onward without discontinuous jumps, consistent with a secular change rather than heterogeneous treatment effects contaminating the TWFE estimate. The period-split robustness (Section~\ref{sec:results}) further validates this by separately estimating elasticity in the acute (2020--2021) and post-acute (2022--2024) sub-periods, showing near-zero elasticity in both.
+
 \subsection{Robustness Checks}
 
 We conduct extensive robustness checks to validate baseline findings:
 
-\textbf{Alternative control specifications:} Beyond full controls, we estimate seven alternative specifications ranging from minimal (GDP only) to comprehensive (all available controls). This addresses concerns about overcontrol or omitted variables.
+\textbf{Alternative control specifications:} Beyond the full controls baseline, we estimate six additional specifications ranging from minimal (GDP only) to intermediate groupings of socioeconomic, institutional, infrastructure, demographic, and macroeconomic controls. Seven specifications in total are reported in Table~\ref{tab:baseline}. This addresses concerns about overcontrol or omitted variables.
 
 \textbf{Alternative price measures:} We compare income-relative prices (price as \% of GNI per capita) against PPP-adjusted prices and nominal USD prices. Income-relative prices best capture affordability from consumers' perspective, but alternative measures provide validation.
 

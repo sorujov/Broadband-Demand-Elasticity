@@ -1,0 +1,32 @@
+\begin{table}[htbp]
+\centering
+\caption{IV Robustness: 2SLS Estimates with Mobile Broadband Price as Instrument}
+\label{tab:iv_robustness}
+\begin{minipage}{\textwidth}
+\begin{adjustbox}{width=\textwidth}
+\small
+\begin{tabular}{lccccc}
+\toprule
+& \multicolumn{2}{c}{EU Elasticity} & \multicolumn{2}{c}{EaP Elasticity} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Specification & Coef. & SE & Coef. & SE & First-Stage $F$ \\
+\midrule
+OLS Baseline (TWFE, DK SE) & $-0.101^{*}$ & (0.053) & $-0.595^{***}$ & (0.076) & --- \\
+\\
+Pre-COVID 2SLS & $-6.129$ & (51.781) & $3.026$ & (10.089) & 0.4 \\
+\\
+Full Sample 2SLS (COVID interactions) & $-0.171$ & (0.239) & $0.123$ & (0.142) & 17.4 \\
+\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\vspace{4pt}
+\small
+\textit{Notes:} Instrument: log mobile broadband price (GNI\%), which captures
+common supply-side cost shifters while being plausibly exogenous to fixed broadband
+demand shocks. 2SLS uses within-transformed (entity + time demeaned) variables.
+First-stage $F$ statistic for primary price equation; $F > 10$ indicates instrument
+relevance. Heteroskedasticity-robust standard errors in parentheses.
+$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\end{minipage}
+\end{table}

@@ -21,7 +21,7 @@ y_it = β₁·Price_it + β₂·(Price_it × EaP_i) + X_it'γ + α_i + δ_t + ε
 ```
 
 Where:
-- **y_it**: log(broadband subscriptions per 100) in country *i*, year *t*
+- **y_it**: log(total broadband subscriptions) in country *i*, year *t* (log population included as control; per-100 alternative in `fixed_broadband_subs_alt`)
 - **Price_it**: log(price as % of GNI per capita)
 - **EaP_i**: dummy for Eastern Partnership countries
 - **X_it**: control variables (GDP, urbanization, education, etc.)

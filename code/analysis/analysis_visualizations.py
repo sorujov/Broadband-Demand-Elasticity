@@ -128,23 +128,23 @@ def create_figure1_temporal_evolution(df_year):
     # Zero reference line
     ax.axhline(y=0, color='black', linestyle='-', linewidth=0.5, alpha=0.4, zorder=1)
 
-    # Plot EU line with significance markers
-    eu_sig = [eu_elasticities[i] if eu_pvals[i] <= 0.10 else np.nan for i in range(len(years))]
-    eu_nonsig = [eu_elasticities[i] if eu_pvals[i] > 0.10 else np.nan for i in range(len(years))]
+    # Plot EU line with significance markers (threshold: p < 0.05)
+    eu_sig = [eu_elasticities[i] if eu_pvals[i] <= 0.05 else np.nan for i in range(len(years))]
+    eu_nonsig = [eu_elasticities[i] if eu_pvals[i] > 0.05 else np.nan for i in range(len(years))]
 
     ax.plot(years, eu_elasticities, '-', color=EU_COLOR, linewidth=1.5, zorder=2)
-    ax.plot(years, eu_sig, 'o', color=EU_COLOR, markersize=5, label='EU (p < 0.10)', zorder=3)
+    ax.plot(years, eu_sig, 'o', color=EU_COLOR, markersize=5, label='EU (p < 0.05)', zorder=3)
     ax.plot(years, eu_nonsig, 'o', markerfacecolor='white', markeredgecolor=EU_COLOR,
-            markeredgewidth=1.2, markersize=5, label='EU (p >= 0.10)', zorder=3)
+            markeredgewidth=1.2, markersize=5, label='EU (p >= 0.05)', zorder=3)
 
-    # Plot EaP line with significance markers
-    eap_sig = [eap_elasticities[i] if eap_pvals[i] <= 0.10 else np.nan for i in range(len(years))]
-    eap_nonsig = [eap_elasticities[i] if eap_pvals[i] > 0.10 else np.nan for i in range(len(years))]
+    # Plot EaP line with significance markers (threshold: p < 0.05)
+    eap_sig = [eap_elasticities[i] if eap_pvals[i] <= 0.05 else np.nan for i in range(len(years))]
+    eap_nonsig = [eap_elasticities[i] if eap_pvals[i] > 0.05 else np.nan for i in range(len(years))]
 
     ax.plot(years, eap_elasticities, '-', color=EAP_COLOR, linewidth=1.5, zorder=2)
-    ax.plot(years, eap_sig, 's', color=EAP_COLOR, markersize=5, label='EaP (p < 0.10)', zorder=3)
+    ax.plot(years, eap_sig, 's', color=EAP_COLOR, markersize=5, label='EaP (p < 0.05)', zorder=3)
     ax.plot(years, eap_nonsig, 's', markerfacecolor='white', markeredgecolor=EAP_COLOR,
-            markeredgewidth=1.2, markersize=5, label='EaP (p >= 0.10)', zorder=3)
+            markeredgewidth=1.2, markersize=5, label='EaP (p >= 0.05)', zorder=3)
 
     # Formatting
     ax.set_xlabel('Year')

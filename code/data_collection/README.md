@@ -71,10 +71,13 @@ python code/data_collection/step1_download_itu.py
 
 ITU provides telecommunications data through two sources:
 1. **Excel File** (NEW - Primary Source): Official price baskets with complete historical data
-   - URL: https://www.itu.int/en/ITU-D/Statistics/Documents/publications/prices2024/ITU_ICTPriceBaskets_2008-2024.xlsx
+   - URL: https://www.itu.int/en/ITU-D/Statistics/Documents/publications/prices2025/ITU_ICTPriceBaskets_2008-2025.xlsx
+   - Sheet: `economies_2008-2025`
    - Contains: Fixed-broadband and Mobile-broadband baskets
    - Format: Wide format (years as columns), reshaped to long format
    - Coverage: 2010-2024 with USD, GNI%, and PPP prices
+   - **Basket succession**: 1 GB basket (Code prefix `i154_FBB`, 2008–2017) → 5 GB basket (Code prefix `i154_FBB5`, 2018–). Both are captured by filtering `Code.startswith('i154_FBB')` — no year overlap exists.
+   - **Filtering**: Uses `Code` column prefix matching (stable across Excel editions; `basket_combined_simplified` column is not used)
    - **Advantage**: 98.4% PPP coverage (487/495 obs) vs API's 42.4% (196 obs)
 
 2. **DataHub API** (Secondary Source): Other telecommunications indicators

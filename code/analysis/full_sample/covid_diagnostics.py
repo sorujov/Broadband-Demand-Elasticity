@@ -197,19 +197,26 @@ for year in range(2015, 2025):
         eu_year = beta_base + beta_year
         eap_year = beta_base + beta_eap + beta_year + beta_triple
 
-        # Standard errors
-        se_year = res.std_errors[f'price_x_year{year}']
-        se_triple = res.std_errors[f'price_x_eap_x_year{year}']
+        # Standard errors using full covariance matrix (correct delta method)
+        cov = res.cov
+        params_index = list(res.params.index)
 
-        se_eu = np.sqrt(res.std_errors[PRIMARY_PRICE]**2 + se_year**2)
-        se_eap = np.sqrt(res.std_errors[PRIMARY_PRICE]**2 + res.std_errors['price_x_eap']**2 + 
-                         se_year**2 + se_triple**2)
+        def combo_se(coef_names):
+            idx = [params_index.index(n) for n in coef_names]
+            a = np.zeros(len(params_index))
+            for i in idx:
+                a[i] = 1.0
+            return np.sqrt(a @ cov.values @ a)
+
+        se_eu = combo_se([PRIMARY_PRICE, f'price_x_year{year}'])
+        se_eap = combo_se([PRIMARY_PRICE, 'price_x_eap',
+                           f'price_x_year{year}', f'price_x_eap_x_year{year}'])
 
         p_eu = 2 * (1 - stats.t.cdf(abs(eu_year/se_eu), df=res.df_resid))
         p_eap = 2 * (1 - stats.t.cdf(abs(eap_year/se_eap), df=res.df_resid))
 
-        sig_eu = "***" if p_eu < 0.01 else "**" if p_eu < 0.05 else "*" if p_eu < 0.10 else ""
-        sig_eap = "***" if p_eap < 0.01 else "**" if p_eap < 0.05 else "*" if p_eap < 0.10 else ""
+        sig_eu = "***" if p_eu < 0.01 else "**" if p_eu < 0.05 else ""
+        sig_eap = "***" if p_eap < 0.01 else "**" if p_eap < 0.05 else ""
 
         covid_marker = " [COVID]" if year >= 2020 else ""
         print(f"{year}{covid_marker:9s}  {eu_year:7.3f}{sig_eu:3s}      {eap_year:7.3f}{sig_eap:3s}    {p_eu:.3f}   {p_eap:.3f}")
@@ -451,3 +458,212 @@ else:
 print(f"\n" + "="*80)
 print(f"DIAGNOSTICS COMPLETE")
 print(f"="*80)
+
+
+# ============================================================================
+# GENERATE LATEX TABLE 4 (Placebo Test) → manuscript/tables/
+# ============================================================================
+
+print("\n" + "="*80)
+print("GENERATING LATEX TABLE 4 (Placebo Test)")
+print("="*80)
+
+try:
+    from code.utils.config import MANUSCRIPT_TABLES_DIR
+except (ImportError, ModuleNotFoundError):
+    try:
+        from utils.config import MANUSCRIPT_TABLES_DIR
+    except ImportError:
+        MANUSCRIPT_TABLES_DIR = BASE_DIR / 'manuscript' / 'tables'
+MANUSCRIPT_TABLES_DIR.mkdir(parents=True, exist_ok=True)
+
+# Use full controls for the table (consistent with main analysis)
+FULL_CONTROLS = [
+    'log_gdp_per_capita', 'urban_population_pct', 'education_tertiary_pct',
+    'regulatory_quality_estimate', 'log_secure_internet_servers',
+    'research_development_expenditure', 'log_population_density',
+    'population_ages_15_64',
+]
+
+# Set panel index
+df_all = pd.read_csv(ANALYSIS_READY_FILE)
+df_all['year_num'] = df_all['year'].astype(int)
+df_all['eap_dummy'] = df_all['country'].isin(EAP_COUNTRIES).astype(float)
+df_all['year_dt_p'] = pd.to_datetime(df_all['year_num'], format='%Y')
+df_all = df_all.set_index(['country', 'year_dt_p'])
+
+# Placebo data: 2010-2019 with late dummy (2015-2019)
+df_plac = df_all[df_all.index.get_level_values('year_dt_p').year <= 2019].copy()
+df_plac['late_dummy'] = (df_plac.index.get_level_values('year_dt_p').year >= 2015).astype(float)
+df_plac['price_x_eap']          = df_plac[PRIMARY_PRICE] * df_plac['eap_dummy']
+df_plac['price_x_late']         = df_plac[PRIMARY_PRICE] * df_plac['late_dummy']
+df_plac['price_x_eap_x_late']   = df_plac[PRIMARY_PRICE] * df_plac['eap_dummy'] * df_plac['late_dummy']
+
+avail_ctrl = [c for c in FULL_CONTROLS if c in df_plac.columns]
+req_plac = [PRIMARY_DV, PRIMARY_PRICE, 'price_x_eap',
+            'price_x_late', 'price_x_eap_x_late'] + avail_ctrl
+df_plac_clean = df_plac[req_plac].dropna()
+
+y_p = df_plac_clean[PRIMARY_DV]
+X_p = df_plac_clean[[PRIMARY_PRICE, 'price_x_eap',
+                      'price_x_late', 'price_x_eap_x_late'] + avail_ctrl]
+res_plac_full = PanelOLS(y_p, X_p, entity_effects=True, time_effects=True).fit(
+    cov_type='kernel', kernel='bartlett', bandwidth=3)
+
+# Early (2010-2014) and late (2015-2019) subsamples
+def run_sub_placebo(df_panel):
+    df_s = df_panel.copy()
+    df_s['price_x_eap'] = df_s[PRIMARY_PRICE] * df_s['eap_dummy']
+    req_s = [PRIMARY_DV, PRIMARY_PRICE, 'price_x_eap'] + avail_ctrl
+    df_s = df_s[req_s].dropna()
+    if len(df_s) < 40:
+        return None
+    y_s = df_s[PRIMARY_DV]
+    X_s = df_s[[PRIMARY_PRICE, 'price_x_eap'] + avail_ctrl]
+    return PanelOLS(y_s, X_s, entity_effects=True, time_effects=True).fit(
+        cov_type='kernel', kernel='bartlett', bandwidth=3)
+
+yr_arr = df_all.index.get_level_values('year_dt_p').year
+res_early = run_sub_placebo(df_all[(yr_arr >= 2010) & (yr_arr <= 2014)])
+res_late  = run_sub_placebo(df_all[(yr_arr >= 2015) & (yr_arr <= 2019)])
+
+
+def fmt4(coef, se, pval):
+    stars = '***' if pval < 0.01 else '**' if pval < 0.05 else '*' if pval < 0.10 else ''
+    if stars:
+        return f'${coef:+.2f}^{{{stars}}}$', f'({se:.2f})'
+    return f'${coef:+.2f}$', f'({se:.2f})'
+
+
+def eap_elast(res):
+    if res is None:
+        return '--', ''
+    b1 = res.params[PRIMARY_PRICE]; b2 = res.params['price_x_eap']
+    s1 = res.std_errors[PRIMARY_PRICE]; s2 = res.std_errors['price_x_eap']
+    eb = b1 + b2; es = np.sqrt(s1**2 + s2**2)
+    ep = 2 * (1 - stats.t.cdf(abs(eb / es), df=res.df_resid))
+    return fmt4(eb, es, ep)
+
+
+# Full placebo model values
+b_pr   = res_plac_full.params[PRIMARY_PRICE]
+se_pr  = res_plac_full.std_errors[PRIMARY_PRICE]
+p_pr   = res_plac_full.pvalues[PRIMARY_PRICE]
+b_eap  = res_plac_full.params['price_x_eap']
+se_eap = res_plac_full.std_errors['price_x_eap']
+p_eap  = res_plac_full.pvalues['price_x_eap']
+b_lat  = res_plac_full.params['price_x_late']
+se_lat = res_plac_full.std_errors['price_x_late']
+p_lat  = res_plac_full.pvalues['price_x_late']
+b_tri  = res_plac_full.params['price_x_eap_x_late']
+se_tri = res_plac_full.std_errors['price_x_eap_x_late']
+p_tri  = res_plac_full.pvalues['price_x_eap_x_late']
+
+# Implied elasticities
+eu_early_b  = b_pr;                           eu_early_se = se_pr;       eu_early_pv = p_pr
+eu_late_b   = b_pr + b_lat;                   eu_late_se  = np.sqrt(se_pr**2 + se_lat**2)
+eu_late_pv  = 2*(1-stats.t.cdf(abs(eu_late_b/eu_late_se), df=res_plac_full.df_resid))
+eap_early_b = b_pr + b_eap;                   eap_early_se = np.sqrt(se_pr**2 + se_eap**2)
+eap_early_pv = 2*(1-stats.t.cdf(abs(eap_early_b/eap_early_se), df=res_plac_full.df_resid))
+eap_late_b  = b_pr + b_eap + b_lat + b_tri;   eap_late_se = np.sqrt(se_pr**2+se_eap**2+se_lat**2+se_tri**2)
+eap_late_pv = 2*(1-stats.t.cdf(abs(eap_late_b/eap_late_se), df=res_plac_full.df_resid))
+
+c_pr,     s_pr     = fmt4(b_pr,        se_pr,        p_pr)
+c_eap_int, s_eap_int = fmt4(b_eap,     se_eap,       p_eap)
+c_lat,    s_lat    = fmt4(b_lat,       se_lat,       p_lat)
+c_tri,    s_tri    = fmt4(b_tri,       se_tri,       p_tri)
+c_eu_e,   s_eu_e  = fmt4(eu_early_b,  eu_early_se,  eu_early_pv)
+c_eu_l,   s_eu_l  = fmt4(eu_late_b,   eu_late_se,   eu_late_pv)
+c_eap_e,  s_eap_e = fmt4(eap_early_b, eap_early_se, eap_early_pv)
+c_eap_l,  s_eap_l = fmt4(eap_late_b,  eap_late_se,  eap_late_pv)
+
+c2_eu,  s2_eu  = (fmt4(res_early.params[PRIMARY_PRICE],
+                        res_early.std_errors[PRIMARY_PRICE],
+                        res_early.pvalues[PRIMARY_PRICE]) if res_early else ('--', ''))
+c3_eu,  s3_eu  = (fmt4(res_late.params[PRIMARY_PRICE],
+                        res_late.std_errors[PRIMARY_PRICE],
+                        res_late.pvalues[PRIMARY_PRICE]) if res_late else ('--', ''))
+c2_eap, s2_eap = eap_elast(res_early)
+c3_eap, s3_eap = eap_elast(res_late)
+
+n1 = int(res_plac_full.nobs)
+n2 = int(res_early.nobs) if res_early else '--'
+n3 = int(res_late.nobs)  if res_late  else '--'
+
+lines = [
+    r'\begin{table}[p]',
+    r'\centering',
+    r'\caption{Placebo Test: Pre-COVID Trends (2010--2019)}',
+    r'\label{tab:placebo}',
+    r'\begin{minipage}{\textwidth}',
+    r'\begin{adjustbox}{width=\textwidth}',
+    r'\setlength{\tabcolsep}{3pt}',
+    r'\renewcommand{\arraystretch}{0.85}',
+    r'\begin{tabular}{@{}lccc@{}}',
+    r'\toprule',
+    r'& \multicolumn{3}{c}{Dependent Variable: Log(Subs. per 100)} \\',
+    r'\cmidrule(lr){2-4}',
+    r'& (1) & (2) & (3) \\',
+    r'& Full Sample & Early & Late \\',
+    r'& 2010--19 & 2010--14 & 2015--19 \\',
+    r'\midrule',
+    r'\textbf{Panel A: EU Countries} \\',
+    f'Log(Price) & {c_pr} & {c2_eu} & {c3_eu} \\\\',
+    f'& {s_pr} & {s2_eu} & {s3_eu} \\\\',
+    f'Log(Price) $\\times$ Late & {c_lat} & -- & -- \\\\',
+    f'& {s_lat} & & \\\\',
+    f'\\textit{{Implied late elasticity}} & {c_eu_l} & -- & {c3_eu} \\\\',
+    f'& {s_eu_l} & & {s3_eu} \\\\',
+    r'\midrule',
+    r'\textbf{Panel B: EaP Countries} \\',
+    f'Log(Price) $\\times$ EaP & {c_eap_int} & {c2_eap} & {c3_eap} \\\\',
+    f'& {s_eap_int} & {s2_eap} & {s3_eap} \\\\',
+    f'Log(Price) $\\times$ EaP $\\times$ Late & {c_tri} & -- & -- \\\\',
+    f'& {s_tri} & & \\\\',
+    f'\\textit{{Implied early EaP elasticity}} & {c_eap_e} & {c2_eap} & -- \\\\',
+    f'& {s_eap_e} & {s2_eap} & \\\\',
+    f'\\textit{{Implied late EaP elasticity}} & {c_eap_l} & -- & {c3_eap} \\\\',
+    f'& {s_eap_l} & & {s3_eap} \\\\',
+    r'\midrule',
+    r'\textbf{Panel C: Change in Elasticity} \\',
+    f'$\\Delta\\varepsilon_{{EU}}$ (Late -- Early) & {c_lat} & -- & -- \\\\',
+    f'& {s_lat} & & \\\\',
+    f'p-value & {p_lat:.3f} & -- & -- \\\\',
+    f'$\\Delta\\varepsilon_{{EaP}}$ (Late -- Early) & {c_tri} & -- & -- \\\\',
+    f'& {s_tri} & & \\\\',
+    f'p-value & {p_tri:.3f} & -- & -- \\\\',
+    r'\midrule',
+    r'\textbf{Panel D: Model Statistics} \\',
+    f'Full controls & Yes & Yes & Yes \\\\',
+    f'Country FE & Yes & Yes & Yes \\\\',
+    f'Year FE & Yes & Yes & Yes \\\\',
+    f'Observations & {n1} & {n2} & {n3} \\\\',
+    f'Countries & 33 & 33 & 33 \\\\',
+    f'R-squared & {res_plac_full.rsquared:.2f} & ' +
+    (f'{res_early.rsquared:.2f}' if res_early else '--') +
+    ' & ' + (f'{res_late.rsquared:.2f}' if res_late else '--') + ' \\\\',
+    r'\bottomrule',
+    r'\end{tabular}',
+    r'\end{adjustbox}',
+    r'\par\vspace{4pt}',
+    r'\scriptsize',
+    r'\textit{Notes:} Dependent variable: log fixed broadband subscriptions per 100.',
+    r"Price: \% of GNI per capita. ``Late'' is a placebo indicator for 2015--2019.",
+    r'EaP denotes Eastern Partnership countries. Column~(1) estimates the full placebo',
+    r'interaction on 2010--2019; Columns~(2)--(3) report subsamples for 2010--2014 (early)',
+    r'and 2015--2019 (late). Controls: log GDP per capita, urbanization (\%), tertiary',
+    r'enrollment (\%), regulatory quality, log secure servers, R\&D (\% GDP), log population',
+    r'density, and age dependency ratio. Driscoll--Kraay SEs (bandwidth~=~3) in parentheses.',
+    r'$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.',
+    r'\end{minipage}',
+    r'\end{table}',
+]
+
+table4_path = MANUSCRIPT_TABLES_DIR / 'table4_placebo.tex'
+with open(table4_path, 'w', encoding='utf-8') as f:
+    f.write('\n'.join(lines) + '\n')
+print(f"\n[OK] Table 4 written → {table4_path}")
+
+print("\n" + "="*80)
+print("✓ LATEX TABLE GENERATION COMPLETE")
+print("="*80)

@@ -1,0 +1,34 @@
+\begin{table}[htbp]
+\centering
+\caption{Sample Restriction Robustness Checks (Pre-COVID Baseline, Full Controls, GNI\%-price)}
+\label{tab:sample_restrictions}
+\begin{threeparttable}
+\begin{adjustbox}{max width=\textwidth}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{2}{c}{EU Elasticity} & \multicolumn{2}{c}{EaP Elasticity} & & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Sample Restriction & Coef. & SE & Coef. & SE & $N$ & Countries \\
+\midrule
+Full sample (baseline)               & $-0.115^{**}$  & (0.055) & $-0.609^{***}$ & (0.062) & 330 & 33 \\
+Balanced panel only                  & $-0.115^{**}$  & (0.055) & $-0.609^{***}$ & (0.062) & 330 & 33 \\
+Excl.\ outliers (Cook's $d>4/N$)     & $-0.121^{**}$  & (0.058) & $-0.608^{***}$ & (0.063) & 309 & 31 \\
+High-income countries only           & $-0.090^{***}$ & (0.027) & \multicolumn{2}{c}{---}             & 170 & 17 \\
+Middle/lower-income only             & $-0.006$       & (0.134) & $-0.429^{***}$ & (0.095) & 160 & 16 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}[para,flushleft]
+\small\sloppy
+\item \textit{Notes:} All models estimated with two-way fixed effects (country and year)
+and Driscoll--Kraay standard errors (bandwidth = 3) in parentheses. Price variable is
+log fixed broadband price as \% of GNI per capita (Full Controls specification,
+pre-COVID 2010--2019). High/middle-income split uses median country-level GDP per capita
+(constant 2015 USD) over 2010--2019. Cook's distance threshold is $4/N$ where
+$N$ is number of observations. High-income subsample contains only EU countries,
+so EaP elasticity is not identified (---).
+$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

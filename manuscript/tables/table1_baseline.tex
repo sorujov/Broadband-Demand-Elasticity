@@ -2,7 +2,7 @@
 \centering
 \caption{Baseline Two-Way Fixed Effects Estimates: Pre-COVID Period (2010--2019)}
 \label{tab:baseline}
-\begin{threeparttable}
+\begin{minipage}{\textwidth}
 \begin{adjustbox}{width=\textwidth}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -15,56 +15,59 @@
 & GDP Only & + Socio & + Instit. & + Infra. & + Demog. & + All & Full \\
 \midrule
 \textbf{Panel A: Price Elasticity} \\
-Log(Price) & $-0.09^{*}$ & $-0.10^{**}$ & $-0.11^{**}$ & $-0.12^{**}$ & $-0.11^{**}$ & $-0.12^{**}$ & $-0.12^{**}$ \\
-& (0.04) & (0.04) & (0.04) & (0.05) & (0.04) & (0.05) & (0.05) \\
+Log(Price) & $-0.08^{*}$ & $-0.14^{***}$ & $-0.15^{***}$ & $-0.10^{*}$ & $-0.09$ & $-0.09$ & $-0.10^{*}$ \\
+& (0.04) & (0.04) & (0.04) & (0.06) & (0.06) & (0.06) & (0.05) \\
 \\
-Log(Price) $\times$ EaP & $-0.47^{***}$ & $-0.48^{***}$ & $-0.49^{***}$ & $-0.50^{***}$ & $-0.48^{***}$ & $-0.49^{***}$ & $-0.49^{***}$ \\
-& (0.09) & (0.09) & (0.09) & (0.09) & (0.09) & (0.09) & (0.09) \\
+Log(Price) $\times$ EaP & $-0.53^{***}$ & $-0.48^{***}$ & $-0.46^{***}$ & $-0.48^{***}$ & $-0.48^{***}$ & $-0.48^{***}$ & $-0.49^{***}$ \\
+& (0.08) & (0.05) & (0.05) & (0.07) & (0.07) & (0.07) & (0.05) \\
 \\
-\textit{Implied EaP elasticity} & $-0.56^{***}$ & $-0.58^{***}$ & $-0.60^{***}$ & $-0.62^{***}$ & $-0.59^{***}$ & $-0.61^{***}$ & $-0.61^{***}$ \\
-& (0.08) & (0.08) & (0.08) & (0.08) & (0.08) & (0.08) & (0.08) \\
+\textit{Implied EaP elasticity} & \textit{$-0.62^{***}$} & \textit{$-0.62^{***}$} & \textit{$-0.61^{***}$} & \textit{$-0.58^{***}$} & \textit{$-0.57^{***}$} & \textit{$-0.57^{***}$} & \textit{$-0.60^{***}$} \\
+& \textit{(0.09)} & \textit{(0.06)} & \textit{(0.06)} & \textit{(0.09)} & \textit{(0.09)} & \textit{(0.09)} & \textit{(0.08)} \\
+\\
 \midrule
 \textbf{Panel B: Control Variables} \\
-Log(GDP per capita) & $0.38^{***}$ & $0.40^{***}$ & $0.41^{***}$ & $0.42^{***}$ & $0.40^{***}$ & $0.42^{***}$ & $0.42^{***}$ \\
-& (0.06) & (0.06) & (0.06) & (0.06) & (0.06) & (0.06) & (0.06) \\
+Log(GDP per capita) & $0.19^{***}$ & $0.22^{***}$ & $0.21^{***}$ & $0.22^{***}$ & $0.27^{***}$ & $0.27^{***}$ & $0.23^{***}$ \\
+& (0.07) & (0.07) & (0.06) & (0.08) & (0.08) & (0.08) & (0.07) \\
 \\
-Urban population (\%) & & $0.012^{**}$ & $0.011^{**}$ & $0.010^{*}$ & $0.011^{**}$ & $0.010^{*}$ & $0.010^{*}$ \\
-& & (0.005) & (0.005) & (0.005) & (0.005) & (0.005) & (0.005) \\
+Urban population (\%) &  & $0.01$ & $0.01$ & $0.01$ & $0.01$ & $0.01$ & $0.01$ \\
+&  & (0.01) & (0.01) & (0.01) & (0.01) & (0.01) & (0.01) \\
 \\
-Tertiary enrollment (\%) & & $0.008^{**}$ & $0.007^{*}$ & $0.007^{*}$ & $0.008^{**}$ & $0.007^{*}$ & $0.007^{*}$ \\
-& & (0.003) & (0.003) & (0.003) & (0.003) & (0.003) & (0.003) \\
+Tertiary enrollment (\%) &  & $0.01^{***}$ & $0.01^{***}$ & $0.01^{***}$ & $0.01^{***}$ & $0.01^{***}$ & $0.01^{***}$ \\
+&  & (0.00) & (0.00) & (0.00) & (0.00) & (0.00) & (0.00) \\
 \\
-Regulatory quality & & & $0.15^{*}$ & $0.14^{*}$ & $0.15^{*}$ & $0.14^{*}$ & $0.14^{*}$ \\
-& & & (0.07) & (0.07) & (0.07) & (0.07) & (0.07) \\
+Regulatory quality &  &  & $0.06^{**}$ & $0.02$ & $0.04$ & $0.04$ & $0.03$ \\
+&  &  & (0.03) & (0.04) & (0.03) & (0.03) & (0.03) \\
 \\
-Log(Secure servers) & & & & $0.08^{**}$ & $0.09^{**}$ & $0.08^{**}$ & $0.08^{**}$ \\
-& & & & (0.03) & (0.03) & (0.03) & (0.03) \\
+Log(Secure servers) &  &  &  & $0.05^{**}$ & $0.08^{**}$ & $0.08^{**}$ & $0.07^{**}$ \\
+&  &  &  & (0.02) & (0.03) & (0.03) & (0.03) \\
 \\
-R\&D (\% GDP) & & & & $0.09^{*}$ & $0.10^{*}$ & $0.09^{*}$ & $0.09^{*}$ \\
-& & & & (0.04) & (0.04) & (0.04) & (0.04) \\
+R\&D (\% GDP) &  &  &  & $0.03$ & $0.05^{**}$ & $0.05^{**}$ & $0.04^{**}$ \\
+&  &  &  & (0.03) & (0.02) & (0.02) & (0.02) \\
 \\
-Log(Population density) & & & & & $0.06$ & $0.07$ & $0.07$ \\
-& & & & & (0.08) & (0.08) & (0.08) \\
+Log(Population density) &  &  &  &  & $0.89^{***}$ & $0.89^{***}$ & $0.84^{***}$ \\
+&  &  &  &  & (0.19) & (0.19) & (0.17) \\
 \\
-Age dependency ratio & & & & & $-0.003$ & $-0.004$ & $-0.004$ \\
-& & & & & (0.004) & (0.004) & (0.004) \\
+Age dependency ratio &  &  &  &  & $0.01$ & $0.01$ & $0.01$ \\
+&  &  &  &  & (0.01) & (0.01) & (0.01) \\
+\\
 \midrule
 \textbf{Panel C: Model Statistics} \\
 Country fixed effects & Yes & Yes & Yes & Yes & Yes & Yes & Yes \\
 Year fixed effects & Yes & Yes & Yes & Yes & Yes & Yes & Yes \\
-Observations & 297 & 297 & 297 & 297 & 297 & 297 & 297 \\
+Observations & 330 & 330 & 330 & 330 & 330 & 330 & 330 \\
 Countries & 33 & 33 & 33 & 33 & 33 & 33 & 33 \\
-R-squared & 0.89 & 0.90 & 0.91 & 0.91 & 0.91 & 0.92 & 0.92 \\
+R-squared & 0.27 & 0.34 & 0.34 & 0.37 & 0.39 & 0.39 & 0.40 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\begin{tablenotes}[flushleft]
+\par\vspace{4pt}
 \scriptsize
-\item \textit{Notes:} Dependent variable is log of fixed broadband subscriptions per 100 inhabitants. 
-Price is measured as percentage of GNI per capita. EaP is a dummy for Eastern Partnership countries 
-(Armenia, Azerbaijan, Belarus, Georgia, Moldova, Ukraine). All specifications include country and year 
-fixed effects. Driscoll--Kraay standard errors (bandwidth = 3) in parentheses. 
-$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
-\end{tablenotes}
-\end{threeparttable}
+\textit{Notes:} Dependent variable is log of fixed broadband subscriptions per 100 inhabitants.
+Price is measured as percentage of GNI per capita. EaP is a dummy for Eastern Partnership countries
+(Armenia, Azerbaijan, Belarus, Georgia, Moldova, Ukraine). Columns~(6) and~(7) both include all
+non-macro controls; column~(7) additionally includes GDP growth and inflation rate (coefficients
+not shown; their inclusion does not change the elasticity estimates).
+All specifications include country and year fixed effects. Driscoll--Kraay standard errors
+(bandwidth = 3) in parentheses. $^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\end{minipage}
 \end{table}

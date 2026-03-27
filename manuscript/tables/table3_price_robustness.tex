@@ -1,52 +1,51 @@
 \begin{table}[p]
 \centering
-\caption{Robustness to Alternative Price Measures: Pre-COVID Period (2010--2019)}
+\caption{Price Elasticity Robustness: Alternative Price Measures and Control Specifications (Pre-COVID)}
 \label{tab:price_robustness}
-\begin{threeparttable}
+\begin{minipage}{\textwidth}
 \begin{adjustbox}{width=\textwidth}
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{0.9}
-\begin{tabular}{@{}lcccccc@{}}
+\small
+\begin{tabular}{llcccccccc}
 \toprule
-& \multicolumn{6}{c}{Price Measurement} \\
-\cmidrule(lr){2-7}
-& \multicolumn{2}{c}{Income-Relative} & \multicolumn{2}{c}{PPP-Adjusted} & \multicolumn{2}{c}{Nominal USD} \\
-\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
-& EU & EaP & EU & EaP & EU & EaP \\
-& (1) & (2) & (3) & (4) & (5) & (6) \\
+Price Measure & Control Spec & EU Elast. & EU SE & EU p & EaP Elast. & EaP SE & EaP p & N & R$^2$ \\
 \midrule
-\textbf{Price Elasticity} \\
-Log(Price) & $-0.12^{**}$ & -- & $-0.14^{**}$ & -- & $-0.09^{*}$ & -- \\
-& (0.05) & & (0.05) & & (0.05) & \\
-\\
-Log(Price) $\times$ EaP & -- & $-0.49^{***}$ & -- & $-0.50^{***}$ & -- & $-0.48^{***}$ \\
-& & (0.09) & & (0.10) & & (0.10) \\
-\\
-\textit{Implied EaP elasticity} & -- & $-0.61^{***}$ & -- & $-0.64^{***}$ & -- & $-0.57^{***}$ \\
-& & (0.08) & & (0.09) & & (0.09) \\
-\midrule
-\textbf{Model Statistics} \\
-Full controls & Yes & Yes & Yes & Yes & Yes & Yes \\
-Country FE & Yes & Yes & Yes & Yes & Yes & Yes \\
-Year FE & Yes & Yes & Yes & Yes & Yes & Yes \\
-Observations & 297 & 297 & 297 & 297 & 297 & 297 \\
-R-squared & 0.92 & 0.92 & 0.91 & 0.91 & 0.90 & 0.90 \\
+\multicolumn{10}{l}{\textit{Price: GNI\%}} \\
+ & Full Controls (Baseline) & $-0.101^{*}$ & (0.053) & 0.056 & $-0.595^{***}$ & (0.076) & 0.000 & 330 & 0.40 \\
+ & Comprehensive & $-0.101^{*}$ & (0.054) & 0.063 & $-0.570^{***}$ & (0.085) & 0.000 & 330 & 0.36 \\
+ & Core & $-0.142^{***}$ & (0.042) & 0.001 & $-0.618^{***}$ & (0.061) & 0.000 & 330 & 0.34 \\
+ & Institutional & $-0.090^{**}$ & (0.043) & 0.040 & $-0.604^{***}$ & (0.087) & 0.000 & 330 & 0.28 \\
+ & Infrastructure & $-0.033$ & (0.074) & 0.655 & $-0.596^{***}$ & (0.117) & 0.000 & 330 & 0.30 \\
+ & Demographic & $-0.104^{***}$ & (0.028) & 0.000 & $-0.621^{***}$ & (0.059) & 0.000 & 330 & 0.28 \\
+ & Macroeconomic & $-0.094^{**}$ & (0.040) & 0.019 & $-0.631^{***}$ & (0.066) & 0.000 & 330 & 0.30 \\
+ & Minimal & $-0.082^{*}$ & (0.042) & 0.050 & $-0.615^{***}$ & (0.086) & 0.000 & 330 & 0.27 \\
+\addlinespace
+\multicolumn{10}{l}{\textit{Price: PPP}} \\
+ & Full Controls (Baseline) & $-0.087^{*}$ & (0.052) & 0.094 & $-0.201^{*}$ & (0.119) & 0.092 & 330 & 0.22 \\
+ & Comprehensive & $-0.092^{*}$ & (0.055) & 0.095 & $-0.211^{**}$ & (0.106) & 0.047 & 330 & 0.19 \\
+ & Core & $-0.125^{**}$ & (0.063) & 0.048 & $-0.244^{**}$ & (0.096) & 0.012 & 330 & 0.13 \\
+ & Institutional & $-0.116^{**}$ & (0.052) & 0.027 & $-0.164$ & (0.110) & 0.136 & 330 & 0.07 \\
+ & Infrastructure & $-0.081$ & (0.050) & 0.107 & $-0.155$ & (0.118) & 0.191 & 330 & 0.09 \\
+ & Demographic & $-0.123^{*}$ & (0.063) & 0.052 & $-0.180^{*}$ & (0.102) & 0.079 & 330 & 0.06 \\
+ & Macroeconomic & $-0.104^{**}$ & (0.048) & 0.031 & $-0.168$ & (0.124) & 0.179 & 330 & 0.08 \\
+ & Minimal & $-0.112^{**}$ & (0.051) & 0.030 & $-0.177^{*}$ & (0.107) & 0.098 & 330 & 0.05 \\
+\addlinespace
+\multicolumn{10}{l}{\textit{Price: USD}} \\
+ & Full Controls (Baseline) & $-0.098^{**}$ & (0.039) & 0.014 & $-0.340^{***}$ & (0.067) & 0.000 & 330 & 0.29 \\
+ & Comprehensive & $-0.099^{**}$ & (0.039) & 0.012 & $-0.337^{***}$ & (0.060) & 0.000 & 330 & 0.26 \\
+ & Core & $-0.124^{***}$ & (0.042) & 0.003 & $-0.390^{***}$ & (0.056) & 0.000 & 330 & 0.23 \\
+ & Institutional & $-0.100^{***}$ & (0.031) & 0.001 & $-0.332^{***}$ & (0.065) & 0.000 & 330 & 0.14 \\
+ & Infrastructure & $-0.064$ & (0.041) & 0.120 & $-0.326^{***}$ & (0.072) & 0.000 & 330 & 0.16 \\
+ & Demographic & $-0.115^{***}$ & (0.039) & 0.004 & $-0.356^{***}$ & (0.058) & 0.000 & 330 & 0.14 \\
+ & Macroeconomic & $-0.090^{***}$ & (0.030) & 0.003 & $-0.344^{***}$ & (0.066) & 0.000 & 330 & 0.16 \\
+ & Minimal & $-0.094^{***}$ & (0.029) & 0.002 & $-0.348^{***}$ & (0.065) & 0.000 & 330 & 0.14 \\
+\addlinespace
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\begin{tablenotes}[flushleft]
-\scriptsize
-\begin{minipage}{\textwidth}
-\item \textit{Notes:} Dependent variable is log of fixed broadband subscriptions per 100 inhabitants. 
-Columns (1)--(2) use income-relative prices (price as \% of GNI per capita) as baseline. 
-Columns (3)--(4) use PPP-adjusted prices in international dollars. Columns (5)--(6) use nominal 
-USD prices. All specifications include full controls: log GDP per capita, urban population \%, 
-tertiary enrollment \%, regulatory quality, log secure servers, R\&D \% GDP, log population 
-density, and age dependency ratio. EaP is a dummy for Eastern Partnership countries 
-(Armenia, Azerbaijan, Belarus, Georgia, Moldova, Ukraine). Driscoll--Kraay standard errors 
-(bandwidth = 3) in parentheses. $^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\par\vspace{4pt}
+\small
+\textit{Notes:} Each row is a separate regression. All specifications include country
+and year fixed effects. Driscoll--Kraay standard errors in parentheses.
+$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
 \end{minipage}
-\end{tablenotes}
-\end{threeparttable}
 \end{table}

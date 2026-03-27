@@ -130,13 +130,21 @@ class PipelineRunner:
 
         scripts = [
             (self.code_dir / 'analysis' / 'pre_covid' / 'two_way_fe.py',
-             "Pre-COVID analysis (2010-2019): 8 control specs × 3 price measures"),
+             "Pre-COVID analysis (2010-2019): 8 control specs × 3 price measures → table1, table3"),
             (self.code_dir / 'analysis' / 'full_sample' / 'two_way_fe_full_sample.py',
-             "Full sample analysis (2010-2024): COVID interactions"),
+             "Full sample analysis (2010-2024): COVID interactions → table2, table4"),
             (self.code_dir / 'analysis' / 'full_sample' / 'covid_diagnostics.py',
              "COVID diagnostics: year-by-year elasticities and placebo tests"),
+            (self.code_dir / 'analysis' / 'full_sample' / 'period_split_analysis.py',
+             "Period-split: Pre-COVID / Acute COVID (2020-21) / Post-Acute (2022-24) → table5"),
+            (self.code_dir / 'analysis' / 'robustness' / 'iv_estimation.py',
+             "IV robustness: 2SLS with mobile broadband price instrument → table6"),
+            (self.code_dir / 'analysis' / 'robustness' / 'eap_jackknife.py',
+             "EaP jackknife: leave-one-country-out robustness → table7"),
             (self.code_dir / 'analysis' / 'analysis_visualizations.py',
-             "Generate publication-quality figures (6 figures, 300 DPI)"),
+             "Generate publication-quality figures → manuscript/figures/"),
+            (self.code_dir / 'analysis' / 'generate_paper_macros.py',
+             "Generate LaTeX macros → manuscript/paper_macros.tex"),
         ]
 
         for script_path, description in scripts:
@@ -151,8 +159,10 @@ class PipelineRunner:
 
         print("\nStage 3 completed: All analyses finished")
         print(f"   Results:")
-        print(f"      - Excel files: results/regression_output/")
-        print(f"      - Figures: results/figures/")
+        print(f"      - Excel files:       results/regression_output/")
+        print(f"      - LaTeX tables:      manuscript/tables/  (auto-generated)")
+        print(f"      - Figures:           manuscript/figures/ (auto-generated)")
+        print(f"      - LaTeX macros:      manuscript/paper_macros.tex (auto-generated)")
         return True
             
     def run_full_pipeline(self, skip_collection=False, skip_preparation=False, analysis_only=False):

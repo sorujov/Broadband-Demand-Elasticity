@@ -56,7 +56,11 @@
 }
 
 % Journal information (update as needed for target journal)
-\journal{}
+\journal{Information Economics and Policy}
+
+% Auto-generated macros (numbers from regression outputs)
+% Regenerate with: python code/analysis/generate_paper_macros.py
+\input{paper_macros}
 
 % ============================================================================
 % DOCUMENT
@@ -78,7 +82,7 @@
 \title{The Transformation of Broadband Demand: From Discretionary Service to Essential Infrastructure (2010--2024)}
 
 % Authors
-\author[ada,icta]{Samir Orujov\corref{cor1}}
+\author[ada,icta,unec,ubs]{Samir Orujov\corref{cor1}}
 \ead{sorujov@ada.edu.az}
 \cortext[cor1]{Corresponding author}
 
@@ -100,6 +104,14 @@
                   city={Prague},
                   country={Czech Republic}}
 
+\affiliation[unec]{organization={Azerbaijan State University of Economics (UNEC)},
+                  city={Baku},
+                  country={Azerbaijan}}
+
+\affiliation[ubs]{organization={Université de Bretagne Sud},
+                  city={Lorient},
+                  country={France}}
+
 % Abstract
 \begin{abstract}
 \input{sections/abstract}
@@ -107,17 +119,16 @@
 
 % Keywords
 \begin{keyword}
-Broadband demand \sep Price elasticity \sep Panel data \sep Eastern Partnership \sep European Union \sep COVID-19 \sep Digital transformation \sep Two-way fixed effects
+Broadband demand \sep Price elasticity \sep Panel data \sep Eastern Partnership \sep European Union \sep COVID-19 \sep Digital transformation
 \end{keyword}
 
-% Highlights (optional; commented out to reduce frontmatter height for submission)
-%\begin{highlights}
-%\item Broadband demand evolved from price-elastic ($\varepsilon = -0.61$) to price-inelastic ($\varepsilon \approx 0$) over 2010--2024
-%\item EaP countries were 5$\times$ more price-sensitive than EU countries pre-COVID, then converged
-%\item Transformation began in 2015---not 2020---ruling out COVID-19 as the causal shock
-%\item Income-relative prices yield significant results in 100\% of specifications vs. 25\% for PPP prices
-%\item Policy must shift from affordability subsidies to infrastructure deployment as markets mature
-%\end{highlights}
+\begin{highlights}
+\item Broadband price elasticity declined from $-0.61$ (EaP) and $-0.12$ (EU) to $\approx$0 by 2020
+\item EaP countries were 5$\times$ more price-elastic than EU countries pre-COVID, then converged
+\item Transformation began in 2015---not 2020---ruling out COVID-19 as the sole causal shock
+\item GNI-based prices give significant results in all specs; PPP in only 25\% of EaP specs
+\item Policy must shift from price subsidies to infrastructure deployment as demand matures
+\end{highlights}
 
 \end{frontmatter}
 
@@ -170,7 +181,7 @@ Broadband demand \sep Price elasticity \sep Panel data \sep Eastern Partnership 
 % ============================================================================
 
 \section*{Acknowledgments}
-The authors acknowledge the support of ADA University and the Information and Communication Technology Agency of the Republic of Azerbaijan. The views expressed in this paper are those of the authors and do not necessarily reflect the official positions of the affiliated institutions. Data were obtained from the International Telecommunication Union (ITU) and World Bank open data portals.
+The authors thank Daniel Vertesy and Esperanza Magpantay of the ITU Statistics Division for clarifications on price basket definitions and data coverage. The authors also acknowledge the support of the Information and Communication Technologies Agency of the Republic of Azerbaijan. The views expressed in this paper are those of the authors and do not necessarily reflect the official positions of the affiliated institutions. Data were obtained from the International Telecommunication Union (ITU) and World Bank open data portals.
 
 % ============================================================================
 % DECLARATIONS
@@ -191,12 +202,13 @@ The data used in this study are publicly available from the International Teleco
 
 \section{Regression Tables}
 \label{app:tables}
+\setcounter{table}{0}
 
 This appendix presents the complete regression results referenced in the main text. All models use two-way fixed effects (country and year) with Driscoll--Kraay standard errors robust to heteroskedasticity, serial correlation, and cross-sectional dependence (bandwidth = 3).
 
 \subsection{Baseline Pre-COVID Results}
 
-Table~\ref{tab:baseline} presents the baseline estimates for the pre-COVID period (2010--2019) across eight control specifications.
+Table~\ref{tab:baseline} presents the baseline estimates for the pre-COVID period (2010--2019) across seven control specifications.
 
 \input{tables/table1_baseline}
 
@@ -221,76 +233,76 @@ Table~\ref{tab:placebo} presents the placebo test splitting the pre-COVID period
 \clearpage
 \section{Additional Robustness Checks}
 \label{app:robustness}
+\setcounter{table}{0}
 
-\subsection{Control Variable Specifications}
+\subsection{Period-Split: Acute vs.\ Post-Acute COVID}
 
-The baseline results in Table~\ref{tab:baseline} present eight control specifications designed to test sensitivity to different variable combinations:
+Table~\ref{tab:period_split} decomposes the COVID period (2020--2024) into an acute phase
+(2020--2021) and a post-acute phase (2022--2024). Both sub-periods exhibit near-zero
+elasticity for EU and EaP countries, confirming that the disappearance of price sensitivity
+is not driven solely by the acute pandemic shock. Panel~B excludes Ukraine and Belarus---whose
+data reliability is compromised by war and sanctions---and reaches the same conclusion.
 
-\begin{enumerate}
-    \item \textbf{GDP Only:} Minimal specification with log GDP per capita as the sole control
-    \item \textbf{+ Socioeconomic:} Adds urban population percentage and tertiary enrollment rate
-    \item \textbf{+ Institutional:} Adds regulatory quality index from World Bank WGI
-    \item \textbf{+ Infrastructure:} Adds log secure servers per million and R\&D expenditure as \% of GDP
-    \item \textbf{+ Demographic:} Adds log population density and age dependency ratio
-    \item \textbf{Full Controls:} All variables included simultaneously
-\end{enumerate}
+\input{tables/table5_period_split}
 
-Results are remarkably stable across specifications. EaP elasticity ranges from $-0.56$ to $-0.63$ (mean $-0.61$, standard deviation $0.04$). All estimates are significant at the 1\% level. This stability indicates that omitted variable bias is minimal and that the main results are not driven by particular control variable choices.
+\subsection{IV Robustness: 2SLS Estimates}
 
-\subsection{Price Measurement Robustness}
+Table~\ref{tab:iv_robustness} presents 2SLS estimates using the log mobile broadband price as
+an instrument for fixed broadband price. Mobile and fixed broadband share common supply-side
+cost drivers (network infrastructure, spectrum, regulatory fees), while mobile price is
+plausibly exogenous to unobserved fixed broadband demand shocks. The first-stage $F$-statistic
+is 9.1 for the pre-COVID specification (borderline) and 17.7 for the full sample, indicating
+adequate but not strong instrument relevance. The EaP pre-COVID 2SLS estimate is $-1.56$
+(p$=$0.043), consistent in direction with the OLS baseline ($-0.61$) and suggesting the OLS
+may understate the true elasticity magnitude due to classical measurement error in prices. The
+EU 2SLS estimate is imprecise (SE $> 4$), reflecting instrument weakness for the EU equation
+specifically; the broad confidence interval is uninformative for EU. The full-sample 2SLS
+with COVID interactions yields very wide standard errors, limiting interpretability. Overall,
+the IV evidence corroborates rather than contradicts the OLS results: demand is negatively
+price-elastic in EaP countries, and simultaneity bias does not appear to inflate the OLS
+estimate above its true value.
 
-Table~\ref{tab:price_robustness} examines three alternative price measures:
+\input{tables/table6_iv_robustness}
 
-\begin{itemize}
-    \item \textbf{Income-relative prices} (baseline): Price as percentage of GNI per capita. This captures affordability from the consumer's budget perspective and is recommended by ITU for affordability targets.
-    \item \textbf{PPP-adjusted prices}: Prices adjusted for purchasing power parity using World Bank ICP data. This controls for cross-country differences in cost of living.
-    \item \textbf{Nominal USD prices}: Raw prices in US dollars. This provides a common metric but ignores purchasing power differences.
-\end{itemize}
+\subsection{EaP Jackknife: Leave-One-Country-Out}
 
-Results are consistent across all three measures. EaP elasticity ranges from $-0.57$ to $-0.64$, all significant at the 1\% level. EU elasticity ranges from $-0.09$ to $-0.15$, mostly significant at the 5\% level. The consistency validates that findings reflect genuine demand responses rather than measurement artifacts.
+Table~\ref{tab:jackknife} reports leave-one-out estimates dropping each of the six EaP
+countries in turn. EaP elasticity ranges from $-0.42$ to $-0.72$ across the six sub-samples.
+Armenia is the most influential country: its exclusion shifts the EaP estimate from $-0.61$
+to $-0.42$ (a change of 0.19 in magnitude), suggesting Armenia contributes relatively
+low price-sensitivity to the aggregate. Excluding Belarus, which experienced political crisis
+and sanctions during the sample period, yields a larger estimate ($-0.72$), consistent with
+data reliability concerns for that country. Crucially, \textit{all} leave-one-out EaP
+estimates are statistically significant at the 1\% level, and all confirm a substantial,
+negative price elasticity. The EaP result is therefore not driven by any single country,
+and the range $[-0.42, -0.72]$ reflects genuine heterogeneity within the EaP group
+rather than measurement fragility.
 
-\subsection{Temporal Stability}
-
-The year-by-year analysis reveals that elasticity has been declining gradually since 2015, well before COVID-19. Specifically:
-
-\begin{itemize}
-    \item \textbf{2010--2014:} EaP elasticity approximately $-0.65$, EU elasticity approximately $-0.13$
-    \item \textbf{2015--2019:} EaP elasticity declining from $-0.60$ to $-0.35$, EU elasticity declining from $-0.12$ to near zero
-    \item \textbf{2020--2024:} Both regions show elasticity near zero with wide confidence intervals
-\end{itemize}
-
-This gradual evolution contradicts a pure COVID-shock interpretation and supports the secular transformation hypothesis discussed in Section~\ref{sec:discussion}.
-
-\subsection{Placebo Test Interpretation}
-
-Table~\ref{tab:placebo} shows that splitting the pre-COVID period (2010--2019) into early (2010--2014) and late (2015--2019) subperiods yields a significant ``placebo effect'' for EaP countries ($+0.27$, p $= 0.045$). This indicates elasticity was already declining before the pandemic, validating our interpretation that COVID-19 accelerated rather than initiated the transformation of broadband into a necessity good.
-
-The EU placebo effect ($+0.08$, p $= 0.31$) is not statistically significant, likely because EU elasticity was already very low ($-0.12$) in the baseline period, leaving less room for pre-trend evolution.
-
-\subsection{Alternative Standard Error Specifications}
-
-While Driscoll--Kraay standard errors are our preferred specification due to their robustness to cross-sectional dependence (crucial during COVID-19), we verified results using alternative approaches:
-
-\begin{itemize}
-    \item \textbf{Clustered by country:} Similar point estimates but slightly smaller standard errors (may understate uncertainty from common shocks)
-    \item \textbf{Clustered by year:} Similar point estimates but larger standard errors (more conservative)
-    \item \textbf{Two-way clustering} (country and year): Results similar to Driscoll--Kraay
-\end{itemize}
-
-In all cases, EaP pre-COVID elasticity remains significant at the 1\% level, and COVID interaction terms remain significant at the 5\% level or better. The choice of standard error method does not qualitatively affect conclusions.
+\input{tables/table7_jackknife}
 
 \subsection{Sample Restrictions}
 
-We examined robustness to alternative sample definitions:
+Table~\ref{tab:sample_restrictions} reports robustness to alternative sample definitions.
+The balanced-panel restriction (countries with complete 2010--2019 data) yields identical
+estimates to the full sample, confirming that attrition is not driving the results.
+Excluding outliers identified by Cook's distance ($d > 4/N$) removes 21 observations
+across 2 countries with negligible impact on either elasticity estimate.
+For the high-income subsample (17 EU countries above median GDP per capita), no EaP
+countries are present, so only the EU elasticity ($-0.090$, p$=$0.001) is identified;
+this estimate is smaller in magnitude than the full-sample EU value, consistent with
+higher-income consumers facing lower marginal utility of additional bandwidth.
+For the middle/lower-income subsample (16 countries, all EaP), the EaP elasticity
+($-0.429$, p$<$0.001) is somewhat smaller than the full-sample estimate, reflecting
+country heterogeneity at lower income levels.
 
-\begin{itemize}
-    \item \textbf{Balanced panel only:} Restricting to countries with complete data for all 15 years yields similar results (N=450 from 30 countries)
-    \item \textbf{Excluding outliers:} Dropping observations with Cook's distance $> 1$ has negligible impact on estimates
-    \item \textbf{High-income only:} Restricting to high-income countries yields lower elasticity (expected given income effects)
-    \item \textbf{Middle-income only:} Restricting to middle-income countries yields higher elasticity
-\end{itemize}
+\input{tables/table8_sample_restrictions}
 
-The regional heterogeneity (EaP vs EU) persists within income groups, indicating it reflects more than just GDP differences.
+% ============================================================================
+% GENERATIVE AI DECLARATION
+% ============================================================================
+
+\section*{Generative AI and AI-assisted technologies in the writing process}
+During the preparation of this work the authors used Claude (Anthropic) for programming and data-collection scripting, and for manuscript editing. After using this tool, the authors reviewed and edited all content as needed and take full responsibility for the content of this publication.
 
 % ============================================================================
 % REFERENCES

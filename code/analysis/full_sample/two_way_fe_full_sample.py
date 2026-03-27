@@ -561,3 +561,217 @@ print(f"  • EU (Pre-COVID) = β_price")
 print(f"  • EaP (Pre-COVID) = β_price + β_price×EaP")
 print(f"  • EU (COVID) = β_price + β_price×COVID")
 print(f"  • EaP (COVID) = β_price + β_price×EaP + β_price×COVID + β_price×EaP×COVID")
+
+
+# ============================================================================
+# GENERATE LATEX TABLE 2 (COVID Interaction Results)
+# ============================================================================
+
+print("\n" + "=" * 80)
+print("GENERATING LATEX TABLE 2 → manuscript/tables/")
+print("=" * 80)
+
+try:
+    from code.utils.config import MANUSCRIPT_TABLES_DIR
+except (ImportError, ModuleNotFoundError):
+    try:
+        from utils.config import MANUSCRIPT_TABLES_DIR
+    except ImportError:
+        MANUSCRIPT_TABLES_DIR = BASE_DIR / 'manuscript' / 'tables'
+MANUSCRIPT_TABLES_DIR.mkdir(parents=True, exist_ok=True)
+
+# Run pre-COVID and COVID subsamples for comparison columns
+df_full_reset = df.reset_index()
+df_pre = df_full_reset[df_full_reset['year_num'] <= 2019].copy()
+df_cov = df_full_reset[df_full_reset['year_num'] >= 2020].copy()
+
+def run_subsample(df_sub, label):
+    """Run baseline two-way FE on a subsample."""
+    df_sub = df_sub.copy()
+    df_sub['year_dt_s'] = pd.to_datetime(df_sub['year_num'], format='%Y')
+    df_sub = df_sub.set_index(['country', 'year_dt_s'])
+    df_sub['price_x_eap'] = df_sub[PRIMARY_PRICE] * df_sub['eap_dummy']
+    avail = [c for c in controls_baseline if c in df_sub.columns]
+    req = [PRIMARY_DV, PRIMARY_PRICE, 'price_x_eap'] + avail
+    df_s = df_sub[req].dropna()
+    if len(df_s) < 40:
+        return None
+    y_s = df_s[PRIMARY_DV]
+    X_s = df_s[[PRIMARY_PRICE, 'price_x_eap'] + avail]
+    return PanelOLS(y_s, X_s, entity_effects=True, time_effects=True).fit(
+        cov_type='kernel', kernel='bartlett', bandwidth=3)
+
+res_pre  = run_subsample(df_pre, 'Pre-COVID')
+res_cov2 = run_subsample(df_cov, 'COVID')
+
+
+def fmt2(coef, se, pval):
+    stars = '***' if pval < 0.01 else '**' if pval < 0.05 else '*' if pval < 0.10 else ''
+    if stars:
+        return f'${coef:+.2f}^{{{stars}}}$', f'({se:.2f})'
+    return f'${coef:+.2f}$', f'({se:.2f})'
+
+
+def cell_pair(res, param_key, alt='--'):
+    """Return (coef_str, se_str) or (alt, '') if unavailable."""
+    if res is None or param_key not in res.params.index:
+        return alt, ''
+    b = res.params[param_key]
+    s = res.std_errors[param_key]
+    p = res.pvalues[param_key]
+    return fmt2(b, s, p)
+
+
+def eap_cell(res):
+    """Compute implied EaP elasticity and return (coef_str, se_str)."""
+    if res is None:
+        return '--', ''
+    b1 = res.params[PRIMARY_PRICE]; b2 = res.params['price_x_eap']
+    s1 = res.std_errors[PRIMARY_PRICE]; s2 = res.std_errors['price_x_eap']
+    eap_b  = b1 + b2
+    eap_se = np.sqrt(s1**2 + s2**2)
+    eap_pv = 2 * (1 - stats.t.cdf(abs(eap_b / eap_se), df=res.df_resid))
+    return fmt2(eap_b, eap_se, eap_pv)
+
+
+# baseline: res_baseline (full interaction, 2010-2024)
+# pre:  res_pre (2010-2019 subsample)
+# cov:  res_cov2 (2020-2024 subsample)
+
+# Values from baseline for Col 1
+b_price    = res_baseline.params[PRIMARY_PRICE]
+se_price_b = res_baseline.std_errors[PRIMARY_PRICE]
+p_price_b  = res_baseline.pvalues[PRIMARY_PRICE]
+b_eap_int  = res_baseline.params['price_x_eap']
+se_eap_b   = res_baseline.std_errors['price_x_eap']
+p_eap_b    = res_baseline.pvalues['price_x_eap']
+b_pc       = res_baseline.params['price_x_covid']
+se_pc      = res_baseline.std_errors['price_x_covid']
+p_pc       = res_baseline.pvalues['price_x_covid']
+b_tri      = res_baseline.params['price_x_eap_x_covid']
+se_tri     = res_baseline.std_errors['price_x_eap_x_covid']
+p_tri      = res_baseline.pvalues['price_x_eap_x_covid']
+
+# Implied elasticities from baseline
+eu_pre_b  = b_price; eu_pre_se = se_price_b; eu_pre_pv = p_price_b
+eap_pre_b = b_price + b_eap_int
+eap_pre_se = np.sqrt(se_price_b**2 + se_eap_b**2)
+eap_pre_pv = 2 * (1 - stats.t.cdf(abs(eap_pre_b / eap_pre_se), df=res_baseline.df_resid))
+eu_cov_b  = b_price + b_pc
+eu_cov_se = np.sqrt(se_price_b**2 + se_pc**2)
+eu_cov_pv = 2 * (1 - stats.t.cdf(abs(eu_cov_b / eu_cov_se), df=res_baseline.df_resid))
+eap_cov_b = b_price + b_eap_int + b_pc + b_tri
+eap_cov_se = np.sqrt(se_price_b**2 + se_eap_b**2 + se_pc**2 + se_tri**2)
+eap_cov_pv = 2 * (1 - stats.t.cdf(abs(eap_cov_b / eap_cov_se), df=res_baseline.df_resid))
+
+def _fmt(b, s, p):
+    stars = '***' if p < 0.01 else '**' if p < 0.05 else '*' if p < 0.10 else ''
+    cs = f'${b:+.2f}^{{{stars}}}$' if stars else f'${b:+.2f}$'
+    return cs, f'({s:.2f})'
+
+c1_eu_pre,   s1_eu_pre   = _fmt(eu_pre_b,   eu_pre_se,   eu_pre_pv)
+c1_pc,       s1_pc       = _fmt(b_pc,        se_pc,       p_pc)
+c1_eap_pre,  s1_eap_pre  = _fmt(eap_pre_b,  eap_pre_se,  eap_pre_pv)
+c1_tri,      s1_tri      = _fmt(b_tri,       se_tri,      p_tri)
+c1_eap_int,  s1_eap_int  = _fmt(b_eap_int,  se_eap_b,    p_eap_b)
+c1_eu_cov_impl, s1_eu_cov_impl = _fmt(eu_cov_b, eu_cov_se, eu_cov_pv)
+c1_eap_cov_impl, s1_eap_cov_impl = _fmt(eap_cov_b, eap_cov_se, eap_cov_pv)
+
+# Col 2 (pre-COVID subsample)
+c2_eu,   s2_eu   = cell_pair(res_pre,  PRIMARY_PRICE)
+c2_eap,  s2_eap  = eap_cell(res_pre)
+
+# Col 3 (COVID subsample)
+c3_eu,   s3_eu   = cell_pair(res_cov2, PRIMARY_PRICE)
+c3_eap,  s3_eap  = eap_cell(res_cov2)
+
+n_full = int(res_baseline.nobs)
+n_pre  = int(res_pre.nobs) if res_pre else '--'
+n_cov2 = int(res_cov2.nobs) if res_cov2 else '--'
+
+lines = [
+    r'\begin{table}[p]',
+    r'\centering',
+    r'\caption{COVID-19 Interaction Effects: Full Sample (2010--2024)}',
+    r'\label{tab:covid}',
+    r'\begin{minipage}{\textwidth}',
+    r'\begin{adjustbox}{width=\textwidth}',
+    r'\scriptsize',
+    r'\setlength{\tabcolsep}{3pt}',
+    r'\renewcommand{\arraystretch}{0.9}',
+    r'\begin{tabular}{@{}lcccc@{}}',
+    r'\toprule',
+    r'& \multicolumn{4}{c}{Dependent Variable: Log(Subs. per 100)} \\',
+    r'\cmidrule(lr){2-5}',
+    r'& (1) & (2) & (3) & (4) \\',
+    r'& Full Sample & Pre-COVID & COVID & Diff. Test \\',
+    r'& w/ COVID Int. & 2010--19 & 2020--24 & (p-value) \\',
+    r'\midrule',
+    r'\textbf{Panel A: EU Countries} \\',
+    f'Log(Price) & {c1_eu_pre} & {c2_eu} & {c3_eu} & -- \\\\',
+    f'& {s1_eu_pre} & {s2_eu} & {s3_eu} & \\\\',
+    r'\\',
+    f'Log(Price) $\\times$ COVID & {c1_pc} & -- & -- & {p_pc:.3f} \\\\',
+    f'& {s1_pc} & & & \\\\',
+    r'\\',
+    f'\\textit{{Implied COVID elasticity}} & {c1_eu_cov_impl} & -- & {c3_eu} & -- \\\\',
+    f'& {s1_eu_cov_impl} & & {s3_eu} & \\\\',
+    r'\midrule',
+    r'\textbf{Panel B: EaP Countries} \\',
+    f'Log(Price) $\\times$ EaP & {c1_eap_int} & {c2_eap} & -- & -- \\\\',
+    f'& {s1_eap_int} & & & \\\\',
+    r'\\',
+    f'Log(Price) $\\times$ EaP $\\times$ COVID & {c1_tri} & -- & -- & {p_tri:.3f} \\\\',
+    f'& {s1_tri} & & & \\\\',
+    r'\\',
+    f'\\textit{{Implied pre-COVID EaP elasticity}} & {c1_eap_pre} & {c2_eap} & -- & -- \\\\',
+    f'& {s1_eap_pre} & {s2_eap} & & \\\\',
+    r'\\',
+    f'\\textit{{Implied COVID EaP elasticity}} & {c1_eap_cov_impl} & -- & {c3_eap} & -- \\\\',
+    f'& {s1_eap_cov_impl} & & {s3_eap} & \\\\',
+    r'\midrule',
+    r'\textbf{Panel C: Change in Elasticity} \\',
+    f'$\\Delta\\varepsilon_{{EU}}$ (COVID -- Pre) & {c1_pc} & -- & -- & {p_pc:.3f} \\\\',
+    f'& {s1_pc} & & & \\\\',
+    f'$\\Delta\\varepsilon_{{EaP}}$ (COVID -- Pre) & ' +
+    _fmt(b_pc + b_tri, np.sqrt(se_pc**2 + se_tri**2),
+         2 * (1 - stats.t.cdf(abs((b_pc + b_tri) / np.sqrt(se_pc**2 + se_tri**2)),
+                               df=res_baseline.df_resid)))[0] +
+    f' & -- & -- & {2*(1-stats.t.cdf(abs((b_pc+b_tri)/np.sqrt(se_pc**2+se_tri**2)),df=res_baseline.df_resid)):.3f} \\\\',
+    f'& {_fmt(b_pc+b_tri, np.sqrt(se_pc**2+se_tri**2), 0.001)[1]} & & & \\\\',
+    r'\midrule',
+    r'\textbf{Panel D: Model Statistics} \\',
+    f'Full controls & Yes & Yes & Yes & -- \\\\',
+    f'Country FE & Yes & Yes & Yes & -- \\\\',
+    f'Year FE & Yes & Yes & Yes & -- \\\\',
+    f'Observations & {n_full} & {n_pre} & {n_cov2} & -- \\\\',
+    f'Countries & 33 & 33 & 33 & -- \\\\',
+    f'R-squared & {res_baseline.rsquared:.2f} & ' +
+    (f'{res_pre.rsquared:.2f}' if res_pre else '--') +
+    f' & ' + (f'{res_cov2.rsquared:.2f}' if res_cov2 else '--') + f' & -- \\\\',
+    r'\bottomrule',
+    r'\end{tabular}',
+    r'\end{adjustbox}',
+    r'\par\vspace{4pt}',
+    r'\scriptsize',
+    r'\textit{Notes:} Dependent variable is log of fixed broadband subscriptions per 100 inhabitants.',
+    r'Price is measured as percentage of GNI per capita. COVID is a period dummy for years 2020--2024.',
+    r'EaP is a dummy for Eastern Partnership countries. Full controls include: log GDP per capita,',
+    r'urban population \%, tertiary enrollment \%, regulatory quality, log secure servers, R\&D \% GDP,',
+    r'log population density, and age dependency ratio. Column (1) presents the full interaction model',
+    r'on 2010--2024 data. Columns (2)--(3) present separate subsample estimates for comparison.',
+    r'Column (4) reports p-values from Wald tests of coefficient differences between COVID and',
+    r'pre-COVID periods. Driscoll--Kraay standard errors (bandwidth = 3) in parentheses.',
+    r'$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.',
+    r'\end{minipage}',
+    r'\end{table}',
+]
+
+table2_path = MANUSCRIPT_TABLES_DIR / 'table2_covid.tex'
+with open(table2_path, 'w', encoding='utf-8') as f:
+    f.write('\n'.join(lines) + '\n')
+print(f"\n[OK] Table 2 written → {table2_path}")
+
+print("\n" + "=" * 80)
+print("✓ LATEX TABLE GENERATION COMPLETE")
+print("=" * 80)

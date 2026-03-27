@@ -29,10 +29,17 @@ DATA_PROCESSED = DATA_DIR / 'processed'
 
 # Results subdirectories
 RESULTS_REGRESSION = RESULTS_DIR / 'regression_output'
+RESULTS_FIGURES = RESULTS_DIR / 'figures' / 'analysis_figures'
+
+# Manuscript output paths (scripts write directly here)
+MANUSCRIPT_DIR = PROJECT_ROOT / 'manuscript'
+MANUSCRIPT_TABLES_DIR = MANUSCRIPT_DIR / 'tables'
+MANUSCRIPT_FIGURES_DIR = MANUSCRIPT_DIR / 'figures'
 
 # Create directories if they don't exist
-for path in [DATA_RAW, DATA_INTERIM, DATA_PROCESSED, 
-             RESULTS_REGRESSION]:
+for path in [DATA_RAW, DATA_INTERIM, DATA_PROCESSED,
+             RESULTS_REGRESSION, RESULTS_FIGURES,
+             MANUSCRIPT_TABLES_DIR, MANUSCRIPT_FIGURES_DIR]:
     path.mkdir(parents=True, exist_ok=True)
 
 # ============================================================================
@@ -130,7 +137,12 @@ COUNTRY_CODES = {v: k for k, v in COUNTRY_NAMES.items()}
 # ============================================================================
 
 START_YEAR = 2010  # Price data available from 2010
-END_YEAR = 2024    # Most recent complete year
+END_YEAR = 2024    # Most recent complete year with full WB control coverage
+# NOTE: ITU price basket 2008-2025 Excel is available (updated URL in step1_download_itu.py).
+#       To extend to 2025: change END_YEAR=2025. WB controls for 2025 are largely unavailable
+#       and will be forward-filled (extrapolated) from 2024. Subscription data via ITU API
+#       may require authentication after the ITU DataHub revision (check API access first).
+#       Document any 2025 extrapolation in the paper's data section.
 YEARS = list(range(START_YEAR, END_YEAR + 1))
 
 # ============================================================================

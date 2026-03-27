@@ -45,7 +45,9 @@ class ITUDataDownloader:
 
     def __init__(self):
         self.api_base_url = "https://api.datahub.itu.int/v2"
-        self.excel_url = "https://www.itu.int/en/ITU-D/Statistics/Documents/publications/prices2024/ITU_ICTPriceBaskets_2008-2024.xlsx"
+        # Updated to 2025 edition (per ITU Statistics Division, Daniel Vertesy, Dec 2025)
+        # Basket definition changed: minimum threshold raised from 1GB to 5GB
+        self.excel_url = "https://www.itu.int/en/ITU-D/Statistics/Documents/ICT_Prices/ITU_ICTPriceBaskets_2008-2025.xlsx"
         
         self.country_iso3_codes = EU_COUNTRIES + EAP_COUNTRIES
         self.country_names = [COUNTRY_NAMES[code] for code in self.country_iso3_codes]
@@ -56,13 +58,13 @@ class ITUDataDownloader:
             {
                 'name': 'fixed_broad_price',
                 'source': 'excel',
-                'basket': 'Fixed-broadband basket',
+                'code_prefix': 'i154_FBB',   # covers i154_FBB (1GB, 2008-2017) and i154_FBB5 (5GB, 2018-)
                 'description': 'Fixed-broadband prices (USD, GNI%, PPP)'
             },
             {
                 'name': 'mobile_broad_price',
                 'source': 'excel',
-                'basket': 'Data-only mobile-broadband basket',
+                'code_prefix': 'i271mb_',    # data-only mobile broadband baskets
                 'description': 'Mobile-broadband prices (USD, GNI%, PPP)'
             },
             {
@@ -91,8 +93,12 @@ class ITUDataDownloader:
             }
         ]
     
-    def download_excel_prices(self, basket_name, indicator_name):
-        """Download price data from ITU Excel file."""
+    def download_excel_prices(self, code_prefix, indicator_name):
+        """Download price data from ITU Excel file.
+        
+        Uses Code column prefix matching (e.g. 'i154_FBB' covers both the
+        1GB basket 2008-2017 and the 5GB basket 2018-, with no year overlap).
+        """
         print(f"  -> Downloading Excel file...")
         
         try:
@@ -104,10 +110,10 @@ class ITUDataDownloader:
             
             # Read Excel file
             excel_file = BytesIO(response.content)
-            df = pd.read_excel(excel_file, sheet_name='economies_2008-2024')
+            df = pd.read_excel(excel_file, sheet_name='economies_2008-2025')
             
-            # Filter to specific basket
-            df = df[df['basket_combined_simplified'] == basket_name].copy()
+            # Filter to specific basket using Code column prefix (stable across Excel editions)
+            df = df[df['Code'].str.startswith(code_prefix)].copy()
             
             # Filter to our countries
             df = df[df['IsoCode'].isin(self.country_iso3_codes)].copy()
@@ -145,7 +151,7 @@ class ITUDataDownloader:
             })
             
             # Add metadata
-            df_wide['seriesCode'] = basket_name.replace(' basket', '').replace('-', '_').lower()
+            df_wide['seriesCode'] = code_prefix.rstrip('_')
             df_wide['seriesUnits'] = 'Multiple (USD, GNI%, PPP)'
             df_wide['dataSource'] = 'ITU Excel'
             
@@ -234,7 +240,7 @@ class ITUDataDownloader:
             
             if indicator['source'] == 'excel':
                 df = self.download_excel_prices(
-                    basket_name=indicator['basket'],
+                    code_prefix=indicator['code_prefix'],
                     indicator_name=indicator['name']
                 )
             else:
