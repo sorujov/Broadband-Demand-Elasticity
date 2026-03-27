@@ -141,6 +141,8 @@ class PipelineRunner:
              "IV robustness: 2SLS with mobile broadband price instrument → table6"),
             (self.code_dir / 'analysis' / 'robustness' / 'eap_jackknife.py',
              "EaP jackknife: leave-one-country-out robustness → table7"),
+            (self.code_dir / 'analysis' / 'robustness' / 'sample_restrictions.py',
+             "Sample restrictions: balanced panel, outliers, income subsamples → table8"),
             (self.code_dir / 'analysis' / 'analysis_visualizations.py',
              "Generate publication-quality figures → manuscript/figures/"),
             (self.code_dir / 'analysis' / 'generate_paper_macros.py',

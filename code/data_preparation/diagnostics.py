@@ -1,4 +1,4 @@
-# code/data_preparation/01_analysis.py
+# code/data_preparation/diagnostics.py
 
 """
 ================================================================================

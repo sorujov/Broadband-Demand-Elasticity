@@ -151,7 +151,7 @@ class DataCollectionPipeline:
             print("  - data/interim/*_processed.xlsx (7 processed files)")
             print("  - data/processed/data_merged_with_series.xlsx (462 obs × 33 vars)")
             print("\nNext step: Run data preparation scripts")
-            print("  python code/data_preparation/01_analysis.py")
+            print("  python code/data_preparation/diagnostics.py")
         else:
             print("\n[WARNING] Pipeline completed with errors")
             print("Review the output above to identify issues")
