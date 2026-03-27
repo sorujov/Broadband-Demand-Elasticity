@@ -103,7 +103,7 @@ se_interaction = res_baseline.std_errors['price_x_eap']
 eu_elasticity = beta_price
 eap_elasticity = beta_price + beta_interaction
 eu_se = se_price
-eap_se = np.sqrt(se_price**2 + se_interaction**2)
+eap_se = np.sqrt(se_price**2 + se_interaction**2 + 2 * res_baseline.cov.loc[PRIMARY_PRICE, 'price_x_eap'])
 
 eu_pval = 2 * (1 - stats.t.cdf(abs(eu_elasticity/eu_se), df=res_baseline.df_resid))
 eap_pval = 2 * (1 - stats.t.cdf(abs(eap_elasticity/eap_se), df=res_baseline.df_resid))
@@ -211,7 +211,7 @@ for spec_name, spec_info in CONTROL_SPECS.items():
     eu_elast = beta_price
     eap_elast = beta_price + beta_interaction
     eu_se = se_price
-    eap_se = np.sqrt(se_price**2 + se_interaction**2)
+    eap_se = np.sqrt(se_price**2 + se_interaction**2 + 2 * res.cov.loc[PRIMARY_PRICE, 'price_x_eap'])
 
     eu_pval = 2 * (1 - stats.t.cdf(abs(eu_elast/eu_se), df=res.df_resid))
     eap_pval = 2 * (1 - stats.t.cdf(abs(eap_elast/eap_se), df=res.df_resid))
@@ -242,7 +242,8 @@ for spec_name, spec_info in CONTROL_SPECS.items():
         'gdp_coef': res.params[gdp_col] if gdp_col in res.params.index else np.nan,
         'gdp_pval': res.pvalues[gdp_col] if gdp_col in res.pvalues.index else np.nan,
         'n_obs': res.nobs,
-        'r_squared': res.rsquared
+        'r_squared': res.rsquared,
+        'df_resid': res.df_resid
     })
 
 # Save extended results
@@ -326,7 +327,7 @@ for price_def in PRICE_MEASURES:
             eu_elast = beta_price
             eap_elast = beta_price + beta_interaction
             eu_se = se_price
-            eap_se = np.sqrt(se_price**2 + se_interaction**2)
+            eap_se = np.sqrt(se_price**2 + se_interaction**2 + 2 * res.cov.loc[price_def['var'], interaction_name])
             
             eu_pval = 2 * (1 - stats.t.cdf(abs(eu_elast/eu_se), df=res.df_resid))
             eap_pval = 2 * (1 - stats.t.cdf(abs(eap_elast/eap_se), df=res.df_resid))
@@ -359,7 +360,8 @@ for price_def in PRICE_MEASURES:
                 'interaction_coef': beta_interaction,
                 'interaction_pval': res.pvalues[interaction_name],
                 'n_obs': res.nobs,
-                'r_squared': res.rsquared
+                'r_squared': res.rsquared,
+                'df_resid': res.df_resid
             })
                 
         except Exception as e:
@@ -454,7 +456,7 @@ CTRL_DISPLAY = [
     ('log_secure_internet_servers',      'Log(Secure servers)'),
     ('research_development_expenditure', 'R\\&D (\\% GDP)'),
     ('log_population_density',           'Log(Population density)'),
-    ('population_ages_15_64',            'Age dependency ratio'),
+    ('population_ages_15_64',            'Working-age pop.\\ (15--64, \\%)'),
 ]
 
 
@@ -488,7 +490,7 @@ col_nums = [f'({i+1})' for i in range(n_cols)]
 
 lines = []
 lines += [
-    r'\begin{table}[p]',
+    r'\begin{table}[H]',
     r'\centering',
     r'\caption{Baseline Two-Way Fixed Effects Estimates: Pre-COVID Period (2010--2019)}',
     r'\label{tab:baseline}',
@@ -496,7 +498,7 @@ lines += [
     r'\begin{adjustbox}{width=\textwidth}',
     r'\scriptsize',
     r'\setlength{\tabcolsep}{3pt}',
-    r'\renewcommand{\arraystretch}{0.9}',
+    r'\renewcommand{\arraystretch}{0.85}',
     f'\\begin{{tabular}}{{@{{}}l{"c" * n_cols}@{{}}}}',
     r'\toprule',
     f'& \\multicolumn{{{n_cols}}}{{c}}{{Dependent Variable: Log(Subscriptions per 100)}} \\\\',
@@ -509,8 +511,7 @@ lines += [
 
 def add_row(lines, label, coefs, ses):
     lines.append(label + ' & ' + ' & '.join(coefs) + ' \\\\')
-    lines.append('& ' + ' & '.join(ses) + ' \\\\')
-    lines.append(r'\\')
+    lines.append('& ' + ' & '.join(ses) + ' \\\\[2pt]')
 
 # Log(Price)
 coefs, ses = [], []
@@ -540,7 +541,7 @@ for res in table1_res:
     b1 = res.params[PRIMARY_PRICE]; b2 = res.params['price_x_eap']
     s1 = res.std_errors[PRIMARY_PRICE]; s2 = res.std_errors['price_x_eap']
     eap_b = b1 + b2
-    eap_se = np.sqrt(s1**2 + s2**2)
+    eap_se = np.sqrt(s1**2 + s2**2 + 2 * res.cov.loc[PRIMARY_PRICE, 'price_x_eap'])
     eap_pval = 2 * (1 - stats.t.cdf(abs(eap_b / eap_se), df=res.df_resid))
     c, s = fmt_coef(eap_b, eap_se, eap_pval)
     coefs.append(f'\\textit{{{c}}}'); ses.append(f'\\textit{{{s}}}')
@@ -573,15 +574,13 @@ lines += [
     r'\bottomrule',
     r'\end{tabular}',
     r'\end{adjustbox}',
-    r'\par\vspace{4pt}',
+    r'\par\vspace{2pt}',
     r'\scriptsize',
-    r'\textit{Notes:} Dependent variable is log of fixed broadband subscriptions per 100 inhabitants.',
-    r'Price is measured as percentage of GNI per capita. EaP is a dummy for Eastern Partnership countries',
-    r'(Armenia, Azerbaijan, Belarus, Georgia, Moldova, Ukraine). Columns~(6) and~(7) both include all',
-    r'non-macro controls; column~(7) additionally includes GDP growth and inflation rate (coefficients',
-    r'not shown; their inclusion does not change the elasticity estimates).',
-    r'All specifications include country and year fixed effects. Driscoll--Kraay standard errors',
-    r'(bandwidth = 3) in parentheses. $^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.',
+    r'\textit{Notes:} Dependent variable is log fixed broadband subscriptions per 100 inhabitants.',
+    r'Price measured as \% of GNI per capita. EaP dummy for Eastern Partnership countries.',
+    r'Columns~(6)--(7) include all non-macro controls; (7) adds GDP growth and inflation (coefficients not shown).',
+    r'Country and year FE. Driscoll--Kraay SEs (bandwidth$\,=\,$3). Qualitatively unchanged with clustered or robust SEs.',
+    r'$^{*}$p$<$0.10, $^{**}$p$<$0.05, $^{***}$p$<$0.01.',
     r'\end{minipage}',
     r'\end{table}',
 ]
@@ -603,13 +602,13 @@ def build_price_robustness_table(comp_df, out_path):
     n_c = len(header_cols)
 
     lines = [
-        r'\begin{table}[p]',
+        r'\begin{table}[!htbp]',
         r'\centering',
         r'\caption{Price Elasticity Robustness: Alternative Price Measures and Control Specifications (Pre-COVID)}',
         r'\label{tab:price_robustness}',
         r'\begin{minipage}{\textwidth}',
         r'\begin{adjustbox}{width=\textwidth}',
-        r'\small',
+        r'\scriptsize',
         f'\\begin{{tabular}}{{ll{"c" * (n_c - 2)}}}',
         r'\toprule',
         ' & '.join(header_cols) + r' \\',
@@ -639,7 +638,7 @@ def build_price_robustness_table(comp_df, out_path):
         r'\end{tabular}',
         r'\end{adjustbox}',
         r'\par\vspace{4pt}',
-        r'\small',
+        r'\scriptsize',
         r'\textit{Notes:} Each row is a separate regression. All specifications include country',
         r'and year fixed effects. Driscoll--Kraay standard errors in parentheses.',
         r'$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.',

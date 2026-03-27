@@ -131,9 +131,12 @@ se_price_covid = res_baseline.std_errors['price_x_covid']
 se_triple = res_baseline.std_errors['price_x_eap_x_covid']
 
 eu_pre_se = se_price
-eap_pre_se = np.sqrt(se_price**2 + se_eap_int**2)
-eu_covid_se = np.sqrt(se_price**2 + se_price_covid**2)
-eap_covid_se = np.sqrt(se_price**2 + se_eap_int**2 + se_price_covid**2 + se_triple**2)
+eap_pre_se = np.sqrt(se_price**2 + se_eap_int**2 + 2*res_baseline.cov.loc[PRIMARY_PRICE, 'price_x_eap'])
+eu_covid_se = np.sqrt(se_price**2 + se_price_covid**2 + 2*res_baseline.cov.loc[PRIMARY_PRICE, 'price_x_covid'])
+_cov = res_baseline.cov
+_vars4 = [PRIMARY_PRICE, 'price_x_eap', 'price_x_covid', 'price_x_eap_x_covid']
+_a4 = np.array([1.0]*4)
+eap_covid_se = np.sqrt(_a4 @ _cov.loc[_vars4, _vars4].values @ _a4)
 
 # P-values
 eu_pre_pval = 2 * (1 - stats.t.cdf(abs(eu_pre/eu_pre_se), df=res_baseline.df_resid))
@@ -274,9 +277,12 @@ for spec_name, spec_info in CONTROL_SPECS.items():
     se_triple = res.std_errors['price_x_eap_x_covid']
 
     eu_pre_se = se_price
-    eap_pre_se = np.sqrt(se_price**2 + se_eap_int**2)
-    eu_covid_se = np.sqrt(se_price**2 + se_price_covid**2)
-    eap_covid_se = np.sqrt(se_price**2 + se_eap_int**2 + se_price_covid**2 + se_triple**2)
+    eap_pre_se = np.sqrt(se_price**2 + se_eap_int**2 + 2*res.cov.loc[PRIMARY_PRICE, 'price_x_eap'])
+    eu_covid_se = np.sqrt(se_price**2 + se_price_covid**2 + 2*res.cov.loc[PRIMARY_PRICE, 'price_x_covid'])
+    _cv = res.cov
+    _v4 = [PRIMARY_PRICE, 'price_x_eap', 'price_x_covid', 'price_x_eap_x_covid']
+    _a4 = np.array([1.0]*4)
+    eap_covid_se = np.sqrt(_a4 @ _cv.loc[_v4, _v4].values @ _a4)
 
     # P-values
     eu_pre_pval = 2 * (1 - stats.t.cdf(abs(eu_pre/eu_pre_se), df=res.df_resid))
@@ -325,7 +331,8 @@ for spec_name, spec_info in CONTROL_SPECS.items():
         'triple_interaction_coef': beta_triple,
         'triple_interaction_pval': res.pvalues['price_x_eap_x_covid'],
         'n_obs': res.nobs,
-        'r_squared': res.rsquared
+        'r_squared': res.rsquared,
+        'df_resid': res.df_resid
     })
 
 # Save extended results
@@ -427,9 +434,12 @@ for price_def in PRICE_MEASURES:
             se_triple = res.std_errors[triple_name]
             
             eu_pre_se = se_price
-            eap_pre_se = np.sqrt(se_price**2 + se_eap_int**2)
-            eu_covid_se = np.sqrt(se_price**2 + se_price_covid**2)
-            eap_covid_se = np.sqrt(se_price**2 + se_eap_int**2 + se_price_covid**2 + se_triple**2)
+            eap_pre_se = np.sqrt(se_price**2 + se_eap_int**2 + 2*res.cov.loc[price_def['var'], interaction_name])
+            eu_covid_se = np.sqrt(se_price**2 + se_price_covid**2 + 2*res.cov.loc[price_def['var'], price_covid_name])
+            _cv = res.cov
+            _v4 = [price_def['var'], interaction_name, price_covid_name, triple_name]
+            _a4 = np.array([1.0]*4)
+            eap_covid_se = np.sqrt(_a4 @ _cv.loc[_v4, _v4].values @ _a4)
             
             # P-values
             eu_pre_pval = 2 * (1 - stats.t.cdf(abs(eu_pre/eu_pre_se), df=res.df_resid))
@@ -482,7 +492,8 @@ for price_def in PRICE_MEASURES:
                 'triple_interaction_coef': beta_triple,
                 'triple_interaction_pval': res.pvalues[triple_name],
                 'n_obs': res.nobs,
-                'r_squared': res.rsquared
+                'r_squared': res.rsquared,
+                'df_resid': res.df_resid
             })
                 
         except Exception as e:
@@ -629,7 +640,7 @@ def eap_cell(res):
     b1 = res.params[PRIMARY_PRICE]; b2 = res.params['price_x_eap']
     s1 = res.std_errors[PRIMARY_PRICE]; s2 = res.std_errors['price_x_eap']
     eap_b  = b1 + b2
-    eap_se = np.sqrt(s1**2 + s2**2)
+    eap_se = np.sqrt(s1**2 + s2**2 + 2 * res.cov.loc[PRIMARY_PRICE, 'price_x_eap'])
     eap_pv = 2 * (1 - stats.t.cdf(abs(eap_b / eap_se), df=res.df_resid))
     return fmt2(eap_b, eap_se, eap_pv)
 
@@ -653,15 +664,18 @@ se_tri     = res_baseline.std_errors['price_x_eap_x_covid']
 p_tri      = res_baseline.pvalues['price_x_eap_x_covid']
 
 # Implied elasticities from baseline
+_cov_bl = res_baseline.cov
 eu_pre_b  = b_price; eu_pre_se = se_price_b; eu_pre_pv = p_price_b
 eap_pre_b = b_price + b_eap_int
-eap_pre_se = np.sqrt(se_price_b**2 + se_eap_b**2)
+eap_pre_se = np.sqrt(se_price_b**2 + se_eap_b**2 + 2*_cov_bl.loc[PRIMARY_PRICE, 'price_x_eap'])
 eap_pre_pv = 2 * (1 - stats.t.cdf(abs(eap_pre_b / eap_pre_se), df=res_baseline.df_resid))
 eu_cov_b  = b_price + b_pc
-eu_cov_se = np.sqrt(se_price_b**2 + se_pc**2)
+eu_cov_se = np.sqrt(se_price_b**2 + se_pc**2 + 2*_cov_bl.loc[PRIMARY_PRICE, 'price_x_covid'])
 eu_cov_pv = 2 * (1 - stats.t.cdf(abs(eu_cov_b / eu_cov_se), df=res_baseline.df_resid))
 eap_cov_b = b_price + b_eap_int + b_pc + b_tri
-eap_cov_se = np.sqrt(se_price_b**2 + se_eap_b**2 + se_pc**2 + se_tri**2)
+_v4 = [PRIMARY_PRICE, 'price_x_eap', 'price_x_covid', 'price_x_eap_x_covid']
+_a4 = np.array([1.0]*4)
+eap_cov_se = np.sqrt(_a4 @ _cov_bl.loc[_v4, _v4].values @ _a4)
 eap_cov_pv = 2 * (1 - stats.t.cdf(abs(eap_cov_b / eap_cov_se), df=res_baseline.df_resid))
 
 def _fmt(b, s, p):
@@ -690,7 +704,7 @@ n_pre  = int(res_pre.nobs) if res_pre else '--'
 n_cov2 = int(res_cov2.nobs) if res_cov2 else '--'
 
 lines = [
-    r'\begin{table}[p]',
+    r'\begin{table}[!htbp]',
     r'\centering',
     r'\caption{COVID-19 Interaction Effects: Full Sample (2010--2024)}',
     r'\label{tab:covid}',
@@ -698,7 +712,7 @@ lines = [
     r'\begin{adjustbox}{width=\textwidth}',
     r'\scriptsize',
     r'\setlength{\tabcolsep}{3pt}',
-    r'\renewcommand{\arraystretch}{0.9}',
+    r'\renewcommand{\arraystretch}{0.85}',
     r'\begin{tabular}{@{}lcccc@{}}',
     r'\toprule',
     r'& \multicolumn{4}{c}{Dependent Variable: Log(Subs. per 100)} \\',
@@ -709,36 +723,34 @@ lines = [
     r'\midrule',
     r'\textbf{Panel A: EU Countries} \\',
     f'Log(Price) & {c1_eu_pre} & {c2_eu} & {c3_eu} & -- \\\\',
-    f'& {s1_eu_pre} & {s2_eu} & {s3_eu} & \\\\',
-    r'\\',
+    f'& {s1_eu_pre} & {s2_eu} & {s3_eu} & \\\\[2pt]',
     f'Log(Price) $\\times$ COVID & {c1_pc} & -- & -- & {p_pc:.3f} \\\\',
-    f'& {s1_pc} & & & \\\\',
-    r'\\',
+    f'& {s1_pc} & & & \\\\[2pt]',
     f'\\textit{{Implied COVID elasticity}} & {c1_eu_cov_impl} & -- & {c3_eu} & -- \\\\',
     f'& {s1_eu_cov_impl} & & {s3_eu} & \\\\',
     r'\midrule',
     r'\textbf{Panel B: EaP Countries} \\',
     f'Log(Price) $\\times$ EaP & {c1_eap_int} & {c2_eap} & -- & -- \\\\',
-    f'& {s1_eap_int} & & & \\\\',
-    r'\\',
+    f'& {s1_eap_int} & & & \\\\[2pt]',
     f'Log(Price) $\\times$ EaP $\\times$ COVID & {c1_tri} & -- & -- & {p_tri:.3f} \\\\',
-    f'& {s1_tri} & & & \\\\',
-    r'\\',
+    f'& {s1_tri} & & & \\\\[2pt]',
     f'\\textit{{Implied pre-COVID EaP elasticity}} & {c1_eap_pre} & {c2_eap} & -- & -- \\\\',
-    f'& {s1_eap_pre} & {s2_eap} & & \\\\',
-    r'\\',
+    f'& {s1_eap_pre} & {s2_eap} & & \\\\[2pt]',
     f'\\textit{{Implied COVID EaP elasticity}} & {c1_eap_cov_impl} & -- & {c3_eap} & -- \\\\',
     f'& {s1_eap_cov_impl} & & {s3_eap} & \\\\',
     r'\midrule',
     r'\textbf{Panel C: Change in Elasticity} \\',
     f'$\\Delta\\varepsilon_{{EU}}$ (COVID -- Pre) & {c1_pc} & -- & -- & {p_pc:.3f} \\\\',
     f'& {s1_pc} & & & \\\\',
-    f'$\\Delta\\varepsilon_{{EaP}}$ (COVID -- Pre) & ' +
-    _fmt(b_pc + b_tri, np.sqrt(se_pc**2 + se_tri**2),
-         2 * (1 - stats.t.cdf(abs((b_pc + b_tri) / np.sqrt(se_pc**2 + se_tri**2)),
-                               df=res_baseline.df_resid)))[0] +
-    f' & -- & -- & {2*(1-stats.t.cdf(abs((b_pc+b_tri)/np.sqrt(se_pc**2+se_tri**2)),df=res_baseline.df_resid)):.3f} \\\\',
-    f'& {_fmt(b_pc+b_tri, np.sqrt(se_pc**2+se_tri**2), 0.001)[1]} & & & \\\\',
+]
+# Pre-compute delta EaP with correct covariance
+_delta_eap_b  = b_pc + b_tri
+_delta_eap_se = np.sqrt(se_pc**2 + se_tri**2 + 2*_cov_bl.loc['price_x_covid', 'price_x_eap_x_covid'])
+_delta_eap_pv = 2 * (1 - stats.t.cdf(abs(_delta_eap_b / _delta_eap_se), df=res_baseline.df_resid))
+_c_delta, _s_delta = _fmt(_delta_eap_b, _delta_eap_se, _delta_eap_pv)
+lines += [
+    f'$\\Delta\\varepsilon_{{EaP}}$ (COVID -- Pre) & {_c_delta} & -- & -- & {_delta_eap_pv:.3f} \\\\',
+    f'& {_s_delta} & & & \\\\',
     r'\midrule',
     r'\textbf{Panel D: Model Statistics} \\',
     f'Full controls & Yes & Yes & Yes & -- \\\\',
@@ -758,7 +770,7 @@ lines = [
     r'Price is measured as percentage of GNI per capita. COVID is a period dummy for years 2020--2024.',
     r'EaP is a dummy for Eastern Partnership countries. Full controls include: log GDP per capita,',
     r'urban population \%, tertiary enrollment \%, regulatory quality, log secure servers, R\&D \% GDP,',
-    r'log population density, and age dependency ratio. Column (1) presents the full interaction model',
+    r'log population density, and working-age population share (15--64, \%). Column (1) presents the full interaction model',
     r'on 2010--2024 data. Columns (2)--(3) present separate subsample estimates for comparison.',
     r'Column (4) reports p-values from Wald tests of coefficient differences between COVID and',
     r'pre-COVID periods. Driscoll--Kraay standard errors (bandwidth = 3) in parentheses.',

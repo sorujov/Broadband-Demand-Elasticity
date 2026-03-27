@@ -27,18 +27,17 @@ DATA_RAW = DATA_DIR / 'raw'
 DATA_INTERIM = DATA_DIR / 'interim'
 DATA_PROCESSED = DATA_DIR / 'processed'
 
-# Results subdirectories
+# Results subdirectories (intermediate regression outputs)
 RESULTS_REGRESSION = RESULTS_DIR / 'regression_output'
-RESULTS_FIGURES = RESULTS_DIR / 'figures' / 'analysis_figures'
 
-# Manuscript output paths (scripts write directly here)
+# Manuscript output paths (all final tables, figures, and macros go here)
 MANUSCRIPT_DIR = PROJECT_ROOT / 'manuscript'
 MANUSCRIPT_TABLES_DIR = MANUSCRIPT_DIR / 'tables'
 MANUSCRIPT_FIGURES_DIR = MANUSCRIPT_DIR / 'figures'
 
 # Create directories if they don't exist
 for path in [DATA_RAW, DATA_INTERIM, DATA_PROCESSED,
-             RESULTS_REGRESSION, RESULTS_FIGURES,
+             RESULTS_REGRESSION,
              MANUSCRIPT_TABLES_DIR, MANUSCRIPT_FIGURES_DIR]:
     path.mkdir(parents=True, exist_ok=True)
 

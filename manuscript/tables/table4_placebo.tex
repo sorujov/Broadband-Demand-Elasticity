@@ -1,11 +1,12 @@
-\begin{table}[p]
+\begin{table}[!htbp]
 \centering
 \caption{Placebo Test: Pre-COVID Trends (2010--2019)}
 \label{tab:placebo}
 \begin{minipage}{\textwidth}
 \begin{adjustbox}{width=\textwidth}
+\tiny
 \setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{0.85}
+\renewcommand{\arraystretch}{0.8}
 \begin{tabular}{@{}lccc@{}}
 \toprule
 & \multicolumn{3}{c}{Dependent Variable: Log(Subs. per 100)} \\
@@ -20,17 +21,17 @@ Log(Price) & $-0.15^{*}$ & $+0.21$ & $-0.06^{***}$ \\
 Log(Price) $\times$ Late & $+0.13^{*}$ & -- & -- \\
 & (0.07) & & \\
 \textit{Implied late elasticity} & $-0.02$ & -- & $-0.06^{***}$ \\
-& (0.11) & & (0.02) \\
+& (0.06) & & (0.02) \\
 \midrule
 \textbf{Panel B: EaP Countries} \\
-Log(Price) $\times$ EaP & $-0.29^{***}$ & $-0.33^{*}$ & $-0.08$ \\
-& (0.10) & (0.18) & (0.07) \\
+Log(Price) $\times$ EaP & $-0.29^{***}$ & $-0.33^{***}$ & $-0.08$ \\
+& (0.10) & (0.02) & (0.08) \\
 Log(Price) $\times$ EaP $\times$ Late & $+0.08^{*}$ & -- & -- \\
 & (0.04) & & \\
-\textit{Implied early EaP elasticity} & $-0.44^{***}$ & $-0.33^{*}$ & -- \\
-& (0.13) & (0.18) & \\
-\textit{Implied late EaP elasticity} & $-0.23$ & -- & $-0.08$ \\
-& (0.16) & & (0.07) \\
+\textit{Implied early EaP elasticity} & $-0.44^{***}$ & $-0.33^{***}$ & -- \\
+& (0.03) & (0.02) & \\
+\textit{Implied late EaP elasticity} & $-0.23^{**}$ & -- & $-0.08$ \\
+& (0.11) & & (0.08) \\
 \midrule
 \textbf{Panel C: Change in Elasticity} \\
 $\Delta\varepsilon_{EU}$ (Late -- Early) & $+0.13^{*}$ & -- & -- \\
@@ -50,15 +51,15 @@ R-squared & 0.45 & 0.49 & 0.21 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
-\par\vspace{4pt}
-\scriptsize
+\par\vspace{2pt}
+\tiny
 \textit{Notes:} Dependent variable: log fixed broadband subscriptions per 100.
 Price: \% of GNI per capita. ``Late'' is a placebo indicator for 2015--2019.
 EaP denotes Eastern Partnership countries. Column~(1) estimates the full placebo
 interaction on 2010--2019; Columns~(2)--(3) report subsamples for 2010--2014 (early)
 and 2015--2019 (late). Controls: log GDP per capita, urbanization (\%), tertiary
 enrollment (\%), regulatory quality, log secure servers, R\&D (\% GDP), log population
-density, and age dependency ratio. Driscoll--Kraay SEs (bandwidth~=~3) in parentheses.
+density, and working-age population share (15--64, \%). Driscoll--Kraay SEs (bandwidth~=~3) in parentheses.
 $^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
 \end{minipage}
 \end{table}

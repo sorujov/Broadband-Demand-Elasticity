@@ -24,6 +24,7 @@ from matplotlib.gridspec import GridSpec
 from pathlib import Path
 import sys
 import io
+import scipy.stats as st
 
 # Fix Windows console encoding for special characters
 if sys.platform == 'win32':
@@ -34,9 +35,7 @@ if sys.platform == 'win32':
 BASE_DIR = Path(__file__).resolve().parents[2]
 RESULTS_DIR = BASE_DIR / 'results'
 REGRESSION_DIR = RESULTS_DIR / 'regression_output'
-FIGURES_DIR = RESULTS_DIR / 'figures' / 'analysis_figures'
 MANUSCRIPT_FIGURES_DIR = BASE_DIR / 'manuscript' / 'figures'
-FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 MANUSCRIPT_FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 # Data paths
@@ -92,10 +91,6 @@ ACCENT_YELLOW = '#F0E442' # Yellow
 
 def save_figure(fig, name):
     """Save figure in both PDF (vector) and PNG (raster) formats."""
-    # Save to results directory
-    fig.savefig(FIGURES_DIR / f'{name}.pdf', format='pdf')
-    fig.savefig(FIGURES_DIR / f'{name}.png', format='png')
-    # Save to manuscript directory
     fig.savefig(MANUSCRIPT_FIGURES_DIR / f'{name}.pdf', format='pdf')
     fig.savefig(MANUSCRIPT_FIGURES_DIR / f'{name}.png', format='png')
     print(f"  ✓ Saved: {name}.pdf and {name}.png")
@@ -105,12 +100,14 @@ def save_figure(fig, name):
 # ============================================================================
 
 def create_figure1_temporal_evolution(df_year):
-    """Year-by-year price elasticity showing gradual decline from 2015."""
+    """Year-by-year price elasticity for EU showing gradual decline from 2015.
+    EaP is excluded: with only 5-6 EaP countries the triple interaction
+    price x EaP x year_t is identified from too few cross-sectional units to
+    yield interpretable estimates (confounded with EaP-bloc-specific shocks).
+    """
     years = df_year['year'].tolist()
     eu_elasticities = df_year['eu_elasticity'].tolist()
-    eap_elasticities = df_year['eap_elasticity'].tolist()
     eu_pvals = df_year['eu_pval'].tolist()
-    eap_pvals = df_year['eap_pval'].tolist()
 
     fig, ax = plt.subplots(figsize=(6.5, 4))
 
@@ -133,27 +130,16 @@ def create_figure1_temporal_evolution(df_year):
     eu_nonsig = [eu_elasticities[i] if eu_pvals[i] > 0.05 else np.nan for i in range(len(years))]
 
     ax.plot(years, eu_elasticities, '-', color=EU_COLOR, linewidth=1.5, zorder=2)
-    ax.plot(years, eu_sig, 'o', color=EU_COLOR, markersize=5, label='EU (p < 0.05)', zorder=3)
+    ax.plot(years, eu_sig, 'o', color=EU_COLOR, markersize=5, label='p < 0.05', zorder=3)
     ax.plot(years, eu_nonsig, 'o', markerfacecolor='white', markeredgecolor=EU_COLOR,
-            markeredgewidth=1.2, markersize=5, label='EU (p >= 0.05)', zorder=3)
-
-    # Plot EaP line with significance markers (threshold: p < 0.05)
-    eap_sig = [eap_elasticities[i] if eap_pvals[i] <= 0.05 else np.nan for i in range(len(years))]
-    eap_nonsig = [eap_elasticities[i] if eap_pvals[i] > 0.05 else np.nan for i in range(len(years))]
-
-    ax.plot(years, eap_elasticities, '-', color=EAP_COLOR, linewidth=1.5, zorder=2)
-    ax.plot(years, eap_sig, 's', color=EAP_COLOR, markersize=5, label='EaP (p < 0.05)', zorder=3)
-    ax.plot(years, eap_nonsig, 's', markerfacecolor='white', markeredgecolor=EAP_COLOR,
-            markeredgewidth=1.2, markersize=5, label='EaP (p >= 0.05)', zorder=3)
+            markeredgewidth=1.2, markersize=5, label='p $\geq$ 0.05', zorder=3)
 
     # Formatting
     ax.set_xlabel('Year')
-    ax.set_ylabel(r'Price Elasticity ($\varepsilon$)')
+    ax.set_ylabel(r'EU Price Elasticity ($\varepsilon$)')
     ax.set_xlim(2014.5, 2024.5)
-    # Increase y-range to ensure latest EaP value is visible
-    ax.set_ylim(-0.35, 0.35)
+    ax.set_ylim(-0.25, 0.20)
     ax.set_xticks(range(2015, 2025))
-    # Move legend to upper-left, slightly right of y-axis to avoid line overlap
     ax.legend(loc='upper left', bbox_to_anchor=(0.02, 0.98), frameon=True,
               edgecolor='lightgray', fancybox=False, ncol=1, fontsize=8)
 
@@ -172,6 +158,8 @@ def create_figure2_robustness_specs(df_specs):
     eu_ses = df_specs['eu_se'].tolist()
     eap_vals = df_specs['eap_elasticity'].tolist()
     eap_ses = df_specs['eap_se'].tolist()
+    # Per-row t-quantile for 90% CI, consistent with t-distribution used for p-values
+    t90 = [st.t.ppf(0.95, df=d) for d in df_specs['df_resid'].tolist()]
 
     # Cleaner specification names (single line where possible)
     short_specs = ['Full', 'Comprehensive', 'Core', 'Institutional',
@@ -181,11 +169,13 @@ def create_figure2_robustness_specs(df_specs):
     x = np.arange(len(specs))
     width = 0.35
 
-    # Create bars with error bars
+    # Create bars with 90% CI error bars (t_{0.95, df_resid} × SE, matching p<0.10 significance threshold)
+    eu_ses_90 = [t90[i] * eu_ses[i] for i in range(len(eu_ses))]
+    eap_ses_90 = [t90[i] * eap_ses[i] for i in range(len(eap_ses))]
     bars1 = ax.bar(x - width/2, eu_vals, width, label='EU', color=EU_COLOR,
-                   yerr=eu_ses, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
+                   yerr=eu_ses_90, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
     bars2 = ax.bar(x + width/2, eap_vals, width, label='EaP', color=EAP_COLOR,
-                   yerr=eap_ses, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
+                   yerr=eap_ses_90, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
 
     # Formatting
     ax.set_xlabel('Control Specification')
@@ -211,14 +201,14 @@ def create_figure3_price_measurement(df_price):
     price_measures = ['GNI%', 'PPP', 'USD']
     price_labels = ['GNI%', 'PPP', 'USD']
 
-    # Calculate summary statistics
+    # Calculate summary statistics (pre-COVID-only model)
     eu_means, eap_means, eu_sig_rates, eap_sig_rates = [], [], [], []
     for pm in price_measures:
         subset = df_price[df_price['price_measure'] == pm]
-        eu_means.append(subset['eu_pre_elasticity'].mean())
-        eap_means.append(subset['eap_pre_elasticity'].mean())
-        eu_sig_rates.append(100 * (subset['eu_pre_pval'] < 0.05).sum() / len(subset))
-        eap_sig_rates.append(100 * (subset['eap_pre_pval'] < 0.05).sum() / len(subset))
+        eu_means.append(subset['eu_elasticity'].mean())
+        eap_means.append(subset['eap_elasticity'].mean())
+        eu_sig_rates.append(100 * (subset['eu_pval'] < 0.05).sum() / len(subset))
+        eap_sig_rates.append(100 * (subset['eap_pval'] < 0.05).sum() / len(subset))
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.5, 3.2))
     x = np.arange(len(price_measures))
@@ -243,8 +233,9 @@ def create_figure3_price_measurement(df_price):
     ax1.set_xlabel('Price Measure')
     ax1.set_xticks(x)
     ax1.set_xticklabels(price_labels, fontsize=9)
-    # Increase y-range to provide headroom for legend
-    ax1.set_ylim(-0.40, 0.40)
+    # Dynamic y-range: accommodate largest negative value with headroom for legend
+    min_val = min(min(eu_means), min(eap_means))
+    ax1.set_ylim(min_val * 1.25, 0.15)
     ax1.axhline(y=0, color='black', linestyle='-', linewidth=0.5, alpha=0.4)
     # Legend at top-right; panel label at bottom-center
     ax1.legend(loc='upper right', bbox_to_anchor=(1.02, 1.02), frameon=True,
@@ -299,6 +290,16 @@ def create_figure4_covid_comparison(df_price):
     eu_covid, eap_covid = baseline['eu_covid_elasticity'], baseline['eap_covid_elasticity']
     eu_pre_se, eap_pre_se = baseline['eu_pre_se'], baseline['eap_pre_se']
     eu_covid_se, eap_covid_se = baseline['eu_covid_se'], baseline['eap_covid_se']
+    eu_pre_pval, eap_pre_pval = baseline['eu_pre_pval'], baseline['eap_pre_pval']
+    eu_covid_pval, eap_covid_pval = baseline['eu_covid_pval'], baseline['eap_covid_pval']
+    # t-quantile for 90% CI, consistent with t-distribution used for p-values
+    t90 = st.t.ppf(0.95, df=baseline['df_resid'])
+
+    def _stars(p):
+        if p < 0.01: return '***'
+        if p < 0.05: return '**'
+        if p < 0.10: return '*'
+        return ''
 
     # Calculate changes
     eu_change = eu_covid - eu_pre
@@ -309,43 +310,43 @@ def create_figure4_covid_comparison(df_price):
     x_pos = [0, 1.2]
     width = 0.28
 
-    # Pre-COVID bars
+    # Pre-COVID bars (error bars = 90% CI = t_{0.95, df_resid} × SE, matching p<0.10 significance threshold)
     ax.bar(x_pos[0] - width/2 - 0.03, eu_pre, width, color=EU_COLOR,
-           yerr=eu_pre_se, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
+           yerr=t90*eu_pre_se, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
     ax.bar(x_pos[0] + width/2 + 0.03, eap_pre, width, color=EAP_COLOR,
-           yerr=eap_pre_se, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
+           yerr=t90*eap_pre_se, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
 
-    # COVID bars
+    # COVID bars (error bars = 90% CI = t_{0.95, df_resid} × SE, matching p<0.10 significance threshold)
     ax.bar(x_pos[1] - width/2 - 0.03, eu_covid, width, color=EU_COLOR,
-           yerr=eu_covid_se, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
+           yerr=t90*eu_covid_se, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
     ax.bar(x_pos[1] + width/2 + 0.03, eap_covid, width, color=EAP_COLOR,
-           yerr=eap_covid_se, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
+           yerr=t90*eap_covid_se, capsize=2, error_kw={'linewidth': 0.8, 'color': 'black'})
 
     # Boxed numeric labels positioned inside each bar for clean look
     # Pre-COVID EU (negative bar - place in middle)
     ax.text(x_pos[0] - width/2 - 0.03, eu_pre / 2+0.05,
-            f'{eu_pre:.2f}***',
+            f'{eu_pre:.2f}{_stars(eu_pre_pval)}',
             ha='center', va='center', fontsize=8, fontweight='bold', color='white',
             bbox=dict(boxstyle='round,pad=0.25', facecolor=EU_COLOR,
                       edgecolor='white', linewidth=1.0, alpha=0.95))
     
     # Pre-COVID EaP (negative bar - place in middle)
     ax.text(x_pos[0] + width/2 + 0.03, eap_pre / 2 + 0.1,
-            f'{eap_pre:.2f}***',
+            f'{eap_pre:.2f}{_stars(eap_pre_pval)}',
             ha='center', va='center', fontsize=8, fontweight='bold', color='white',
             bbox=dict(boxstyle='round,pad=0.25', facecolor=EAP_COLOR,
                       edgecolor='white', linewidth=1.0, alpha=0.95))
     
     # COVID EU (positive bar - place in middle)
     ax.text(x_pos[1] - width/2 - 0.03, eu_covid / 2,
-            f'{eu_covid:.2f}',
+            f'{eu_covid:.2f}{_stars(eu_covid_pval)}',
             ha='center', va='center', fontsize=8, fontweight='bold', color='white',
             bbox=dict(boxstyle='round,pad=0.25', facecolor=EU_COLOR,
                       edgecolor='white', linewidth=1.0, alpha=0.95))
     
     # COVID EaP (positive bar - place in middle)
     ax.text(x_pos[1] + width/2 + 0.03, eap_covid / 2,
-            f'{eap_covid:.2f}',
+            f'{eap_covid:.2f}{_stars(eap_covid_pval)}',
             ha='center', va='center', fontsize=8, fontweight='bold', color='white',
             bbox=dict(boxstyle='round,pad=0.25', facecolor=EAP_COLOR,
                       edgecolor='white', linewidth=1.0, alpha=0.95))
@@ -380,7 +381,9 @@ def create_figure4_covid_comparison(df_price):
     ax.set_xticks(x_pos)
     ax.set_xticklabels(['Pre-COVID\n(2010-2019)', 'COVID\n(2020-2024)'], fontsize=9)
     ax.set_xlim(-0.45, 1.65)
-    ax.set_ylim(-0.70, 0.40)
+    all_vals = [eu_pre - t90*eu_pre_se, eap_pre - t90*eap_pre_se,
+                eu_covid + t90*eu_covid_se, eap_covid + t90*eap_covid_se]
+    ax.set_ylim(min(all_vals) - 0.12, max(all_vals) + 0.12)
 
     plt.tight_layout()
     save_figure(fig, 'fig4_covid_comparison')
@@ -391,20 +394,20 @@ def create_figure4_covid_comparison(df_price):
 # ============================================================================
 
 def create_figure5_placebo_test(df_year, df_placebo, df_price):
-    """Two-panel figure: phase evolution and placebo test results."""
+    """Two-panel figure: EU phase evolution (panel a) and placebo coefficients (panel b).
+    Panel A shows EU only: with 27 countries, year-by-year EU elasticities are well-identified.
+    EaP is excluded from Panel A because with only 5-6 EaP countries the phase averages from the
+    year-by-year model are confounded with EaP-bloc-specific shocks and cannot be interpreted.
+    EaP evidence appears in Panel B via the pooled placebo coefficient.
+    """
     baseline = df_price[(df_price['control_spec'] == 'Full Controls (Baseline)') &
                         (df_price['price_measure'] == 'GNI%')].iloc[0]
 
-    # Phase averages
+    # EU phase averages (all from EU year-by-year, reliable with N=27 countries)
     eu_vals = [
         baseline['eu_pre_elasticity'],
         df_year[df_year['year'].between(2015, 2019)]['eu_elasticity'].mean(),
         df_year[df_year['year'].between(2020, 2024)]['eu_elasticity'].mean()
-    ]
-    eap_vals = [
-        baseline['eap_pre_elasticity'],
-        df_year[df_year['year'].between(2015, 2019)]['eap_elasticity'].mean(),
-        df_year[df_year['year'].between(2020, 2024)]['eap_elasticity'].mean()
     ]
 
     # Placebo results
@@ -413,44 +416,37 @@ def create_figure5_placebo_test(df_year, df_placebo, df_price):
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(6.5, 3.2))
 
-    # Panel A: Three-phase evolution
+    # Panel A: EU three-phase evolution only
     phases = ['2010-2014', '2015-2019', '2020-2024']
     x = np.arange(len(phases))
-    width = 0.35
+    width = 0.5
 
-    ax1.bar(x - width/2, eu_vals, width, label='EU', color=EU_COLOR)
-    ax1.bar(x + width/2, eap_vals, width, label='EaP', color=EAP_COLOR)
+    ax1.bar(x, eu_vals, width, color=EU_COLOR)
 
-    # Add significance annotations - cleaner
-    ax1.text(x[0] - width/2, eu_vals[0] - 0.015, '***', ha='center', va='top',
+    # Significance for 2010-2014 bar (pre-COVID model-based)
+    eu_pre_p = baseline['eu_pre_pval']
+    eu_pre_stars = '***' if eu_pre_p < 0.01 else ('**' if eu_pre_p < 0.05 else ('*' if eu_pre_p < 0.10 else ''))
+    ax1.text(x[0], eu_vals[0] - 0.015, eu_pre_stars, ha='center', va='top',
              fontsize=9, fontweight='bold', color='white')
-    ax1.text(x[0] + width/2, eap_vals[0] - 0.015, '***', ha='center', va='top',
-             fontsize=9, fontweight='bold', color='white')
-
-    # Removed arrow and 'Pre-COVID trend' label for cleaner presentation
 
     ax1.axhline(y=0, color='black', linestyle='-', linewidth=0.5, alpha=0.4)
-    ax1.set_ylabel(r'Price Elasticity ($\varepsilon$)')
+    ax1.set_ylabel(r'EU Price Elasticity ($\varepsilon$)')
     ax1.set_xlabel('Period')
     ax1.set_xticks(x)
     ax1.set_xticklabels(phases, fontsize=8)
-    ax1.set_ylim(-0.70, 0.50)
-    ax1.legend(loc='upper right', frameon=True, edgecolor='lightgray', fontsize=8, fancybox=False)
+    ax1.set_ylim(-0.35, 0.20)
     ax1.text(0.50, -0.22, '(a)', transform=ax1.transAxes,
              fontsize=11, fontweight='bold', va='top', ha='center')
 
-    # Panel B: Placebo test coefficients
-    # Simplified x-axis labels without parentheticals
+    # Panel B: Placebo test coefficients (both EU and EaP from pooled model)
     tests = ['EU', 'EaP']
     coefs = [eu_placebo['coefficient'], eap_placebo['coefficient']]
     pvals = [eu_placebo['pvalue'], eap_placebo['pvalue']]
-    # Use the same region colors as elsewhere: EU blue, EaP orange
     colors = [EU_COLOR, EAP_COLOR]
 
     bars = ax2.bar(range(2), coefs, width=0.5, color=colors, alpha=0.8, edgecolor='black', linewidth=0.8)
     ax2.axhline(y=0, color='black', linestyle='-', linewidth=0.5, alpha=0.4)
 
-    # Add p-value annotations - simpler format
     for i, (coef, pval) in enumerate(zip(coefs, pvals)):
         sig = '**' if pval < 0.05 else ''
         ax2.text(i, coef + 0.012, f'{coef:.3f}{sig}\n(p={pval:.2f})',
@@ -460,15 +456,12 @@ def create_figure5_placebo_test(df_year, df_placebo, df_price):
     ax2.set_xlabel('Placebo Test', labelpad=0)
     ax2.set_xticks(range(2))
     ax2.set_xticklabels(tests, fontsize=8)
-    # Increase y-limit to 0.5 for generous padding above annotations
     ax2.set_ylim(-0.02, 0.50)
-    # Add legend consistent with panel (a)
     legend_elements_b = [mpatches.Patch(facecolor=EU_COLOR, label='EU'),
                          mpatches.Patch(facecolor=EAP_COLOR, label='EaP')]
     ax2.legend(handles=legend_elements_b, loc='upper right', bbox_to_anchor=(1.02, 1.02),
                frameon=True, edgecolor='lightgray', fancybox=False,
                borderpad=0.2, handlelength=1.2, labelspacing=0.2)
-    # Align panel label with panel (a) level
     ax2.text(0.50, -0.22, '(b)', transform=ax2.transAxes,
              fontsize=11, fontweight='bold', va='top', ha='center')
 
@@ -499,9 +492,9 @@ def create_figure6_results_matrix(df_price):
     for _, row in df_price.iterrows():
         spec_idx = spec_map[row['control_spec']]
         price_idx = price_map[row['price_measure']]
-        matrix[spec_idx, price_idx] = row['eap_pre_elasticity']
+        matrix[spec_idx, price_idx] = row['eap_elasticity']
 
-        pval = row['eap_pre_pval']
+        pval = row['eap_pval']
         if pval < 0.01:
             sig_matrix[spec_idx, price_idx] = '***'
         elif pval < 0.05:
@@ -567,7 +560,8 @@ def main():
     print("Loading data files...")
     try:
         df_specs = pd.read_excel(PRE_COVID_DIR / 'extended_control_specifications.xlsx')
-        df_price = pd.read_excel(FULL_SAMPLE_DIR / 'price_robustness_matrix.xlsx')
+        df_price_pre = pd.read_excel(PRE_COVID_DIR / 'price_robustness_matrix.xlsx')
+        df_price_full = pd.read_excel(FULL_SAMPLE_DIR / 'price_robustness_matrix.xlsx')
         df_year = pd.read_excel(FULL_SAMPLE_DIR / 'year_by_year_elasticities.xlsx')
         df_placebo = pd.read_excel(FULL_SAMPLE_DIR / 'placebo_test_results.xlsx')
         print("  ✓ Data files loaded successfully")
@@ -577,22 +571,24 @@ def main():
         return
 
     # Generate figures
+    # Figures 3 & 6 use pre-COVID-only data (matching captions and body text macros)
+    # Figure 4 uses full-sample data (needs COVID columns)
+    # Figure 5 uses full-sample data for pre-vs-COVID phase comparison
     print("Generating figures (PDF + PNG)...")
     create_figure1_temporal_evolution(df_year)
     create_figure2_robustness_specs(df_specs)
-    create_figure3_price_measurement(df_price)
-    create_figure4_covid_comparison(df_price)
-    create_figure5_placebo_test(df_year, df_placebo, df_price)
-    create_figure6_results_matrix(df_price)
+    create_figure3_price_measurement(df_price_pre)
+    create_figure4_covid_comparison(df_price_full)
+    create_figure5_placebo_test(df_year, df_placebo, df_price_full)
+    create_figure6_results_matrix(df_price_pre)
 
     print()
     print("=" * 70)
     print("ALL FIGURES GENERATED SUCCESSFULLY")
     print("=" * 70)
     print()
-    print("Output locations:")
-    print(f"  Results: {FIGURES_DIR}")
-    print(f"  Manuscript: {MANUSCRIPT_FIGURES_DIR}")
+    print("Output location:")
+    print(f"  Figures: {MANUSCRIPT_FIGURES_DIR}")
     print()
     print("Improvements implemented:")
     print("  ✓ Colorblind-friendly Okabe-Ito palette (blue/orange)")

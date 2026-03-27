@@ -20,7 +20,7 @@ The control vector $\mathbf{X}_{it}$ includes time-varying economic, socioeconom
     \item \textbf{Human capital:} Urban population percentage, tertiary education enrollment rate  
     \item \textbf{Institutional:} Regulatory quality index (World Bank WGI)
     \item \textbf{Infrastructure:} Log secure internet servers per million, R\&D expenditure as \% GDP
-    \item \textbf{Demographic:} Log population density, age dependency ratio
+    \item \textbf{Demographic:} Log population density, working-age population share (15--64, \%)
 \end{itemize}
 
 \subsection{Extended Specification with COVID-19 Interactions}
@@ -49,7 +49,7 @@ The coefficient $\beta_3$ measures the change in EU elasticity during COVID-19, 
 
 Our identification strategy relies on within-country variation in prices and subscriptions over time, conditional on country and year fixed effects plus time-varying controls. Several threats to identification warrant discussion.
 
-\textbf{Simultaneity:} Prices and quantities are jointly determined in equilibrium, potentially generating simultaneity bias if unobserved demand shocks affect both. However, regulatory frameworks in telecommunications typically involve ex-ante price setting with limited short-run adjustment \citep{laffont2000competition}, particularly in Europe's regulated markets. Additionally, fixed effects absorb persistent demand differences, while year effects control for aggregate shocks. As a more direct test, Appendix~\ref{app:robustness} presents 2SLS estimates instrumenting fixed broadband prices with mobile broadband prices, finding qualitatively similar results.
+\textbf{Simultaneity:} Prices and quantities are jointly determined in equilibrium, potentially generating simultaneity bias if unobserved demand shocks affect both. However, regulatory frameworks in telecommunications typically involve ex-ante price setting with limited short-run adjustment \citep{laffont2000competition}, particularly in Europe's regulated markets. Additionally, fixed effects absorb persistent demand differences, while year effects control for aggregate shocks. As a more direct test, Appendix~\ref{app:robustness} presents 2SLS estimates instrumenting fixed broadband prices with mobile broadband prices; the EU estimate remains negative and of similar magnitude, though the instrument is too weak to draw firm conclusions for the EaP-specific interaction.
 
 \textbf{Omitted variables:} Unobserved time-varying factors could correlate with both prices and demand. We address this through comprehensive controls capturing economic conditions, human capital, institutions, and infrastructure. Robustness checks varying control specifications (Section~\ref{sec:results}) show estimates are stable, suggesting omitted variable bias is limited.
 

@@ -247,7 +247,7 @@ p_eu_ols  = ols_res.pvalues[PRIMARY_PRICE]
 b_int_ols = ols_res.params['price_x_eap']
 se_int_ols = ols_res.std_errors['price_x_eap']
 eap_b_ols  = b_eu_ols + b_int_ols
-eap_se_ols = np.sqrt(se_eu_ols**2 + se_int_ols**2)
+eap_se_ols = np.sqrt(se_eu_ols**2 + se_int_ols**2 + 2 * ols_res.cov.loc[PRIMARY_PRICE, 'price_x_eap'])
 eap_p_ols  = 2 * (1 - stats.t.cdf(abs(eap_b_ols / eap_se_ols), df=ols_res.df_resid))
 sig_eu_ols  = '***' if p_eu_ols  < 0.01 else '**' if p_eu_ols  < 0.05 else '*' if p_eu_ols  < 0.10 else ''
 sig_eap_ols = '***' if eap_p_ols < 0.01 else '**' if eap_p_ols < 0.05 else '*' if eap_p_ols < 0.10 else ''
@@ -293,7 +293,7 @@ lines = [
     r'\label{tab:iv_robustness}',
     r'\begin{minipage}{\textwidth}',
     r'\begin{adjustbox}{width=\textwidth}',
-    r'\small',
+    r'\scriptsize',
     r'\begin{tabular}{lccccc}',
     r'\toprule',
     r'& \multicolumn{2}{c}{EU Elasticity} & \multicolumn{2}{c}{EaP Elasticity} & \\',
@@ -306,20 +306,20 @@ for row in results:
     c_eu, s_eu   = fmt(row['eu_elasticity'],  row['eu_se'],  row['eu_pval'])
     c_eap, s_eap = fmt(row['eap_elasticity'], row['eap_se'], row['eap_pval'])
     f_str = f"{row['first_stage_f']:.1f}" if pd.notna(row.get('first_stage_f')) else '---'
-    lines.append(f"{row['specification']} & {c_eu} & {s_eu} & {c_eap} & {s_eap} & {f_str} \\\\")
-    lines.append(r'\\')
+    lines.append(f"{row['specification']} & {c_eu} & {s_eu} & {c_eap} & {s_eap} & {f_str} \\\\[2pt]")
 
 lines += [
     r'\bottomrule',
     r'\end{tabular}',
     r'\end{adjustbox}',
     r'\par\vspace{4pt}',
-    r'\small',
+    r'\scriptsize',
     r'\textit{Notes:} Instrument: log mobile broadband price (GNI\%), which captures',
     r'common supply-side cost shifters while being plausibly exogenous to fixed broadband',
     r'demand shocks. 2SLS uses within-transformed (entity + time demeaned) variables.',
     r'First-stage $F$ statistic for primary price equation; $F > 10$ indicates instrument',
-    r'relevance. Heteroskedasticity-robust standard errors in parentheses.',
+    r'relevance. OLS row: Driscoll--Kraay standard errors (kernel bandwidth$=$3);',
+    r'2SLS rows: heteroskedasticity-robust standard errors. All in parentheses.',
     r'$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.',
     r'\end{minipage}',
     r'\end{table}',

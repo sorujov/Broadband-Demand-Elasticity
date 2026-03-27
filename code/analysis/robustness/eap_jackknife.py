@@ -89,7 +89,7 @@ def run_baseline(df_panel, label):
     se_int = res.std_errors['price_x_eap']
 
     eap_b   = b_eu + b_int
-    eap_se  = np.sqrt(se_eu**2 + se_int**2)
+    eap_se  = np.sqrt(se_eu**2 + se_int**2 + 2 * res.cov.loc[PRIMARY_PRICE, 'price_x_eap'])
     eu_pval  = res.pvalues[PRIMARY_PRICE]
     eap_pval = 2 * (1 - stats.t.cdf(abs(eap_b / eap_se), df=res.df_resid))
 
@@ -185,7 +185,7 @@ lines = [
     r'\label{tab:jackknife}',
     r'\begin{minipage}{\textwidth}',
     r'\begin{adjustbox}{width=\textwidth}',
-    r'\small',
+    r'\scriptsize',
     r'\begin{tabular}{lcccccc}',
     r'\toprule',
     r'& \multicolumn{2}{c}{EU Elasticity} & \multicolumn{2}{c}{EaP Elasticity} & & \\',
@@ -209,7 +209,7 @@ lines += [
     r'\end{tabular}',
     r'\end{adjustbox}',
     r'\par\vspace{4pt}',
-    r'\small',
+    r'\scriptsize',
     r'\textit{Notes:} Each row drops one EaP country from the sample and',
     r're-estimates the baseline model (Full Controls, GNI\% price, pre-COVID 2010--2019).',
     r'Driscoll--Kraay standard errors (bandwidth = 3) in parentheses.',

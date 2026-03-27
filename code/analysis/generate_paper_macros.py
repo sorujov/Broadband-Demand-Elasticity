@@ -61,6 +61,8 @@ pre_price = pd.read_excel(RESULTS_REGRESSION / 'pre_covid_analysis' /
                           'price_robustness_matrix.xlsx')
 full_ext  = pd.read_excel(RESULTS_REGRESSION / 'full_sample_covid_analysis' /
                           'extended_control_specifications.xlsx')
+full_price = pd.read_excel(RESULTS_REGRESSION / 'full_sample_covid_analysis' /
+                           'price_robustness_matrix.xlsx')
 period    = pd.read_excel(RESULTS_REGRESSION / 'full_sample_covid_analysis' /
                           'period_split_results.xlsx')
 yby       = pd.read_excel(RESULTS_REGRESSION / 'full_sample_covid_analysis' /
@@ -171,6 +173,20 @@ eap_covid_b       = fc_full_row['eap_covid_elasticity']
 eap_covid_pval    = fc_full_row['eap_covid_pval']
 full_n            = int(fc_full_row['n_obs'])
 
+# Pre-COVID baselines from the interaction model (price_robustness_matrix)
+# These match Figure 4 exactly (same data source)
+_fp_mask = (full_price['control_spec'].str.contains('Full Controls', case=False, na=False) &
+            (full_price['price_measure'] == 'GNI%'))
+_fp_row  = full_price[_fp_mask].iloc[0]
+eu_pre_int_b      = _fp_row['eu_pre_elasticity']
+eu_pre_int_pval   = _fp_row['eu_pre_pval']
+eap_pre_int_b     = _fp_row['eap_pre_elasticity']
+eap_pre_int_pval  = _fp_row['eap_pre_pval']
+eu_covid_int_b    = _fp_row['eu_covid_elasticity']
+eu_covid_int_pval = _fp_row['eu_covid_pval']
+eap_covid_int_b   = _fp_row['eap_covid_elasticity']
+eap_covid_int_pval = _fp_row['eap_covid_pval']
+
 # COVID interaction terms (price×COVID and triple)
 eu_cov_int_b    = fc_full_row['price_x_covid_coef']
 eu_cov_int_pval = fc_full_row['price_x_covid_pval']
@@ -226,6 +242,12 @@ iv_full_mask = iv_2sls_mask & iv_res['covid_interaction'].astype(bool)
 iv_full_row  = iv_res[iv_full_mask].iloc[0] if iv_full_mask.any() else None
 
 iv_full_f = iv_full_row['first_stage_f'] if iv_full_row is not None else float('nan')
+
+# Full-sample IV elasticities (credible spec, F > 10)
+iv_full_eu_b   = iv_full_row['eu_elasticity']  if iv_full_row is not None else float('nan')
+iv_full_eu_se  = iv_full_row['eu_se']           if iv_full_row is not None else float('nan')
+iv_full_eap_b  = iv_full_row['eap_elasticity']  if iv_full_row is not None else float('nan')
+iv_full_eap_se = iv_full_row['eap_se']          if iv_full_row is not None else float('nan')
 
 # ── sample restrictions ───────────────────────────────────────────────────────
 
@@ -293,6 +315,8 @@ add('GDPStars', stars(gdp_base_pval) if not np.isnan(gdp_base_pval) else '')
 add('gdpcoef',  fmt(gdp_base_b, 2) if not np.isnan(gdp_base_b) else r'\text{n/a}')   # alias
 add('BaselineN',   str(baseline_n))
 add('BaselineRsq', fmt(baseline_r2))
+eap_eu_ratio = abs(eap_base_b) / abs(eu_base_b) if abs(eu_base_b) > 0 else float('nan')
+add('EaPEURatio',  fmt(eap_eu_ratio, 1))
 
 # --- Control-spec stability (pre-COVID, GNI%) ---
 add('EaPSpecMin',  fmt(eap_spec_min, 2))
@@ -337,8 +361,10 @@ add('RobEUSigTen',  str(rob_eu_sig_10))
 # --- COVID full-sample implied elasticities and interactions ---
 add('EUPreFullB',     fmt(eu_pre_full_b, 2))
 add('EUPreFullPval',  fmt(eu_pre_full_pval))
+add('EUPreFullStars', stars(eu_pre_full_pval))
 add('EaPPreFullB',    fmt(eap_pre_full_b, 2))
 add('EaPPreFullPval', fmt(eap_pre_full_pval))
+add('EaPPreFullStars',stars(eap_pre_full_pval))
 add('EUCovidB',       fmt(eu_covid_b, 2))
 add('EUCovidPval',    fmt(eu_covid_pval))
 add('EUCovidStars',   stars(eu_covid_pval))
@@ -354,6 +380,14 @@ add('EUCovIntStars',  stars(eu_cov_int_pval))
 add('EaPTripleInt',   fmt(eap_triple_b, 2))
 add('EaPTriplePval',  fmt(eap_triple_pval))
 add('EaPTripleStars', stars(eap_triple_pval))
+
+# --- Interaction model pre-COVID baselines (Figure 4 data source) ---
+add('EUPreIntB',      fmt(eu_pre_int_b, 2))
+add('EUPreIntPval',   fmt(eu_pre_int_pval))
+add('EUPreIntStars',  stars(eu_pre_int_pval))
+add('EaPPreIntB',     fmt(eap_pre_int_b, 2))
+add('EaPPreIntPval',  fmt(eap_pre_int_pval))
+add('EaPPreIntStars', stars(eap_pre_int_pval))
 
 # --- Year-by-year: 2015 EU elasticity cited in the text ---
 if not np.isnan(eu_yby_2015_b):
@@ -381,6 +415,12 @@ add('IVEaPPval', fmt(iv_eap_pval, 3))
 add('IVEaPStars',stars(iv_eap_pval))
 add('IVFirstF',  fmt(iv_first_f, 1))
 add('IVFullF',   fmt(iv_full_f, 1) if not np.isnan(iv_full_f) else r'\text{n/a}')
+if not np.isnan(iv_full_eu_b):
+    add('IVFullEUB',   fmt(iv_full_eu_b))
+    add('IVFullEUSE',  fmt(iv_full_eu_se))
+if not np.isnan(iv_full_eap_b):
+    add('IVFullEaPB',  fmt(iv_full_eap_b))
+    add('IVFullEaPSE', fmt(iv_full_eap_se))
 
 # --- Sample restrictions ---
 if samp_bal is not None:
@@ -487,7 +527,7 @@ desc_table_tex = r"""\begin{table}[htbp]
 \label{tab:descriptives}
 \begin{threeparttable}
 \begin{adjustbox}{max width=\textwidth}
-\small
+\scriptsize
 \begin{tabular}{lcccccc}
 \toprule
 & \multicolumn{2}{c}{Full Sample} & \multicolumn{2}{c}{EU (""" + str(n_countries_eu) + r""")} & \multicolumn{2}{c}{EaP (""" + str(n_countries_eap) + r""")} \\
@@ -503,7 +543,7 @@ Years & \multicolumn{2}{c}{""" + str(n_years) + r"""} & \multicolumn{2}{c}{""" +
 \end{tabular}
 \end{adjustbox}
 \begin{tablenotes}[flushleft]
-\small
+\scriptsize
 \item \textit{Notes:} Summary statistics for balanced panel of """ + str(n_countries_full) + r""" countries over 2010--2024. EU includes """ + str(n_countries_eu) + r""" member states; EaP includes Armenia, Azerbaijan, Belarus, Georgia, Moldova, and Ukraine. Price and GDP figures in current US\$. Data sources: ITU (telecommunications), World Bank WDI (economic variables), World Bank WGI (governance).
 \end{tablenotes}
 \end{threeparttable}

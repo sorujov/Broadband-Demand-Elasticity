@@ -39,8 +39,9 @@ except ModuleNotFoundError:
 RESULTS_DIR = RESULTS_REGRESSION
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-# Create subfolders for organized results
-FIGURES_DIR = RESULTS_DIR.parent / 'figures' / 'covid_diagnostics'
+# Diagnostic figures go to manuscript/figures/ alongside other figures
+MANUSCRIPT_DIR = RESULTS_DIR.parent.parent / 'manuscript'
+FIGURES_DIR = MANUSCRIPT_DIR / 'figures'
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 # Load data
@@ -274,14 +275,23 @@ df_placebo = df_placebo.set_index(['country', 'year_dt_placebo'])
 df_placebo['price_x_placebo'] = df_placebo[PRIMARY_PRICE] * df_placebo['placebo_covid']
 df_placebo['price_x_eap_x_placebo'] = df_placebo[PRIMARY_PRICE] * df_placebo['eap_dummy'] * df_placebo['placebo_covid']
 
+# Use full controls (consistent with Table 4 generation)
+FULL_CONTROLS_PLACEBO = [
+    'log_gdp_per_capita', 'urban_population_pct', 'education_tertiary_pct',
+    'regulatory_quality_estimate', 'log_secure_internet_servers',
+    'research_development_expenditure', 'log_population_density',
+    'population_ages_15_64',
+]
+placebo_ctrls = [c for c in FULL_CONTROLS_PLACEBO if c in df_placebo.columns]
+
 # Estimate placebo model
 required_placebo = [PRIMARY_DV, PRIMARY_PRICE, 'price_x_eap', 
-                    'price_x_placebo', 'price_x_eap_x_placebo'] + controls
+                    'price_x_placebo', 'price_x_eap_x_placebo'] + placebo_ctrls
 df_placebo_clean = df_placebo[required_placebo].dropna()
 
 y_placebo = df_placebo_clean[PRIMARY_DV]
 X_placebo = df_placebo_clean[[PRIMARY_PRICE, 'price_x_eap', 
-                               'price_x_placebo', 'price_x_eap_x_placebo'] + controls]
+                               'price_x_placebo', 'price_x_eap_x_placebo'] + placebo_ctrls]
 
 model_placebo = PanelOLS(y_placebo, X_placebo, entity_effects=True, time_effects=True)
 res_placebo = model_placebo.fit(cov_type='kernel', kernel='bartlett', bandwidth=3)
@@ -540,7 +550,8 @@ def eap_elast(res):
         return '--', ''
     b1 = res.params[PRIMARY_PRICE]; b2 = res.params['price_x_eap']
     s1 = res.std_errors[PRIMARY_PRICE]; s2 = res.std_errors['price_x_eap']
-    eb = b1 + b2; es = np.sqrt(s1**2 + s2**2)
+    cov12 = res.cov.loc[PRIMARY_PRICE, 'price_x_eap']
+    eb = b1 + b2; es = np.sqrt(s1**2 + s2**2 + 2*cov12)
     ep = 2 * (1 - stats.t.cdf(abs(eb / es), df=res.df_resid))
     return fmt4(eb, es, ep)
 
@@ -560,12 +571,16 @@ se_tri = res_plac_full.std_errors['price_x_eap_x_late']
 p_tri  = res_plac_full.pvalues['price_x_eap_x_late']
 
 # Implied elasticities
+cov = res_plac_full.cov
 eu_early_b  = b_pr;                           eu_early_se = se_pr;       eu_early_pv = p_pr
-eu_late_b   = b_pr + b_lat;                   eu_late_se  = np.sqrt(se_pr**2 + se_lat**2)
+eu_late_b   = b_pr + b_lat;                   eu_late_se  = np.sqrt(se_pr**2 + se_lat**2 + 2*cov.loc[PRIMARY_PRICE, 'price_x_late'])
 eu_late_pv  = 2*(1-stats.t.cdf(abs(eu_late_b/eu_late_se), df=res_plac_full.df_resid))
-eap_early_b = b_pr + b_eap;                   eap_early_se = np.sqrt(se_pr**2 + se_eap**2)
+eap_early_b = b_pr + b_eap;                   eap_early_se = np.sqrt(se_pr**2 + se_eap**2 + 2*cov.loc[PRIMARY_PRICE, 'price_x_eap'])
 eap_early_pv = 2*(1-stats.t.cdf(abs(eap_early_b/eap_early_se), df=res_plac_full.df_resid))
-eap_late_b  = b_pr + b_eap + b_lat + b_tri;   eap_late_se = np.sqrt(se_pr**2+se_eap**2+se_lat**2+se_tri**2)
+eap_late_b  = b_pr + b_eap + b_lat + b_tri
+_vars = [PRIMARY_PRICE, 'price_x_eap', 'price_x_late', 'price_x_eap_x_late']
+_a = np.array([1.0]*4)
+eap_late_se = np.sqrt(_a @ cov.loc[_vars, _vars].values @ _a)
 eap_late_pv = 2*(1-stats.t.cdf(abs(eap_late_b/eap_late_se), df=res_plac_full.df_resid))
 
 c_pr,     s_pr     = fmt4(b_pr,        se_pr,        p_pr)
@@ -591,14 +606,15 @@ n2 = int(res_early.nobs) if res_early else '--'
 n3 = int(res_late.nobs)  if res_late  else '--'
 
 lines = [
-    r'\begin{table}[p]',
+    r'\begin{table}[!htbp]',
     r'\centering',
     r'\caption{Placebo Test: Pre-COVID Trends (2010--2019)}',
     r'\label{tab:placebo}',
     r'\begin{minipage}{\textwidth}',
     r'\begin{adjustbox}{width=\textwidth}',
+    r'\tiny',
     r'\setlength{\tabcolsep}{3pt}',
-    r'\renewcommand{\arraystretch}{0.85}',
+    r'\renewcommand{\arraystretch}{0.8}',
     r'\begin{tabular}{@{}lccc@{}}',
     r'\toprule',
     r'& \multicolumn{3}{c}{Dependent Variable: Log(Subs. per 100)} \\',
@@ -645,15 +661,15 @@ lines = [
     r'\bottomrule',
     r'\end{tabular}',
     r'\end{adjustbox}',
-    r'\par\vspace{4pt}',
-    r'\scriptsize',
+    r'\par\vspace{2pt}',
+    r'\tiny',
     r'\textit{Notes:} Dependent variable: log fixed broadband subscriptions per 100.',
     r"Price: \% of GNI per capita. ``Late'' is a placebo indicator for 2015--2019.",
     r'EaP denotes Eastern Partnership countries. Column~(1) estimates the full placebo',
     r'interaction on 2010--2019; Columns~(2)--(3) report subsamples for 2010--2014 (early)',
     r'and 2015--2019 (late). Controls: log GDP per capita, urbanization (\%), tertiary',
     r'enrollment (\%), regulatory quality, log secure servers, R\&D (\% GDP), log population',
-    r'density, and age dependency ratio. Driscoll--Kraay SEs (bandwidth~=~3) in parentheses.',
+    r'density, and working-age population share (15--64, \%). Driscoll--Kraay SEs (bandwidth~=~3) in parentheses.',
     r'$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.',
     r'\end{minipage}',
     r'\end{table}',

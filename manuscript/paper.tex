@@ -26,6 +26,7 @@
 
 % Mathematics and symbols
 \usepackage{amsmath,amssymb}
+\usepackage{bbm}              % Indicator function \mathbbm{1}
 
 % Tables and figures
 \usepackage{booktabs}
@@ -199,42 +200,59 @@ The data used in this study are publicly available from the International Teleco
 
 \clearpage
 \appendix
+\enlargethispage{4\baselineskip}
 
 \section{Regression Tables}
 \label{app:tables}
 \setcounter{table}{0}
-
-This appendix presents the complete regression results referenced in the main text. All models use two-way fixed effects (country and year) with Driscoll--Kraay standard errors robust to heteroskedasticity, serial correlation, and cross-sectional dependence (bandwidth = 3).
+\small
+\singlespacing
+{\small\noindent This appendix presents the complete regression results referenced in the main text. All models use two-way fixed effects (country and year) with Driscoll--Kraay standard errors robust to heteroskedasticity, serial correlation, and cross-sectional dependence (bandwidth = 3).}
+\vspace{-4pt}
 
 \subsection{Baseline Pre-COVID Results}
+\vspace{-2pt}
+\small
+\singlespacing
 
-Table~\ref{tab:baseline} presents the baseline estimates for the pre-COVID period (2010--2019) across seven control specifications.
+{ Table~\ref{tab:baseline} presents the baseline estimates for the pre-COVID period (2010--2019) across seven control specifications.}
+\vspace{-2pt}
 
 \input{tables/table1_baseline}
+\clearpage
 
 \subsection{COVID-19 Interaction Effects}
+\small
+\singlespacing
 
 Table~\ref{tab:covid} presents results from the full sample (2010--2024) with COVID-19 period interactions.
 
 \input{tables/table2_covid}
+\clearpage
 
 \subsection{Robustness to Alternative Price Measures}
+% \small
+\singlespacing
 
 Table~\ref{tab:price_robustness} compares elasticity estimates across three price definitions: income-relative (baseline), PPP-adjusted, and nominal USD.
 
 \input{tables/table3_price_robustness}
+\clearpage
 
 \subsection{Placebo Test for Pre-COVID Trends}
+\small
+\singlespacing
 
 Table~\ref{tab:placebo} presents the placebo test splitting the pre-COVID period into early (2010--2014) and late (2015--2019) subperiods.
 
 \input{tables/table4_placebo}
-
 \clearpage
+
 \section{Additional Robustness Checks}
 \label{app:robustness}
 \setcounter{table}{0}
-
+\small
+\singlespacing
 \subsection{Period-Split: Acute vs.\ Post-Acute COVID}
 
 Table~\ref{tab:period_split} decomposes the COVID period (2020--2024) into an acute phase
@@ -244,9 +262,11 @@ is not driven solely by the acute pandemic shock. Panel~B excludes Ukraine and B
 data reliability is compromised by war and sanctions---and reaches the same conclusion.
 
 \input{tables/table5_period_split}
+\clearpage
 
 \subsection{IV Robustness: 2SLS Estimates}
-
+\small
+\singlespacing
 Table~\ref{tab:iv_robustness} presents 2SLS estimates using the log mobile broadband price as
 an instrument for fixed broadband price. Mobile and fixed broadband share common supply-side
 cost drivers (network infrastructure, spectrum, regulatory fees), while mobile price is
@@ -263,9 +283,11 @@ price-elastic in EaP countries, and simultaneity bias does not appear to inflate
 estimate above its true value.
 
 \input{tables/table6_iv_robustness}
+\clearpage
 
 \subsection{EaP Jackknife: Leave-One-Country-Out}
-
+\small
+\singlespacing
 Table~\ref{tab:jackknife} reports leave-one-out estimates dropping each of the six EaP
 countries in turn. EaP elasticity ranges from $-0.42$ to $-0.72$ across the six sub-samples.
 Armenia is the most influential country: its exclusion shifts the EaP estimate from $-0.61$
@@ -279,20 +301,22 @@ and the range $[-0.42, -0.72]$ reflects genuine heterogeneity within the EaP gro
 rather than measurement fragility.
 
 \input{tables/table7_jackknife}
+\clearpage
 
 \subsection{Sample Restrictions}
-
+\small
+\singlespacing
 Table~\ref{tab:sample_restrictions} reports robustness to alternative sample definitions.
 The balanced-panel restriction (countries with complete 2010--2019 data) yields identical
 estimates to the full sample, confirming that attrition is not driving the results.
-Excluding outliers identified by Cook's distance ($d > 4/N$) removes 21 observations
+Excluding outliers identified by Cook's distance ($d > 4/N$) removes 22 observations
 across 2 countries with negligible impact on either elasticity estimate.
 For the high-income subsample (17 EU countries above median GDP per capita), no EaP
-countries are present, so only the EU elasticity ($-0.090$, p$=$0.001) is identified;
-this estimate is smaller in magnitude than the full-sample EU value, consistent with
-higher-income consumers facing lower marginal utility of additional bandwidth.
-For the middle/lower-income subsample (16 countries, all EaP), the EaP elasticity
-($-0.429$, p$<$0.001) is somewhat smaller than the full-sample estimate, reflecting
+countries are present, so only the EU elasticity ($\SampHiEUB$, p$=$\SampHiEUPval) is identified;
+this estimate is not statistically significant, consistent with
+higher-income consumers facing minimal affordability constraints.
+For the middle/lower-income subsample (16 countries including all EaP), the EaP elasticity
+($\SampMidEaPB$, p$<$0.001) is somewhat smaller than the full-sample estimate, reflecting
 country heterogeneity at lower income levels.
 
 \input{tables/table8_sample_restrictions}

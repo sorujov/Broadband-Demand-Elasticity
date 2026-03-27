@@ -1,26 +1,26 @@
 \subsection{Policy Implications for Digital Inclusion}
 
-Our findings have direct implications for broadband policy in Europe and neighboring regions. The strong pre-COVID price elasticity in EaP countries ($\varepsilon = \EaPBaseBr$) suggests that affordability-focused policies---price regulation, operator subsidies, or consumer vouchers---can effectively increase broadband adoption. A 10\% price reduction would increase subscriptions by approximately $\EaPTenPctChg$\%, translating to nearly \EaPAddSubsTotal{} new users across the EaP region.
+Our findings have direct implications for broadband policy in Europe and neighboring regions. The strong pre-COVID price elasticity in EaP countries suggests that affordability-focused policies---price regulation, operator subsidies, or consumer vouchers---can effectively increase broadband adoption. A 10\% price reduction would increase subscriptions by approximately $\EaPTenPctChg$\%, translating to nearly \EaPAddSubsTotal{} new users across the EaP region.
 
 However, the shift toward inelastic demand during COVID-19 fundamentally alters the policy toolkit. When price sensitivity approaches zero, further price reductions yield minimal adoption gains. Instead, policies must address other barriers including infrastructure gaps (particularly in rural areas), digital literacy deficits, and content relevance \citep{guermazi2021broadband}. The transition from price-sensitive to price-insensitive demand marks broadband's evolution from discretionary service to essential utility.
 
-For EU countries, the consistently low elasticity ($\varepsilon = \EUBaseBr$) even pre-COVID suggests price is not the primary adoption barrier. With subscription rates exceeding \DescSubsEU{} per 100 inhabitants (Table~\ref{tab:descriptives}), most households with willingness to pay already have broadband. Remaining gaps likely reflect supply constraints (rural coverage) or demographic factors (elderly populations) rather than affordability. EU policy should focus on universal service obligations ensuring infrastructure availability rather than price interventions.
+For EU countries, the consistently low elasticity even pre-COVID suggests price is not the primary adoption barrier. With subscription rates exceeding \DescSubsEU{} per 100 inhabitants (Table~\ref{tab:descriptives}), most households with willingness to pay already have broadband. Remaining gaps likely reflect supply constraints (rural coverage) or demographic factors (elderly populations). EU policy should focus on universal service obligations ensuring infrastructure availability rather than price interventions.
 
-The EaP-EU differential ($\Delta\varepsilon = \IntCoef$) highlights the importance of context-dependent policy design. Uniform European approaches may be suboptimal given heterogeneous demand elasticities. EaP countries benefit more from affordability programs, while EU countries require infrastructure and digital skills initiatives. Regional development policies should account for these structural differences.
+The EaP-EU differential highlights the importance of context-dependent policy design. Uniform European approaches may be suboptimal given heterogeneous demand elasticities. EaP countries benefit more from affordability programs, while EU countries require infrastructure and digital skills initiatives.
 
 \subsection{Time-Varying Elasticity and Demand Evolution}
 
-A central finding is that broadband demand elasticity is not constant but evolves systematically over time. For EU countries (N$=$27), the year-by-year analysis reveals a statistically precise declining trend starting well before COVID-19, with elasticity falling from $\EUYbyYRefElast$ in 2015 to near zero by the late 2010s. For EaP countries, the small regional sample (five to six countries) precludes precise individual-year estimates, but the pooled placebo test (Table~\ref{tab:placebo}) confirms that EaP elasticity was also declining before COVID-19 ($+\PlaceboEaP$, p$=$\PlaceboEaPPval). This gradual transformation in both regions suggests demand elasticity is a function of market maturity, technological change, and societal integration.
+A central finding is that broadband demand elasticity is not constant but evolves systematically over time. For EU countries (N$=$27), the year-by-year analysis reveals a statistically precise declining trend starting well before COVID-19, with elasticity falling from $\EUYbyYRefElast$ in 2015 to near zero by the late 2010s. For EaP countries, year-by-year estimates cannot be interpreted at the annual frequency: with only five to six EaP countries, each triple interaction term is identified from too few cross-sectional units and is confounded with EaP-bloc-specific shocks (geopolitical events, investment cycles) that cannot be separated from the price response. Instead, the pooled placebo test (Table~\ref{tab:placebo}) confirms that EaP elasticity was also declining before COVID-19 ($+\PlaceboEaP$, p$=$\PlaceboEaPPval), as was EU elasticity ($+\PlaceboEU$, p$=$\PlaceboEUPval). This gradual transformation in both regions suggests demand elasticity is a function of market maturity, technological change, and societal integration.
 
 Three mechanisms likely drive this evolution. First, \textbf{network effects} become stronger as broadband penetration increases. The value of connectivity rises with the number of connected users, making broadband more essential regardless of price \citep{katz1985network}. Second, \textbf{habit formation} makes broadband increasingly indispensable as consumers integrate it into daily routines \citep{becker1988theory}. Third, \textbf{complementary innovations}---smartphones, streaming services, cloud computing---increase broadband's value proposition independent of price.
 
-This time-varying elasticity has important methodological implications for future research. Static elasticity estimates from early-period data (e.g., 2000s) may not apply to current markets. Panel methods allowing for time variation, as employed here, are essential for capturing evolving demand patterns. Researchers estimating telecommunications demand should test for structural breaks and non-constant parameters rather than assuming stable relationships.
+This time-varying elasticity has important methodological implications. Static elasticity estimates from early-period data may not apply to current markets. Panel methods allowing for time variation, as employed here, are essential for capturing evolving demand patterns.
 
 From a forecasting perspective, our results suggest broadband adoption will continue even without further price declines. The near-zero COVID-era elasticity implies that infrastructure availability and service quality---not affordability---now determine adoption. Countries planning broadband expansion should prioritize network deployment over price regulation as markets mature.
 
 \subsection{Price Measurement and Affordability Metrics}
 
-The robustness across price measures (Table~\ref{tab:price_robustness}) provides valuable methodological insights. Income-relative prices (price as \% of GNI per capita), PPP-adjusted prices, and nominal USD prices all yield similar elasticities, suggesting findings are not artifacts of price definition.
+The robustness across price measures (Table~\ref{tab:price_robustness}) provides valuable methodological insights. All three price definitions---income-relative (GNI\%), PPP-adjusted, and nominal USD---yield negative elasticity estimates, confirming that broadband demand is price-sensitive regardless of measurement choice. However, the magnitudes differ substantially: income-relative prices yield the largest EaP elasticities ($\EaPGNIFCB$), followed by nominal USD ($\EaPUSDBCB$), and PPP-adjusted ($\EaPPPPFCB$).
 
 However, \textit{income-relative prices} emerge as the most appropriate affordability metric. The ITU basket is designed to track the minimum viable entry-level broadband offering in each period---1\,GB in the early years, 5\,GB once that became the prevailing threshold---so the GNI\% measure is literally the fraction of monthly income a household must spend to cross the adoption threshold. This directly matches the object of interest in a discrete adoption model: not how expensive broadband is in absolute terms, but whether it is affordable enough to subscribe at all \citep{deaton1980almost}. A \$30/month connection is inexpensive for a household earning \$3{,}000/month but prohibitive for one earning \$200/month; GNI\% captures this heterogeneity while nominal USD does not.
 
@@ -37,7 +37,8 @@ as demonstrated in Figure~\ref{fig:price_measurement}. This validates the ITU's 
 affordability targets as percentages of GNI per capita \citep{itu2024data}. Policymakers tracking broadband affordability 
 should prioritize income-relative metrics over both nominal and PPP-adjusted prices.
 
-An important caveat is that our price data represent standardized fixed-broadband baskets whose definition 
+An important caveat is that our price data represent standardized fixed-broadband 
+baskets whose definition 
 changed over the sample: the ITU's 1\,GB basket (I154\_FBB, 2010--2017) was succeeded by 
 its 5\,GB basket (I154\_FBB5, 2018--2024) as 5\,GB became the prevailing entry-level threshold. 
 Because this transition occurred simultaneously for all countries in 2018, year fixed effects absorb 
@@ -51,26 +52,27 @@ though cross-country comparability would be challenging.
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.75\textwidth]{fig3_price_measurement.pdf}
-\caption{Effect of price measurement on inference (pre-COVID, 2010--2019). (a) Mean elasticity by price measure. (b) Percentage of specifications significant at p$<$0.05. GNI\% yields 100\% significant EaP results vs. 25\% for PPP, validating income-relative pricing as the appropriate affordability metric.}
+\caption{Effect of price measurement on inference (pre-COVID, 2010--2019). (a) Mean elasticity by price measure. (b) Percentage of specifications significant at p$<$0.05. GNI\% yields 100\% significant EaP results vs.\ \PctPPPSigEaP\% for PPP (at p$<$0.05), validating income-relative pricing as the appropriate affordability metric.}
 \label{fig:price_measurement}
 \end{figure}
 
 \subsection{Regional Heterogeneity and Development Gradients}
 
-The large EaP-EU elasticity differential ($\EaPBaseBr$ vs.\ $\EUBaseBr$) reflects broader development gradients. EaP countries (Armenia, Azerbaijan, Belarus, Georgia, Moldova, Ukraine) have lower GDP per capita (\$4,500--\$13,000 PPP) compared to EU countries (\$25,000--\$60,000 PPP). This income gap translates directly to affordability constraints, making EaP consumers more price-sensitive.
+The large EaP-EU elasticity differential reflects broader development gradients. EaP countries have lower GDP per capita (\$4,500--\$13,000 PPP) compared to EU countries (\$25,000--\$60,000 PPP), translating directly to affordability constraints and higher price sensitivity.
 
 Beyond income, institutional and infrastructure differences matter. EaP countries exhibit lower regulatory quality (Table~\ref{tab:descriptives}), potentially reducing competitive pressure and raising prices. Weaker governance may also hamper policy implementation of broadband programs. Additionally, lower internet server density and R\&D intensity suggest less developed digital ecosystems, reducing complementary services that drive demand.
 
-These structural differences imply that development strategies successful in high-income EU markets may not transfer directly to middle-income EaP contexts. EaP countries face a distinct policy challenge: expanding broadband adoption while navigating affordability constraints and institutional gaps. Targeted approaches addressing these specific barriers are essential.
+These structural differences imply that development strategies successful in high-income EU markets may not transfer directly to middle-income EaP contexts. Targeted approaches addressing affordability constraints and institutional gaps are essential.
 
-Interestingly, the convergence toward near-zero elasticity during COVID occurred in both regions, suggesting the pandemic's economic and social impacts transcended development levels. Even in lower-income EaP countries, broadband became a necessity good during lockdowns. This convergence may reflect the universal human need for connectivity during social restrictions, overriding typical income-based differences in demand behavior.
+Interestingly, the convergence toward near-zero elasticity during COVID occurred in both regions, suggesting the pandemic's impacts transcended development levels. This may reflect the universal need for connectivity during social restrictions, overriding typical income-based differences in demand.
 
 \subsection{COVID-19 Shock vs. Secular Trends}
 
 A crucial interpretive question is whether observed changes reflect a COVID-19 shock or
 continuation of pre-existing trends. The placebo test (Table~\ref{tab:placebo}) provides
-compelling evidence for the latter: EaP elasticity was already declining during 2015--2019,
-before the pandemic.
+suggestive evidence for the latter: both EU and EaP
+placebo interactions are positive and marginally significant, indicating that elasticity
+was already declining during 2015--2019.
 
 The period-split results (Table~\ref{tab:period_split}) sharpen this interpretation by
 decomposing the post-2019 period into two distinct phases. During the \emph{acute} COVID
@@ -83,18 +85,18 @@ one would expect some reversion toward pre-COVID elasticity as restrictions lift
 
 Instead, zero post-acute elasticity supports the \emph{secular transformation} hypothesis:
 broadband has permanently crossed the threshold from discretionary to essential service.
-The mechanisms are structural, not cyclical. High-speed connectivity is now deeply embedded
+High-speed connectivity is now deeply embedded
 in work, education, healthcare, and social life. Even at elevated prices, households treat
 disconnection as prohibitively costly---analogous to electricity or water utilities. COVID-19
 did not cause this transition; it accelerated the final stage of a process underway since
-roughly 2015 (as the placebo test reveals).
+roughly 2015.
 
 For policy, this distinction has permanent implications. If zero elasticity is durable,
-price subsidies lose their effectiveness as tools for expanding adoption. The binding
-constraints are now infrastructure availability (especially in rural and remote areas),
-digital literacy, and service quality---not affordability per se. EU policy should focus
-on ensuring universal coverage; EaP policy should pair infrastructure investment with
-institutional reforms to foster competition and drive price levels down structurally.
+price subsidies lose their effectiveness. The binding
+constraints are now infrastructure availability (especially in rural areas),
+digital literacy, and service quality. EU policy should focus
+on universal coverage; EaP policy should pair infrastructure investment with
+institutional reforms to foster competition.
 
 \subsection{Limitations and Alternative Explanations}
 
@@ -118,10 +120,16 @@ between prices and quantities could bias estimates. Operators may set prices bas
 expected demand, inducing correlation. While regulatory frameworks limit short-run price
 adjustment, reducing simultaneity concerns \citep{laffont2000competition}, we address this
 directly using 2SLS with the mobile broadband price as an instrument
-(Table~\ref{tab:iv_robustness}). The EaP 2SLS estimate ($-1.56$) is larger in magnitude
-than the OLS ($-0.61$), consistent with classical attenuation bias in the OLS rather than
-upward simultaneity bias. Confidence is limited for the EU equation where instrument
-strength is borderline; the EU OLS estimate should therefore be interpreted cautiously.
+(Table~\ref{tab:iv_robustness}). The pre-COVID specification suffers from a weak
+instrument (first-stage $F = \IVFirstF$), rendering those estimates uninformative.
+With the full sample and COVID interactions, instrument strength improves
+($F = \IVFullF$): the EU 2SLS estimate ($\IVFullEUB$, SE$= \IVFullEUSE$) is negative
+and similar in magnitude to the OLS ($\EUBaseBr$), though statistically insignificant,
+providing no evidence of upward simultaneity bias. The EaP 2SLS estimate
+($\IVFullEaPB$, SE$= \IVFullEaPSE$) is imprecisely estimated and not significant,
+likely reflecting the difficulty of instrumenting the region-specific interaction
+term with a single instrument. Overall, the IV results do not suggest simultaneity
+bias inflates the OLS but lack the precision to serve as a definitive endogeneity test.
 
 Fifth, \textbf{external validity}: findings derive from European and Eastern Partnership countries. Generalization to other regions---particularly low-income countries in Africa, Asia, or Latin America---is uncertain. Demand elasticity likely varies with income, institutions, and technology. Cross-regional studies are needed to assess global applicability.
 
@@ -135,4 +143,4 @@ Alternative explanations for near-zero COVID-era elasticity merit consideration.
     \item \textbf{Government interventions:} Some countries implemented broadband subsidies or price controls during COVID \citep{oecd2021broadband}. If subsidies offset price increases, observed relationships could be distorted. Detailed policy data would help control for interventions.
 \end{itemize}
 
-Despite these limitations, the robustness across specifications, price measures (Table~\ref{tab:price_robustness}), and time periods provides confidence in core findings. The large magnitude of effects, statistical significance, and theoretical coherence all support substantive conclusions about evolving broadband demand.
+Despite these limitations, the robustness across specifications, price measures (Table~\ref{tab:price_robustness}), and time periods provides confidence in core findings.
