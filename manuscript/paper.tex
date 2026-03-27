@@ -270,17 +270,26 @@ data reliability is compromised by war and sanctions---and reaches the same conc
 Table~\ref{tab:iv_robustness} presents 2SLS estimates using the log mobile broadband price as
 an instrument for fixed broadband price. Mobile and fixed broadband share common supply-side
 cost drivers (network infrastructure, spectrum, regulatory fees), while mobile price is
-plausibly exogenous to unobserved fixed broadband demand shocks. The first-stage $F$-statistic
-is 9.1 for the pre-COVID specification (borderline) and 17.7 for the full sample, indicating
-adequate but not strong instrument relevance. The EaP pre-COVID 2SLS estimate is $-1.56$
-(p$=$0.043), consistent in direction with the OLS baseline ($-0.61$) and suggesting the OLS
-may understate the true elasticity magnitude due to classical measurement error in prices. The
-EU 2SLS estimate is imprecise (SE $> 4$), reflecting instrument weakness for the EU equation
-specifically; the broad confidence interval is uninformative for EU. The full-sample 2SLS
-with COVID interactions yields very wide standard errors, limiting interpretability. Overall,
-the IV evidence corroborates rather than contradicts the OLS results: demand is negatively
-price-elastic in EaP countries, and simultaneity bias does not appear to inflate the OLS
-estimate above its true value.
+plausibly exogenous to unobserved fixed broadband demand shocks.
+
+Instrument relevance differs sharply by specification. For the pre-COVID 2SLS, the
+first-stage $F$-statistic is just 0.4---well below any conventional threshold---indicating
+that the mobile price is essentially uninformative about fixed broadband price variation in
+the 2010--2019 subsample. Consequently, the pre-COVID 2SLS estimates (EU: $-6.13$,
+SE$=$51.78; EaP: $+3.03$, SE$=$10.09) are completely uninformative and should be disregarded.
+For the full-sample specification with COVID interactions, the first-stage $F$-statistic is
+17.4, indicating adequate instrument relevance. The full-sample 2SLS yields EU$=-0.171$
+(SE$=$0.239, p$=$0.474) and EaP$=+0.123$ (SE$=$0.142, p$=$0.387); neither estimate is
+statistically significant, and both are consistent with the COVID-era near-zero elasticity
+found in OLS.
+
+The EU 2SLS estimate is also imprecise (SE $> 4$), reflecting instrument weakness for the EU
+equation specifically. Overall the IV evidence neither corroborates nor contradicts the OLS
+results in a strong sense: demand is negatively price-elastic in EaP countries pre-COVID
+according to OLS ($-0.60$, p$<0.001$), but the instrument does not achieve sufficient
+relevance in the pre-COVID window to conduct a meaningful IV test of this finding.
+Simultaneity bias therefore remains a caveat rather than a resolved concern, though the
+absence of a significant positive bias in the full-sample 2SLS is mildly reassuring.
 
 \input{tables/table6_iv_robustness}
 \clearpage
