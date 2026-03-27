@@ -52,7 +52,7 @@ data/processed/analysis_ready_data.csv
 
 ---
 
-### `01_analysis.py` [OPTIONAL DIAGNOSTIC]
+### `diagnostics.py` [OPTIONAL DIAGNOSTIC]
 
 **Purpose:** Rigorous missing data diagnostics and advanced imputation methods
 
@@ -86,7 +86,7 @@ data/processed/missing_data_analysis/
 
 **Usage:**
 ```bash
-python code/data_preparation/01_analysis.py
+python code/data_preparation/diagnostics.py
 ```
 
 **Note:** This script is **NOT** part of the main pipeline. It's a diagnostic tool for publication-quality missing data analysis. The main pipeline uses `02_prepare_data.py` which implements simple, transparent imputation (forward fill + interpolation).

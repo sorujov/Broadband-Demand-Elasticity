@@ -25,10 +25,10 @@
 <td width="33%" align="center">
 
 ### 📈 Pre-COVID (2010-2019)
-**EaP: -0.61***  
+**EaP: -0.60***  
 *Highly price-elastic*
 
-10% price drop → 6% more subscriptions
+10% price drop → 6.0% more subscriptions
 
 </td>
 <td width="33%" align="center">
@@ -55,7 +55,7 @@ Broadband became essential
 ### 🔑 Main Contributions
 
 1. **📊 Robust Pre-COVID Estimates**: EaP countries show ε ≈ -0.60, significant in 100% of specifications with GNI% price measure
-2. **📏 Measurement Matters**: GNI% yields 100% significance; PPP-adjusted prices only 25% — **price measurement critically affects inference**
+2. **📏 Measurement Matters**: GNI% yields 100% significance; PPP-adjusted prices only 12% — **price measurement critically affects inference**
 3. **🕐 Decade-Long Evolution**: Elasticity declined gradually 2015-2024, **not sudden COVID shock** (placebo test confirms pre-trend, p=0.045)
 4. **💡 Policy Insight**: Price policies effective when elastic (2010-2019), ineffective when inelastic (2020-2024) — **infrastructure > affordability now**
 
@@ -91,6 +91,22 @@ Broadband became essential
   - COVID: 2020-2024 (165 obs)
 
 ### Structure
+
+#### 🔄 Analysis Pipeline
+
+```mermaid
+flowchart LR
+    A["🌐 ITU Stats\n🏦 World Bank"] --> B["Stage 1\nData Collection\nrun_data_collection.py"]
+    B --> C["Stage 2\nData Preparation\n02_prepare_data.py"]
+    C --> D["Stage 3\nEconometric Analysis\npython code/main.py"]
+    D --> E["9 LaTeX Tables\nresults/regression_output/"]
+    D --> F["6 Figures\nresults/figures/"]
+    D --> G["paper_macros.tex\nmanuscript/"]
+    E & F & G --> H["Stage 4\nLaTeX Compile\npaper.pdf · 61 pp."]
+```
+
+#### 📁 Directory Layout
+
 ```
 Broadband-Demand-Elasticity/
 │
@@ -113,14 +129,19 @@ Broadband-Demand-Elasticity/
 │   │   └── README.md
 │   ├── data_preparation/            # Variable transformations & cleaning
 │   │   ├── 02_prepare_data.py       # Main preparation script
-│   │   ├── 01_analysis.py           # Missing data diagnostics
+│   │   ├── diagnostics.py           # Missing data diagnostics
 │   │   └── README.md
 │   ├── analysis/                    # Econometric analysis
 │   │   ├── pre_covid/               # 2010-2019 baseline analysis
 │   │   │   └── two_way_fe.py
 │   │   ├── full_sample/             # 2010-2024 with COVID interactions
 │   │   │   ├── two_way_fe_full_sample.py
-│   │   │   └── covid_diagnostics.py
+│   │   │   ├── covid_diagnostics.py
+│   │   │   └── period_split_analysis.py
+│   │   ├── robustness/              # Robustness checks
+│   │   │   ├── eap_jackknife.py
+│   │   │   ├── iv_estimation.py
+│   │   │   └── sample_restrictions.py
 │   │   ├── analysis_visualizations.py
 │   │   └── README.md
 │   ├── utils/
@@ -146,11 +167,12 @@ Broadband-Demand-Elasticity/
 │   ├── paper.tex                    # Main manuscript file
 │   ├── references.bib               # Bibliography
 │   ├── sections/                    # Individual sections (8 .tex files)
-│   ├── tables/                      # Regression tables (4 .tex files)
+│   ├── tables/                      # Regression tables (9 .tex files)
 │   ├── figures/                     # Figures for manuscript (PDF, PNG)
 │   ├── styles/                      # LaTeX styles (elsarticle)
 │   └── README.md
 │
+├── pyproject.toml                   # Build system (pip install -e .)
 ├── requirements.txt                 # Python dependencies
 └── README.md                        # This file
 ```
@@ -277,15 +299,15 @@ res = model.fit(cov_type='kernel', kernel='bartlett', bandwidth=3)
 
 | Region | Elasticity | Std. Error | p-value | Interpretation |
 |--------|-----------|-----------|---------|----------------|
-| **EU** | -0.115** | 0.055 | 0.036 | Marginally elastic |
-| **EaP** | -0.609*** | 0.077 | <0.001 | **Highly elastic** |
-| **Ratio** | **5.28×** | — | — | EaP 5× more elastic than EU |
+| **EU** | -0.101* | 0.053 | 0.056 | Marginally elastic |
+| **EaP** | -0.595*** | 0.061 | <0.001 | **Highly elastic** |
+| **Ratio** | **5.9×** | — | — | EaP ~6× more elastic than EU |
 
-**Model Fit**: R² = 0.408, N = 330
+**Model Fit**: R² = 0.40, N = 330
 
 **Interpretation**: 
-- ✅ EaP countries: 10% price reduction → **6.1% increase** in subscriptions
-- ⚠️ EU countries: 10% price reduction → **1.2% increase** in subscriptions
+- ✅ EaP countries: 10% price reduction → **6.0% increase** in subscriptions
+- ⚠️ EU countries: 10% price reduction → **1.0% increase** in subscriptions
 - 🔍 EaP significantly more price-sensitive (developing markets)
 
 ### Robustness: 8 Control Specifications
@@ -301,14 +323,14 @@ res = model.fit(cov_type='kernel', kernel='bartlett', bandwidth=3)
 </tr>
 </thead>
 <tbody>
-<tr><td>Full Controls</td><td>-0.115**</td><td><b>-0.609***</b></td><td>5.28×</td><td>0.408</td></tr>
-<tr><td>Comprehensive</td><td>-0.116**</td><td><b>-0.587***</b></td><td>5.06×</td><td>0.369</td></tr>
-<tr><td>Core</td><td>-0.165***</td><td><b>-0.629***</b></td><td>3.81×</td><td>0.352</td></tr>
-<tr><td>Institutional</td><td>-0.089**</td><td><b>-0.604***</b></td><td>6.78×</td><td>0.278</td></tr>
-<tr><td>Infrastructure</td><td>-0.033</td><td><b>-0.596***</b></td><td>18.31×</td><td>0.296</td></tr>
-<tr><td>Demographic</td><td>-0.140***</td><td><b>-0.636***</b></td><td>4.55×</td><td>0.298</td></tr>
-<tr><td>Macroeconomic</td><td>-0.094**</td><td><b>-0.631***</b></td><td>6.74×</td><td>0.301</td></tr>
-<tr><td>Minimal</td><td>-0.081*</td><td><b>-0.615***</b></td><td>7.56×</td><td>0.275</td></tr>
+<tr><td>Full Controls</td><td>-0.101*</td><td><b>-0.595***</b></td><td>5.9×</td><td>0.40</td></tr>
+<tr><td>Comprehensive</td><td>-0.101*</td><td><b>-0.570***</b></td><td>5.6×</td><td>0.36</td></tr>
+<tr><td>Core</td><td>-0.142***</td><td><b>-0.618***</b></td><td>4.3×</td><td>0.34</td></tr>
+<tr><td>Institutional</td><td>-0.090**</td><td><b>-0.604***</b></td><td>6.7×</td><td>0.28</td></tr>
+<tr><td>Infrastructure</td><td>-0.033</td><td><b>-0.596***</b></td><td>18.1×</td><td>0.30</td></tr>
+<tr><td>Demographic</td><td>-0.104***</td><td><b>-0.621***</b></td><td>6.0×</td><td>0.28</td></tr>
+<tr><td>Macroeconomic</td><td>-0.094**</td><td><b>-0.631***</b></td><td>6.7×</td><td>0.30</td></tr>
+<tr><td>Minimal</td><td>-0.082*</td><td><b>-0.615***</b></td><td>7.5×</td><td>0.27</td></tr>
 </tbody>
 <tfoot>
 <tr><td colspan="5"><i>***p<0.01, **p<0.05, *p<0.10. EaP significant in 100% of specifications (8/8)</i></td></tr>
@@ -347,21 +369,21 @@ res = model.fit(cov_type='kernel', kernel='bartlett', bandwidth=3)
 <tbody>
 <tr>
 <td><b>GNI% (Primary)</b></td>
-<td>[-0.17, -0.03]</td>
+<td>[-0.14, -0.03]</td>
 <td>-0.10</td>
-<td>[-0.64, -0.59]</td>
-<td><b>-0.61</b></td>
+<td>[-0.63, -0.57]</td>
+<td><b>-0.60</b></td>
 <td><b>8/8 (100%)</b> ✅</td>
-<td>0.322</td>
+<td>0.32</td>
 </tr>
 <tr>
 <td>PPP</td>
-<td>[-0.13, -0.08]</td>
-<td>-0.12</td>
-<td>[-0.25, -0.16]</td>
+<td>[-0.13, -0.09]</td>
+<td>-0.10</td>
+<td>[-0.24, -0.16]</td>
 <td>-0.19</td>
-<td>2/8 (25%) ❌</td>
-<td>0.115</td>
+<td>1/8 (12%) ❌</td>
+<td>0.11</td>
 </tr>
 <tr>
 <td>USD</td>
@@ -597,26 +619,30 @@ pip install pandas numpy linearmodels scipy matplotlib
 git clone https://github.com/sorujov/Broadband-Demand-Elasticity.git
 cd Broadband-Demand-Elasticity
 
-# Install dependencies
+# Install as editable package (recommended)
+pip install -e .
+
+# Or install dependencies only
 pip install -r requirements.txt
 
 # Run pre-COVID analysis
-python code/analysis/pre_covid/two_way_fe.py
-
-# Run full sample analysis
-python code/analysis/full_sample/two_way_fe_full_sample.py
-
-# Run diagnostics
-python code/analysis/full_sample/covid_diagnostics.py
+# Run the complete analysis pipeline (~48 seconds)
+python code/main.py --skip-collection
 ```
+
+This regenerates all 9 LaTeX tables, 6 figures, and `paper_macros.tex` in one step.
 
 ### Key Scripts
 
 | Script | Purpose | Output |
 |--------|---------|--------|
+| `code/main.py --skip-collection` | **Full pipeline** (data prep → analysis → macros) | All tables + figures + macros |
 | `two_way_fe.py` | Pre-COVID baseline (2010-2019) | 24 specifications, robustness |
 | `two_way_fe_full_sample.py` | Full sample with COVID (2010-2024) | 24 specifications, interactions |
 | `covid_diagnostics.py` | Validation tests | Diagnostic plots, placebo tests |
+| `eap_jackknife.py` | Leave-one-out jackknife by country | Influence diagnostics |
+| `iv_estimation.py` | IV/2SLS with lagged price instruments | Causal robustness |
+| `sample_restrictions.py` | Balanced panel + outlier sensitivity | Sample robustness |
 
 ### Estimation Command
 
@@ -646,11 +672,11 @@ p_value = results.pvalues['log_price']
 
 ### Pre-COVID (2010-2019)
 - **Sample**: 330 obs, 33 countries, 10 years
-- **EU**: ε = -0.12** (marginally elastic)
-- **EaP**: ε = -0.61*** (highly elastic)
-- **Ratio**: 5.3× difference
+- **EU**: ε = -0.10* (marginally elastic)
+- **EaP**: ε = -0.60*** (highly elastic)
+- **Ratio**: 5.9× difference
 - **Robustness**: 100% GNI% specs significant
-- **R²**: 0.28-0.41
+- **R²**: 0.27-0.40
 
 </td>
 <td width="50%">
@@ -671,7 +697,7 @@ p_value = results.pvalues['log_price']
 
 | Metric | Value |
 |--------|-------|
-| **Total Specifications Tested** | 48 |
+| **Total Specifications Tested** | 48 (24 per analysis) |
 | **Pre-COVID Significant (GNI%)** | 8/8 (100%) |
 | **COVID Interaction Significant** | 24/24 (100%) |
 | **Placebo Pre-Trend** | p=0.045 (detected) |

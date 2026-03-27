@@ -275,7 +275,54 @@ python code/analysis/analysis_visualizations.py
 ### Or run complete pipeline:
 
 ```bash
-python code/main.py
+# Regenerates all tables, figures, and macros in ~48 seconds
+python code/main.py --skip-collection
+```
+
+---
+
+## 🛡️ Robustness Scripts
+
+### `robustness/eap_jackknife.py` — Leave-One-Out Jackknife
+
+**Purpose:** Assess influence of individual EaP countries by re-estimating without each one
+
+**Method:** Drop each of the 6 EaP countries in turn and re-estimate baseline
+
+**Output:** `results/regression_output/robustness/` → `table7_jackknife.tex`
+
+**Key Finding:** EaP elasticity ranges from −0.67 (excl. Georgia) to −0.42 (excl. Armenia) — no single country drives the result
+
+```bash
+python code/analysis/robustness/eap_jackknife.py
+```
+
+### `robustness/iv_estimation.py` — Instrumental Variables
+
+**Purpose:** Address potential endogeneity in price by using lagged price as instrument
+
+**Instruments:** 1- and 2-year lagged log(price) (predetermined, not affected by current shocks)
+
+**Method:** 2SLS with country/year FE; reports first-stage F-statistics
+
+**Output:** `results/regression_output/robustness/` → `table6_iv_robustness.tex`
+
+**Key Finding:** IV estimates broadly consistent with OLS; first-stage F = 65 (EaP), 99 (full sample) — no weak instrument concern
+
+```bash
+python code/analysis/robustness/iv_estimation.py
+```
+
+### `robustness/sample_restrictions.py` — Sample Robustness
+
+**Purpose:** Test sensitivity to sample composition and outlier countries
+
+**Restrictions tested:** Balanced panel; excl. high-price outliers; excl. smallest EaP countries; alternative time windows
+
+**Output:** `results/regression_output/robustness/` → `table8_sample_restrictions.tex`
+
+```bash
+python code/analysis/robustness/sample_restrictions.py
 ```
 
 ---
@@ -392,8 +439,8 @@ bandwidth=3              # Lag truncation (accommodates up to 3-year correlation
 ### Regional Differences
 
 **Pre-COVID (2010-2019):**
-- EaP countries: Higher elasticity (ε ≈ -0.61) → price-sensitive
-- EU countries: Lower elasticity (ε ≈ -0.12) → less responsive
+- EaP countries: Higher elasticity (ε ≈ -0.60) → price-sensitive
+- EU countries: Lower elasticity (ε ≈ -0.10) → less responsive
 - **Why?** Income effects stronger in developing markets
 
 **COVID (2020-2024):**

@@ -16,6 +16,17 @@ data_collection/
 
 ## 🚀 Quick Start
 
+### Pipeline Overview
+
+```mermaid
+flowchart LR
+    A["🌐 ITU Statistics\n(Excel + DataHub API)"] --> S1["step1_download_itu.py"]
+    B["🏦 World Bank\nWDI / WGI APIs"] --> S2["step2_download_worldbank.py"]
+    S1 & S2 --> S3["step3_process_raw_data.py\n(reshape, pivot, metadata)"]
+    S3 --> S4["step4_merge_datasets.py\n(ITU + WB join)"]
+    S4 --> OUT["data/processed/\ndata_merged_with_series.xlsx\n495 obs · 34 variables"]
+```
+
 ### Run Complete Pipeline
 ```bash
 python code/data_collection/run_data_collection.py
