@@ -1,0 +1,80 @@
+\subsection{Baseline Specification}
+
+We estimate broadband demand using two-way fixed effects models that control for time-invariant country heterogeneity and common time shocks:
+
+\begin{equation}
+\label{eq:baseline}
+\ln(\text{Subs}_{it}) = \beta_1 \ln(\text{Price}_{it}) + \beta_2 [\ln(\text{Price}_{it}) \times \text{EaP}_i] + \mathbf{X}_{it}'\gamma + \alpha_i + \delta_t + \varepsilon_{it}
+\end{equation}
+
+where $\text{Subs}_{it}$ denotes fixed broadband subscriptions per 100 inhabitants in country $i$ at time $t$; $\text{Price}_{it}$ is the log of broadband price (measured as percentage of GNI per capita); $\text{EaP}_i$ is a dummy variable equal to one for Eastern Partnership countries; $\mathbf{X}_{it}$ is a vector of time-varying controls; $\alpha_i$ are country fixed effects; $\delta_t$ are year fixed effects; and $\varepsilon_{it}$ is the error term.
+
+The coefficient $\beta_1$ represents price elasticity for EU countries, while $(\beta_1 + \beta_2)$ represents elasticity for EaP countries. The interaction coefficient $\beta_2$ tests whether EaP countries exhibit different price sensitivity than EU countries. Both coefficients have a predicted negative sign based on downward-sloping demand.
+
+Country fixed effects $\alpha_i$ control for all time-invariant country characteristics including geography, institutional history, cultural factors, and average income levels. Year fixed effects $\delta_t$ control for common time shocks affecting all countries including technological change, global economic conditions, and the COVID-19 pandemic. Together, these fixed effects ensure identification comes from within-country deviations from country-specific means, after removing common time trends.
+
+The control vector $\mathbf{X}_{it}$ includes time-varying economic, socioeconomic, and infrastructure variables that could confound the price-demand relationship. Our baseline ``full controls'' specification includes:
+
+\begin{itemize}
+    \item \textbf{Economic:} Log GDP per capita, GDP growth rate, inflation rate
+    \item \textbf{Human capital:} Urban population percentage, tertiary education enrollment rate  
+    \item \textbf{Institutional:} Regulatory quality index (World Bank WGI)
+    \item \textbf{Infrastructure:} Log secure internet servers per million, R\&D expenditure as \% GDP
+    \item \textbf{Demographic:} Log population density, working-age population share (15--64, \%)
+\end{itemize}
+
+\subsection{Extended Specification with COVID-19 Interactions}
+
+To test for structural changes during the COVID-19 period, we extend equation~\eqref{eq:baseline} with period interactions:
+
+\begin{multline}
+\label{eq:covid}
+\ln(\text{Subs}_{it}) = \beta_1 \ln(\text{Price}_{it}) + \beta_2 [\ln(\text{Price}_{it}) \times \text{EaP}_i] \\
++ \beta_3 [\ln(\text{Price}_{it}) \times \text{COVID}_t] + \beta_4 [\ln(\text{Price}_{it}) \times \text{EaP}_i \times \text{COVID}_t] \\
++ \mathbf{X}_{it}'\gamma + \alpha_i + \delta_t + \varepsilon_{it}
+\end{multline}
+
+where $\text{COVID}_t$ is a period dummy equal to one for years 2020--2024. The COVID dummy itself is absorbed by year fixed effects $\delta_t$, so only interactions are estimable. This specification allows elasticity to vary across four groups:
+
+\begin{align*}
+\text{EU, Pre-COVID (2010--2019):} \quad & \varepsilon = \beta_1 \\
+\text{EaP, Pre-COVID (2010--2019):} \quad & \varepsilon = \beta_1 + \beta_2 \\
+\text{EU, COVID (2020--2024):} \quad & \varepsilon = \beta_1 + \beta_3 \\
+\text{EaP, COVID (2020--2024):} \quad & \varepsilon = \beta_1 + \beta_2 + \beta_3 + \beta_4
+\end{align*}
+
+The coefficient $\beta_3$ measures the change in EU elasticity during COVID-19, while $\beta_4$ measures the differential change for EaP countries. If COVID-19 eliminated price sensitivity, we expect $\beta_3 > 0$ (reducing magnitude of negative $\beta_1$) and $\beta_3 + \beta_4 > 0$ for EaP.
+
+\subsection{Identification Strategy}
+
+Our identification strategy relies on within-country variation in prices and subscriptions over time, conditional on country and year fixed effects plus time-varying controls. Several threats to identification warrant discussion.
+
+\textbf{Simultaneity:} Prices and quantities are jointly determined in equilibrium, potentially generating simultaneity bias if unobserved demand shocks affect both. However, regulatory frameworks in telecommunications typically involve ex-ante price setting with limited short-run adjustment \citep{laffont2000competition}, particularly in Europe's regulated markets. Additionally, fixed effects absorb persistent demand differences, while year effects control for aggregate shocks. As a more direct test, Online Appendix~B presents 2SLS estimates instrumenting fixed broadband prices with their own one-year lag; the first-stage $F$-statistic of $\IVFirstF$ (pre-COVID) far exceeds standard relevance thresholds, and the resulting EU and EaP 2SLS estimates are virtually identical to OLS, confirming that simultaneity bias is negligible.
+
+\textbf{Omitted variables:} Unobserved time-varying factors could correlate with both prices and demand. We address this through comprehensive controls capturing economic conditions, human capital, institutions, and infrastructure. Robustness checks varying control specifications (Section~\ref{sec:results}) show estimates are stable, suggesting omitted variable bias is limited.
+
+\textbf{Measurement error:} ITU price data represent standardized baskets that may not reflect marginal prices for all consumers. Classical measurement error in prices would attenuate estimates toward zero, making our significant negative estimates conservative. Non-classical measurement error --- where the error is correlated with true prices or with regressors, biasing estimates in an unpredictable direction --- is more concerning. Using ITU's internationally standardized basket definitions mitigates this by ensuring the measurement protocol is uniform across all 33 countries, so any residual error is unlikely to correlate differentially with the EU/EaP grouping. The 2SLS estimates in Online Appendix~B provide a further check: instrumenting prices with their lagged values purges contemporaneous measurement error, and the resulting estimates are broadly consistent with OLS, confirming that non-classical error is not driving the results.
+
+\textbf{Common shocks:} The COVID-19 pandemic represents a massive common shock potentially violating the parallel trends assumption underlying difference-in-differences. We address this through: (1) placebo tests examining pre-COVID trends, (2) year-by-year estimation showing gradual evolution rather than sudden breaks, and (3) explicit COVID interaction terms allowing elasticity to vary by period.
+
+\subsection{Standard Errors and Inference}
+
+We employ Driscoll--Kraay \citeyearpar{driscoll1998consistent} standard errors, which use a Bartlett kernel with bandwidth $m=3$ to produce estimates robust to heteroskedasticity, serial correlation (up to 3 lags), and cross-sectional dependence \citep{petersen2009estimating, cameron2015practitioner}. Cross-sectional dependence---induced by the COVID-19 pandemic as a global common shock---is the key reason standard clustered standard errors are inadequate here; Driscoll--Kraay performs well for panels with our time dimension; simulations in \citet{hoechle2007robust} confirm adequate performance at $T=15$.
+
+\subsection{Two-Way Fixed Effects and Treatment Heterogeneity}
+
+Recent literature \citep{goodman2021difference, de2020two} warns that TWFE can yield negatively-weighted averages in staggered binary-treatment designs. Our setting avoids this problem on two grounds. First, the key regressor is a \textit{continuous price}, not a binary treatment, so the Goodman-Bacon decomposition does not apply. Second, the COVID interaction uses a common period indicator (2020--2024) applied simultaneously to all countries, not staggered adoption---making the estimator equivalent to a simple before-after comparison free of cohort-timing bias. Our year-by-year estimates show a smooth monotonic decline from 2015 onward, consistent with secular change rather than TWFE artefacts.
+
+\subsection{Robustness Checks}
+
+We conduct extensive robustness checks to validate baseline findings:
+
+\textbf{Alternative control specifications:} Beyond the full controls baseline, we estimate six additional specifications ranging from minimal (GDP only) to intermediate groupings of socioeconomic, institutional, infrastructure, demographic, and macroeconomic controls. Online Appendix Table~A1 presents these as seven progressively nested columns --- each adding one group of controls to the previous --- to illustrate how estimates evolve as the model is enriched. The robustness matrix (Online Appendix Table~A3) instead runs all \NPerMeasure{} configurations as standalone regressions (including a dedicated macroeconomic-only specification) crossed with three price measures, yielding \RobNSpecs{} independent estimates. This addresses concerns about overcontrol or omitted variables.
+
+\textbf{Alternative price measures:} We compare income-relative prices (price as \% of GNI per capita) against PPP-adjusted prices and nominal USD prices. Income-relative prices best capture affordability from consumers' perspective, but alternative measures provide validation.
+
+\textbf{Alternative samples:} We estimate models separately for pre-COVID (2010--2019) and full sample (2010--2024), and conduct subsample analysis by income level and broadband penetration.
+
+\textbf{Placebo tests:} We split the pre-COVID period into early (2010--2014) and late (2015--2019) subperiods, treating 2015--2019 as a ``placebo COVID'' period. If estimated ``COVID effects'' merely reflect continuation of pre-existing trends, the placebo should also be significant.
+
+\textbf{Year-by-year estimation:} We estimate separate elasticities for each year 2015--2024, providing high-resolution evidence on temporal evolution beyond binary pre-COVID/COVID comparisons.

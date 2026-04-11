@@ -1,0 +1,64 @@
+\begin{table}[!htbp]
+\centering
+\caption{COVID-19 Interaction Effects: Full Sample (2010--2024)}
+\label{tab:covid}
+\begin{minipage}{\textwidth}
+\begin{adjustbox}{width=\textwidth}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.85}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& \multicolumn{4}{c}{Dependent Variable: Log(Subs. per 100)} \\
+\cmidrule(lr){2-5}
+& (1) & (2) & (3) & (4) \\
+& Full Sample & Pre-COVID & COVID & Diff. Test \\
+& w/ COVID Int. & 2010--19 & 2020--24 & (p-value) \\
+\midrule
+\textbf{Panel A: EU Countries} \\
+Log(Price) & $-0.19^{**}$ & $-0.10^{*}$ & $-0.04^{**}$ & -- \\
+& (0.07) & (0.05) & (0.02) & \\[2pt]
+Log(Price) $\times$ COVID & $+0.30^{***}$ & -- & -- & 0.007 \\
+& (0.11) & & & \\[2pt]
+\textit{Implied COVID elasticity} & $+0.11$ & -- & $-0.04^{**}$ & -- \\
+& (0.07) & & (0.02) & \\
+\midrule
+\textbf{Panel B: EaP Countries} \\
+Log(Price) $\times$ EaP & $-0.17^{*}$ & $-0.60^{***}$ & -- & -- \\
+& (0.10) & & & \\[2pt]
+Log(Price) $\times$ EaP $\times$ COVID & $+0.12^{***}$ & -- & -- & 0.000 \\
+& (0.03) & & & \\[2pt]
+\textit{Implied pre-COVID EaP elasticity} & $-0.36^{***}$ & $-0.60^{***}$ & -- & -- \\
+& (0.11) & (0.06) & & \\[2pt]
+\textit{Implied COVID EaP elasticity} & $+0.06$ & -- & $-0.13$ & -- \\
+& (0.12) & & (0.10) & \\
+\midrule
+\textbf{Panel C: Change in Elasticity} \\
+$\Delta\varepsilon_{EU}$ (COVID -- Pre) & $+0.30^{***}$ & -- & -- & 0.007 \\
+& (0.11) & & & \\
+$\Delta\varepsilon_{EaP}$ (COVID -- Pre) & $+0.42^{***}$ & -- & -- & 0.002 \\
+& (0.14) & & & \\
+\midrule
+\textbf{Panel D: Model Statistics} \\
+Full controls & Yes & Yes & Yes & -- \\
+Country FE & Yes & Yes & Yes & -- \\
+Year FE & Yes & Yes & Yes & -- \\
+Observations & 495 & 330 & 165 & -- \\
+Countries & 33 & 33 & 33 & -- \\
+R-squared & 0.42 & 0.40 & 0.40 & -- \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\vspace{4pt}
+\scriptsize
+\textit{Notes:} Dependent variable is log of fixed broadband subscriptions per 100 inhabitants.
+Price is measured as percentage of GNI per capita. COVID is a period dummy for years 2020--2024.
+EaP is a dummy for Eastern Partnership countries. Full controls include: log GDP per capita,
+urban population \%, tertiary enrollment \%, regulatory quality, log secure servers, R\&D \% GDP,
+log population density, and working-age population share (15--64, \%). Column (1) presents the full interaction model
+on 2010--2024 data. Columns (2)--(3) present separate subsample estimates for comparison.
+Column (4) reports p-values from Wald tests of coefficient differences between COVID and
+pre-COVID periods. Driscoll--Kraay standard errors (bandwidth = 3) in parentheses.
+$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\end{minipage}
+\end{table}

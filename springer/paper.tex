@@ -1,0 +1,187 @@
+% ============================================================================
+% Broadband Demand Elasticity Paper
+% Journal: Journal of Regulatory Economics (Springer)
+% Author: Samir Orujov
+% ============================================================================
+%
+% Springer Nature sn-jnl document class
+% Options:
+%   - lineno: line numbers in margin for review
+%   - pdflatex: pdflatex compilation
+%   - sn-basic: Basic Springer Nature author-year reference style
+%
+\documentclass[lineno,pdflatex,sn-basic]{sn-jnl}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+
+% Mathematics and symbols
+\usepackage{amsmath,amssymb}
+\usepackage{bbm}              % Indicator function \mathbbm{1}
+
+% Tables and figures
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{adjustbox}       % For scaling tables to fit page width
+\usepackage{pdflscape}       % For landscape tables if needed
+\usepackage{setspace}        % For single spacing in tables
+
+% Hyperlinks
+\usepackage{hyperref}
+\let\orcidlogo\relax  % sn-jnl.cls defines \orcidlogo; clear before orcidlink redefines it
+\usepackage{orcidlink}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+% Figure search path
+\graphicspath{{figures/}}
+
+% sn-jnl.cls wraps every \begin{table} in its own threeparttable+center, which
+% conflicts with our tables that use minipage/adjustbox/threeparttable internally.
+% Restore the plain table environment using the aliases the class itself defines.
+\AtBeginDocument{%
+  \let\table\tableorg
+  \let\endtable\endtableorg
+  \let\sidewaystable\sidewaystableorg
+  \let\endsidewaystable\endsidewaystableorg
+}
+
+% Auto-generated macros (numbers from regression outputs)
+% Regenerate with: python code/analysis/generate_paper_macros.py
+\input{paper_macros}
+
+% ============================================================================
+% DOCUMENT
+% ============================================================================
+
+\begin{document}
+
+% Running title (shortened for header)
+\title[Broadband Price Elasticity in EU and EaP Countries]{Broadband Price Elasticity in EU and Eastern Partnership Countries: Evidence of a Decade-Long Transformation (2010--2024)}
+
+% ============================================================================
+% AUTHORS AND AFFILIATIONS
+% ============================================================================
+
+\author*[1,2,3,4]{\fnm{Samir} \sur{Orujov}\orcidlink{0009-0004-9708-2109}}\email{sorujov@ada.edu.az}
+
+\author[2,5]{\fnm{Ilgar} \sur{Ismayilov}}
+
+\author[2]{\fnm{Jeyhun} \sur{Huseynzade}}
+
+\affil*[1]{\orgname{School of Business, ADA University},
+           \orgaddress{\city{Baku}, \country{Azerbaijan}}}
+
+\affil[2]{\orgname{Information Communication Technologies Agency},
+           \orgaddress{\city{Baku}, \country{Azerbaijan}}}
+
+\affil[3]{\orgname{CERGE-EI, a joint workplace of Charles University and the Economics Institute of the Czech Academy of Sciences},
+           \orgaddress{\city{Prague}, \country{Czech Republic}}}
+
+\affil[4]{\orgname{Universit\'{e} de Bretagne Sud},
+           \orgaddress{\city{Vannes}, \country{France}}}
+
+\affil[5]{\orgname{Faculty of Social Sciences, Charles University},
+           \orgaddress{\city{Prague}, \country{Czech Republic}}}
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+
+\abstract{%
+\input{sections/abstract}%
+}
+
+% ============================================================================
+% KEYWORDS (4--6 required by JRE)
+% ============================================================================
+
+\keywords{Broadband demand, Price elasticity, Eastern Partnership, European Union, COVID-19, Digital transformation}
+
+% ============================================================================
+% JEL CLASSIFICATION (required by JRE)
+% ============================================================================
+
+\pacs[JEL Classification]{L96, C23, O33, L51}
+
+\maketitle
+
+% ============================================================================
+% MAIN SECTIONS
+% ============================================================================
+
+\section{Introduction}
+\label{sec:introduction}
+\input{sections/introduction}
+
+\section{Literature Review and Theoretical Framework}
+\label{sec:literature}
+\input{sections/literature}
+
+\section{Data and Sample}
+\label{sec:data}
+\input{sections/data}
+
+\section{Empirical Methodology}
+\label{sec:methodology}
+\input{sections/methodology}
+
+\section{Results}
+\label{sec:results}
+\input{sections/results}
+
+\section{Discussion and Policy Implications}
+\label{sec:discussion}
+\input{sections/discussion}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{sections/conclusion}
+
+% ============================================================================
+% STATEMENTS AND DECLARATIONS (required by JRE)
+% ============================================================================
+
+\section*{Statements and Declarations}
+
+\noindent\textbf{Competing Interests:} The authors declare no competing financial interests or personal relationships that could have appeared to influence this work.
+
+\noindent\textbf{Funding:} This research received no specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+\noindent\textbf{Author Contributions:}
+\textbf{Samir Orujov:} Conceptualization, Methodology, Software, Formal analysis and investigation, Data curation, Writing -- original draft, Writing -- review and editing, Visualization, Project administration.
+\textbf{Ilgar Ismayilov:} Validation, Writing -- review and editing, Supervision.
+\textbf{Jeyhun Huseynzade:} Validation, Writing -- review and editing.
+
+\noindent\textbf{Data Availability:} Data are publicly available from the ITU and World Bank. Replication code is at \url{https://github.com/sorujov/Broadband-Demand-Elasticity}.
+
+% ============================================================================
+% ONLINE SUPPLEMENTARY INFORMATION POINTER
+% ============================================================================
+
+\noindent Regression tables (A1--A4, B1--B4) are provided as Online Supplementary Information (Online Resource~1).
+
+% ============================================================================
+% ACKNOWLEDGMENTS
+% ============================================================================
+
+\section*{Acknowledgments}
+The authors thank Daniel Vertesy and Esperanza Magpantay of the ITU Statistics Division for clarifications on price basket definitions and data coverage. The authors also acknowledge the support of the Information Communication Technologies Agency of the Republic of Azerbaijan. The views expressed in this paper are those of the authors and do not necessarily reflect the official positions of the affiliated institutions. Data were obtained from the International Telecommunication Union (ITU) and World Bank open data portals.
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+
+\bibliography{references}
+
+\end{document}

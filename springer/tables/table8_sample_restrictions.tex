@@ -1,0 +1,37 @@
+\begin{table}[htbp]
+\centering
+\caption{Sample Restriction Robustness Checks (Pre-COVID Baseline, Full Controls,
+    GNI\%-price). Driscoll--Kraay standard errors in parentheses.
+    Significance: $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.10$.}
+\label{tab:sample_restrictions}
+\begin{minipage}{\textwidth}
+\begin{adjustbox}{width=\textwidth}
+\scriptsize
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{2}{c}{EU} & \multicolumn{2}{c}{EaP} & & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Sample Restriction & $\hat\varepsilon$ & SE & $\hat\varepsilon$ & SE & $N$ & Countries \\
+\midrule
+Full sample (baseline) & $-0.101^{*}$ & (0.053) & $-0.595^{***}$ & (0.061) & 330 & 33 \\
+\addlinespace[4pt]
+Balanced panel only & $-0.101^{*}$ & (0.053) & $-0.595^{***}$ & (0.061) & 330 & 33 \\
+\addlinespace[4pt]
+Excl.\ outliers (Cook\'s $d>4/N$) & $-0.104^{*}$ & (0.057) & $-0.594^{***}$ & (0.062) & 308 & 31 \\
+\addlinespace[4pt]
+High-income countries only & $-0.016$ & (0.037) & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{} & 170 & 17 \\
+\addlinespace[4pt]
+Middle/lower-income only & $-0.008$ & (0.120) & $-0.433^{***}$ & (0.089) & 160 & 16 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{tablenotes}
+\scriptsize
+\item \textit{Notes:} All models estimated with two-way fixed effects (country and year)
+    and Driscoll--Kraay standard errors (bandwidth = 3). Price variable is log fixed
+    broadband price as \% of GNI per capita. High/middle-income split uses median
+    country-level GDP per capita (constant 2015 USD) averaged over 2010--2019.
+    Cook\'s distance threshold is $4/N$ where $N$ is the number of observations.
+\end{tablenotes}
+\end{minipage}
+\end{table}

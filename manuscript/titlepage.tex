@@ -1,0 +1,121 @@
+% ============================================================================
+% TITLE PAGE
+% Broadband Demand Elasticity Paper — Elsevier Submission
+%
+% PURPOSE: Standalone title page for double-blind peer review submission.
+%          Upload this file as the "Title Page" item in the submission system.
+%          The companion file paper_anonymous.tex is the author-blinded manuscript.
+% ============================================================================
+
+\documentclass[preprint,review,12pt,authoryear]{styles/elsarticle}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\bibliographystyle{styles/elsarticle-harv}
+\graphicspath{{figures/}}
+\input{paper_macros}
+
+\journal{Information Economics and Policy}
+
+% Suppress default preprint footer
+\makeatletter
+\def\ps@pprintTitle{\let\@oddhead\@empty\let\@evenhead\@empty
+    \let\@oddfoot\@empty\let\@evenfoot\@empty}
+\makeatother
+
+\begin{document}
+
+\begin{frontmatter}
+
+% ── Title ────────────────────────────────────────────────────────────────────
+\title{Broadband Price Elasticity in EU and Eastern Partnership Countries:
+       Evidence of a Decade-Long Transformation (2010--2024)}
+
+% ── Authors ──────────────────────────────────────────────────────────────────
+\author[ada,icta,unec,ubs]{Samir Orujov\corref{cor1}}
+\ead{sorujov@ada.edu.az}
+\cortext[cor1]{Corresponding author. Tel.: +99451 3171988}
+
+\author[icta,charles]{Ilgar Ismayilov}
+
+\author[icta]{Jeyhun Huseynzade}
+
+% ── Affiliations ─────────────────────────────────────────────────────────────
+\affiliation[ada]{organization={School of Business, ADA University},
+                  city={Baku},
+                  country={Azerbaijan}}
+
+\affiliation[icta]{organization={Information and Communication Technology Agency},
+                  city={Baku},
+                  country={Azerbaijan}}
+
+\affiliation[charles]{organization={Faculty of Social Sciences, Charles University},
+                  city={Prague},
+                  country={Czech Republic}}
+
+\affiliation[unec]{organization={Azerbaijan State University of Economics (UNEC)},
+                  city={Baku},
+                  country={Azerbaijan}}
+
+\affiliation[ubs]{organization={Universit\'{e} de Bretagne Sud},
+                  city={Vannes},
+                  country={France}}
+
+% ── Abstract ─────────────────────────────────────────────────────────────────
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+% ── Keywords ─────────────────────────────────────────────────────────────────
+\begin{keyword}
+Broadband demand \sep Price elasticity \sep Panel data \sep Eastern
+Partnership \sep European Union \sep COVID-19 \sep Digital transformation
+\end{keyword}
+
+\end{frontmatter}
+
+% ── CRediT Author Contribution Statement ─────────────────────────────────────
+\section*{CRediT authorship contribution statement}
+\textbf{Samir Orujov:} Conceptualization, Methodology, Software, Formal
+analysis, Data curation, Writing -- original draft, Writing -- review \&
+editing, Visualization.
+\textbf{Ilgar Ismayilov:} Validation, Writing -- review \& editing, Supervision.
+\textbf{Jeyhun Huseynzade:} Validation, Writing -- review \& editing.
+
+% ── Acknowledgments ──────────────────────────────────────────────────────────
+\section*{Acknowledgments}
+The authors thank Daniel Vertesy and Esperanza Magpantay of the ITU Statistics
+Division for clarifications on price basket definitions and data coverage. The
+authors also acknowledge the support of the Information Communication
+Technologies Agency of the Republic of Azerbaijan. The views expressed in this
+paper are those of the authors and do not necessarily reflect the official
+positions of the affiliated institutions. Data were obtained from the International
+Telecommunication Union (ITU) and World Bank open data portals.
+
+% ── Declarations ─────────────────────────────────────────────────────────────
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or
+personal relationships that could have appeared to influence the work reported
+in this paper.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the
+manuscript preparation process}
+During the preparation of this work the authors used Claude (Anthropic) for
+programming and data-collection scripting, and for manuscript editing. After
+using this tool, the authors reviewed and edited all content as needed and take
+full responsibility for the content of this publication.
+
+\section*{Data availability}
+The data used in this study are publicly available from the International
+Telecommunication Union (ITU) World Telecommunication/ICT Indicators Database
+and the World Bank World Development Indicators. Replication code and processed
+analysis datasets are available at:
+\url{https://github.com/sorujov/Broadband-Demand-Elasticity}.
+
+\end{document}

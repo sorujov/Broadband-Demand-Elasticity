@@ -1,0 +1,31 @@
+\begin{table}[htbp]
+\centering
+\caption{EaP Jackknife Robustness: Leave-One-Country-Out (Pre-COVID Baseline)}
+\label{tab:jackknife}
+\begin{minipage}{\textwidth}
+\begin{adjustbox}{width=\textwidth}
+\scriptsize
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{2}{c}{EU Elasticity} & \multicolumn{2}{c}{EaP Elasticity} & & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Sample & Coef. & SE & Coef. & SE & N & R$^2$ \\
+\midrule
+\textbf{Full EaP (baseline)} & $-0.101^{*}$ & (0.053) & $-0.595^{***}$ & (0.061) & 330 & 0.40 \\
+Drop Armenia & $-0.069$ & (0.059) & $-0.417^{***}$ & (0.040) & 320 & 0.34 \\
+Drop Azerbaijan & $-0.092^{*}$ & (0.048) & $-0.548^{***}$ & (0.058) & 320 & 0.41 \\
+Drop Belarus & $-0.089$ & (0.062) & $-0.667^{***}$ & (0.074) & 320 & 0.48 \\
+Drop Georgia & $-0.087^{**}$ & (0.037) & $-0.672^{***}$ & (0.068) & 320 & 0.49 \\
+Drop Moldova & $-0.100^{*}$ & (0.053) & $-0.604^{***}$ & (0.062) & 320 & 0.39 \\
+Drop Ukraine & $-0.107^{**}$ & (0.049) & $-0.604^{***}$ & (0.069) & 320 & 0.41 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\vspace{4pt}
+\scriptsize
+\textit{Notes:} Each row drops one EaP country from the sample and
+re-estimates the baseline model (Full Controls, GNI\% price, pre-COVID 2010--2019).
+Driscoll--Kraay standard errors (bandwidth = 3) in parentheses.
+$^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\end{minipage}
+\end{table}

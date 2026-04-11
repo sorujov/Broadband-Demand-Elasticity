@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.27)  28 MAR 2026 02:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.27)  8 APR 2026 22:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -576,7 +576,12 @@ Overfull \hbox (5.45187pt too wide) in paragraph at lines 5--6
 []\T1/cmr/m/n/12 For pol-icy, the near-zero elas-tic-ity im-plies that af-ford-abil-ity interventions---
  []
 
-) [45] [46] [47] (./tables/table1_baseline.tex
+) [45] [46]
+Overfull \hbox (6.20036pt too wide) in paragraph at lines 199--203
+\T1/cmr/m/n/12 (An-thropic) for pro-gram-ming and data-collection script-ing, and for manuscript
+ []
+
+[47] (./tables/table1_baseline.tex
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
@@ -602,7 +607,7 @@ l.3 ...es: Pre-COVID, Acute COVID, and Post-Acute}
                                                   ) [52
 
 ]
-Overfull \hbox (1.7014pt too wide) in paragraph at lines 276--292
+Overfull \hbox (1.7014pt too wide) in paragraph at lines 283--299
 []\T1/cmr/bx/n/10.95 Instrument ra-tio-nale. \T1/cmr/m/n/10.95 Na-tional fixed broad-band price bas-kets are set through
  []
 
@@ -641,18 +646,18 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: B46B1406AC8DA7BBD771724399CB2424;10563.
  ) 
 Here is how much of TeX's memory you used:
- 13262 strings out of 469515
- 213708 string characters out of 5467570
- 630187 words of memory out of 5000000
- 41433 multiletter control sequences out of 15000+600000
+ 13255 strings out of 469515
+ 213524 string characters out of 5467570
+ 630134 words of memory out of 5000000
+ 41427 multiletter control sequences out of 15000+600000
  653331 words of font info for 108 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,14n,79p,1489b,701s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0600.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0600.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0800.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss0800.450pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0700.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> <c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/samir.orucov/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on paper.pdf (62 pages, 650607 bytes).
+Output written on paper.pdf (62 pages, 650354 bytes).
 PDF statistics:
- 2214 PDF objects out of 2487 (max. 8388607)
- 1016 compressed objects within 11 object streams
- 196 named destinations out of 1000 (max. 500000)
+ 2212 PDF objects out of 2487 (max. 8388607)
+ 1015 compressed objects within 11 object streams
+ 195 named destinations out of 1000 (max. 500000)
  423 words of extra memory for PDF output out of 10000 (max. 10000000)
 

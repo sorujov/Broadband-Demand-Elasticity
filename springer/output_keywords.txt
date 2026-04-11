@@ -1,0 +1,233 @@
+
+============================================================
+FILE: goldfarb2020digital.pdf | Length: 177024
+============================================================
+
+  [pandemic] NOT FOUND
+
+  [COVID] NOT FOUND
+
+  [accelerat] NOT FOUND
+
+  [trend] NOT FOUND
+
+  [digital economics] (28 hits) -- first occurrence:
+  ...Journal of Economic Literature 2019, 57(1), 3ΓÇô43
+https://doi.org/10.1257/jel.20171452
+3
+1.ΓÇâ What Is Digital Economics?
+D
+igital technology is the representation 
+of information in bits. This reduces the 
+cost of storage, computation, and transmis-
+sion of data. Research on digital economics 
+examines whether and how digital technol-
+ogy changes economic activity. 
+Understanding the effects of digi...
+
+============================================================
+FILE: brynjolfsson2020covid.pdf | Length: 31412
+============================================================
+
+  [remote work] (31 hits) -- first occurrence:
+  ...NBER WORKING PAPER SERIES
+COVID-19 AND REMOTE WORK:
+AN EARLY LOOK AT US DATA
+Erik Brynjolfsson
+John J. Horton
+Adam Ozimek
+Daniel Rock
+Garima Sharma
+Hong-Yi TuYe
+Working Paper 27344
+http://www.nber.org/papers/w27344
+NATIONAL BUREAU OF ECONOMIC RESEARCH
+1050 Massachusetts Avenue
+Cambridge, MA 02138
+June 2020
+MIT's COUHES ruled this project...
+
+  [lockdown] NOT FOUND
+
+  [necessity] NOT FOUND
+
+  [convenience] NOT FOUND
+
+  [shift] (7 hits) -- first occurrence:
+  ...hermore, states with a higher share of employment in information work including 
+management, professional and related occupations were more likely to shift toward working from 
+home and had fewer people laid off or furloughed. We find no substantial change in results 
+between the two waves, suggesting that most changes to remote work manifested by early April.
+Erik Brynjolfsson
+MIT Sloan School of Management
+100 Main Street, E62-414
+Cambridge, MA...
+
+  [rapid] (3 hits) -- first occurrence:
+  ...02142
+hytuye@mit.edu
+Code and Data are available at https://github.com/johnjosephhorton/remote_work/
+1
+Introduction
+The on-going COVID-19 pandemic is rapidly transforming how, and even
+whether, people work. Large numbers of people have remained in their homes
+to avoid the disease or due to shelter-in-place orders. Many businesses are
+closed and many people are not working remotely. There have been enor-
+mous and unprecedented increases in workers...
+
+============================================================
+FILE: favale2020campus.pdf | Length: 49986
+============================================================
+
+  [videoconferenc] NOT FOUND
+
+  [streaming] (5 hits) -- first occurrence:
+  ...asures modi∩¼üed peopleΓÇÖs habits, while the Internet gained a major role in supporting 
+remote working, e-teaching, online collaboration, gaming, video streaming, etc. All these sudden changes put 
+unprecedented stress on the network. 
+In this paper, we analyze the impact of the lockdown enforcement on the Politecnico di Torino campus network. 
+Right after the school shutdown on the 25 th of February, PoliTO deployed its own in-house solution for v...
+
+  [traffic] NOT FOUND
+
+  [pattern] (12 hits) -- first occurrence:
+  ...ntered the most 
+restrictive lockdown in its history. 
+Fig. 1 clearly depicts the impact of these measures. 1 It shows the 
+variation of the mobility patterns in Italy since the begin of the emer- 
+gency and the impact of the restrictions and total lockdown. The vertical 
+bars highlight the relevant events listed above. The leftmost violet bar 
+identi∩¼ües the date of the ∩¼ürst COVID-19 case in Italy. The central brown 
+bar identi∩¼ües the school shut...
+
+  [shift] (3 hits) -- first occurrence:
+  ... structures for a long time. The urge to respect social dis- 
+tancing and lockdown measures adopted to limit the spreading of the 
+infection led to a shift in the fruition and supply of a wide number of 
+services. Some examples include the increased usage of home delivery 
+services, the shift to online lessons and the adoption of remote working 
+solutions. 
+Italy has been among the ∩¼ürst countries hit by COVID-19. The ∩¼ürst 
+case was identi∩¼üed in t...
+
+  [e-learning] (6 hits) -- first occurrence:
+  ...s 176 (2020) 107290 
+Contents lists available at ScienceDirect 
+Computer Networks 
+journal homepage: www.elsevier.com/locate/comnet 
+Campus tra∩¼âc and e-Learning during COVID-19 pandemic 
+Thomas Favale a , Francesca Soro a , Martino Trevisan a , Γêù , Idilio Drago b , Marco Mellia a 
+a Politecnico di Torino, Italy 
+b University of Turin, Italy 
+a r t i c l e 
+i n f o 
+Keywords: 
+Computer networks 
+COVID-19 epidemic 
+Internet measurements 
+e-Learning...
+
+============================================================
+FILE: roller2001telecommunications.pdf | Length: 58374
+============================================================
+
+  [income effect] (1 hits) -- first occurrence:
+  ...d to telephone price. The elasticity of de-
+mand is estimated at 21.13 and is signi∩¼ücantly
+larger than 1, implying an elastic demand. Re-
+garding the income effect, we ∩¼ünd the demand
+for telecommunications infrastructure is posi-
+tively related to real GDP, with the income
+elasticity being rather large and very signi∩¼ücant.
+This ∩¼ünding is important for our purposes, be-
+cause we argued previously that there is two-
+way causality between telecom in...
+
+  [lower-income] NOT FOUND
+
+  [developing] (2 hits) -- first occurrence:
+  ...ne of the ∩¼ürst studies we are
+aware of that investigates the potential impact
+of telecommunication on growth. Using data for
+over 15 developed and 45 developing nations
+from 1960 to 1973, Hardy regresses GDP per
+capita on lagged GDP per capita, lagged tele-
+phones per capita, and the number of (lagged)
+radios. He concludes that telephones per capita
+signi∩¼ücantly impacts the GDP, whereas the
+spread of radio does not. However, when the
+regression i...
+
+  [affordab] NOT FOUND
+
+  [adoption] NOT FOUND
+
+  [dominate] NOT FOUND
+
+============================================================
+FILE: dauvin2014estimating.pdf | Length: 41572
+============================================================
+
+  [log-log] NOT FOUND
+
+  [log transform] NOT FOUND
+
+  [elasticit] NOT FOUND
+
+  [middle-income] NOT FOUND
+
+  [EU] (66 hits) -- first occurrence:
+  ...Estimating broadband diffusion in the EU using NUTS 1
+regional data
+Magali Dauvin a,n, Lukasz Grzybowski b,c
+a Universite Paris X Nanterre, 200 Avenue de la Republique, 92000 Nanterre, France
+b Telecom ParisTech, Department of Economics and Social Sciences, 46 rue Barrault, 75013 Paris, France
+c School of Economics, Faculty of Commerce,...
+
+  [NUTS] (34 hits) -- first occurrence:
+  ...Estimating broadband diffusion in the EU using NUTS 1
+regional data
+Magali Dauvin a,n, Lukasz Grzybowski b,c
+a Universite Paris X Nanterre, 200 Avenue de la Republique, 92000 Nanterre, France
+b Telecom ParisTech, Department of Economics and Social Sciences, 46 rue Barrault, 75013 Paris, France
+c School of Economics, Faculty of Commerce, Universi...
+
+  [specification] (21 hits) -- first occurrence:
+  ...ata on NUTS 1 regional data for 27 EU countries in the years
+2006ΓÇô2010 to analyze determinants of broadband diffusion. We estimate both linear
+demand specification and the logistic diffusion function. We find that, after controlling for
+regional differences due to socioeconomic factors, inter-platform competition approxi-
+mated by an inter-platform Herfindahl index has a significant positive impact on broad-
+band diffusion. Broadband deployment i...
+
+============================================================
+FILE: koutroumpis2009impact.pdf | Length: 67088
+============================================================
+
+  [Eastern Partnership] NOT FOUND
+
+  [Armenia] NOT FOUND
+
+  [Azerbaijan] NOT FOUND
+
+  [Belarus] NOT FOUND
+
+  [Georgia] NOT FOUND
+
+  [Moldova] NOT FOUND
+
+  [Ukraine] NOT FOUND
+
+  [elasticit] (4 hits) -- first occurrence:
+  ...
+2 Aaron (1990), Hulten and Schwab (1984), Jorgenson (1991), Tatom (1991).
+3 From country data to state and regional data the estimates of the output elasticity of public capital dwindles. Munnell (1992) states that these
+changes are attributed to ΓÇÿleakagesΓÇÖ because ΓÇÿyone can not capture all of the payoff to an infrastructure investment by looking at a small geographic areaΓÇÖ.
+4 Eberts and Fogarty (1987) examined the question of causality by looki...
+
+  [demand] (17 hits) -- first occurrence:
+  ...ructure investment can increase economic growth in various ways. More
+obviously the equipment, the drilling and the ductwork lead to increases in the demand of goods and services. This ∩¼ürst
+level of infrastructural investment is nevertheless not as signi∩¼ücant as the utility derived from the use of the network.
+Broadband networks provide the framework for the delivery of different services ranging from telephony and its
+variants (PSTN, VoIP and vi...

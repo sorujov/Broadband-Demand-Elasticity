@@ -1,0 +1,311 @@
+% ============================================================================
+% Broadband Demand Elasticity Paper — ANONYMIZED MANUSCRIPT
+%
+% PURPOSE: Author-blinded version for double-blind peer review.
+%          All author identifiers have been removed:
+%            • Author names and affiliations omitted
+%            • CRediT statement omitted
+%            • Acknowledgments omitted (available upon acceptance)
+%            • GitHub repository URL anonymised
+%            • Institutional acknowledgment omitted
+%          Upload this file as the "Manuscript file" in the submission system.
+%          Upload titlepage.tex (separately compiled) as the "Title Page".
+% ============================================================================
+
+\documentclass[preprint,review,12pt,authoryear]{styles/elsarticle}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+
+\usepackage{lineno}
+\modulolinenumbers[5]
+
+\usepackage{amsmath,amssymb}
+\usepackage{bbm}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{pdflscape}
+\usepackage{setspace}
+
+\bibliographystyle{styles/elsarticle-harv}
+\graphicspath{{figures/}}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\journal{Economics of Innovation and New Technology}
+
+\input{paper_macros}
+
+% ============================================================================
+% DOCUMENT
+% ============================================================================
+
+\begin{document}
+
+\makeatletter
+\def\ps@pprintTitle{\let\@oddhead\@empty\let\@evenhead\@empty
+    \let\@oddfoot\@empty\let\@evenfoot\@empty}
+\makeatother
+
+\begin{frontmatter}
+
+% ── Title ────────────────────────────────────────────────────────────────────
+\title{Broadband Price Elasticity in EU and Eastern Partnership Countries:
+       Evidence of a Decade-Long Transformation (2010--2024)}
+
+% Authors and affiliations are omitted for double-blind review.
+% See the separate Title Page file for full author information.
+
+% ── Abstract ─────────────────────────────────────────────────────────────────
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+% ── Keywords ─────────────────────────────────────────────────────────────────
+\begin{keyword}
+Broadband demand \sep Price elasticity \sep Panel data \sep Eastern
+Partnership \sep European Union \sep COVID-19 \sep Digital transformation
+\end{keyword}
+
+% ── Highlights ───────────────────────────────────────────────────────────────
+\begin{highlights}
+\item Broadband price elasticity declined from $\EaPBaseBr$ (EaP) and $\EUBaseBr$
+      (EU) to $\approx$0 by 2020
+\item EaP price elasticity $\EaPEURatio$$\times$ EU pre-COVID; demand-side
+      harmonisation achieved by 2020
+\item Transformation began in 2015---not 2020---ruling out COVID-19 as the sole
+      causal shock
+\item GNI-based prices give significant results in all specs; PPP in only
+      \PctPPPSigEaP\% of EaP specs
+\item Policy must shift from price subsidies to infrastructure deployment as
+      demand matures
+\end{highlights}
+
+\end{frontmatter}
+
+\linenumbers
+
+% ============================================================================
+% MAIN SECTIONS
+% ============================================================================
+
+\section{Introduction}
+\label{sec:introduction}
+\input{sections/introduction}
+
+\section{Literature Review and Theoretical Framework}
+\label{sec:literature}
+\input{sections/literature}
+
+\section{Data and Sample}
+\label{sec:data}
+\input{sections/data_anon}
+
+\section{Empirical Methodology}
+\label{sec:methodology}
+\input{sections/methodology}
+
+\section{Results}
+\label{sec:results}
+\input{sections/results}
+
+\section{Discussion and Policy Implications}
+\label{sec:discussion}
+\input{sections/discussion}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{sections/conclusion}
+
+% ============================================================================
+% DECLARATIONS (anonymised for review)
+% ============================================================================
+
+% CRediT statement omitted — available upon acceptance.
+
+% Acknowledgments omitted for double-blind review — available upon acceptance.
+
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or
+personal relationships that could have appeared to influence the work reported
+in this paper.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the
+manuscript preparation process}
+During the preparation of this work the authors used Claude Sonnet 4.6
+(Anthropic) for programming and data-collection scripting, and for manuscript
+editing. After using this tool, the authors reviewed and edited all content as
+needed and take full responsibility for the content of this publication.
+
+\section*{Data availability}
+The data used in this study are publicly available from the International
+Telecommunication Union (ITU) World Telecommunication/ICT Indicators Database
+and the World Bank World Development Indicators. Replication code and processed
+analysis datasets are available at: [Repository link provided upon acceptance].
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+
+\bibliography{references}
+
+% ============================================================================
+% APPENDICES
+% ============================================================================
+
+\clearpage
+\appendix
+\enlargethispage{4\baselineskip}
+
+\section{Regression Tables}
+\label{app:tables}
+\setcounter{table}{0}
+\small
+\singlespacing
+{\small\noindent This appendix presents the complete regression results referenced
+in the main text. All models use two-way fixed effects (country and year) with
+Driscoll--Kraay standard errors robust to heteroskedasticity, serial correlation,
+and cross-sectional dependence (bandwidth = 3).}
+\vspace{-4pt}
+
+\subsection{Baseline Pre-COVID Results}
+\vspace{-2pt}
+\small
+\singlespacing
+
+{Table~\ref{tab:baseline} presents the baseline estimates for the pre-COVID period
+(2010--2019) across seven control specifications.}
+\vspace{-2pt}
+
+\input{tables/table1_baseline}
+\clearpage
+
+\subsection{COVID-19 Interaction Effects}
+\small
+\singlespacing
+
+Table~\ref{tab:covid} presents results from the full sample (2010--2024) with
+COVID-19 period interactions.
+
+\input{tables/table2_covid}
+\clearpage
+
+\subsection{Robustness to Alternative Price Measures}
+\singlespacing
+
+Table~\ref{tab:price_robustness} compares elasticity estimates across three price
+definitions: income-relative (baseline), PPP-adjusted, and nominal USD.
+
+\input{tables/table3_price_robustness}
+\clearpage
+
+\subsection{Placebo Test for Pre-COVID Trends}
+\small
+\singlespacing
+
+Table~\ref{tab:placebo} presents the placebo test splitting the pre-COVID period
+into early (2010--2014) and late (2015--2019) subperiods.
+
+\input{tables/table4_placebo}
+\clearpage
+
+\section{Additional Robustness Checks}
+\label{app:robustness}
+\setcounter{table}{0}
+\small
+\singlespacing
+
+\subsection{Period-Split: Acute vs.\ Post-Acute COVID}
+
+Table~\ref{tab:period_split} decomposes the COVID period (2020--2024) into an
+acute phase (2020--2021) and a post-acute phase (2022--2024). Both sub-periods
+exhibit near-zero elasticity for EU and EaP countries, confirming that the
+disappearance of price sensitivity is not driven solely by the acute pandemic shock.
+Panel~B excludes Ukraine and Belarus---whose data reliability is compromised by war
+and sanctions---and reaches the same conclusion.
+
+\input{tables/table5_period_split}
+\clearpage
+
+\subsection{IV Robustness: 2SLS Estimates}
+\small
+\singlespacing
+
+Table~\ref{tab:iv_robustness} presents 2SLS estimates instrumenting fixed broadband
+price with its own one-year lag ($\log$ fixed broadband price in GNI\%, lagged one year).
+
+\textbf{Instrument rationale.}
+National fixed broadband price baskets are set through annual regulatory and
+procurement cycles, generating high year-to-year autocorrelation. The lagged price
+therefore strongly predicts the current price (within-demeaned first-stage
+$F = \IVFirstF$ pre-COVID; $F = \IVFullF$ full-sample), well above the Stock--Yogo
+10\% maximal-IV-bias threshold of 16.38 \citep{stock2002testing}. The exclusion
+restriction is plausible: conditional on country and year fixed effects plus
+time-varying controls, past prices affect current subscriptions only through current
+prices, since broadband contracts are monthly or annual and consumers cannot anticipate
+next year's regulated tariff when making adoption decisions today.\footnote{We also
+tested international internet bandwidth as an alternative instrument. However, an
+over-identified specification combining both instruments strongly rejected the Hansen
+$J$ overidentification test ($\chi^{2}(2) = 262.89$, $p < 0.001$), indicating that
+bandwidth correlates with connection speed and quality, which directly enter the demand
+equation. A further practical limitation is that ITU bandwidth data are missing for most
+EU countries after 2018, and multiple imputation does not recover sufficient coverage to
+support credible inference. Lagged price is therefore the sole preferred instrument.}
+
+\input{tables/table6_iv_robustness}
+\clearpage
+
+\subsection{EaP Jackknife: Leave-One-Country-Out}
+
+Table~\ref{tab:jackknife} reports leave-one-out estimates dropping each of the six
+EaP countries in turn. EaP elasticity ranges from $-0.42$ to $-0.67$ across the six
+sub-samples. Armenia is the most influential country: its exclusion raises the EaP
+estimate from $-0.60$ to $-0.42$, suggesting Armenia contributes relatively high
+price-sensitivity to the aggregate EaP estimate. Excluding Georgia yields the largest
+negative estimate ($-0.67$), indicating that Georgia exhibits below-average price
+sensitivity relative to the rest of the EaP group; removing it therefore shifts the
+group-level estimate further from zero. Crucially, all leave-one-out EaP estimates are
+statistically significant at the 1\% level, and all confirm a substantial, negative price
+elasticity. The EaP result is therefore not driven by any single country, and the range
+$[-0.42, -0.67]$ reflects genuine heterogeneity within the EaP group rather than
+measurement fragility.
+
+\input{tables/table7_jackknife}
+\clearpage
+
+\subsection{Sample Restrictions}
+
+Table~\ref{tab:sample_restrictions} reports robustness to alternative sample
+definitions. The balanced-panel restriction (countries with complete 2010--2019 data)
+yields identical estimates to the full sample, confirming that attrition is not driving
+the results. Excluding outliers identified by Cook's distance ($d > 4/N$) removes 22
+observations across 2 countries with negligible impact on either elasticity estimate.
+For the high-income subsample (17 EU countries above median GDP per capita), no EaP
+countries are present, so only the EU elasticity ($-0.016$, $p=0.673$) is identified;
+this estimate is not statistically significant, consistent with higher-income consumers
+facing minimal affordability constraints. For the middle/lower-income subsample
+(16 countries including all EaP), the EaP elasticity ($-0.433$, $p<0.001$) is somewhat
+smaller than the full-sample estimate, reflecting country heterogeneity at lower income
+levels.
+
+\input{tables/table8_sample_restrictions}
+
+\end{document}

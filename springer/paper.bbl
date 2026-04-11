@@ -1,0 +1,120 @@
+\begin{thebibliography}{37}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\providecommand{\eprint}[2][]{\url{#2}}
+ \bibcommenthead
+
+\bibitem[{Becker and Murphy(1988)}]{becker1988theory}
+Becker GS, Murphy KM (1988) A theory of rational addiction. Journal of Political Economy 96(4):675--700. \doi{10.1086/261558}
+
+\bibitem[{Brynjolfsson et~al.(2020)Brynjolfsson, Horton, Ozimek, Rock, Sharma, and TuYe}]{brynjolfsson2020covid}
+Brynjolfsson E, Horton JJ, Ozimek A, et~al (2020) {COVID}-19 and remote work: An early look at {US} data. NBER Working Paper 27344, National Bureau of Economic Research, \doi{10.3386/w27344}
+
+\bibitem[{Cameron and Miller(2015)}]{cameron2015practitioner}
+Cameron AC, Miller DL (2015) A practitioner's guide to cluster-robust inference. Journal of Human Resources 50(2):317--372. \doi{10.3368/jhr.50.2.317}
+
+\bibitem[{Cardona et~al.(2009)Cardona, Schwarz, Yurtoglu, and Zulehner}]{cardona2009demand}
+Cardona M, Schwarz A, Yurtoglu BB, et~al (2009) Demand estimation and market definition for broadband {Internet} services. Journal of Regulatory Economics 35(1):70--95. \doi{10.1007/s11149-008-9076-x}
+
+\bibitem[{de~Chaisemartin and D'Haultf{\oe}uille(2020)}]{de2020two}
+de~Chaisemartin C, D'Haultf{\oe}uille X (2020) Two-way fixed effects estimators with heterogeneous treatment effects. American Economic Review 110(9):2964--2996. \doi{10.1257/aer.20181169}
+
+\bibitem[{Dauvin and Grzybowski(2014)}]{dauvin2014estimating}
+Dauvin M, Grzybowski L (2014) Estimating broadband diffusion in the {EU} using {NUTS} 1 regional data. Telecommunications Policy 38(1):96--104. \doi{10.1016/j.telpol.2013.05.006}
+
+\bibitem[{Deaton and Muellbauer(1980)}]{deaton1980almost}
+Deaton A, Muellbauer J (1980) Economics and consumer behavior. Cambridge University Press, Cambridge, UK
+
+\bibitem[{Driscoll and Kraay(1998)}]{driscoll1998consistent}
+Driscoll JC, Kraay AC (1998) Consistent covariance matrix estimation with spatially dependent panel data. Review of Economics and Statistics 80(4):549--560. \doi{10.1162/003465398557825}
+
+\bibitem[{{Ecorys}(2013)}]{ecorys2013evaluation}
+{Ecorys} (2013) Evaluation of the {EU} broadband policy. Final report, European Commission, Brussels
+
+\bibitem[{{European Commission}(2021)}]{european2021eap}
+{European Commission} (2021) Eastern {P}artnership: Connecting to digital opportunities. Policy brief, European Commission, Brussels
+
+\bibitem[{Favale et~al.(2020)Favale, Soro, Trevisan, Drago, and Mellia}]{favale2020campus}
+Favale T, Soro F, Trevisan M, et~al (2020) Campus traffic and e-learning during {COVID}-19 pandemic. Computer Networks 176:107290. \doi{10.1016/j.comnet.2020.107290}
+
+\bibitem[{Feldmann et~al.(2021)Feldmann, Gasser, Lichtblau, Pujol, Poese, Dietzel, Wagner, Wichtlhuber, Tapiador, Vallina-Rodriguez, Hohlfeld, and Smaragdakis}]{feldmann2021year}
+Feldmann A, Gasser O, Lichtblau F, et~al (2021) A year in lockdown: {H}ow the waves of {COVID}-19 impact internet traffic. Communications of the {ACM} 64(7):101--108. \doi{10.1145/3465212}
+
+\bibitem[{Goodman-Bacon(2021)}]{goodman2021difference}
+Goodman-Bacon A (2021) Difference-in-differences with variation in treatment timing. Journal of Econometrics 225(2):254--277. \doi{10.1016/j.jeconom.2021.03.014}
+
+\bibitem[{Greenstein and Mazzeo(2016)}]{greenstein2016measuring}
+Greenstein S, Mazzeo MJ (2016) Measuring the quality of communication networks. In: Goldfarb A, Greenstein SM, Tucker CE (eds) Economic analysis of the digital economy. University of Chicago Press, Chicago, IL, p 321--346
+
+\bibitem[{Guermazi and Satola(2021)}]{guermazi2021broadband}
+Guermazi B, Satola D (2021) Broadband for all: A holistic approach. Working paper, World Bank, Washington, DC
+
+\bibitem[{Guermazi et~al.(2021)Guermazi, Satola, and Rastogi}]{guermazi2021digital}
+Guermazi B, Satola D, Rastogi S (2021) Digital infrastructure for development: From principles to practice. Digital development report, World Bank, Washington, DC
+
+\bibitem[{Hauge and Prieger(2010)}]{hauge2010demand}
+Hauge JA, Prieger JE (2010) Demand-side programs to stimulate adoption of broadband: What works? Review of Network Economics 9(3). \doi{10.2202/1446-9022.1234}
+
+\bibitem[{Hausman et~al.(2001)Hausman, Sidak, and Singer}]{hausman2001private}
+Hausman JA, Sidak JG, Singer HJ (2001) Private incentives and social costs: {E}stimating the demand for broadband services. Yale Journal on Regulation 18:227--304
+
+\bibitem[{Hoechle(2007)}]{hoechle2007robust}
+Hoechle D (2007) Robust standard errors for panel regressions with cross-sectional dependence. Stata Journal 7(3):281--312. \doi{10.1177/1536867X0700700301}
+
+\bibitem[{{IAB}(2020)}]{iab2020internet}
+{IAB} (2020) Internet trends during {COVID}-19 pandemic: A global perspective. Technical report, Internet Architecture Board
+
+\bibitem[{{ITU}(2024)}]{itu2024data}
+{ITU} (2024) World telecommunication/ict indicators database. Tech. rep., International Telecommunication Union, Geneva, available at: \url{https://www.itu.int/en/ITU-D/Statistics/}
+
+\bibitem[{Katz and Shapiro(1985)}]{katz1985network}
+Katz ML, Shapiro C (1985) Network externalities, competition, and compatibility. American Economic Review 75(3):424--440
+
+\bibitem[{Katz et~al.(2010)Katz, Koutroumpis, and Callorda}]{katz2010impact}
+Katz RL, Koutroumpis P, Callorda FM (2010) The impact of broadband on the economy: Research to date and policy issues. ITU Study 4:1--35
+
+\bibitem[{Laffont and Tirole(2000)}]{laffont2000competition}
+Laffont JJ, Tirole J (2000) Competition in telecommunications. MIT Press, Cambridge, MA
+
+\bibitem[{Lindlacher(2021)}]{lindlacher2021low}
+Lindlacher V (2021) Low demand despite broad supply: Is high-speed {Internet} an infrastructure of general interest? Information Economics and Policy 56:100924. \doi{10.1016/j.infoecopol.2021.100924}
+
+\bibitem[{Liu et~al.(2018)Liu, Prince, and Wallsten}]{liu2018distinguishing}
+Liu YH, Prince J, Wallsten S (2018) Distinguishing bandwidth and latency in households' willingness-to-pay for broadband internet speed. Information Economics and Policy 45:1--15. \doi{10.1016/j.infoecopol.2018.07.001}
+
+\bibitem[{{OECD}(2002)}]{schreyer2002oecd}
+{OECD} (2002) {OECD} manual: Measuring the information economy. Tech. rep., OECD Publishing, Paris, \doi{10.1787/9789264099012-en}
+
+\bibitem[{{OECD}(2020)}]{oecd2020broadband}
+{OECD} (2020) Broadband connectivity: An agenda for policy action. OECD Digital Economy Papers 295, Organisation for Economic Co-operation and Development, Paris, \doi{10.1787/6b1e5c58-en}
+
+\bibitem[{{OECD}(2021{\natexlab{a}})}]{oecd2021broadband}
+{OECD} (2021{\natexlab{a}}) Broadband policy responses to the {COVID}-19 pandemic. OECD Digital Economy Papers 317, Organisation for Economic Co-operation and Development, Paris, \doi{10.1787/3dd9da7e-en}
+
+\bibitem[{{OECD}(2021{\natexlab{b}})}]{oecd2021covid}
+{OECD} (2021{\natexlab{b}}) The impact of {COVID}-19 on broadband: Getting ready for the next wave. OECD Digital Economy Papers 320, Organisation for Economic Co-operation and Development, Paris, \doi{10.1787/1e33a7a0-en}
+
+\bibitem[{Petersen(2009)}]{petersen2009estimating}
+Petersen MA (2009) Estimating standard errors in finance panel data sets: {C}omparing approaches. Review of Financial Studies 22(1):435--480. \doi{10.1093/rfs/hhn053}
+
+\bibitem[{Rappoport et~al.(2003)Rappoport, Kridel, Taylor, Alleman, and Duffy-Deno}]{rappoport2003demand}
+Rappoport PN, Kridel DJ, Taylor LD, et~al (2003) Demand for access to the internet. Internet economics pp 55--72
+
+\bibitem[{R{\"o}ller and Waverman(2001)}]{roller2001telecommunications}
+R{\"o}ller LH, Waverman L (2001) Telecommunications infrastructure and economic development: A simultaneous approach. American Economic Review 91(4):909--923. \doi{10.1257/aer.91.4.909}
+
+\bibitem[{Sinclair(2023)}]{sinclair2023broadband}
+Sinclair A (2023) Assessing the benefits of high-speed broadband: Lessons from {Australia}'s {National Broadband Network} ({NBN}). Information Economics and Policy 65:101062. \doi{10.1016/j.infoecopol.2023.101062}
+
+\bibitem[{Waverman et~al.(2001)Waverman, Meschi, and Fuss}]{waverman2001telecommunications}
+Waverman L, Meschi M, Fuss M (2001) Telecommunications infrastructure and economic development: A simultaneous approach. American Economic Review 91(2):384--388. \doi{10.1257/aer.91.2.384}
+
+\bibitem[{{World Bank}(2024{\natexlab{a}})}]{worldbank2024wdi}
+{World Bank} (2024{\natexlab{a}}) World development indicators. Available at: \url{https://databank.worldbank.org/source/world-development-indicators}
+
+\bibitem[{{World Bank}(2024{\natexlab{b}})}]{worldbank2024wgi}
+{World Bank} (2024{\natexlab{b}}) Worldwide governance indicators. Available at: \url{https://www.worldbank.org/en/publication/worldwide-governance-indicators}
+
+\end{thebibliography}

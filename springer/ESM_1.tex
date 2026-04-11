@@ -1,0 +1,252 @@
+% ============================================================================
+% Online Supplementary Information (Online Resource 1)
+% Journal: Journal of Regulatory Economics (Springer)
+% ============================================================================
+%
+% Uses the same sn-jnl class as the main paper for consistent Springer styling.
+% No line numbers (not needed for supplementary material).
+%
+\documentclass[pdflatex,sn-basic]{sn-jnl}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+
+\usepackage{amsmath,amssymb}
+\usepackage{bbm}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{pdflscape}
+\usepackage{setspace}
+\usepackage{hyperref}
+\let\orcidlogo\relax  % sn-jnl.cls defines \orcidlogo; clear before orcidlink redefines it
+\usepackage{orcidlink}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+% Figure search path
+\graphicspath{{figures/}}
+
+% sn-jnl wraps every \begin{table} in its own threeparttable+center.
+% Restore the plain table environment using the aliases the class defines.
+\AtBeginDocument{%
+  \let\table\tableorg
+  \let\endtable\endtableorg
+  \let\sidewaystable\sidewaystableorg
+  \let\endsidewaystable\endsidewaystableorg
+}
+
+% Auto-generated macros (numbers from regression outputs)
+\input{paper_macros}
+
+% Appendix table numbering: A1--A4, B1--B4
+% \thesection = A, B, ... after \appendix; \thetable resets at each \section.
+\renewcommand{\thetable}{\thesection\arabic{table}}
+% Fix duplicate hyperref PDF anchors when table counter is reset in section B
+\renewcommand{\theHtable}{\thesection\arabic{table}}
+
+% ============================================================================
+% DOCUMENT
+% ============================================================================
+
+\begin{document}
+
+% Running head for supplementary
+\title[Online Supplementary Information]{Online Supplementary Information (Online Resource~1)\\[4pt]
+\textit{Broadband Price Elasticity in EU and Eastern Partnership Countries:
+Evidence of a Decade-Long Transformation (2010--2024)}}
+
+% ============================================================================
+% AUTHORS AND AFFILIATIONS (required by Springer SI guidelines)
+% ============================================================================
+
+\author*[1,2,3,4]{\fnm{Samir} \sur{Orujov}\orcidlink{0009-0004-9708-2109}}\email{sorujov@ada.edu.az}
+
+\author[2,5]{\fnm{Ilgar} \sur{Ismayilov}}
+
+\author[2]{\fnm{Jeyhun} \sur{Huseynzade}}
+
+\affil*[1]{\orgname{School of Business, ADA University},
+           \orgaddress{\city{Baku}, \country{Azerbaijan}}}
+
+\affil[2]{\orgname{Information Communication Technologies Agency},
+           \orgaddress{\city{Baku}, \country{Azerbaijan}}}
+
+\affil[3]{\orgname{CERGE-EI, a joint workplace of Charles University and the Economics Institute of the Czech Academy of Sciences},
+           \orgaddress{\city{Prague}, \country{Czech Republic}}}
+
+\affil[4]{\orgname{Universit\'{e} de Bretagne Sud},
+           \orgaddress{\city{Vannes}, \country{France}}}
+
+\affil[5]{\orgname{Faculty of Social Sciences, Charles University},
+           \orgaddress{\city{Prague}, \country{Czech Republic}}}
+
+% ============================================================================
+% ABSTRACT (describes supplementary content)
+% ============================================================================
+
+\abstract{This file is the Online Supplementary Information submitted alongside
+the article \textit{Broadband Price Elasticity in EU and Eastern Partnership
+Countries: Evidence of a Decade-Long Transformation (2010--2024)},
+\textit{Journal of Regulatory Economics}.
+It contains eight regression tables referenced in the main text as
+Online Resource Tables~A1--A4 and B1--B4.
+Appendix~A presents the core results: baseline pre-COVID estimates (Table~A1),
+COVID-19 interaction effects (Table~A2), robustness to alternative price measures
+(Table~A3), and the placebo pre-trend test (Table~A4).
+Appendix~B presents additional robustness checks: acute vs.\ post-acute
+COVID period decomposition (Table~B1), 2SLS instrumental-variable estimates
+(Table~B2), EaP leave-one-country-out jackknife (Table~B3), and alternative
+sample restrictions (Table~B4).
+All models use two-way fixed effects (country and year) with Driscoll--Kraay
+standard errors robust to heteroskedasticity, serial correlation, and
+cross-sectional dependence (bandwidth $= 3$).
+Significance codes: $^{*}p{<}0.10$, $^{**}p{<}0.05$, $^{***}p{<}0.01$.}
+
+\maketitle
+
+% ============================================================================
+% APPENDIX A: BASELINE REGRESSION TABLES
+% ============================================================================
+
+\appendix
+
+\section{Baseline Regression Tables}
+\label{app:A}
+\setcounter{table}{0}
+
+\subsection{Baseline Pre-COVID Results (Table~A1)}
+
+Table~A1 presents baseline two-way fixed effects estimates for the pre-COVID period
+(2010--2019) across seven control specifications, from minimal controls (GDP per capita
+only, column~1) to the full specification (column~7).
+
+\input{tables/table1_baseline}
+\clearpage
+
+\subsection{COVID-19 Interaction Effects (Table~A2)}
+
+Table~A2 presents results from equation~(2) of the main paper, interacting prices with
+the COVID-19 period dummy (2020--2024). Column~(1) uses the full 2010--2024 sample with
+COVID interactions; columns~(2)--(3) present separate pre-COVID and COVID subsample
+estimates for comparison.
+
+\input{tables/table2_covid}
+\clearpage
+
+\subsection{Robustness to Alternative Price Measures (Table~A3)}
+
+Table~A3 compares elasticity estimates across three price definitions: income-relative
+(GNI\%, baseline), PPP-adjusted, and nominal USD prices. Each panel rows all seven
+control specifications for one price measure.
+
+\input{tables/table3_price_robustness}
+\clearpage
+
+\subsection{Placebo Test for Pre-COVID Trends (Table~A4)}
+
+Table~A4 presents the placebo test splitting the pre-COVID period into an early
+subperiod (2010--2014) and a late subperiod (2015--2019). A significant positive
+interaction on the 2015--2019 dummy indicates elasticity was already declining before
+the pandemic.
+
+\input{tables/table4_placebo}
+\clearpage
+
+% ============================================================================
+% APPENDIX B: ADDITIONAL ROBUSTNESS CHECKS
+% ============================================================================
+
+\section{Additional Robustness Checks}
+\label{app:B}
+\setcounter{table}{0}
+
+\subsection{Period-Split: Acute vs.\ Post-Acute COVID (Table~B1)}
+
+Table~B1 decomposes the COVID era into an acute phase (2020--2021) and a post-acute
+phase (2022--2024) using a single full-panel interaction model with
+price$\,\times\,$period dummies, preserving degrees of freedom. Both sub-periods
+exhibit near-zero elasticity for EU and EaP. Panel~B excludes Ukraine and
+Belarus---whose data reliability is compromised by war and sanctions---with unchanged
+conclusions.
+
+\input{tables/table5_period_split}
+\clearpage
+
+\subsection{IV Robustness: 2SLS Estimates (Table~B2)}
+
+Table~B2 presents 2SLS estimates instrumenting fixed broadband price with its own
+one-year lag ($\log$ fixed broadband price in GNI\%, lagged one year).
+
+\textbf{Instrument rationale.}
+National fixed broadband price baskets are set through annual regulatory and
+procurement cycles, generating high year-to-year autocorrelation. The lagged price
+strongly predicts the current price (within-demeaned first-stage
+$F = \IVFirstF$ pre-COVID; $F = \IVFullF$ full-sample), well above the
+Stock--Yogo critical value of 16.38 for 10\% worst-case Wald test size distortion \citep{stock2002testing}.
+The exclusion restriction is plausible: conditional on country and year fixed effects
+plus time-varying controls, past prices affect current subscriptions only through
+current prices, since broadband contracts are monthly or annual and consumers cannot
+anticipate next year's regulated tariff when making adoption decisions
+today.\footnote{We also tested international internet bandwidth as an alternative
+instrument. An over-identified specification combining both instruments strongly
+rejected the Hansen $J$ overidentification test ($\chi^2(2) = 262.89$,
+$p < 0.001$), indicating bandwidth correlates with connection speed and quality,
+which directly enters the demand equation. ITU bandwidth data are also missing for
+most EU countries after 2018. Lagged price is therefore the sole preferred
+instrument.}
+
+\input{tables/table6_iv_robustness}
+
+\textbf{Results.}
+Panel~A shows pre-COVID 2SLS alongside the OLS baseline:
+EU$=\IVPreEUB$ (SE$=\IVPreEUSE$, $p=\IVPreEUPval$\IVPreEUStars) and
+EaP$=\IVPreEaPB$ (SE$=\IVPreEaPSE$, $p=$\IVPreEaPPval\IVPreEaPStars),
+broadly consistent with OLS (EU$=\EUBaseB$, EaP$=\EaPBaseB$), confirming
+simultaneity bias is negligible.
+Panel~B replicates the full-sample COVID specification:
+EU$=\IVFullEUB$ (SE$=\IVFullEUSE$, $p=$\IVFullEUPval\IVFullEUStars) and
+EaP$=\IVFullEaPB$ (SE$=\IVFullEaPSE$, $p=$\IVFullEaPPval\IVFullEaPStars),
+consistent with the OLS COVID-era attenuation.
+
+\clearpage
+
+\subsection{EaP Jackknife: Leave-One-Country-Out (Table~B3)}
+
+Table~B3 reports leave-one-out estimates dropping each of the six EaP countries in
+turn. EaP elasticity ranges from $\EaPJKMax$ to $\EaPJKMin$ across the six
+sub-samples. \EaPJKMaxCountry{} contributes the highest price-sensitivity; excluding
+it raises the EaP estimate from $\EaPBaseBr$ to $\EaPJKMax$. All six leave-one-out
+estimates are significant at the 1\% level, confirming the EaP result is not driven
+by any single country.
+
+\input{tables/table7_jackknife}
+\clearpage
+
+\subsection{Sample Restrictions (Table~B4)}
+
+Table~B4 reports robustness to alternative sample definitions. The balanced-panel
+restriction (countries with complete 2010--2019 data) yields identical estimates,
+confirming attrition does not drive the results. Excluding Cook's-distance outliers
+($d > 4/N$) removes 22 observations across 2 countries with negligible impact on
+either elasticity. For the high-income subsample (17 EU countries above median GDP
+per capita) only the EU elasticity ($\SampHiEUB$, p$=$\SampHiEUPval) is identified
+and is not significant, consistent with minimal affordability constraints at higher
+incomes. For the middle/lower-income subsample (16 countries including all EaP), EaP
+elasticity ($\SampMidEaPB$, p$<$0.001) is somewhat smaller than the full-sample
+estimate, reflecting within-group heterogeneity.
+
+\input{tables/table8_sample_restrictions}
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+
+\bibliography{references}
+
+\end{document}

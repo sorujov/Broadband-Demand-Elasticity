@@ -1,0 +1,43 @@
+\begin{table}[htbp]
+\centering
+\caption{Period-Split Elasticity Estimates: Pre-COVID, Acute COVID, and Post-Acute}
+\label{tab:period_split}
+\begin{minipage}{\textwidth}
+\begin{adjustbox}{width=\textwidth}
+\scriptsize
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{2}{c}{Pre-COVID} & \multicolumn{2}{c}{Acute COVID} & \multicolumn{2}{c}{Post-Acute} \\
+& \multicolumn{2}{c}{2010--2019} & \multicolumn{2}{c}{2020--2021} & \multicolumn{2}{c}{2022--2024} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+& EU & EaP & EU & EaP & EU & EaP \\
+\midrule
+\textit{Panel A: Full Sample (33 countries)} \\
+Elasticity & $-0.197^{**}$ & $-0.359^{***}$ & $0.073$ & $0.020$ & $0.124$ & $0.098$ \\
+& (0.077) & (0.112) & (0.067) & (0.113) & (0.080) & (0.109) \\[2pt]
+Observations & \multicolumn{6}{c}{495} \\
+R-squared   & \multicolumn{6}{c}{0.42} \\
+\midrule
+\textit{Panel B: Excluding Ukraine \& Belarus from COVID Periods} \\
+Elasticity & $-0.191^{***}$ & $-0.427^{***}$ & $0.071$ & $-0.080$ & $0.079$ & $-0.051$ \\
+& (0.067) & (0.096) & (0.058) & (0.099) & (0.068) & (0.103) \\[2pt]
+Observations & \multicolumn{6}{c}{485} \\
+R-squared   & \multicolumn{6}{c}{0.43} \\
+\midrule
+Country FE & \multicolumn{6}{c}{Yes} \\
+Year FE    & \multicolumn{6}{c}{Yes} \\
+Price measure & \multicolumn{6}{c}{GNI\% (income-relative)} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\vspace{4pt}
+\scriptsize
+\textit{Notes:} Estimates come from a single regression on the full 2010--2024 panel
+using price$\times$period interaction dummies for Acute COVID (2020--2021) and Post-Acute
+(2022--2024). Pre-COVID elasticities are the base-period coefficients. This interaction
+approach avoids the short-panel problem of estimating 2-year subsamples.
+Full controls. Driscoll--Kraay standard errors (bandwidth = 3) in parentheses.
+Panel~B excludes Ukraine and Belarus from the COVID periods only (their pre-2020
+observations are retained). $^{*}$ p $<$ 0.10, $^{**}$ p $<$ 0.05, $^{***}$ p $<$ 0.01.
+\end{minipage}
+\end{table}
