@@ -26,7 +26,7 @@
 
 ### 📈 Pre-COVID (2010-2019)
 **EaP: -0.60***  
-*Highly price-elastic*
+*Relatively price-elastic*
 
 10% price drop → 6.0% more subscriptions
 
@@ -114,10 +114,7 @@ Broadband-Demand-Elasticity/
 │   ├── raw/                         # ITU, World Bank raw data (CSV)
 │   ├── interim/                     # Processed ITU & WB data (XLSX)
 │   └── processed/                   # Analysis-ready datasets
-│       ├── analysis_ready_data.csv  # Final dataset (495 obs)
-│       ├── data_merged_with_series.xlsx
-│       ├── itu_series_reference.xlsx
-│       └── missing_data_report.xlsx
+│       └── analysis_ready_data.csv  # Final dataset (495 obs)
 │
 ├── code/
 │   ├── data_collection/             # Data download & processing pipeline
@@ -133,16 +130,10 @@ Broadband-Demand-Elasticity/
 │   │   └── README.md
 │   ├── analysis/                    # Econometric analysis
 │   │   ├── pre_covid/               # 2010-2019 baseline analysis
-│   │   │   └── two_way_fe.py
 │   │   ├── full_sample/             # 2010-2024 with COVID interactions
-│   │   │   ├── two_way_fe_full_sample.py
-│   │   │   ├── covid_diagnostics.py
-│   │   │   └── period_split_analysis.py
 │   │   ├── robustness/              # Robustness checks
-│   │   │   ├── eap_jackknife.py
-│   │   │   ├── iv_estimation.py
-│   │   │   └── sample_restrictions.py
 │   │   ├── analysis_visualizations.py
+│   │   ├── generate_paper_macros.py
 │   │   └── README.md
 │   ├── utils/
 │   │   ├── config.py                # Project configuration
@@ -150,27 +141,32 @@ Broadband-Demand-Elasticity/
 │   └── main.py                      # Complete pipeline executor
 │
 ├── results/
-│   ├── regression_output/           # Excel files with regression results
-│   │   ├── pre_covid_analysis/
-│   │   │   ├── extended_control_specifications.xlsx
-│   │   │   └── price_robustness_matrix.xlsx
-│   │   └── full_sample_covid_analysis/
-│   │       ├── extended_control_specifications.xlsx
-│   │       ├── price_robustness_matrix.xlsx
-│   │       ├── year_by_year_elasticities.xlsx
-│   │       └── placebo_test_results.xlsx
-│   └── figures/                     # Publication-quality plots (300 DPI)
-│       ├── analysis_figures/        # 6 main figures (PNG, PDF)
-│       └── covid_diagnostics/       # Diagnostic plots
+│   └── regression_output/           # Excel files with regression results
 │
-├── manuscript/                      # LaTeX manuscript files
-│   ├── paper.tex                    # Main manuscript file
+├── manuscript/                      # Elsevier manuscript (prior submission)
+│   ├── paper.tex                    # Main manuscript
+│   ├── paper_anonymous.tex          # Anonymised version
+│   ├── titlepage.tex                # Separate title page
 │   ├── references.bib               # Bibliography
-│   ├── sections/                    # Individual sections (8 .tex files)
-│   ├── tables/                      # Regression tables (9 .tex files)
-│   ├── figures/                     # Figures for manuscript (PDF, PNG)
+│   ├── sections/                    # Individual section .tex files
+│   ├── tables/                      # Regression table .tex files
+│   ├── figures/                     # Figures (PDF, PNG)
 │   ├── styles/                      # LaTeX styles (elsarticle)
 │   └── README.md
+│
+├── springer/                        # JRE (Springer) submission package
+│   ├── paper.tex                    # Main manuscript (sn-jnl class)
+│   ├── ESM_1.tex                    # Online supplementary material
+│   ├── paper_macros.tex             # Auto-generated result macros
+│   ├── references.bib               # Bibliography
+│   ├── sn-jnl.cls                   # Springer Nature journal class
+│   ├── sn-basic.bst                 # Springer bibliography style
+│   ├── paper.pdf                    # Compiled main manuscript
+│   ├── ESM_1.pdf                    # Compiled supplementary (upload separately)
+│   ├── cover.pdf                    # Cover letter (upload separately)
+│   ├── sections/                    # Individual section .tex files
+│   ├── tables/                      # Regression table .tex files
+│   └── figures/                     # Figure PDFs
 │
 ├── pyproject.toml                   # Build system (pip install -e .)
 ├── requirements.txt                 # Python dependencies
@@ -300,7 +296,7 @@ res = model.fit(cov_type='kernel', kernel='bartlett', bandwidth=3)
 | Region | Elasticity | Std. Error | p-value | Interpretation |
 |--------|-----------|-----------|---------|----------------|
 | **EU** | -0.101* | 0.053 | 0.056 | Marginally elastic |
-| **EaP** | -0.595*** | 0.061 | <0.001 | **Highly elastic** |
+| **EaP** | -0.595*** | 0.061 | <0.001 | **Relatively elastic** |
 | **Ratio** | **5.9×** | — | — | EaP ~6× more elastic than EU |
 
 **Model Fit**: R² = 0.40, N = 330
@@ -337,7 +333,7 @@ res = model.fit(cov_type='kernel', kernel='bartlett', bandwidth=3)
 </tfoot>
 </table>
 
-**Key Finding**: 🎯 **EaP elasticity highly robust**
+**Key Finding**: 🎯 **EaP elasticity robust across all specifications**
 - Range: [-0.636, -0.587]
 - Coefficient of variation: **3.1%** (extremely stable)
 - Significant at p<0.01 in **ALL 8 specifications**
@@ -673,7 +669,7 @@ p_value = results.pvalues['log_price']
 ### Pre-COVID (2010-2019)
 - **Sample**: 330 obs, 33 countries, 10 years
 - **EU**: ε = -0.10* (marginally elastic)
-- **EaP**: ε = -0.60*** (highly elastic)
+- **EaP**: ε = -0.60*** (relatively elastic)
 - **Ratio**: 5.9× difference
 - **Robustness**: 100% GNI% specs significant
 - **R²**: 0.27-0.40
@@ -740,7 +736,7 @@ The evolving nature of broadband demand elasticity has important implications fo
 
 | Period | Observed Elasticity | Policy Implications |
 |--------|-------------------|---------------------|
-| **2010-2014** | High (ε ≈ -0.60) | Price-based interventions highly effective |
+| **2010-2014** | Relatively elastic (ε ≈ -0.60) | Price-based interventions effective |
 | **2015-2019** | Declining | Transition period: mixed policy approach needed |
 | **2020-2024** | Near-zero | Infrastructure investment more effective than price subsidies |
 
