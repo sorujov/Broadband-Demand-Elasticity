@@ -5,6 +5,8 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{url}
+\let\orcidlogo\relax
+\usepackage{orcidlink}
 \graphicspath{{figures/}}
 
 %% Anonymous version: create an empty file blind.flag before compiling
@@ -22,7 +24,7 @@
 \author{Anonymous}
 \affil{Anonymous}
 \else
-\author*[1,2,3]{\fnm{Samir} \sur{Orujov}}\email{sorujov@ada.edu.az}
+\author*[1,2,3]{\fnm{Samir} \sur{Orujov}\,\orcidlink{0009-0004-9708-2109}}\email{sorujov@ada.edu.az}
 \author[2,4]{\fnm{Ilgar} \sur{Ismayilov}}
 \author[2]{\fnm{Jeyhun} \sur{Huseynzade}}
 \affil*[1]{\orgdiv{School of Business}, \orgname{ADA University}, \orgaddress{\city{Baku}, \country{Azerbaijan}}}
