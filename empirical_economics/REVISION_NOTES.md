@@ -2,7 +2,6 @@
 
 **Date:** 16 September 2026
 **New target:** *Empirical Economics* (Springer). ABDC A / AJG 2 → ADA Category 5: 2,000 AZN base, which becomes **1,200 AZN** and **2.0 recognition points** with two external co-authors. No submission fee.
-**Alternative with the same category:** *Applied Economics*. It charges a USD 270 submission fee and caps papers at 8,000 words including references.
 
 **New title:** *What can country panels tell us about broadband price responsiveness? Evidence from the European Union and the Eastern Partnership, 2010–2024*
 
@@ -106,26 +105,6 @@ A separate referee-style review was run on the draft. Its main points and the fi
 
 An automated audit checks every decimal number in the text against `results/results.json`. The only unmatched values are figures quoted from other papers.
 
-## 5. Things you should check before submitting
+## 5. How to reproduce
 
-- **Co-authors.** All authors have approved the current text (confirmed 16 September 2026).
-- **Author contributions.** Confirm the CRediT roles.
-- **Competing interests.** None declared (confirmed by the authors). Confirm ORCID details in the submission system.
-- **GitHub.** The repository should contain the new `empirical_economics/` folder before the Data availability statement goes live.
-- **EaP facts.** State ownership of incumbents and the Belarus EaP suspension (2021) are stated without a citation; add a source if the editor asks.
-- **Online Resource.** Submit `ESM_1.pdf` as "Online Resource 1".
-- **Blind review.** Empirical Economics may use double-blind review; `manuscript_anonymous.pdf` is ready if so.
-
-## 6. How to reproduce (run from `empirical_economics/code`)
-
-```
-python build_data_v2.py      # downloads/uses ITU, WB (cached), NTL, builds panel.pkl
-python regional.py           # Eurostat regional panel (needs eurostat/*.json)
-python analysis.py           # Tables 3–5, 7, S1–S4 (≈2 min)
-python analysis2.py          # long differences, decomposition, placebo, lights, sub-periods
-python analysis3_ivfd.py     # FD Hausman IV
-python analysis4_referee.py  # FD+FE, group-year FE, mean group, EaP by year, K=70 headroom
-python simulate.py           # Figure S1
-python figures.py; python make_tables.py; python make_esm.py
-python verify_numbers.py     # audit of numbers in the text
-```
+From the `empirical_economics/` folder run `python code/run_all.py` (see `README.md`). A clean run reproduces `results/results.json` exactly.
