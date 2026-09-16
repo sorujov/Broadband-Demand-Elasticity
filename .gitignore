@@ -30,3 +30,6 @@ MERGE_PROMPT.md
 # AI Tools & Extensions
 .claude/
 tstex_modules/
+
+# Confidential referee reports and editor letters
+reviews/

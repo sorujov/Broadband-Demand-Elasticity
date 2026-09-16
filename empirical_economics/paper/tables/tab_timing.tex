@@ -1,0 +1,37 @@
+\begin{table}[t]
+\caption{Did the price response change? Basket regimes, sub-periods and the post-2019 period}\label{tab:timing}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccc@{}}
+\toprule
+\multicolumn{6}{@{}l}{\textit{Panel A. Pooled coefficient within each ITU basket regime}}\\
+& \multicolumn{2}{c}{1\,GB basket, 2010--2017} & \multicolumn{2}{c}{5\,GB basket, 2018--2024} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+& TWFE levels & First differences & TWFE levels & First differences & \\
+Log price & $-0.24^{***}$ & $-0.09^{*}$ & $0.00$ & $-0.00$ & \\
+& (0.08) & (0.05) & (0.03) & (0.01) & \\
+Observations & 263 & 229 & 208 & 153 & \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Panel B. First differences by sub-period}}\\
+& 2011--2013 & 2014--2017 & 2019--2024 & & \\
+EU & $0.05$ & $-0.01$ & $-0.00$ & & \\
+& (0.05) & (0.01) & (0.01) & & \\
+EaP & $-0.29$ & $-0.04$ & $-0.02$ & & \\
+& (0.18) & (0.04) & (0.05) & & \\
+EaP--EU: WCR / RI $p$ & 0.38 / 0.16 & 0.61 / 0.62 & 0.81 / 0.81 & & \\
+Observations & 98 & 131 & 153 & & \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Panel C. Price $\times$ post-2019 (2020--2024), full sample}}\\
+& \multicolumn{2}{c}{TWFE levels} & + country trends & First differences & \\
+Log price & \multicolumn{2}{c}{$-0.22^{***}$} & $-0.03$ & $-0.07^{**}$ & \\
+& \multicolumn{2}{c}{(0.05)} & (0.05) & (0.03) & \\
+Log price $\times$ post-2019 & \multicolumn{2}{c}{$0.30^{***}$} & $-0.08$ & $0.05^{**}$ & \\
+& \multicolumn{2}{c}{(0.07)} & (0.06) & (0.02) & \\
+WCR $p$, shift & \multicolumn{2}{c}{$<$0.001} & 0.226 & 0.043 & \\
+Post-2019 coefficient & \multicolumn{2}{c}{$0.08$} & $-0.11^{***}$ & $-0.01$ & \\
+Shift, EU / EaP & \multicolumn{2}{c}{0.11 / 0.38} & $-$0.08 / $-$0.10 & 0.01 / 0.09 & \\
+WCR $p$, EU / EaP shift & \multicolumn{2}{c}{0.087 / 0.003} & 0.008 / 0.682 & 0.717 / 0.053 & \\
+Observations & \multicolumn{2}{c}{471} & 471 & 382 & \\
+\botrule
+\end{tabular*}
+\footnotetext{Panel A estimates the pooled model separately within the two ITU basket definitions. Panel B interacts the price change with an EaP indicator within each sub-period; WCR and RI $p$-values refer to the EaP--EU difference. Panel C interacts price with an indicator for 2020--2024; the split model interacts it further with the EaP indicator. Other notes as in Table~\ref{tab:pooled}.}
+\end{table}
