@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite it as below."
+title: "Replication package for: What can country panels tell us about broadband price responsiveness? Evidence from the European Union and the Eastern Partnership, 2010-2024"
+authors:
+  - family-names: Orujov
+    given-names: Samir
+    orcid: "https://orcid.org/0009-0004-9708-2109"
+    affiliation: "ADA University"
+  - family-names: Ismayilov
+    given-names: Ilgar
+    affiliation: "Information Communication Technologies Agency"
+  - family-names: Huseynzade
+    given-names: Jeyhun
+    affiliation: "Information Communication Technologies Agency"
+version: "1.0"
+date-released: "2026-09-16"
+license: MIT
+repository-code: "https://github.com/sorujov/Broadband-Demand-Elasticity"

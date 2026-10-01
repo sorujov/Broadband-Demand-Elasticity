@@ -1,0 +1,29 @@
+\begin{table}[t]
+\caption{Pooled price coefficient: levels versus within-differenced and dynamic estimators}\label{tab:pooled}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccccc@{}}
+\toprule
+& (1) & (2) & (3) & (4) & (5) & (6) \\
+& \shortstack{TWFE\\levels} & \shortstack{+ country\\trends} & \shortstack{First\\differences} & \shortstack{FD, 2-year\\cumulative} & \shortstack{Dynamic\\LSDV} & \shortstack{Difference\\GMM} \\
+\midrule
+\multicolumn{7}{@{}l}{\textit{Panel A. 2010--2019}}\\
+Log price & $-0.23^{***}$ & $-0.08$ & $-0.07^{*}$ & $-0.11^{***}$ & $0.00$ & $-0.00$\\
+ & (0.07) & (0.05) & (0.04) & (0.04) & (0.01) & (0.11)\\
+WCR bootstrap $p$ & $<$0.001 & 0.158 & 0.080 & -- & -- & --\\
+Lagged dependent variable & -- & -- & -- & -- & $0.61^{***}$ & $0.65^{***}$\\
+Long-run effect & -- & -- & -- & -- & $0.00$ & $-0.00$ (0.32)\\
+Hansen $J$ / AR(2) $p$ & -- & -- & -- & -- & -- & 0.62 / 0.45\\
+Observations & 307 & 307 & 240 & 195 & 274 & 240\\
+\midrule
+\multicolumn{7}{@{}l}{\textit{Panel B. 2010--2024}}\\
+Log price & $-0.13^{**}$ & $-0.06$ & $-0.05^{*}$ & $-0.06$ & $0.02$ & $-0.03$\\
+ & (0.06) & (0.04) & (0.03) & (0.04) & (0.01) & (0.09)\\
+WCR bootstrap $p$ & 0.058 & 0.206 & 0.075 & -- & -- & --\\
+Lagged dependent variable & -- & -- & -- & -- & $0.72^{***}$ & $0.61^{***}$\\
+Long-run effect & -- & -- & -- & -- & $0.06$ & $-0.07$ (0.21)\\
+Hansen $J$ / AR(2) $p$ & -- & -- & -- & -- & -- & 0.64 / 0.79\\
+Observations & 471 & 471 & 382 & 315 & 438 & 382\\
+\botrule
+\end{tabular*}
+\footnotetext{Dependent variable: log fixed-broadband subscriptions per 100 inhabitants (first-differenced in columns 3--4, 6). Price: log entry-level basket as \% of GNI per capita. Columns 1--2 include country and year effects; columns 3--4 include year effects; all include the core controls of Section~\ref{sec:data}. Column 2 adds country-specific linear trends. Column 4 reports the sum of the current and lagged price-change coefficients. Column 5 adds the lagged dependent variable to column 1 (the short-run coefficient is shown; Nickell bias is of order $1/T$). Column 6 is one-step difference GMM with price treated as endogenous, instruments collapsed and limited to lags 2--3 (12 instruments in Panel A, 17 in Panel B), log GDP per capita as the only control and year effects; long-run standard error by the delta method. Carried-forward 2019 prices are treated as missing and the 2017--2018 change is excluded in columns 3--4. Standard errors clustered by country (33 clusters) in parentheses. WCR: wild cluster restricted bootstrap $p$-value, Webb weights, 9{,}999 replications. $^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$.}
+\end{table}

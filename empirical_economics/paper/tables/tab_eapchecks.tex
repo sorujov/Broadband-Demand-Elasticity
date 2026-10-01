@@ -1,0 +1,38 @@
+\begin{table}[t]
+\caption{First-difference estimates, 2010--2019: what drives the EaP coefficient?}\label{tab:eapchecks}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccc@{}}
+\toprule
+& \multicolumn{2}{c}{EaP} & \multicolumn{2}{c}{EU} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Specification & Coef. & SE & Coef. & SE & Obs. \\
+\midrule
+(1) Baseline & $-0.28^{***}$ & (0.08) & $-0.01$ & (0.02) & 240\\
+\multicolumn{6}{@{}l}{\textit{Price measurement}}\\
+(2) Price in PPP dollars & $-0.10$ & (0.23) & $-0.02$ & (0.02) & 233\\
+(3) Price in current US dollars & $-0.23^{*}$ & (0.12) & $-0.02$ & (0.02) & 242\\
+(4) Incl.\ repeated 2019 prices, 2017--18 change & $-0.27^{***}$ & (0.08) & $-0.01$ & (0.01) & 295\\
+\multicolumn{6}{@{}l}{\textit{Decomposing the affordability ratio (with log GDP per capita)}}\\
+(5a) Log tariff, US\$ & $-0.26^{**}$ & (0.11) & $-0.02$ & (0.02) & \\
+(5b) Log GNI p.c.\ (ITU denominator) & $0.36^{**}$ & (0.15) & $-0.34^{**}$ & (0.15) & \\
+(5c) Test tariff $+$ GNI $=0$, $p$ & \multicolumn{2}{c}{0.66} & \multicolumn{2}{c}{0.03} & \\
+(6a) Log tariff, US\$, no GDP control & $-0.15$ & (0.14) & $-0.01$ & (0.01) & \\
+(6b) Log GNI p.c., no GDP control & $0.51^{***}$ & (0.16) & $-0.04$ & (0.11) & \\
+\multicolumn{6}{@{}l}{\textit{Sample and controls}}\\
+(7) Excl.\ currency-crisis years & $-0.22^{*}$ & (0.12) & $-0.02$ & (0.02) & 231\\
+(8) Excluding Azerbaijan & $-0.27^{***}$ & (0.10) & $-0.00$ & (0.02) & 233\\
+(9) Night lights instead of GDP & $-0.22^{**}$ & (0.10) & $0.01$ & (0.02) & 208\\
+(10) Night lights and GDP & $-0.27^{***}$ & (0.07) & $-0.00$ & (0.02) & 208\\
+(11) Log GDP per capita only & $-0.27^{***}$ & (0.07) & $-0.01$ & (0.02) & 240\\
+(12) Adding secure servers and R\&D & $-0.25^{***}$ & (0.09) & $0.00$ & (0.02) & 240\\
+\multicolumn{6}{@{}l}{\textit{Outcome and functional form}}\\
+(13) Internet users (\%) & $-0.27^{***}$ & (0.03) & $-0.03^{*}$ & (0.01) & 240\\
+(14) Log count of subscriptions & $-0.26^{***}$ & (0.08) & $-0.01$ & (0.01) & 295\\
+(15) Log-odds, ceiling 70 per 100 & $-0.30^{***}$ & (0.08) & $-0.01$ & (0.02) & 240\\
+\multicolumn{6}{@{}l}{\textit{Timing}}\\
+(16a) Current price change & $-0.27^{***}$ & (0.08) & $-0.01$ & (0.03) & 195\\
+(16b) Next year's price change & $-0.16$ & (0.10) & $-0.01$ & (0.02) & \\
+\botrule
+\end{tabular*}
+\footnotetext{All rows are first-difference regressions with year effects and core controls unless stated, 2010--2019, clustered standard errors (33 countries). Row 5 replaces the log affordability ratio by its two components, the US-dollar tariff and the Atlas GNI per capita implied by ITU's ratio; under a pure affordability response their coefficients are equal and opposite. Row 7 drops Azerbaijan 2015--16, Ukraine 2014--15, Belarus 2011 and 2015, and Armenia, Georgia and Moldova 2015. Night lights: harmonised DMSP/VIIRS radiance summed over national territory (\citealp{li2020harmonized}, 2024 release); the 2013--2014 sensor change is excluded. Row 15: $\ln[s/(70-s)]$. Row 16 adds next year's price change; the EaP coefficient on the current change in 16a is the sum of main and interaction terms. $^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$.}
+\end{table}

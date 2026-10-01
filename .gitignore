@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.env
+*.egg-info/
+dist/
+build/
+empirical_economics/_work/
+
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.blg
+*.spl
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+texput.*
+
+# Copyrighted literature (never commit published papers)
+**/pdfs/
+extracted_texts.txt
+
+# Editors and system files
+.vscode/
+.DS_Store
+Thumbs.db
+.Rhistory
+.RData
+.Rproj.user/
+*.zip
+
+# Private notes, referee reports and editor letters
+reviews/
+additional_info*.txt

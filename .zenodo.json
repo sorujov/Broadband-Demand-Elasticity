@@ -1,0 +1,13 @@
+{
+  "title": "Replication package for: What can country panels tell us about broadband price responsiveness? Evidence from the European Union and the Eastern Partnership, 2010-2024",
+  "upload_type": "software",
+  "description": "Code, data and results reproducing every table, figure and number of the article. Country panel of 27 EU and 6 Eastern Partnership countries (ITU price baskets, World Bank indicators, harmonised night-time lights) and a regional panel of 175 EU NUTS-2 regions (Eurostat). Run empirical_economics/code/run_all.py.",
+  "creators": [
+    {"name": "Orujov, Samir", "affiliation": "ADA University; Information Communication Technologies Agency; CERGE-EI", "orcid": "0009-0004-9708-2109"},
+    {"name": "Ismayilov, Ilgar", "affiliation": "Information Communication Technologies Agency; Charles University"},
+    {"name": "Huseynzade, Jeyhun", "affiliation": "Information Communication Technologies Agency"}
+  ],
+  "keywords": ["broadband adoption", "affordability", "price elasticity", "technology diffusion", "panel data", "small-sample inference", "Eastern Partnership", "European Union"],
+  "license": "MIT",
+  "access_right": "open"
+}

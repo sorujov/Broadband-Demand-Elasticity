@@ -1,0 +1,23 @@
+\begin{table}[t]
+\caption{Price coefficients for EU and Eastern Partnership countries, 2010--2019}\label{tab:groups}
+\scriptsize\setlength{\tabcolsep}{1pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccccc@{}}
+\toprule
+& (1) & (2) & (3) & (4) & (5) & (6) & (7) \\
+& \shortstack{TWFE\\levels} & \shortstack{+ country\\trends} & \shortstack{First\\differences} & \shortstack{FD +\\country FE} & \shortstack{FD + group\\year FE} & \shortstack{3-year\\diff.} & \shortstack{Mean\\group} \\
+\midrule
+EU & $-0.08^{*}$ & $-0.01$ & $-0.01$ & $-0.00$ & $-0.00$ & $-0.04$ & $-0.01$\\
+ & (0.05) & (0.03) & (0.02) & (0.02) & (0.01) & (0.03) & (0.02)\\
+EaP & $-0.46^{***}$ & $-0.27^{***}$ & $-0.28^{***}$ & $-0.17^{**}$ & $0.13$ & $-0.45^{***}$ & $-0.19$\\
+ & (0.09) & (0.09) & (0.08) & (0.08) & (0.13) & (0.10) & (0.20)\\
+\midrule
+\multicolumn{8}{@{}l}{\textit{$p$-values for the EaP--EU difference}}\\
+Cluster-robust & $<$0.001 & 0.004 & $<$0.001 & 0.035 & 0.291 & & \\
+Wild bootstrap & 0.012 & 0.095 & 0.037 & 0.133 & 0.523 & & \\
+Randomisation & 0.026 & 0.028 & 0.005 & & & & 0.084\\
+Rank-sum & & & & & & & 0.021\\
+Observations & 307 & 307 & 240 & 240 & 240 & 163 & 33\\
+\botrule
+\end{tabular*}
+\footnotetext{Columns 1--6 are single regressions in which the price coefficient is interacted with an EaP indicator; the EaP row reports the sum of the main and interaction coefficients. Column 4 adds country effects to the first-difference model (country-specific trends in levels). Column 5 replaces the common year effects by year effects specific to each group, so that the EaP coefficient is identified only from differences among the six EaP countries within a year. Column 6 uses overlapping 3-year differences within the 2010--2017 basket regime, with year effects (5-year differences: EU $-0.06$, EaP $-0.46$). Column 7 is the unweighted average of country-specific first-difference slopes \citep{pesaran1995estimating} with the standard error from their dispersion; the inverse-variance-weighted averages are $-0.00$ (EU) and $-0.25$ (EaP), the latter with 48\% of the weight on Belarus; its $p$-values come from permuting group labels across the 33 slopes and from a two-sided Mann--Whitney test. Randomisation inference reassigns the EaP label to 6 of the 33 countries at random (4{,}999 draws) and compares studentised statistics. Wild bootstrap: WCR, Webb weights. Range of the EaP coefficient when one EaP country is left out: (1) $-0.54$ to $-0.40$; (2) $-0.35$ to $-0.21$; (3) $-0.34$ to $-0.20$. Other notes as in Table~\ref{tab:pooled}.}
+\end{table}

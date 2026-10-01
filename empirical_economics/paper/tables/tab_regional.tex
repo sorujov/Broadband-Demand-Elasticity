@@ -1,0 +1,20 @@
+\begin{table}[t]
+\caption{Regional evidence: households with broadband in 175 EU regions, 2010--2021}\label{tab:regional}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccc@{}}
+\toprule
+& (1) & (2) & (3) & (4) & (5) \\
+FE & \shortstack{Region,\\year} & \shortstack{Region,\\year} & \shortstack{Region,\\country-year} & \shortstack{Region,\\country-year} & \shortstack{Region, year\\2010--2017} \\
+\midrule
+National log price & $0.03$ & $0.03$ & -- & -- & $0.02$\\
+& (0.04) & (0.05) & & & (0.07)\\
+Price $\times$ less-developed & & $-0.02$ & $0.03$ & $0.01$ & $-0.06$\\
+& & (0.08) & (0.07) & (0.08) & (0.12)\\
+Price $\times$ less-dev. $\times$ 2020--21 & & & & $0.08^{*}$ & \\
+& & & & (0.05) & \\
+WCR $p$ (first coef.) & 0.573 & 0.765 & 0.786 & 0.936 & 0.616\\
+Observations & 1807 & 1807 & 1807 & 1807 & 1218\\
+\botrule
+\end{tabular*}
+\footnotetext{Dependent variable: log share of households with broadband (Eurostat \texttt{isoc\_r\_broad\_h}), finest regional level available (NUTS-2; NUTS-1 for Germany, Greece and Poland), 19 member states with at least two regions. National price: log ITU basket as \% of GNI per capita. Less-developed region: GDP per head in PPS below 75\% of the EU average in the first observed year (46 regions), the EU cohesion-policy threshold. All columns control for log regional GDP per head in PPS; columns 1, 2 and 5 also for national log GDP per capita. Standard errors clustered by member state (19 clusters); WCR with 1{,}999 replications. The 95\% confidence interval for the interaction in column 2 is $[-0.18, 0.14]$. $^{*}p<0.10$, $^{**}p<0.05$, $^{***}p<0.01$.}
+\end{table}
